@@ -1,0 +1,192 @@
+import React, { useEffect, useState } from 'react';
+import { Loader2, AlertCircle, RefreshCw } from 'lucide-react';
+
+interface LoadingScreenProps {
+  onComplete: () => void;
+  isGenerating?: boolean;
+  progress?: number;
+  error?: string | null;
+  onRetry?: () => void;
+}
+
+export function LoadingScreen({ 
+  onComplete, 
+  isGenerating = false, 
+  progress = 0, 
+  error = null,
+  onRetry 
+}: LoadingScreenProps) {
+  const [localProgress, setLocalProgress] = useState(0);
+  const [loadingText, setLoadingText] = useState('INITIALIZING...');
+
+  const loadingMessages = [
+    'INITIALIZING...',
+    'CONNECTING TO FAL AI...',
+    'ANALYZING VIBE...',
+    'GENERATING DESIGN...',
+    'CREATING VIDEO...',
+    'APPLYING EFFECTS...',
+    'FINAL TOUCHES...',
+    'COMPLETE!'
+  ];
+
+  useEffect(() => {
+    if (isGenerating) {
+      setLocalProgress(progress);
+      const messageIndex = Math.floor((progress / 100) * (loadingMessages.length - 1));
+      setLoadingText(loadingMessages[messageIndex] || loadingMessages[0]);
+
+      if (progress >= 100) {
+        setTimeout(() => onComplete(), 1000);
+      }
+    } else if (!error) {
+      const interval = setInterval(() => {
+        setLocalProgress(prev => {
+          const newProgress = prev + 1;
+          
+          const messageIndex = Math.floor((newProgress / 100) * (loadingMessages.length - 1));
+          setLoadingText(loadingMessages[messageIndex] || loadingMessages[0]);
+
+          if (newProgress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => onComplete(), 1000);
+            return 100;
+          }
+          return newProgress;
+        });
+      }, 30);
+
+      return () => clearInterval(interval);
+    }
+  }, [onComplete, isGenerating, progress, error]);
+
+  if (error) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
+        <div className="text-center max-w-2xl mx-auto px-4">
+          <div className="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-8">
+            <AlertCircle className="text-white" size={48} />
+          </div>
+
+          <h2 className="text-3xl font-black uppercase tracking-wider text-white mb-4">
+            GENERATION FAILED
+          </h2>
+
+          <div className="bg-red-900 bg-opacity-50 p-6 rounded-lg mb-8">
+            <p className="text-red-300 text-sm font-mono leading-relaxed mb-4">
+              Video generation failed:
+            </p>
+            <div className="text-red-200 text-xs font-mono leading-relaxed bg-red-800 bg-opacity-50 p-4 rounded max-h-40 overflow-y-auto text-left">
+              <div className="mb-2">
+                <strong>Error:</strong> {error}
+              </div>
+              <div className="mb-2">
+                <strong>Timestamp:</strong> {new Date().toISOString()}
+              </div>
+              <div className="mb-2">
+                <strong>User Agent:</strong> {navigator.userAgent}
+              </div>
+              <div className="mb-2">
+                <strong>API Key Present:</strong> {import.meta.env.VITE_FAL_API_KEY ? 'Yes' : 'No'}
+              </div>
+              <div className="mb-2">
+                <strong>Environment:</strong> {import.meta.env.MODE}
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            {onRetry && (
+              <button
+                onClick={onRetry}
+                className="w-full px-8 py-3 bg-white text-black font-black text-sm uppercase tracking-wider hover:bg-gray-200 transition-all duration-200 flex items-center justify-center"
+              >
+                <RefreshCw size={16} className="mr-2" />
+                TRY AGAIN
+              </button>
+            )}
+
+            <button
+              onClick={onComplete}
+              className="w-full px-8 py-3 border border-white text-white font-black text-sm uppercase tracking-wider hover:bg-white hover:text-black transition-all duration-200"
+            >
+              CONTINUE WITHOUT VIDEO
+            </button>
+          </div>
+
+          <p className="text-gray-400 text-xs mt-4 uppercase tracking-wide">
+            You can still complete your order with a preview image
+          </p>
+
+          {/* Troubleshooting Tips */}
+          <div className="mt-8 p-4 bg-gray-900 bg-opacity-50 rounded-lg text-left">
+            <h4 className="text-white font-bold text-sm mb-3 uppercase tracking-wide">
+              Troubleshooting Tips:
+            </h4>
+            <ul className="text-gray-300 text-xs space-y-2">
+              <li>• Check your internet connection</li>
+              <li>• Verify the FAL AI API key is correctly set</li>
+              <li>• Try refreshing the page and starting over</li>
+              <li>• Contact support if the issue persists</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
+      <div className="text-center">
+        <div className="relative mb-8">
+          <div className="w-24 h-24 border-4 border-white border-dashed rounded-full animate-spin mx-auto opacity-80" 
+               style={{ 
+                 borderStyle: 'dashed',
+                 animationDuration: '2s',
+                 filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))'
+               }} 
+          />
+          <Loader2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-yellow-400" size={32} />
+        </div>
+
+        <h2 className="text-3xl font-black uppercase tracking-wider text-white mb-4">
+          {loadingText}
+        </h2>
+
+        <div className="w-80 mx-auto mb-6">
+          <div className="bg-gray-800 rounded-full h-2 overflow-hidden">
+            <div 
+              className="bg-gradient-to-r from-red-600 to-yellow-400 h-full transition-all duration-300 ease-out rounded-full"
+              style={{ width: `${isGenerating ? progress : localProgress}%` }}
+            />
+          </div>
+          <p className="text-white text-sm mt-2 opacity-75">
+            {Math.round(isGenerating ? progress : localProgress)}% COMPLETE
+          </p>
+        </div>
+
+        <p className="text-gray-400 text-sm uppercase tracking-wide">
+          {isGenerating ? 'EST. 2–5 MIN TO GENERATE' : 'EST. 2–3 MIN TO CREATE'}
+        </p>
+
+        {isGenerating && (
+          <div className="mt-6 p-4 bg-gray-900 bg-opacity-50 rounded-lg max-w-sm mx-auto">
+            <p className="text-gray-300 text-xs uppercase tracking-wide">
+              {progress < 30 ? 'STARTING VIDEO GENERATION...' :
+               progress < 60 ? 'PROCESSING WITH FAL AI...' :
+               progress < 90 ? 'FINALIZING VIDEO...' :
+               'ALMOST READY!'}
+            </p>
+          </div>
+        )}
+
+        <div className="absolute top-20 left-20 text-white opacity-30 transform rotate-12">
+          <div className="text-6xl font-light">↗</div>
+        </div>
+        <div className="absolute bottom-20 right-20 text-white opacity-30 transform -rotate-12">
+          <div className="text-6xl font-light">↙</div>
+        </div>
+      </div>
+    </div>
+  );
+}
