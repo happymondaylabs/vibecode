@@ -1,10 +1,12 @@
-import * as fal from "@fal-ai/serverless-client";
+import { createClient } from "@fal-ai/serverless-client";
 import { UserData, Theme } from '../types';
 
 // Configure Fal client with the API key from environment
 const FAL_KEY = import.meta.env.VITE_FAL_API_KEY;
 if (!FAL_KEY) throw new Error("Missing Fal API key");
-fal.config({ credentials: FAL_KEY });
+
+// Instantiate the client using createClient factory
+const fal = createClient({ credentials: FAL_KEY });
 
 console.log('FAL API Key configured:', FAL_KEY ? 'Yes' : 'No');
 
@@ -54,7 +56,7 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
     console.log('FAL Key present:', !!FAL_KEY);
     console.log('===============================');
     
-    // Use the exact model name and payload structure you specified
+    // Use the namespaced video endpoint with correct payload structure
     const payload = {
       prompt,                        // your generated prompt string
       duration: 8,                   // seconds
@@ -64,7 +66,8 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
     
     console.log("Fal payload → text-to-video", payload);
     
-    const response = await fal.generate("text-to-video", {
+    const response = await fal.video.generate({
+      model: "text-to-video",
       input: payload
     });
 
@@ -72,7 +75,11 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
 
     // Check different possible response structures
     let videoUrl = null;
-    if (response.data) {
+    if (response.output) {
+      videoUrl = response.output.video_url || 
+                response.output.video?.url || 
+                response.output.url;
+    } else if (response.data) {
       videoUrl = response.data.video?.url || 
                 response.data.video_url || 
                 response.data.output?.url ||
@@ -105,7 +112,7 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
 
 export async function checkVideoStatus(requestId: string): Promise<VideoGenerationResponse> {
   try {
-    const result = await fal.status("text-to-video", {
+    const result = await fal.video.status({
       requestId: requestId,
       logs: true
     });
@@ -114,7 +121,11 @@ export async function checkVideoStatus(requestId: string): Promise<VideoGenerati
 
     if (result.status === 'COMPLETED') {
       let videoUrl = null;
-      if (result.data) {
+      if (result.output) {
+        videoUrl = result.output.video_url || 
+                  result.output.video?.url || 
+                  result.output.url;
+      } else if (result.data) {
         videoUrl = result.data.video?.url || 
                   result.data.video_url || 
                   result.data.output?.url ||
