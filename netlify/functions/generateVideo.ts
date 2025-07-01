@@ -81,6 +81,7 @@ export const handler: Handler = async (event) => {
       themeId: theme.id 
     });
 
+    // 1) Build your human-readable prompt
     const prompt = generatePrompt(userData, theme);
     
     if (!prompt) {
@@ -89,33 +90,36 @@ export const handler: Handler = async (event) => {
 
     console.log("Generated prompt:", prompt);
 
-    // Build the payload according to Veo3 API requirements
+    // 2) Construct the exact payload the docs expect:
     const payload = {
       input: {
         prompt,
-        aspect_ratio: "16:9",
-        duration: "8s",  // String format as required
-        enhance_prompt: true,
-        generate_audio: true,
+        aspect_ratio: "16:9",   // only 16:9, 9:16, or 1:1 are allowed
+        duration:     "8s",     // must be the string "8s", not the number 8
+        enhance_prompt: true,   // optional, but helpful
+        generate_audio: true    // optional, but recommended
       },
+      logs: true               // this will stream Fal.ai logs back to you
     };
+
     console.log("🚀 Fal payload →", JSON.stringify(payload, null, 2));
 
     // Configure and call Fal.ai
     fal.config({ credentials: FAL_KEY });
 
-    // Use the correct model ID "fal-ai/veo3" (not image-to-video)
+    // 4) Call the API with fal.subscribe()
     const result = await fal.subscribe("fal-ai/veo3", payload);
     console.log("✅ Fal response →", JSON.stringify(result.data, null, 2));
 
-    // result.data will contain { video_url: "https://…mp4" }
+    // 5) Extract the video URL correctly - result.data.video.url
+    const videoUrl = result.data.video.url;
     return {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ videoUrl: result.data.video_url }),
+      body: JSON.stringify({ videoUrl }),
     };
   } catch (error: any) {
     console.error("🔥 generateVideo error:", error);
