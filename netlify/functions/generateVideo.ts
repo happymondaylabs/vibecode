@@ -94,17 +94,21 @@ export const handler: Handler = async (event) => {
 
     console.log("Generated prompt:", prompt);
 
-    // Call Fal.ai video generation
-    const response = await fal.run("fal-ai/fast-svd", {
+    // Prepare payload
+    const payload = {
+      model: "text-to-video",
       input: {
         prompt,
         duration: 8,
         aspect_ratio: "16:9",
         image_url: theme.image,
       },
-    });
+    };
+    console.log("🚀 Fal payload →", JSON.stringify(payload, null, 2));
 
-    console.log("Fal response:", response);
+    // Call Fal.ai
+    const response = await fal.video.generate(payload);
+    console.log("✅ Fal response →", JSON.stringify(response, null, 2));
 
     // Extract video URL from response
     let videoUrl = null;
@@ -137,15 +141,13 @@ export const handler: Handler = async (event) => {
     };
 
   } catch (error: any) {
-    // Log full error for Netlify logs
     console.error("🔥 generateVideo function error:", {
       message: error.message,
       stack: error.stack,
       details: error.details || null,
-      response: error.response || null,
+      raw: error.response || error.body || null,
     });
 
-    // Return a JSON error so front-end can display it
     return {
       statusCode: 500,
       headers: {
@@ -156,6 +158,7 @@ export const handler: Handler = async (event) => {
         error: error.message,
         stack: error.stack,
         details: error.details || null,
+        raw: error.response || error.body || null,
       }),
     };
   }
