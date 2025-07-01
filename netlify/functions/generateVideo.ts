@@ -3,14 +3,6 @@ import type { Handler } from "@netlify/functions";
 // Server-side Fal import (only works in Node.js environment)
 const fal = require("@fal-ai/serverless-client");
 
-// Configure Fal with server-side API key
-const FAL_KEY = process.env.FAL_API_KEY;
-if (!FAL_KEY) {
-  throw new Error("Missing FAL_API_KEY environment variable");
-}
-
-fal.config({ credentials: FAL_KEY });
-
 interface UserData {
   name: string;
   age: string;
@@ -69,6 +61,23 @@ export const handler: Handler = async (event) => {
       body: JSON.stringify({ error: "Method not allowed" }),
     };
   }
+
+  // Check for FAL API key first
+  const FAL_KEY = process.env.FAL_API_KEY;
+  if (!FAL_KEY) {
+    console.error("Missing FAL_API_KEY!");
+    return {
+      statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ error: "Server misconfiguration" }),
+    };
+  }
+
+  // Configure Fal with the API key
+  fal.config({ credentials: FAL_KEY });
 
   try {
     console.log("=== NETLIFY FUNCTION DEBUG ===");
