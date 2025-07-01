@@ -137,22 +137,25 @@ export const handler: Handler = async (event) => {
     };
 
   } catch (error: any) {
-    console.error("❌ Netlify function error:", error);
-    console.error("Error details:", {
+    // Log full error for Netlify logs
+    console.error("🔥 generateVideo function error:", {
       message: error.message,
       stack: error.stack,
-      name: error.name,
+      details: error.details || null,
+      response: error.response || null,
     });
 
+    // Return a JSON error so front-end can display it
     return {
       statusCode: 500,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ 
-        error: error.message || "Video generation failed",
-        details: error.stack || String(error)
+      body: JSON.stringify({
+        error: error.message,
+        stack: error.stack,
+        details: error.details || null,
       }),
     };
   }
