@@ -1,7 +1,5 @@
-// netlify/functions/generateVideo.ts
-
+import { fal } from "@fal-ai/client";
 import type { Handler } from "@netlify/functions";
-import fal from "@fal-ai/serverless-client";
 import type { Theme, UserData } from "../../src/types";
 
 // Generate prompt based on theme and user data
@@ -62,9 +60,6 @@ export const handler: Handler = async (event) => {
     };
   }
 
-  // Configure Fal with the API key
-  fal.config({ credentials: FAL_KEY });
-
   try {
     console.log("=== NETLIFY FUNCTION DEBUG ===");
     console.log("Event body:", event.body);
@@ -94,71 +89,46 @@ export const handler: Handler = async (event) => {
 
     console.log("Generated prompt:", prompt);
 
-    // Prepare payload
+    // Build the payload
     const payload = {
       input: {
         prompt,
         duration: 8,
         aspect_ratio: "16:9",
-        image_url: theme.image,
+        image_url: theme.image, // full URL if possible
       },
     };
     console.log("🚀 Fal payload →", JSON.stringify(payload, null, 2));
 
-    // Call Fal.ai using the correct fal.generate method
-    const response = await fal.generate("text-to-video", payload);
-    console.log("✅ Fal response →", JSON.stringify(response, null, 2));
+    // Configure and call Fal.ai
+    fal.config({ credentials: FAL_KEY });
 
-    // Extract video URL from response
-    let videoUrl = null;
-    if (response.video_url) {
-      videoUrl = response.video_url;
-    } else if (response.video && response.video.url) {
-      videoUrl = response.video.url;
-    } else if (response.output && response.output.video_url) {
-      videoUrl = response.output.video_url;
-    }
+    // Use the new "subscribe" API for text-to-video
+    // Model ID for Veo3 is "fal-ai/veo3/image-to-video"
+    const result = await fal.subscribe("fal-ai/veo3/image-to-video", {
+      ...payload,
+      logs: false,           // or `true` if you want console logs
+    });
+    console.log("✅ Fal response →", JSON.stringify(result.data, null, 2));
 
-    if (!videoUrl) {
-      console.error("No video URL found in response:", response);
-      throw new Error("No video URL in Fal.ai response");
-    }
-
-    console.log("✅ Video generated successfully:", videoUrl);
-
+    // result.data will contain { video_url: "https://…mp4" }
     return {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ 
-        videoUrl,
-        status: "completed",
-        requestId: response.request_id || null
-      }),
+      body: JSON.stringify({ videoUrl: result.data.video_url }),
     };
-
   } catch (error: any) {
-    console.error("🔥 generateVideo function error:", {
-      message: error.message,
-      stack: error.stack,
-      details: error.details || null,
-      raw: error.response || error.body || null,
-    });
-
+    console.error("🔥 generateVideo error:", error);
     return {
       statusCode: 500,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        error: error.message,
-        stack: error.stack,
-        details: error.details || null,
-        raw: error.response || error.body || null,
-      }),
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };
