@@ -89,13 +89,14 @@ export const handler: Handler = async (event) => {
 
     console.log("Generated prompt:", prompt);
 
-    // Build the payload
+    // Build the payload according to Veo3 API requirements
     const payload = {
       input: {
         prompt,
-        duration: 8,
         aspect_ratio: "16:9",
-        image_url: theme.image, // full URL if possible
+        duration: "8s",  // String format as required
+        enhance_prompt: true,
+        generate_audio: true,
       },
     };
     console.log("🚀 Fal payload →", JSON.stringify(payload, null, 2));
@@ -103,12 +104,8 @@ export const handler: Handler = async (event) => {
     // Configure and call Fal.ai
     fal.config({ credentials: FAL_KEY });
 
-    // Use the new "subscribe" API for text-to-video
-    // Model ID for Veo3 is "fal-ai/veo3/image-to-video"
-    const result = await fal.subscribe("fal-ai/veo3/image-to-video", {
-      ...payload,
-      logs: false,           // or `true` if you want console logs
-    });
+    // Use the correct model ID "fal-ai/veo3" (not image-to-video)
+    const result = await fal.subscribe("fal-ai/veo3", payload);
     console.log("✅ Fal response →", JSON.stringify(result.data, null, 2));
 
     // result.data will contain { video_url: "https://…mp4" }
