@@ -1,20 +1,8 @@
+// netlify/functions/generateVideo.ts
+
 import type { Handler } from "@netlify/functions";
-import fal from "@fal-ai/serverless-client";
-
-interface UserData {
-  name: string;
-  age: string;
-  message: string;
-}
-
-interface Theme {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  category: string;
-  code: string;
-}
+import * as fal from "@fal-ai/serverless-client";
+import type { Theme, UserData } from "../../src/types";
 
 // Generate prompt based on theme and user data
 function generatePrompt(userData: UserData, theme: Theme): string {
