@@ -96,7 +96,6 @@ export const handler: Handler = async (event) => {
 
     // Prepare payload
     const payload = {
-      model: "text-to-video",
       input: {
         prompt,
         duration: 8,
@@ -106,8 +105,8 @@ export const handler: Handler = async (event) => {
     };
     console.log("🚀 Fal payload →", JSON.stringify(payload, null, 2));
 
-    // Call Fal.ai
-    const response = await fal.video.generate(payload);
+    // Call Fal.ai using fal.generate instead of fal.video.generate
+    const response = await fal.generate("text-to-video", payload);
     console.log("✅ Fal response →", JSON.stringify(response, null, 2));
 
     // Extract video URL from response
