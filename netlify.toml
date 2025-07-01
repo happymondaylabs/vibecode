@@ -1,7 +1,7 @@
 [build]
 functions = "netlify/functions"
 publish = "dist"
-command = "npm install --prefix netlify/functions && npx vite build"
+command = "npm run build"
 
 [functions]
 node_bundler = "esbuild"

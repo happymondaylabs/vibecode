@@ -1,8 +1,0 @@
-{
-  "name": "netlify-functions",
-  "version": "1.0.0",
-  "dependencies": {
-    "@fal-ai/serverless-client": "^0.14.0",
-    "@netlify/functions": "^2.0.0"
-  }
-}
