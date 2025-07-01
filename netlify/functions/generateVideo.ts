@@ -1,7 +1,7 @@
 // netlify/functions/generateVideo.ts
 
 import type { Handler } from "@netlify/functions";
-import * as fal from "@fal-ai/serverless-client";
+import fal from "@fal-ai/serverless-client";
 import type { Theme, UserData } from "../../src/types";
 
 // Generate prompt based on theme and user data
@@ -105,7 +105,7 @@ export const handler: Handler = async (event) => {
     };
     console.log("🚀 Fal payload →", JSON.stringify(payload, null, 2));
 
-    // Call Fal.ai using fal.generate instead of fal.video.generate
+    // Call Fal.ai using the correct fal.generate method
     const response = await fal.generate("text-to-video", payload);
     console.log("✅ Fal response →", JSON.stringify(response, null, 2));
 
