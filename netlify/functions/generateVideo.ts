@@ -1,7 +1,5 @@
 import type { Handler } from "@netlify/functions";
-
-// Server-side Fal import (only works in Node.js environment)
-const fal = require("@fal-ai/serverless-client");
+import fal from "@fal-ai/serverless-client";
 
 interface UserData {
   name: string;
