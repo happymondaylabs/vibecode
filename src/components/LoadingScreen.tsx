@@ -21,9 +21,9 @@ export function LoadingScreen({
 
   const loadingMessages = [
     'INITIALIZING...',
-    'CONNECTING TO FAL AI...',
+    'SUBMITTING TO QUEUE...',
     'ANALYZING VIBE...',
-    'GENERATING DESIGN...',
+    'QUEUED FOR PROCESSING...',
     'CREATING VIDEO...',
     'APPLYING EFFECTS...',
     'FINAL TOUCHES...',
@@ -166,14 +166,14 @@ export function LoadingScreen({
         </div>
 
         <p className="text-gray-400 text-sm uppercase tracking-wide">
-          {isGenerating ? 'EST. 2–5 MIN TO GENERATE' : 'EST. 2–3 MIN TO CREATE'}
+          {isGenerating ? 'EST. 3–8 MIN TO GENERATE' : 'EST. 3–5 MIN TO CREATE'}
         </p>
 
         {isGenerating && (
           <div className="mt-6 p-4 bg-gray-900 bg-opacity-50 rounded-lg max-w-sm mx-auto">
             <p className="text-gray-300 text-xs uppercase tracking-wide">
-              {progress < 30 ? 'STARTING VIDEO GENERATION...' :
-               progress < 60 ? 'PROCESSING WITH FAL AI...' :
+              {progress < 30 ? 'SUBMITTING TO QUEUE...' :
+               progress < 60 ? 'PROCESSING IN QUEUE...' :
                progress < 90 ? 'FINALIZING VIDEO...' :
                'ALMOST READY!'}
             </p>
