@@ -12,13 +12,13 @@
 ### 2. Set Environment Variables in Netlify
 
 1. Go to your Netlify dashboard
-2. Select your site (celadon-pothos-87dd95)
+2. Select your site: **celadon-pothos-87dd95**
 3. Go to **Site settings** → **Environment variables**
 4. Add a new environment variable:
    - **Key**: `FAL_KEY`
    - **Value**: Your FAL API key from step 1
 5. Click **Save**
-6. Redeploy your site
+6. **IMPORTANT**: Redeploy your site after adding the environment variable
 
 ### 3. Alternative: Set via Netlify CLI (if you have it)
 
@@ -26,7 +26,12 @@
 netlify env:set FAL_KEY your_fal_api_key_here
 ```
 
-### 4. Test the Setup
+### 4. Quick Setup Link
+
+**Direct link to your site's environment variables:**
+https://app.netlify.com/sites/celadon-pothos-87dd95/settings/env
+
+### 5. Test the Setup
 
 After setting the environment variable and redeploying:
 
