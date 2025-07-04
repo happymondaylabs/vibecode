@@ -22,7 +22,7 @@ export function Toast({ toast, onRemove }: ToastProps) {
       ${toast.type === 'error' ? 'bg-red-600 text-white' : 'bg-green-600 text-white'}
     `}>
       <div className="flex items-center justify-between">
-        <p className="font-bold text-sm uppercase tracking-wide">{toast.message}</p>
+        <p className="font-semibold text-sm uppercase tracking-wide">{toast.message}</p>
         <button
           onClick={() => onRemove(toast.id)}
           className="ml-3 text-white hover:text-gray-200 transition-colors"

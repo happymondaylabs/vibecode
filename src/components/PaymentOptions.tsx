@@ -21,7 +21,7 @@ export function PaymentOptions({ onPaymentComplete }: PaymentOptionsProps) {
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="bg-white p-8 rounded-lg shadow-xl">
-        <h3 className="text-2xl font-black uppercase tracking-wider text-center mb-8">
+        <h3 className="text-2xl font-semibold uppercase tracking-wider text-center mb-8">
           DOWNLOAD YOUR VIBE CARD
         </h3>
 
@@ -29,8 +29,8 @@ export function PaymentOptions({ onPaymentComplete }: PaymentOptionsProps) {
         <div className="mb-8">
           <div className="p-6 border-2 border-black bg-gray-50 rounded-lg">
             <div className="text-center">
-              <h4 className="text-3xl font-black mb-2">$10</h4>
-              <p className="text-lg font-bold uppercase tracking-wide mb-2">ONE-TIME FEE</p>
+              <h4 className="text-3xl font-semibold mb-2">$10</h4>
+              <p className="text-lg font-semibold uppercase tracking-wide mb-2">ONE-TIME FEE</p>
               <p className="text-sm text-gray-600 uppercase">Complete access to your VIBE CARD</p>
             </div>
           </div>
@@ -38,7 +38,7 @@ export function PaymentOptions({ onPaymentComplete }: PaymentOptionsProps) {
 
         {/* What's Included */}
         <div className="mb-8 p-4 bg-gray-50 rounded-lg">
-          <h4 className="font-bold uppercase text-sm tracking-wide mb-3 text-gray-700">
+          <h4 className="font-semibold uppercase text-sm tracking-wide mb-3 text-gray-700">
             WHAT'S INCLUDED:
           </h4>
           <ul className="space-y-2 text-sm text-gray-600">
@@ -59,7 +59,7 @@ export function PaymentOptions({ onPaymentComplete }: PaymentOptionsProps) {
 
         {/* Payment Features */}
         <div className="mb-8 p-4 bg-gray-50 rounded-lg">
-          <h4 className="font-bold uppercase text-sm tracking-wide mb-3 text-gray-700">
+          <h4 className="font-semibold uppercase text-sm tracking-wide mb-3 text-gray-700">
             SECURE PAYMENT:
           </h4>
           <div className="flex items-center space-x-4 text-sm text-gray-600">
@@ -78,7 +78,7 @@ export function PaymentOptions({ onPaymentComplete }: PaymentOptionsProps) {
         <button
           onClick={handlePayment}
           disabled={processing}
-          className="w-full py-4 bg-black text-white rounded-lg font-black text-lg uppercase tracking-wider hover:text-orange-400 transition-all duration-200 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:text-white"
+          className="w-full py-4 bg-black text-white rounded-lg font-semibold text-lg uppercase tracking-wider hover:text-orange-400 transition-all duration-200 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:text-white"
         >
           {processing ? (
             <div className="flex items-center justify-center">

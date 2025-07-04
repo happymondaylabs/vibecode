@@ -62,15 +62,15 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
         <div className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-4xl font-black tracking-wider">
+              <h1 className="text-4xl font-semibold tracking-wider">
                 VIBE CARD
               </h1>
-              <p className="text-orange-400 mt-1 text-sm font-mono tracking-wide">
+              <p className="text-orange-400 mt-1 text-sm tracking-wide">
                 PAPER BIRTHDAY CARDS ARE BORING
               </p>
             </div>
-            <div className="text-right text-xs font-mono max-w-md">
-              <div className="mb-2 text-orange-400 font-black tracking-wider">
+            <div className="text-right text-xs max-w-md">
+              <div className="mb-2 text-orange-400 font-semibold tracking-wider">
                 PAPER CARDS → VIBE CARDS
               </div>
               <div className="leading-relaxed">
@@ -94,40 +94,40 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                   <div className="pr-6 h-full">
                     {/* Header */}
                     <div className="mb-8">
-                      <h2 className="text-4xl font-black tracking-wider mb-2">VIBE CARD</h2>
-                      <div className="text-lg font-mono tracking-wide">{selectedTheme.title}</div>
+                      <h2 className="text-4xl font-semibold tracking-wider mb-2">VIBE CARD</h2>
+                      <div className="text-lg tracking-wide">{selectedTheme.title}</div>
                     </div>
 
                     {/* User Info Display */}
-                    <div className="space-y-6 text-base font-mono">
+                    <div className="space-y-6 text-base">
                       {/* Name Field */}
                       <div className="flex items-center">
-                        <span className="font-black w-16">NAME:</span>
-                        <span className="ml-4 font-bold">{userData.name}</span>
+                        <span className="font-semibold w-16">NAME:</span>
+                        <span className="ml-4 font-semibold">{userData.name}</span>
                       </div>
 
                       {/* Age Field */}
                       <div className="flex items-center">
-                        <span className="font-black w-16">AGE:</span>
-                        <span className="ml-4 font-bold">{userData.age}</span>
+                        <span className="font-semibold w-16">AGE:</span>
+                        <span className="ml-4 font-semibold">{userData.age}</span>
                       </div>
 
                       {/* Style Field */}
                       <div className="flex items-center">
-                        <span className="font-black w-16">STYLE:</span>
+                        <span className="font-semibold w-16">STYLE:</span>
                         <span className="ml-4">{selectedTheme.title}</span>
                       </div>
 
                       {/* Type Field */}
                       <div className="flex items-center">
-                        <span className="font-black w-16">TYPE:</span>
+                        <span className="font-semibold w-16">TYPE:</span>
                         <span className="ml-4">BIRTHDAY</span>
                       </div>
 
                       {/* Status Field */}
                       <div className="flex items-center">
-                        <span className="font-black w-16">STATUS:</span>
-                        <span className="ml-4 text-black font-black">
+                        <span className="font-semibold w-16">STATUS:</span>
+                        <span className="ml-4 text-black font-semibold">
                           {videoUrl ? 'COMPLETE' : 'READY'}
                         </span>
                       </div>
@@ -179,7 +179,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                     {/* Download Video Button */}
                     <button
                       onClick={handleDownload}
-                      className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-black text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                      className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
                     >
                       <Download size={14} className="mr-2" />
                       DOWNLOAD VIDEO
@@ -187,7 +187,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
 
                     {/* Share Now Button */}
                     <div className="relative group">
-                      <button className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-black text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200">
+                      <button className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200">
                         <Share2 size={14} className="mr-2" />
                         SHARE NOW
                       </button>
@@ -200,21 +200,21 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                             className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs transition-colors"
                           >
                             <Twitter size={12} className="mr-2" />
-                            <span className="font-bold uppercase">Twitter</span>
+                            <span className="font-semibold uppercase">Twitter</span>
                           </button>
                           <button
                             onClick={() => handleShare('instagram')}
                             className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs transition-colors"
                           >
                             <Instagram size={12} className="mr-2" />
-                            <span className="font-bold uppercase">Instagram</span>
+                            <span className="font-semibold uppercase">Instagram</span>
                           </button>
                           <button
                             onClick={() => handleShare('copy')}
                             className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs transition-colors"
                           >
                             <Share2 size={12} className="mr-2" />
-                            <span className="font-bold uppercase">Copy Link</span>
+                            <span className="font-semibold uppercase">Copy Link</span>
                           </button>
                         </div>
                       </div>
@@ -223,7 +223,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                     {/* Create Another Button */}
                     <button
                       onClick={onStartOver}
-                      className="w-full px-3 py-2 border border-black text-black rounded font-black text-xs uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-200"
+                      className="w-full px-3 py-2 border border-black text-black rounded font-semibold text-xs uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-200"
                     >
                       CREATE ANOTHER
                     </button>
@@ -234,7 +234,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
               {/* HP Logo and Symbols */}
               <div className="absolute bottom-6 left-8">
                 <div className="flex items-center space-x-3">
-                  <div className="bg-black text-white px-3 py-2 font-black text-sm">HP</div>
+                  <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
                   <div className="flex space-x-2">
                     <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
                     <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>

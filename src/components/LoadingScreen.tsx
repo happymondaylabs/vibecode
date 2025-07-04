@@ -68,15 +68,15 @@ export function LoadingScreen({
             <AlertCircle className="text-white" size={48} />
           </div>
 
-          <h2 className="text-3xl font-black uppercase tracking-wider text-white mb-4">
+          <h2 className="text-3xl font-semibold uppercase tracking-wider text-white mb-4">
             GENERATION FAILED
           </h2>
 
           <div className="bg-red-900 bg-opacity-50 p-6 rounded-lg mb-8">
-            <p className="text-red-300 text-sm font-mono leading-relaxed mb-4">
+            <p className="text-red-300 text-sm leading-relaxed mb-4">
               Video generation failed:
             </p>
-            <div className="text-red-200 text-xs font-mono leading-relaxed bg-red-800 bg-opacity-50 p-4 rounded max-h-40 overflow-y-auto text-left">
+            <div className="text-red-200 text-xs leading-relaxed bg-red-800 bg-opacity-50 p-4 rounded max-h-40 overflow-y-auto text-left">
               <div className="mb-2">
                 <strong>Error:</strong> {error}
               </div>
@@ -99,7 +99,7 @@ export function LoadingScreen({
             {onRetry && (
               <button
                 onClick={onRetry}
-                className="w-full px-8 py-3 bg-white text-black font-black text-sm uppercase tracking-wider hover:bg-gray-200 transition-all duration-200 flex items-center justify-center"
+                className="w-full px-8 py-3 bg-white text-black font-semibold text-sm uppercase tracking-wider hover:bg-gray-200 transition-all duration-200 flex items-center justify-center"
               >
                 <RefreshCw size={16} className="mr-2" />
                 TRY AGAIN
@@ -108,7 +108,7 @@ export function LoadingScreen({
 
             <button
               onClick={onComplete}
-              className="w-full px-8 py-3 border border-white text-white font-black text-sm uppercase tracking-wider hover:bg-white hover:text-black transition-all duration-200"
+              className="w-full px-8 py-3 border border-white text-white font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-black transition-all duration-200"
             >
               CONTINUE WITHOUT VIDEO
             </button>
@@ -120,7 +120,7 @@ export function LoadingScreen({
 
           {/* Troubleshooting Tips */}
           <div className="mt-8 p-4 bg-gray-900 bg-opacity-50 rounded-lg text-left">
-            <h4 className="text-white font-bold text-sm mb-3 uppercase tracking-wide">
+            <h4 className="text-white font-semibold text-sm mb-3 uppercase tracking-wide">
               Troubleshooting Tips:
             </h4>
             <ul className="text-gray-300 text-xs space-y-2">
