@@ -59,13 +59,13 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
             <div className="w-1/2 relative">
               <div className="pr-6 h-full flex flex-col">
                 {/* Header */}
-                <div className="mb-4">
+                <div className="mb-3">
                   <h2 className="text-4xl font-semibold tracking-wider mb-2">VIBE CARD</h2>
                   <div className="text-lg tracking-wide">PAYMENT CHECKOUT</div>
                 </div>
 
                 {/* Form Fields */}
-                <div className="space-y-3 text-base flex-1">
+                <div className="space-y-2 text-base flex-1">
                   {/* Name Field - Display Only */}
                   <div className="flex items-center">
                     <span className="font-semibold w-16">NAME:</span>
@@ -91,7 +91,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                   </div>
 
                   {/* What's Included - Moved from right side */}
-                  <div className="mt-4">
+                  <div className="mt-3">
                     <h4 className="font-semibold text-xs tracking-wide mb-2 text-gray-700 uppercase">
                       WHAT'S INCLUDED:
                     </h4>
@@ -122,13 +122,13 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
             {/* Right Side - Credit Card Form */}
             <div className="w-1/2 relative pl-6">
               {/* Credit Card Form */}
-              <div className="w-full bg-white border-2 border-black rounded p-3 mb-3">
+              <div className="w-full bg-white border-2 border-black rounded p-2 mb-2">
                 <div className="flex items-center mb-3">
                   <Lock size={14} className="mr-2" />
                   <h4 className="font-semibold text-xs uppercase tracking-wide">SECURE PAYMENT</h4>
                 </div>
                 
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {/* Card Number */}
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5">
@@ -202,7 +202,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
               </div>
               
               {/* Email Field - Moved from left side */}
-              <div className="mb-3">
+              <div className="mb-2">
                 <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5">
                   EMAIL ADDRESS
                 </label>
@@ -226,7 +226,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
               </div>
               
               {/* Security Info */}
-              <div className="text-xs text-gray-600 text-center mt-2">
+              <div className="text-xs text-gray-600 text-center mt-1">
                 <div className="flex items-center justify-center mb-1">
                   <CreditCard size={10} className="mr-1" />
                   <span>POWERED BY STRIPE</span>
@@ -274,7 +274,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
       </div>
 
       {/* Progress Indicator - Single dot to show we're on payment step */}
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center mt-4">
         <div className="flex items-center space-x-3">
           <div className="w-4 h-4 rounded-sm bg-white border border-gray-300" />
           <div className="w-4 h-4 rounded-sm bg-black border-black shadow-sm" />
