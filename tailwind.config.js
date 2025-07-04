@@ -3,9 +3,6 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      fontFamily: {
-        'mono': ['JetBrains Mono', 'monospace'],
-      },
       colors: {
         orange: {
           400: '#FF8C42',
