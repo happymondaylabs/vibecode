@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { generateVideo, VideoGenerationRequest, VideoGenerationResponse } from '../services/falApi';
+import { generateVideo, VideoGenerationRequest } from '../services/falApi';
 
 export function useVideoGeneration() {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -14,7 +14,7 @@ export function useVideoGeneration() {
     setVideoUrl(null);
 
     try {
-      console.log('🚀 Starting video generation via Netlify function...');
+      console.log('🚀 Starting queue-based video generation...');
       console.log('Request details:', {
         name: request.userData.name,
         age: request.userData.age,
@@ -22,13 +22,19 @@ export function useVideoGeneration() {
         themeId: request.theme.id
       });
       
-      setProgress(30);
+      setProgress(20);
       
-      // Simulate progress while waiting for the function
+      // Start progress simulation
       const progressInterval = setInterval(() => {
-        setProgress(prev => Math.min(prev + 5, 90));
-      }, 1000);
+        setProgress(prev => {
+          if (prev < 90) {
+            return prev + Math.random() * 10;
+          }
+          return prev;
+        });
+      }, 2000);
 
+      // Call the new queue-based generation
       const result = await generateVideo(request);
       
       clearInterval(progressInterval);
