@@ -165,12 +165,12 @@ function App() {
                 <h1 className="text-4xl font-black tracking-wider">
                   VIBE CARD
                 </h1>
-                <p className="text-orange-400 mt-1 text-sm font-mono tracking-wide">
+                <p className="text-orange-400 mt-1 text-sm tracking-wide">
                   PAPER BIRTHDAY CARDS ARE BORING
                 </p>
               </div>
-              <div className="text-right text-xs font-mono max-w-md">
-                <div className="mb-2 text-orange-400 font-black tracking-wider">
+              <div className="text-right text-xs max-w-md">
+                <div className="mb-2 text-orange-400 font-semibold tracking-wider">
                   PAPER CARDS → VIBE CARDS
                 </div>
                 <div className="leading-relaxed">
@@ -197,12 +197,12 @@ function App() {
                 <h2 className="text-2xl font-black tracking-wider">
                   VIBE CARD
                 </h2>
-                <p className="text-orange-400 mt-1 text-xs font-mono tracking-wide">
+                <p className="text-orange-400 mt-1 text-xs tracking-wide">
                   © 2025 YOUGENIUS.CO
                 </p>
               </div>
-              <div className="text-right text-xs font-mono max-w-md">
-                <div className="mb-2 text-orange-400 font-black tracking-wider">
+              <div className="text-right text-xs max-w-md">
+                <div className="mb-2 text-orange-400 font-semibold tracking-wider">
                   CONTACT & SUPPORT
                 </div>
                 <div className="leading-relaxed">

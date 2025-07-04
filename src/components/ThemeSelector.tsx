@@ -59,22 +59,22 @@ export function ThemeSelector({
               <div className="pr-6 h-full">
                 {/* Header */}
                 <div className="mb-8">
-                  <h2 className="text-4xl font-black tracking-wider mb-2">VIBE CARD</h2>
-                  <div className="text-lg font-mono tracking-wide">{selectedTheme.title}</div>
+                  <h2 className="text-4xl font-semibold tracking-wider mb-2">VIBE CARD</h2>
+                  <div className="text-lg tracking-wide">{selectedTheme.title}</div>
                 </div>
 
                 {/* Form Fields */}
-                <div className="space-y-6 text-base font-mono">
+                <div className="space-y-6 text-base">
                   {/* Name Field */}
                   <div className="flex items-center">
-                    <span className="font-black w-16">NAME:</span>
+                    <span className="font-semibold w-16">NAME:</span>
                     <div className="flex-1 ml-4">
                       <input
                         type="text"
                         value={userData.name}
                         onChange={(e) => onUserDataChange({ ...userData, name: e.target.value })}
                         maxLength={20}
-                        className={`w-full px-3 py-2 border-2 rounded font-mono text-sm tracking-wide transition-all duration-200 focus:outline-none ${
+                        className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
                           errors.name 
                             ? 'border-red-500 bg-red-50' 
                             : 'border-gray-400 focus:border-black bg-white'
@@ -83,14 +83,14 @@ export function ThemeSelector({
                       />
                       <div className="flex justify-between mt-1">
                         <span className="text-xs text-gray-600">{userData.name.length}/20</span>
-                        {errors.name && <span className="text-xs text-red-600 font-black">{errors.name}</span>}
+                        {errors.name && <span className="text-xs text-red-600 font-semibold">{errors.name}</span>}
                       </div>
                     </div>
                   </div>
 
                   {/* Age Field */}
                   <div className="flex items-center">
-                    <span className="font-black w-16">AGE:</span>
+                    <span className="font-semibold w-16">AGE:</span>
                     <div className="flex-1 ml-4">
                       <input
                         type="number"
@@ -98,7 +98,7 @@ export function ThemeSelector({
                         onChange={(e) => onUserDataChange({ ...userData, age: e.target.value })}
                         min="1"
                         max="120"
-                        className={`w-full px-3 py-2 border-2 rounded font-mono text-sm transition-all duration-200 focus:outline-none ${
+                        className={`w-full px-3 py-2 border-2 rounded text-sm transition-all duration-200 focus:outline-none ${
                           errors.age 
                             ? 'border-red-500 bg-red-50' 
                             : 'border-gray-400 focus:border-black bg-white'
@@ -106,20 +106,20 @@ export function ThemeSelector({
                         placeholder="ENTER AGE"
                       />
                       {errors.age && (
-                        <span className="text-xs text-red-600 font-black mt-1 block">{errors.age}</span>
+                        <span className="text-xs text-red-600 font-semibold mt-1 block">{errors.age}</span>
                       )}
                     </div>
                   </div>
 
                   {/* Style Field - Dynamic based on selected theme */}
                   <div className="flex items-center">
-                    <span className="font-black w-16">STYLE:</span>
+                    <span className="font-semibold w-16">STYLE:</span>
                     <span className="ml-4">{selectedTheme.title}</span>
                   </div>
 
                   {/* Type Field - Static */}
                   <div className="flex items-center">
-                    <span className="font-black w-16">TYPE:</span>
+                    <span className="font-semibold w-16">TYPE:</span>
                     <span className="ml-4">BIRTHDAY</span>
                   </div>
                 </div>
@@ -143,19 +143,19 @@ export function ThemeSelector({
               
               {/* Funny Description */}
               <div className="mt-4 mb-4">
-                <p className="text-sm font-mono text-gray-700 leading-relaxed">
+                <p className="text-sm text-gray-700 leading-relaxed">
                   {selectedTheme.description}
                 </p>
               </div>
               
-              <div className="text-center text-sm font-mono">{selectedTheme.code}</div>
+              <div className="text-center text-sm">{selectedTheme.code}</div>
             </div>
           </div>
 
           {/* HP Logo and Symbols */}
           <div className="absolute bottom-6 left-8">
             <div className="flex items-center space-x-3">
-              <div className="bg-black text-white px-3 py-2 font-black text-sm">HP</div>
+              <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
               <div className="flex space-x-2">
                 <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
                 <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
@@ -170,7 +170,7 @@ export function ThemeSelector({
             <button 
               onClick={handleGenerateCard}
               disabled={!isFormValid}
-              className={`w-full px-6 py-3 font-black text-sm tracking-wider transition-all duration-200 ${
+              className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
                 isFormValid
                   ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
                   : 'bg-gray-400 text-gray-600 cursor-not-allowed'

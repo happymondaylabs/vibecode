@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        'sans': ['Outfit', 'system-ui', 'sans-serif'],
         'mono': ['JetBrains Mono', 'Courier New', 'Monaco', 'Menlo', 'monospace'],
-        'sans': ['JetBrains Mono', 'Courier New', 'Monaco', 'Menlo', 'monospace'],
       },
       colors: {
         orange: {
