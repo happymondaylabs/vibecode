@@ -198,7 +198,7 @@ function App() {
                   VIBE CARD
                 </h2>
                 <p className="text-orange-400 mt-1 text-xs font-mono tracking-wide">
-                  © 2025 VIBE CARD Co. Ltd.
+                  © 2025 YOUGENIUS.CO
                 </p>
               </div>
               <div className="text-right text-xs font-mono max-w-md">
@@ -207,7 +207,7 @@ function App() {
                 </div>
                 <div className="leading-relaxed">
                   Questions? Issues? We're here to help.<br />
-                  Email us at support@vibecard.com
+                  Email us at info@yougenius.co
                 </div>
               </div>
             </div>
