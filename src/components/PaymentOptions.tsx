@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CreditCard, Lock } from 'lucide-react';
 import { UserData } from '../types';
 
 interface PaymentOptionsProps {
@@ -11,13 +11,20 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
   const [processing, setProcessing] = useState(false);
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  
+  // Mock card form state
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
+  const [cvv, setCvv] = useState('');
+  const [cardName, setCardName] = useState('');
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  const handlePayment = async () => {
+  const handleContinueToPayment = () => {
     // Validate email first
     if (!email.trim()) {
       setEmailError('EMAIL IS REQUIRED');
@@ -30,6 +37,10 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
     }
 
     setEmailError('');
+    setShowPaymentForm(true);
+  };
+
+  const handlePayment = async () => {
     setProcessing(true);
     
     // Simulate payment processing
@@ -39,7 +50,8 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
     }, 2000);
   };
 
-  const isFormValid = email.trim().length > 0 && !emailError && validateEmail(email);
+  const isEmailValid = email.trim().length > 0 && !emailError && validateEmail(email);
+  const isCardValid = cardNumber.length >= 16 && expiryDate.length >= 5 && cvv.length >= 3 && cardName.length > 0;
 
   return (
     <div className="relative w-full max-w-6xl mx-auto mb-12">
@@ -86,9 +98,12 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                           setEmail(e.target.value);
                           setEmailError('');
                         }}
+                        disabled={showPaymentForm}
                         className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
                           emailError 
                             ? 'border-red-500 bg-red-50' 
+                            : showPaymentForm
+                            ? 'border-gray-300 bg-gray-100 text-gray-600'
                             : 'border-gray-400 focus:border-black bg-white'
                         }`}
                         placeholder="ENTER EMAIL"
@@ -119,39 +134,129 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
               <div className="w-px h-full border-l-2 border-dashed border-black"></div>
             </div>
 
-            {/* Right Side - Payment Details */}
+            {/* Right Side - Payment Details or Card Form */}
             <div className="w-1/2 relative pl-6">
-              {/* Payment Summary Box */}
-              <div className="w-full bg-black text-white rounded border-2 border-black overflow-hidden p-6 mb-4" style={{ aspectRatio: '16/9' }}>
-                <div className="text-center h-full flex flex-col justify-center">
-                  <h3 className="text-3xl font-semibold mb-4">$10</h3>
-                  <p className="text-lg font-semibold uppercase tracking-wide mb-2">ONE-TIME FEE</p>
-                  <p className="text-sm opacity-80">COMPLETE ACCESS TO YOUR VIBE CARD</p>
-                </div>
-              </div>
-              
-              {/* What's Included */}
-              <div className="mb-4">
-                <h4 className="font-semibold text-sm tracking-wide mb-3 text-gray-700 uppercase">
-                  WHAT'S INCLUDED:
-                </h4>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
-                    CUSTOM VIDEO GENERATED
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
-                    MP4 DOWNLOAD READY
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
-                    EMAIL DELIVERY INCLUDED
-                  </li>
-                </ul>
-              </div>
-              
-              <div className="text-center text-sm text-gray-600">SECURE STRIPE PAYMENT</div>
+              {!showPaymentForm ? (
+                <>
+                  {/* Payment Summary Box */}
+                  <div className="w-full bg-black text-white rounded border-2 border-black overflow-hidden p-6 mb-4" style={{ aspectRatio: '16/9' }}>
+                    <div className="text-center h-full flex flex-col justify-center">
+                      <h3 className="text-3xl font-semibold mb-4">$10</h3>
+                      <p className="text-lg font-semibold uppercase tracking-wide mb-2">ONE-TIME FEE</p>
+                      <p className="text-sm opacity-80">COMPLETE ACCESS TO YOUR VIBE CARD</p>
+                    </div>
+                  </div>
+                  
+                  {/* What's Included */}
+                  <div className="mb-4">
+                    <h4 className="font-semibold text-sm tracking-wide mb-3 text-gray-700 uppercase">
+                      WHAT'S INCLUDED:
+                    </h4>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li className="flex items-center">
+                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        CUSTOM VIDEO GENERATED
+                      </li>
+                      <li className="flex items-center">
+                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        MP4 DOWNLOAD READY
+                      </li>
+                      <li className="flex items-center">
+                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        EMAIL DELIVERY INCLUDED
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="text-center text-sm text-gray-600">SECURE STRIPE PAYMENT</div>
+                </>
+              ) : (
+                <>
+                  {/* Credit Card Form */}
+                  <div className="w-full bg-white border-2 border-black rounded p-4 mb-4">
+                    <div className="flex items-center mb-4">
+                      <Lock size={16} className="mr-2" />
+                      <h4 className="font-semibold text-sm uppercase tracking-wide">SECURE PAYMENT</h4>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {/* Card Number */}
+                      <div>
+                        <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                          CARD NUMBER
+                        </label>
+                        <input
+                          type="text"
+                          value={cardNumber}
+                          onChange={(e) => setCardNumber(e.target.value.replace(/\D/g, '').slice(0, 16))}
+                          className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                          placeholder="1234 5678 9012 3456"
+                          maxLength={16}
+                        />
+                      </div>
+                      
+                      {/* Expiry and CVV */}
+                      <div className="flex space-x-2">
+                        <div className="flex-1">
+                          <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                            EXPIRY
+                          </label>
+                          <input
+                            type="text"
+                            value={expiryDate}
+                            onChange={(e) => {
+                              let value = e.target.value.replace(/\D/g, '');
+                              if (value.length >= 2) {
+                                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                              }
+                              setExpiryDate(value);
+                            }}
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                            placeholder="MM/YY"
+                            maxLength={5}
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                            CVV
+                          </label>
+                          <input
+                            type="text"
+                            value={cvv}
+                            onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                            placeholder="123"
+                            maxLength={3}
+                          />
+                        </div>
+                      </div>
+                      
+                      {/* Cardholder Name */}
+                      <div>
+                        <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                          CARDHOLDER NAME
+                        </label>
+                        <input
+                          type="text"
+                          value={cardName}
+                          onChange={(e) => setCardName(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                          placeholder="JOHN DOE"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Security Info */}
+                  <div className="text-xs text-gray-600 text-center">
+                    <div className="flex items-center justify-center mb-2">
+                      <CreditCard size={14} className="mr-2" />
+                      <span>POWERED BY STRIPE</span>
+                    </div>
+                    <p>Your payment information is encrypted and secure</p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -168,26 +273,40 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
             </div>
           </div>
 
-          {/* Payment Button - Lower Right */}
+          {/* Action Button - Lower Right */}
           <div className="absolute bottom-6 right-6 pl-6" style={{ width: 'calc(50% - 24px)' }}>
-            <button 
-              onClick={handlePayment}
-              disabled={!isFormValid || processing}
-              className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
-                isFormValid && !processing
-                  ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
-                  : 'bg-gray-400 text-gray-600 cursor-not-allowed'
-              }`}
-            >
-              {processing ? (
-                <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                  PROCESSING...
-                </div>
-              ) : (
-                'PAY & GENERATE VIDEO'
-              )}
-            </button>
+            {!showPaymentForm ? (
+              <button 
+                onClick={handleContinueToPayment}
+                disabled={!isEmailValid}
+                className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
+                  isEmailValid
+                    ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
+                    : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                }`}
+              >
+                CONTINUE TO PAYMENT
+              </button>
+            ) : (
+              <button 
+                onClick={handlePayment}
+                disabled={!isCardValid || processing}
+                className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
+                  isCardValid && !processing
+                    ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
+                    : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                }`}
+              >
+                {processing ? (
+                  <div className="flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    PROCESSING...
+                  </div>
+                ) : (
+                  'PAY & GENERATE VIDEO'
+                )}
+              </button>
+            )}
           </div>
         </div>
 
