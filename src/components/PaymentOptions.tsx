@@ -78,30 +78,6 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                     <span className="ml-4 font-semibold">{userData.age}</span>
                   </div>
 
-                  {/* Email Field - Input */}
-                  <div className="flex items-center">
-                    <span className="font-semibold w-16">EMAIL:</span>
-                    <div className="flex-1 ml-4">
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                          setEmailError('');
-                        }}
-                        className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
-                          emailError 
-                            ? 'border-red-500 bg-red-50' 
-                            : 'border-gray-400 focus:border-black bg-white'
-                        }`}
-                        placeholder="ENTER EMAIL"
-                      />
-                      {emailError && (
-                        <span className="text-xs text-red-600 font-semibold mt-1 block">{emailError}</span>
-                      )}
-                    </div>
-                  </div>
-
                   {/* Price Field */}
                   <div className="flex items-center">
                     <span className="font-semibold w-16">PRICE:</span>
@@ -112,6 +88,27 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                   <div className="flex items-center">
                     <span className="font-semibold w-16">TYPE:</span>
                     <span className="ml-4">ONE-TIME PAYMENT</span>
+                  </div>
+
+                  {/* What's Included - Moved from right side */}
+                  <div className="mt-6">
+                    <h4 className="font-semibold text-sm tracking-wide mb-3 text-gray-700 uppercase">
+                      WHAT'S INCLUDED:
+                    </h4>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li className="flex items-center">
+                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        CUSTOM VIDEO GENERATED
+                      </li>
+                      <li className="flex items-center">
+                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        MP4 DOWNLOAD READY
+                      </li>
+                      <li className="flex items-center">
+                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        EMAIL DELIVERY INCLUDED
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -204,25 +201,28 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                 </div>
               </div>
               
-              {/* What's Included - Compact */}
-              <div className="mb-3">
-                <h4 className="font-semibold text-xs tracking-wide mb-2 text-gray-700 uppercase">
-                  WHAT'S INCLUDED:
-                </h4>
-                <ul className="space-y-1 text-xs text-gray-700">
-                  <li className="flex items-center">
-                    <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                    CUSTOM VIDEO GENERATED
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                    MP4 DOWNLOAD READY
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                    EMAIL DELIVERY INCLUDED
-                  </li>
-                </ul>
+              {/* Email Field - Moved from left side */}
+              <div className="mb-4">
+                <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                  EMAIL ADDRESS
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError('');
+                  }}
+                  className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
+                    emailError 
+                      ? 'border-red-500 bg-red-50' 
+                      : 'border-gray-300 focus:border-black bg-white'
+                  }`}
+                  placeholder="ENTER YOUR EMAIL"
+                />
+                {emailError && (
+                  <span className="text-xs text-red-600 font-semibold mt-1 block">{emailError}</span>
+                )}
               </div>
               
               {/* Security Info */}
