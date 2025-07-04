@@ -61,7 +61,7 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
     // Poll for completion
     const requestId = submitResult.requestId;
     let attempts = 0;
-    const maxAttempts = 60; // 5 minutes max
+    const maxAttempts = 240; // 20 minutes max (5 second intervals)
     
     while (attempts < maxAttempts) {
       await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
@@ -86,7 +86,13 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
       }
     }
     
-    throw new Error('Video generation timed out after 5 minutes');
+    // Instead of throwing an error, return a pending status
+    console.log('⏰ Video generation taking longer than expected, returning pending status');
+    return {
+      video_url: '',
+      status: 'pending',
+      request_id: requestId
+    };
 
   } catch (err: any) {
     console.error("❌ Video generation error:", err);

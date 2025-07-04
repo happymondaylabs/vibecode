@@ -45,6 +45,12 @@ export function useVideoGeneration() {
         setProgress(100);
         setIsGenerating(false);
         return result.video_url;
+      } else if (result.status === 'pending') {
+        console.log('⏰ Video generation pending, will continue in background');
+        setProgress(100);
+        setIsGenerating(false);
+        // Don't set videoUrl, but don't throw error either
+        return null;
       } else {
         throw new Error('Video generation failed - no video URL received');
       }

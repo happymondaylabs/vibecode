@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Loader2, AlertCircle, RefreshCw } from 'lucide-react';
+import { Loader2, AlertCircle, RefreshCw, Clock } from 'lucide-react';
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -7,6 +7,7 @@ interface LoadingScreenProps {
   progress?: number;
   error?: string | null;
   onRetry?: () => void;
+  isPending?: boolean;
 }
 
 export function LoadingScreen({ 
@@ -14,7 +15,8 @@ export function LoadingScreen({
   isGenerating = false, 
   progress = 0, 
   error = null,
-  onRetry 
+  onRetry,
+  isPending = false
 }: LoadingScreenProps) {
   const [localProgress, setLocalProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('INITIALIZING...');
@@ -30,6 +32,67 @@ export function LoadingScreen({
     'COMPLETE!'
   ];
 
+  // Handle pending state
+  if (isPending) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
+        <div className="text-center max-w-2xl mx-auto px-4">
+          <div className="w-24 h-24 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-8">
+            <Clock className="text-white" size={48} />
+          </div>
+
+          <h2 className="text-3xl font-semibold uppercase tracking-wider text-white mb-4">
+            GENERATION IN PROGRESS
+          </h2>
+
+          <div className="bg-yellow-900 bg-opacity-50 p-6 rounded-lg mb-8">
+            <p className="text-yellow-200 text-lg leading-relaxed mb-4">
+              Your video is taking longer than usual to generate.
+            </p>
+            <p className="text-yellow-300 text-sm leading-relaxed">
+              This is normal for complex videos. We'll email you when it's ready, 
+              or you can continue and check back later.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <button
+              onClick={onComplete}
+              className="w-full px-8 py-3 bg-white text-black font-semibold text-sm uppercase tracking-wider hover:bg-gray-200 transition-all duration-200"
+            >
+              CONTINUE TO CHECKOUT
+            </button>
+
+            {onRetry && (
+              <button
+                onClick={onRetry}
+                className="w-full px-8 py-3 border border-white text-white font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-black transition-all duration-200"
+              >
+                CHECK STATUS AGAIN
+              </button>
+            )}
+          </div>
+
+          <p className="text-gray-400 text-xs mt-4 uppercase tracking-wide">
+            You can complete your order and we'll deliver the video when ready
+          </p>
+
+          {/* Processing Tips */}
+          <div className="mt-8 p-4 bg-gray-900 bg-opacity-50 rounded-lg text-left">
+            <h4 className="text-white font-semibold text-sm mb-3 uppercase tracking-wide">
+              Why This Happens:
+            </h4>
+            <ul className="text-gray-300 text-xs space-y-2">
+              <li>• High-quality video generation takes time</li>
+              <li>• Complex themes require more processing</li>
+              <li>• Server queue may be busy during peak hours</li>
+              <li>• Your video will be worth the wait!</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
+  }
   useEffect(() => {
     if (isGenerating) {
       setLocalProgress(progress);

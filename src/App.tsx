@@ -21,6 +21,7 @@ function App() {
   });
   const [userEmail, setUserEmail] = useState('');
   const [generatedVideoUrl, setGeneratedVideoUrl] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState(false);
 
   const { errors, validateUserData, clearErrors } = useValidation();
   const { toasts, addToast, removeToast, clearToasts } = useToast();
@@ -48,11 +49,19 @@ function App() {
           userData: formData,
           theme: selectedTheme
         });
-        setGeneratedVideoUrl(videoUrl);
+        
+        if (videoUrl) {
+          setGeneratedVideoUrl(videoUrl);
+          setIsPending(false);
+        } else {
+          // Video is pending
+          setIsPending(true);
+        }
       } catch (error) {
         console.error('Video generation failed:', error);
         // Continue to email step even if video generation fails
         // We'll show a placeholder video
+        setIsPending(false);
       }
     } else {
       addToast('PLEASE FIX THE ERRORS ABOVE', 'error');
@@ -65,14 +74,22 @@ function App() {
 
   const handleRetryGeneration = async () => {
     resetVideoGeneration();
+    setIsPending(false);
     try {
       const videoUrl = await startGeneration({
         userData,
         theme: selectedTheme
       });
-      setGeneratedVideoUrl(videoUrl);
+      
+      if (videoUrl) {
+        setGeneratedVideoUrl(videoUrl);
+        setIsPending(false);
+      } else {
+        setIsPending(true);
+      }
     } catch (error) {
       console.error('Video generation retry failed:', error);
+      setIsPending(false);
     }
   };
 
@@ -92,6 +109,7 @@ function App() {
     setUserData({ name: '', age: '', message: '' });
     setUserEmail('');
     setGeneratedVideoUrl(null);
+    setIsPending(false);
     clearErrors();
     clearToasts();
     resetVideoGeneration();
@@ -121,6 +139,7 @@ function App() {
             progress={progress}
             error={videoError}
             onRetry={handleRetryGeneration}
+            isPending={isPending}
           />
         );
 
