@@ -47,9 +47,9 @@ export const handler: Handler = async (event) => {
   }
 
   // Check for FAL API key first
-  const FAL_KEY = process.env.FAL_KEY;
+  const FAL_KEY = process.env.FAL_API_KEY;
   if (!FAL_KEY) {
-    console.error("Missing FAL_KEY!");
+    console.error("Missing FAL_API_KEY!");
     return {
       statusCode: 500,
       headers: {
