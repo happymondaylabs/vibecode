@@ -50,7 +50,7 @@ If you're still getting "Server misconfiguration":
 
 ## Environment Variables Needed
 
-- `FAL_KEY` - Your FAL.ai API key for video generation
+- `FAL_KEY` - Your FAL.ai API key for video generation ✅ CONFIGURED
 
 ## Development
 
