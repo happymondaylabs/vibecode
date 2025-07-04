@@ -4,7 +4,6 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { EmailCapture } from './components/EmailCapture';
 import { PaymentOptions } from './components/PaymentOptions';
 import { CompletionScreen } from './components/CompletionScreen';
-import { LandingSection } from './components/LandingSection';
 import { Toast } from './components/Toast';
 import { useValidation } from './hooks/useValidation';
 import { useToast } from './hooks/useToast';
@@ -98,30 +97,20 @@ function App() {
     resetVideoGeneration();
   };
 
-  const handleGetStarted = () => {
-    // Scroll to the top of the page where the form is
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const renderCurrentStep = () => {
     switch (currentStep) {
       case 'form':
         return (
-          <>
-            <div className="space-y-12">
-              <ThemeSelector 
-                selectedTheme={selectedTheme}
-                onThemeChange={setSelectedTheme}
-                userData={userData}
-                onUserDataChange={setUserData}
-                errors={errors}
-                onSubmit={handleFormSubmit}
-              />
-            </div>
-            
-            {/* Landing Section */}
-            <LandingSection onGetStarted={handleGetStarted} />
-          </>
+          <div className="space-y-12">
+            <ThemeSelector 
+              selectedTheme={selectedTheme}
+              onThemeChange={setSelectedTheme}
+              userData={userData}
+              onUserDataChange={setUserData}
+              errors={errors}
+              onSubmit={handleFormSubmit}
+            />
+          </div>
         );
 
       case 'loading':
@@ -198,6 +187,33 @@ function App() {
       <main className="max-w-6xl mx-auto px-4 py-8">
         {renderCurrentStep()}
       </main>
+
+      {/* Footer */}
+      {currentStep !== 'loading' && currentStep !== 'complete' && (
+        <footer className="bg-black text-white shadow-lg border-t-4 border-orange-500 mt-16">
+          <div className="max-w-6xl mx-auto px-4 py-6">
+            <div className="flex justify-between items-start">
+              <div>
+                <h2 className="text-2xl font-black tracking-wider">
+                  VIBE CARD
+                </h2>
+                <p className="text-orange-400 mt-1 text-xs font-mono tracking-wide">
+                  © 2025 VIBE CARD Co. Ltd.
+                </p>
+              </div>
+              <div className="text-right text-xs font-mono max-w-md">
+                <div className="mb-2 text-orange-400 font-black tracking-wider">
+                  CONTACT & SUPPORT
+                </div>
+                <div className="leading-relaxed">
+                  Questions? Issues? We're here to help.<br />
+                  Email us at support@vibecard.com
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      )}
 
       {/* Toast Notifications */}
       {toasts.map((toast) => (
