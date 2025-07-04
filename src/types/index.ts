@@ -25,4 +25,4 @@ export interface Toast {
   type: 'error' | 'success';
 }
 
-export type AppStep = 'form' | 'loading' | 'email' | 'payment' | 'complete';
+export type AppStep = 'form' | 'payment' | 'loading' | 'complete';

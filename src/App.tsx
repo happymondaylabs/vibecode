@@ -41,35 +41,38 @@ function App() {
     if (validateUserData(formData)) {
       clearToasts();
       setUserData(formData);
-      setCurrentStep('loading');
-
-      // Start video generation
-      try {
-        const videoUrl = await startGeneration({
-          userData: formData,
-          theme: selectedTheme
-        });
-        
-        if (videoUrl) {
-          setGeneratedVideoUrl(videoUrl);
-          setIsPending(false);
-        } else {
-          // Video is pending
-          setIsPending(true);
-        }
-      } catch (error) {
-        console.error('Video generation failed:', error);
-        // Continue to email step even if video generation fails
-        // We'll show a placeholder video
-        setIsPending(false);
-      }
+      setCurrentStep('payment');
     } else {
       addToast('PLEASE FIX THE ERRORS ABOVE', 'error');
     }
   };
 
+  const handlePaymentComplete = async () => {
+    addToast('PAYMENT SUCCESSFUL! GENERATING YOUR VIBE CARD', 'success');
+    setCurrentStep('loading');
+
+    // Now start video generation after payment
+    try {
+      const videoUrl = await startGeneration({
+        userData,
+        theme: selectedTheme
+      });
+      
+      if (videoUrl) {
+        setGeneratedVideoUrl(videoUrl);
+        setIsPending(false);
+      } else {
+        // Video is pending
+        setIsPending(true);
+      }
+    } catch (error) {
+      console.error('Video generation failed:', error);
+      setIsPending(false);
+    }
+  };
+
   const handleLoadingComplete = () => {
-    setCurrentStep('email');
+    setCurrentStep('complete');
   };
 
   const handleRetryGeneration = async () => {
@@ -91,16 +94,6 @@ function App() {
       console.error('Video generation retry failed:', error);
       setIsPending(false);
     }
-  };
-
-  const handleEmailSubmit = (email: string) => {
-    setUserEmail(email);
-    setCurrentStep('payment');
-  };
-
-  const handlePaymentComplete = () => {
-    addToast('PAYMENT SUCCESSFUL! YOUR VIBE CARD IS READY', 'success');
-    setCurrentStep('complete');
   };
 
   const handleStartOver = () => {
@@ -143,17 +136,12 @@ function App() {
           />
         );
 
-      case 'email':
-        return (
-          <EmailCapture
-            userData={userData}
-            onSubmit={handleEmailSubmit}
-          />
-        );
-
       case 'payment':
         return (
-          <PaymentOptions onPaymentComplete={handlePaymentComplete} />
+          <PaymentOptions 
+            userData={userData}
+            onPaymentComplete={handlePaymentComplete} 
+          />
         );
 
       case 'complete':
