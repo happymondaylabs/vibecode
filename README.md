@@ -15,7 +15,7 @@
 2. Select your site (celadon-pothos-87dd95)
 3. Go to **Site settings** → **Environment variables**
 4. Add a new environment variable:
-   - **Key**: `FAL_API_KEY`
+   - **Key**: `FAL_KEY`
    - **Value**: Your FAL API key from step 1
 5. Click **Save**
 6. Redeploy your site
@@ -23,7 +23,7 @@
 ### 3. Alternative: Set via Netlify CLI (if you have it)
 
 ```bash
-netlify env:set FAL_API_KEY your_fal_api_key_here
+netlify env:set FAL_KEY your_fal_api_key_here
 ```
 
 ### 4. Test the Setup
@@ -45,14 +45,14 @@ If you're still getting "Server misconfiguration":
 
 ## Environment Variables Needed
 
-- `FAL_API_KEY` - Your FAL.ai API key for video generation
+- `FAL_KEY` - Your FAL.ai API key for video generation
 
 ## Development
 
 For local development, create a `.env` file in the root directory:
 
 ```
-FAL_API_KEY=your_fal_api_key_here
+FAL_KEY=your_fal_api_key_here
 ```
 
 Note: The `.env` file is already in `.gitignore` so your API key won't be committed to the repository.
