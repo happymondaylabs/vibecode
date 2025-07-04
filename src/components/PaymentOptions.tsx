@@ -57,15 +57,15 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
           <div className="flex h-full">
             {/* Left Side - Payment Info */}
             <div className="w-1/2 relative">
-              <div className="pr-6 h-full">
+              <div className="pr-6 h-full flex flex-col">
                 {/* Header */}
-                <div className="mb-6">
+                <div className="mb-4">
                   <h2 className="text-4xl font-semibold tracking-wider mb-2">VIBE CARD</h2>
                   <div className="text-lg tracking-wide">PAYMENT CHECKOUT</div>
                 </div>
 
                 {/* Form Fields */}
-                <div className="space-y-4 text-base">
+                <div className="space-y-3 text-base flex-1">
                   {/* Name Field - Display Only */}
                   <div className="flex items-center">
                     <span className="font-semibold w-16">NAME:</span>
@@ -91,21 +91,21 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                   </div>
 
                   {/* What's Included - Moved from right side */}
-                  <div className="mt-6">
-                    <h4 className="font-semibold text-sm tracking-wide mb-3 text-gray-700 uppercase">
+                  <div className="mt-4">
+                    <h4 className="font-semibold text-xs tracking-wide mb-2 text-gray-700 uppercase">
                       WHAT'S INCLUDED:
                     </h4>
-                    <ul className="space-y-2 text-sm text-gray-700">
+                    <ul className="space-y-1 text-xs text-gray-700">
                       <li className="flex items-center">
-                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                         CUSTOM VIDEO GENERATED
                       </li>
                       <li className="flex items-center">
-                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                         MP4 DOWNLOAD READY
                       </li>
                       <li className="flex items-center">
-                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                         EMAIL DELIVERY INCLUDED
                       </li>
                     </ul>
@@ -122,16 +122,16 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
             {/* Right Side - Credit Card Form */}
             <div className="w-1/2 relative pl-6">
               {/* Credit Card Form */}
-              <div className="w-full bg-white border-2 border-black rounded p-4 mb-4">
-                <div className="flex items-center mb-4">
-                  <Lock size={16} className="mr-2" />
-                  <h4 className="font-semibold text-sm uppercase tracking-wide">SECURE PAYMENT</h4>
+              <div className="w-full bg-white border-2 border-black rounded p-3 mb-3">
+                <div className="flex items-center mb-3">
+                  <Lock size={14} className="mr-2" />
+                  <h4 className="font-semibold text-xs uppercase tracking-wide">SECURE PAYMENT</h4>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {/* Card Number */}
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                    <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5">
                       CARD NUMBER
                     </label>
                     <input
@@ -143,7 +143,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                         value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
                         setCardNumber(value.slice(0, 19)); // Max 16 digits + 3 spaces
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                      className="w-full px-2 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
                       placeholder="1234 5678 9012 3456"
                       maxLength={19}
                     />
@@ -152,7 +152,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                   {/* Expiry and CVV */}
                   <div className="flex space-x-2">
                     <div className="flex-1">
-                      <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                      <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5">
                         EXPIRY
                       </label>
                       <input
@@ -165,20 +165,20 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                           }
                           setExpiryDate(value);
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
                         placeholder="MM/YY"
                         maxLength={5}
                       />
                     </div>
                     <div className="flex-1">
-                      <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                      <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5">
                         CVV
                       </label>
                       <input
                         type="text"
                         value={cvv}
                         onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
                         placeholder="123"
                         maxLength={3}
                       />
@@ -187,14 +187,14 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                   
                   {/* Cardholder Name */}
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                    <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5">
                       CARDHOLDER NAME
                     </label>
                     <input
                       type="text"
                       value={cardName}
                       onChange={(e) => setCardName(e.target.value.toUpperCase())}
-                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                      className="w-full px-2 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
                       placeholder="JOHN DOE"
                     />
                   </div>
@@ -202,8 +202,8 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
               </div>
               
               {/* Email Field - Moved from left side */}
-              <div className="mb-4">
-                <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+              <div className="mb-3">
+                <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5">
                   EMAIL ADDRESS
                 </label>
                 <input
@@ -213,7 +213,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                     setEmail(e.target.value);
                     setEmailError('');
                   }}
-                  className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
+                  className={`w-full px-2 py-1.5 border-2 rounded text-xs tracking-wide transition-all duration-200 focus:outline-none ${
                     emailError 
                       ? 'border-red-500 bg-red-50' 
                       : 'border-gray-300 focus:border-black bg-white'
@@ -226,12 +226,12 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
               </div>
               
               {/* Security Info */}
-              <div className="text-xs text-gray-600 text-center">
+              <div className="text-xs text-gray-600 text-center mt-2">
                 <div className="flex items-center justify-center mb-1">
-                  <CreditCard size={12} className="mr-1" />
+                  <CreditCard size={10} className="mr-1" />
                   <span>POWERED BY STRIPE</span>
                 </div>
-                <p>Your payment information is encrypted and secure</p>
+                <p className="text-xs">Your payment information is encrypted and secure</p>
               </div>
             </div>
           </div>
