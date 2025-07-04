@@ -59,216 +59,188 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
     <div className="min-h-screen bg-orange-400">
       {/* Header */}
       <header className="bg-black text-white shadow-lg border-b-4 border-orange-500">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-3xl font-semibold tracking-wider">
+              <h1 className="text-4xl font-semibold tracking-wider">
                 VIBE CARD
               </h1>
-              <p className="text-orange-400 mt-1 text-xs tracking-wide">
+              <p className="text-orange-400 mt-1 text-sm tracking-wide">
                 PAPER BIRTHDAY CARDS ARE BORING
               </p>
             </div>
             <div className="text-right text-xs max-w-md">
-              <div className="mb-1 text-orange-400 font-semibold tracking-wider">
-                ORDER COMPLETE
+              <div className="mb-2 text-orange-400 font-semibold tracking-wider">
+                PAPER CARDS → VIBE CARDS
               </div>
               <div className="leading-relaxed">
-                Your custom video birthday card is ready!
+                Send custom video birthday cards that actually<br />
+                make people laugh, share, and remember you forever.
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content - Horizontal Layout */}
-      <main className="max-w-7xl mx-auto px-4 py-6">
-        <div className="bg-white rounded-lg shadow-2xl overflow-hidden">
-          <div className="flex">
-            {/* Left Side - Video Preview */}
-            <div className="w-1/2 p-6">
-              <h2 className="text-2xl font-semibold uppercase tracking-wider mb-4 text-center">
-                YOUR VIBE CARD
-              </h2>
-              
-              {/* Video Container */}
-              <div className="relative bg-black rounded-lg overflow-hidden mb-4" style={{ aspectRatio: '16/9' }}>
-                {videoUrl ? (
-                  <video
-                    src={videoUrl}
-                    className="w-full h-full object-cover"
-                    poster={selectedTheme.image}
-                    controls={false}
-                    muted
-                    loop
-                    autoPlay
-                  />
-                ) : (
-                  <img
-                    src={selectedTheme.image}
-                    alt={selectedTheme.title}
-                    className="w-full h-full object-cover"
-                  />
-                )}
-                
-                {/* Play Button Overlay */}
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                  <button
-                    onClick={handlePlayVideo}
-                    className="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all duration-200"
-                  >
-                    <Play size={24} className="text-black ml-1" fill="currentColor" />
-                  </button>
-                </div>
-              </div>
+      {/* Main Content */}
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        <div className="relative w-full max-w-6xl mx-auto">
+          {/* Main Card - Same layout as home screen but no navigation arrows */}
+          <div className="flex items-center justify-center">
+            <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-8 flex-1 max-w-4xl" style={{ aspectRatio: '16/10' }}>
+              <div className="flex h-full">
+                {/* Left Side - Card Info */}
+                <div className="w-1/2 relative">
+                  <div className="pr-6 h-full">
+                    {/* Header */}
+                    <div className="mb-8">
+                      <h2 className="text-4xl font-semibold tracking-wider mb-2">VIBE CARD</h2>
+                      <div className="text-lg tracking-wide">{selectedTheme.title}</div>
+                    </div>
 
-              {/* Video Status */}
-              <div className="text-center mb-4">
-                <span className={`inline-block px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide ${
-                  videoUrl ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                }`}>
-                  {videoUrl ? '✓ VIDEO READY' : '⏳ PROCESSING'}
-                </span>
-              </div>
+                    {/* User Info Display */}
+                    <div className="space-y-6 text-base">
+                      {/* Name Field */}
+                      <div className="flex items-center">
+                        <span className="font-semibold w-16">NAME:</span>
+                        <span className="ml-4 font-semibold">{userData.name}</span>
+                      </div>
 
-              {/* Action Buttons */}
-              <div className="space-y-3">
-                <button
-                  onClick={handleDownload}
-                  className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded-lg font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
-                >
-                  <Download size={16} className="mr-2" />
-                  DOWNLOAD VIDEO
-                </button>
+                      {/* Age Field */}
+                      <div className="flex items-center">
+                        <span className="font-semibold w-16">AGE:</span>
+                        <span className="ml-4 font-semibold">{userData.age}</span>
+                      </div>
 
-                <div className="relative group">
-                  <button className="w-full flex items-center justify-center px-4 py-3 bg-gray-800 text-white rounded-lg font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200">
-                    <Share2 size={16} className="mr-2" />
-                    SHARE NOW
-                  </button>
-                  
-                  {/* Share Options Dropdown */}
-                  <div className="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto z-10">
-                    <div className="p-2">
-                      <button
-                        onClick={() => handleShare('twitter')}
-                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm transition-colors"
-                      >
-                        <Twitter size={14} className="mr-2" />
-                        <span className="font-semibold uppercase">Twitter</span>
-                      </button>
-                      <button
-                        onClick={() => handleShare('instagram')}
-                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm transition-colors"
-                      >
-                        <Instagram size={14} className="mr-2" />
-                        <span className="font-semibold uppercase">Instagram</span>
-                      </button>
-                      <button
-                        onClick={() => handleShare('copy')}
-                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm transition-colors"
-                      >
-                        <Share2 size={14} className="mr-2" />
-                        <span className="font-semibold uppercase">Copy Link</span>
-                      </button>
+                      {/* Style Field */}
+                      <div className="flex items-center">
+                        <span className="font-semibold w-16">STYLE:</span>
+                        <span className="ml-4">{selectedTheme.title}</span>
+                      </div>
+
+                      {/* Type Field */}
+                      <div className="flex items-center">
+                        <span className="font-semibold w-16">TYPE:</span>
+                        <span className="ml-4">BIRTHDAY</span>
+                      </div>
+
+                      {/* Status Field */}
+                      <div className="flex items-center">
+                        <span className="font-semibold w-16">STATUS:</span>
+                        <span className="ml-4 text-black font-semibold">
+                          {videoUrl ? 'COMPLETE' : 'READY'}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Right Side - Order Details & Actions */}
-            <div className="w-1/2 p-6 bg-gray-50">
-              <h3 className="text-xl font-semibold uppercase tracking-wider mb-6">
-                ORDER DETAILS
-              </h3>
+                {/* Center Dotted Divider */}
+                <div className="flex items-center justify-center">
+                  <div className="w-px h-full border-l-2 border-dashed border-black"></div>
+                </div>
 
-              {/* Order Summary */}
-              <div className="space-y-4 mb-6">
-                <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                  <span className="font-semibold text-sm uppercase">Name:</span>
-                  <span className="text-sm">{userData.name}</span>
-                </div>
-                <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                  <span className="font-semibold text-sm uppercase">Age:</span>
-                  <span className="text-sm">{userData.age}</span>
-                </div>
-                <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                  <span className="font-semibold text-sm uppercase">Theme:</span>
-                  <span className="text-sm">{selectedTheme.title}</span>
-                </div>
-                <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                  <span className="font-semibold text-sm uppercase">Type:</span>
-                  <span className="text-sm">BIRTHDAY CARD</span>
-                </div>
-                <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                  <span className="font-semibold text-sm uppercase">Status:</span>
-                  <span className={`text-sm font-semibold ${videoUrl ? 'text-green-600' : 'text-yellow-600'}`}>
-                    {videoUrl ? 'COMPLETE' : 'PROCESSING'}
-                  </span>
-                </div>
-              </div>
+                {/* Right Side - Video Preview with Buttons Below */}
+                <div className="w-1/2 relative pl-6 flex flex-col">
+                  {/* Video Thumbnail - Fixed 16:9 aspect ratio */}
+                  <div className="w-full bg-black rounded border-2 border-black overflow-hidden relative mb-4" style={{ aspectRatio: '16/9' }}>
+                    {/* Video Preview */}
+                    {videoUrl ? (
+                      <video
+                        src={videoUrl}
+                        className="w-full h-full object-cover"
+                        poster={selectedTheme.image}
+                        controls={false}
+                        muted
+                        loop
+                        autoPlay
+                      />
+                    ) : (
+                      <img
+                        src={selectedTheme.image}
+                        alt={selectedTheme.title}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    
+                    {/* Video Play Button Overlay */}
+                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                      <button
+                        onClick={handlePlayVideo}
+                        className="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all duration-200"
+                      >
+                        <Play size={20} className="text-black ml-1" fill="currentColor" />
+                      </button>
+                    </div>
+                  </div>
 
-              {/* What's Included */}
-              <div className="mb-6 p-4 bg-white rounded-lg border">
-                <h4 className="font-semibold uppercase text-sm tracking-wide mb-3 text-gray-700">
-                  WHAT'S INCLUDED:
-                </h4>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-                    CUSTOM VIDEO GENERATED
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-                    MP4 DOWNLOAD READY
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-                    UNLIMITED SHARING
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-                    LIFETIME ACCESS
-                  </li>
-                </ul>
-              </div>
+                  {/* Action Buttons - Inside Card Below Thumbnail */}
+                  <div className="space-y-2 flex-1">
+                    {/* Download Video Button */}
+                    <button
+                      onClick={handleDownload}
+                      className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                    >
+                      <Download size={14} className="mr-2" />
+                      DOWNLOAD VIDEO
+                    </button>
 
-              {/* Payment Summary */}
-              <div className="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold text-green-800 uppercase text-sm">Total Paid:</span>
-                  <span className="text-2xl font-bold text-green-800">$10.00</span>
-                </div>
-                <p className="text-xs text-green-600 mt-1 uppercase tracking-wide">
-                  ✓ Payment Successful
-                </p>
-              </div>
+                    {/* Share Now Button */}
+                    <div className="relative group">
+                      <button className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200">
+                        <Share2 size={14} className="mr-2" />
+                        SHARE NOW
+                      </button>
+                      
+                      {/* Share Options Dropdown */}
+                      <div className="absolute bottom-full left-0 right-0 mb-1 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto z-10">
+                        <div className="p-1">
+                          <button
+                            onClick={() => handleShare('twitter')}
+                            className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs transition-colors"
+                          >
+                            <Twitter size={12} className="mr-2" />
+                            <span className="font-semibold uppercase">Twitter</span>
+                          </button>
+                          <button
+                            onClick={() => handleShare('instagram')}
+                            className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs transition-colors"
+                          >
+                            <Instagram size={12} className="mr-2" />
+                            <span className="font-semibold uppercase">Instagram</span>
+                          </button>
+                          <button
+                            onClick={() => handleShare('copy')}
+                            className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs transition-colors"
+                          >
+                            <Share2 size={12} className="mr-2" />
+                            <span className="font-semibold uppercase">Copy Link</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
 
-              {/* Additional Actions */}
-              <div className="space-y-3">
-                <button
-                  onClick={onStartOver}
-                  className="w-full px-4 py-3 border-2 border-black text-black rounded-lg font-semibold text-sm uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-200"
-                >
-                  CREATE ANOTHER CARD
-                </button>
-                
-                <div className="text-center">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">
-                    Need help? Contact support@vibecard.com
-                  </p>
+                    {/* Create Another Button */}
+                    <button
+                      onClick={onStartOver}
+                      className="w-full px-3 py-2 border border-black text-black rounded font-semibold text-xs uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-200"
+                    >
+                      CREATE ANOTHER
+                    </button>
+                  </div>
                 </div>
               </div>
 
               {/* HP Logo and Symbols */}
-              <div className="flex items-center justify-center space-x-3 mt-6 pt-4 border-t border-gray-200">
-                <div className="bg-black text-white px-3 py-1 font-semibold text-xs">HP</div>
-                <div className="flex space-x-1">
-                  <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">©</div>
-                  <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
-                  <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
-                  <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
+              <div className="absolute bottom-6 left-8">
+                <div className="flex items-center space-x-3">
+                  <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
+                  <div className="flex space-x-2">
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
+                  </div>
                 </div>
               </div>
             </div>
