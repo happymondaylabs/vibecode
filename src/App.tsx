@@ -34,6 +34,9 @@ function App() {
     reset: resetVideoGeneration 
   } = useVideoGeneration();
 
+  // Get current theme color
+  const currentThemeColor = selectedTheme.color;
+
   const handleFormSubmit = async () => {
     // For the form submission, we only need name and age (message is optional for now)
     const formData = { ...userData, message: userData.message || `Happy ${userData.age}th Birthday!` };
@@ -120,6 +123,7 @@ function App() {
               onUserDataChange={setUserData}
               errors={errors}
               onSubmit={handleFormSubmit}
+              themeColor={currentThemeColor}
             />
           </div>
         );
@@ -140,7 +144,8 @@ function App() {
         return (
           <PaymentOptions 
             userData={userData}
-            onPaymentComplete={handlePaymentComplete} 
+            onPaymentComplete={handlePaymentComplete}
+            themeColor={currentThemeColor}
           />
         );
 
@@ -151,6 +156,7 @@ function App() {
             selectedTheme={selectedTheme}
             videoUrl={generatedVideoUrl}
             onStartOver={handleStartOver}
+            themeColor={currentThemeColor}
           />
         );
 
@@ -160,24 +166,34 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen transition-all duration-500 ${
-      currentStep === 'complete' ? 'bg-orange-400' : 'bg-orange-400'
-    }`}>
+    <div 
+      className="min-h-screen transition-all duration-500"
+      style={{ backgroundColor: currentThemeColor }}
+    >
       {/* Header */}
       {currentStep !== 'loading' && currentStep !== 'complete' && (
-        <header className="bg-black text-white shadow-lg border-b-4 border-orange-500">
+        <header 
+          className="bg-black text-white shadow-lg border-b-4 transition-all duration-500"
+          style={{ borderBottomColor: currentThemeColor }}
+        >
           <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
               <div>
                 <h1 className="text-2xl md:text-4xl font-black tracking-wider">
                   VIBE CARD
                 </h1>
-                <p className="text-orange-400 mt-1 text-xs md:text-sm tracking-wide">
+                <p 
+                  className="mt-1 text-xs md:text-sm tracking-wide transition-all duration-500"
+                  style={{ color: currentThemeColor }}
+                >
                   PAPER BIRTHDAY CARDS ARE BORING
                 </p>
               </div>
               <div className="text-left md:text-right text-xs max-w-md">
-                <div className="mb-1 md:mb-2 text-orange-400 font-semibold tracking-wider">
+                <div 
+                  className="mb-1 md:mb-2 font-semibold tracking-wider transition-all duration-500"
+                  style={{ color: currentThemeColor }}
+                >
                   PAPER CARDS → VIBE CARDS
                 </div>
                 <div className="leading-relaxed hidden md:block">
@@ -200,19 +216,28 @@ function App() {
 
       {/* Footer */}
       {currentStep !== 'loading' && currentStep !== 'complete' && (
-        <footer className="bg-black text-white shadow-lg border-t-4 border-orange-500 mt-16">
+        <footer 
+          className="bg-black text-white shadow-lg border-t-4 mt-16 transition-all duration-500"
+          style={{ borderTopColor: currentThemeColor }}
+        >
           <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
               <div>
                 <h2 className="text-xl md:text-2xl font-black tracking-wider">
                   VIBE CARD
                 </h2>
-                <p className="text-orange-400 mt-1 text-xs tracking-wide">
+                <p 
+                  className="mt-1 text-xs tracking-wide transition-all duration-500"
+                  style={{ color: currentThemeColor }}
+                >
                   © 2025 YOUGENIUS.CO
                 </p>
               </div>
               <div className="text-left md:text-right text-xs max-w-md">
-                <div className="mb-1 md:mb-2 text-orange-400 font-semibold tracking-wider">
+                <div 
+                  className="mb-1 md:mb-2 font-semibold tracking-wider transition-all duration-500"
+                  style={{ color: currentThemeColor }}
+                >
                   CONTACT & SUPPORT
                 </div>
                 <div className="leading-relaxed hidden md:block">

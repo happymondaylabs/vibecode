@@ -10,6 +10,7 @@ interface ThemeSelectorProps {
   onUserDataChange: (data: UserData) => void;
   errors: ValidationErrors;
   onSubmit: () => void;
+  themeColor: string;
 }
 
 export function ThemeSelector({ 
@@ -18,7 +19,8 @@ export function ThemeSelector({
   userData, 
   onUserDataChange, 
   errors,
-  onSubmit
+  onSubmit,
+  themeColor
 }: ThemeSelectorProps) {
   const currentIndex = themes.findIndex(theme => theme.id === selectedTheme.id);
 
@@ -134,9 +136,32 @@ export function ThemeSelector({
             disabled={!isFormValid}
             className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
               isFormValid
-                ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
+                ? 'bg-black text-white cursor-pointer'
                 : 'bg-gray-400 text-gray-600 cursor-not-allowed'
             }`}
+            onMouseEnter={(e) => {
+              if (isFormValid) {
+                e.currentTarget.style.color = themeColor;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (isFormValid) {
+                e.currentTarget.style.color = 'white';
+              }
+            }}
+            style={isFormValid ? { 
+              '--hover-color': themeColor 
+            } as React.CSSProperties & { '--hover-color': string } : {}}
+            onMouseEnter={(e) => {
+              if (isFormValid) {
+                e.currentTarget.style.color = themeColor;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (isFormValid) {
+                e.currentTarget.style.color = 'white';
+              }
+            }}
           >
             GENERATE CARD
           </button>
@@ -192,8 +217,16 @@ export function ThemeSelector({
                         className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
                           errors.name 
                             ? 'border-red-500 bg-red-50' 
-                            : 'border-gray-400 focus:border-black bg-white'
+                           : 'border-gray-400 bg-white'
                         }`}
+                       onFocus={(e) => e.target.style.borderColor = themeColor}
+                       onBlur={(e) => e.target.style.borderColor = errors.name ? '#ef4444' : '#9ca3af'}
+                       style={{ 
+                         focusBorderColor: themeColor,
+                         '--focus-border-color': themeColor
+                       } as React.CSSProperties & { '--focus-border-color': string }}
+                       onFocus={(e) => e.target.style.borderColor = themeColor}
+                       onBlur={(e) => e.target.style.borderColor = errors.name ? '#ef4444' : '#9ca3af'}
                         placeholder="ENTER NAME"
                       />
                       <div className="flex justify-between mt-1">
@@ -216,8 +249,12 @@ export function ThemeSelector({
                         className={`w-full px-3 py-2 border-2 rounded text-sm transition-all duration-200 focus:outline-none ${
                           errors.age 
                             ? 'border-red-500 bg-red-50' 
-                            : 'border-gray-400 focus:border-black bg-white'
+                           : 'border-gray-400 bg-white'
                         }`}
+                       onFocus={(e) => e.target.style.borderColor = themeColor}
+                       onBlur={(e) => e.target.style.borderColor = errors.age ? '#ef4444' : '#9ca3af'}
+                       onFocus={(e) => e.target.style.borderColor = themeColor}
+                       onBlur={(e) => e.target.style.borderColor = errors.age ? '#ef4444' : '#9ca3af'}
                         placeholder="ENTER AGE"
                       />
                       {errors.age && (
@@ -315,12 +352,13 @@ export function ThemeSelector({
               className={`
                 w-4 h-4 rounded-sm transition-all duration-300 ease-out border
                 ${index === currentIndex 
-                  ? 'bg-black border-black shadow-sm' 
+                  ? 'border-black shadow-sm' 
                   : 'bg-white border-gray-300 hover:border-gray-500'
                 }
                 focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50
                 transform hover:scale-110 active:scale-95
               `}
+              style={index === currentIndex ? { backgroundColor: themeColor } : {}}
               aria-label={`Go to theme ${index + 1}`}
             />
           ))}

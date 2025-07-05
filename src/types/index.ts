@@ -5,6 +5,7 @@ export interface Theme {
   image: string;
   category: string;
   code: string;
+  color: string;
 }
 
 export interface UserData {
