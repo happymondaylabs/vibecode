@@ -5,9 +5,10 @@ import { UserData } from '../types';
 interface PaymentOptionsProps {
   userData: UserData;
   onPaymentComplete: () => void;
+  themeColor: string;
 }
 
-export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsProps) {
+export function PaymentOptions({ userData, onPaymentComplete, themeColor }: PaymentOptionsProps) {
   const [processing, setProcessing] = useState(false);
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -199,8 +200,10 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                 className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
                   emailError 
                     ? 'border-red-500 bg-red-50' 
-                    : 'border-gray-300 focus:border-black bg-white'
+                    : 'border-gray-300 bg-white'
                 }`}
+                onFocus={(e) => e.target.style.borderColor = themeColor}
+                onBlur={(e) => e.target.style.borderColor = emailError ? '#ef4444' : '#d1d5db'}
                 placeholder="ENTER YOUR EMAIL"
               />
               {emailError && (
@@ -224,9 +227,19 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
             disabled={!isFormValid || processing}
             className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
               isFormValid && !processing
-                ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
+                ? 'bg-black text-white cursor-pointer'
                 : 'bg-gray-400 text-gray-600 cursor-not-allowed'
             }`}
+            onMouseEnter={(e) => {
+              if (isFormValid && !processing) {
+                e.currentTarget.style.color = themeColor;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (isFormValid && !processing) {
+                e.currentTarget.style.color = 'white';
+              }
+            }}
           >
             {processing ? (
               <div className="flex items-center justify-center">
@@ -347,6 +360,8 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                         setCardNumber(value.slice(0, 19)); // Max 16 digits + 3 spaces
                       }}
                       className="w-full px-1.5 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
+                      onFocus={(e) => e.target.style.borderColor = themeColor}
+                      onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
                       placeholder="1234 5678 9012 3456"
                       maxLength={19}
                     />
@@ -369,6 +384,8 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                           setExpiryDate(value);
                         }}
                         className="w-full px-1.5 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
+                        onFocus={(e) => e.target.style.borderColor = themeColor}
+                        onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
                         placeholder="MM/YY"
                         maxLength={5}
                       />
@@ -382,6 +399,8 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                         value={cvv}
                         onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
                         className="w-full px-1.5 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
+                        onFocus={(e) => e.target.style.borderColor = themeColor}
+                        onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
                         placeholder="123"
                         maxLength={3}
                       />
@@ -398,6 +417,8 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                       value={cardName}
                       onChange={(e) => setCardName(e.target.value.toUpperCase())}
                       className="w-full px-1.5 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
+                      onFocus={(e) => e.target.style.borderColor = themeColor}
+                      onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
                       placeholder="JOHN DOE"
                     />
                   </div>
@@ -419,8 +440,10 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                   className={`w-full px-2 py-1.5 border-2 rounded text-xs tracking-wide transition-all duration-200 focus:outline-none ${
                     emailError 
                       ? 'border-red-500 bg-red-50' 
-                      : 'border-gray-300 focus:border-black bg-white'
+                      : 'border-gray-300 bg-white'
                   }`}
+                  onFocus={(e) => e.target.style.borderColor = themeColor}
+                  onBlur={(e) => e.target.style.borderColor = emailError ? '#ef4444' : '#d1d5db'}
                   placeholder="ENTER YOUR EMAIL"
                 />
                 {emailError && (
@@ -459,9 +482,19 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
               disabled={!isFormValid || processing}
               className={`w-full px-4 py-2 font-semibold text-xs tracking-wider transition-all duration-200 ${
                 isFormValid && !processing
-                  ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
+                  ? 'bg-black text-white cursor-pointer'
                   : 'bg-gray-400 text-gray-600 cursor-not-allowed'
               }`}
+              onMouseEnter={(e) => {
+                if (isFormValid && !processing) {
+                  e.currentTarget.style.color = themeColor;
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (isFormValid && !processing) {
+                  e.currentTarget.style.color = 'white';
+                }
+              }}
             >
               {processing ? (
                 <div className="flex items-center justify-center">
@@ -480,7 +513,10 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
       <div className="flex justify-center mt-4 md:mt-6">
         <div className="flex items-center space-x-3">
           <div className="w-4 h-4 rounded-sm bg-white border border-gray-300" />
-          <div className="w-4 h-4 rounded-sm bg-black border-black shadow-sm" />
+          <div 
+            className="w-4 h-4 rounded-sm border-black shadow-sm" 
+            style={{ backgroundColor: themeColor }}
+          />
           <div className="w-4 h-4 rounded-sm bg-white border border-gray-300" />
         </div>
       </div>
