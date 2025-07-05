@@ -213,7 +213,6 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                     setEmail(e.target.value);
                     setEmailError('');
                   }}
-                  className={`w-full px-2 py-1.5 border-2 rounded text-xs tracking-wide transition-all duration-200 focus:outline-none ${
                   className={`w-full px-2 py-1 border-2 rounded text-xs tracking-wide transition-all duration-200 focus:outline-none ${
                     emailError 
                       ? 'border-red-500 bg-red-50' 
