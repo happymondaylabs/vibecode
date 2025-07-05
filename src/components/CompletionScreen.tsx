@@ -7,9 +7,10 @@ interface CompletionScreenProps {
   selectedTheme: Theme;
   videoUrl?: string | null;
   onStartOver: () => void;
+  themeColor: string;
 }
 
-export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOver }: CompletionScreenProps) {
+export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOver, themeColor }: CompletionScreenProps) {
   const handleDownload = () => {
     if (videoUrl) {
       // Download the actual generated video
@@ -56,21 +57,33 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
   };
 
   return (
-    <div className="min-h-screen bg-orange-400 pb-8 md:pb-0">
+    <div 
+      className="min-h-screen pb-8 md:pb-0 transition-all duration-500"
+      style={{ backgroundColor: themeColor }}
+    >
       {/* Header */}
-      <header className="bg-black text-white shadow-lg border-b-4 border-orange-500">
+      <header 
+        className="bg-black text-white shadow-lg border-b-4 transition-all duration-500"
+        style={{ borderBottomColor: themeColor }}
+      >
         <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
             <div>
               <h1 className="text-2xl md:text-4xl font-semibold tracking-wider">
                 VIBE CARD
               </h1>
-              <p className="text-orange-400 mt-1 text-xs md:text-sm tracking-wide">
+              <p 
+                className="mt-1 text-xs md:text-sm tracking-wide transition-all duration-500"
+                style={{ color: themeColor }}
+              >
                 PAPER BIRTHDAY CARDS ARE BORING
               </p>
             </div>
             <div className="text-left md:text-right text-xs max-w-md">
-              <div className="mb-1 md:mb-2 text-orange-400 font-semibold tracking-wider">
+              <div 
+                className="mb-1 md:mb-2 font-semibold tracking-wider transition-all duration-500"
+                style={{ color: themeColor }}
+              >
                 PAPER CARDS → VIBE CARDS
               </div>
               <div className="leading-relaxed hidden md:block">
@@ -156,6 +169,8 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                 <button
                   onClick={handleDownload}
                   className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                  onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
                 >
                   <Download size={16} className="mr-2" />
                   DOWNLOAD VIDEO
@@ -163,7 +178,11 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
 
                 {/* Share Now Button */}
                 <div className="relative group">
-                  <button className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200">
+                  <button 
+                    className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                    onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
+                  >
                     <Share2 size={16} className="mr-2" />
                     SHARE NOW
                   </button>
@@ -317,6 +336,8 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                     <button
                       onClick={handleDownload}
                       className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                      onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
+                      onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
                     >
                       <Download size={14} className="mr-2" />
                       DOWNLOAD VIDEO
@@ -324,7 +345,11 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
 
                     {/* Share Now Button */}
                     <div className="relative group">
-                      <button className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200">
+                      <button 
+                        className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                        onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
+                        onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
+                      >
                         <Share2 size={14} className="mr-2" />
                         SHARE NOW
                       </button>
