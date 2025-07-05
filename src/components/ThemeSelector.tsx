@@ -57,7 +57,7 @@ export function ThemeSelector({
           </button>
           
           <div className="text-center flex-1 mx-4">
-            <h3 className="text-lg font-semibold tracking-wider" style={{ color: themeColor }}>
+            <h3 className="text-lg font-semibold tracking-wider text-black">
               {selectedTheme.title}
             </h3>
             <p className="text-xs text-gray-600 uppercase tracking-wide">
