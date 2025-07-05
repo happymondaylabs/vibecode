@@ -46,19 +46,73 @@ export function ThemeSelector({
     <div className="relative w-full max-w-6xl mx-auto mb-8 md:mb-12">
       {/* Mobile Layout */}
       <div className="md:hidden">
+        {/* Mobile Theme Navigation Header */}
+        <div className="flex items-center justify-between mb-4 px-4">
+          <button
+            onClick={() => navigateTheme('prev')}
+            className="p-3 rounded-full bg-black bg-opacity-20 text-black hover:bg-opacity-30 transition-all duration-200"
+            style={{ backgroundColor: `${themeColor}20` }}
+          >
+            <ChevronLeft size={24} strokeWidth={3} />
+          </button>
+          
+          <div className="text-center flex-1 mx-4">
+            <h3 className="text-lg font-semibold tracking-wider" style={{ color: themeColor }}>
+              {selectedTheme.title}
+            </h3>
+            <p className="text-xs text-gray-600 uppercase tracking-wide">
+              {currentIndex + 1} OF {themes.length} THEMES
+            </p>
+          </div>
+          
+          <button
+            onClick={() => navigateTheme('next')}
+            className="p-3 rounded-full bg-black bg-opacity-20 text-black hover:bg-opacity-30 transition-all duration-200"
+            style={{ backgroundColor: `${themeColor}20` }}
+          >
+            <ChevronRight size={24} strokeWidth={3} />
+          </button>
+        </div>
+
         <div className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 mb-4">
           {/* Mobile Header */}
           <div className="text-center mb-4">
             <h2 className="text-2xl font-semibold tracking-wider mb-1">VIBE CARD</h2>
-            <div className="text-sm tracking-wide">{selectedTheme.title}</div>
+            <div className="text-sm tracking-wide" style={{ color: themeColor }}>
+              CREATE YOUR CUSTOM VIDEO
+            </div>
           </div>
 
-          {/* Mobile Image */}
-          <div className="w-full bg-black rounded border-2 border-black overflow-hidden mb-4" style={{ aspectRatio: '16/9' }}>
+          {/* Mobile Image with Navigation Overlay */}
+          <div className="relative w-full bg-black rounded border-2 border-black overflow-hidden mb-4" style={{ aspectRatio: '16/9' }}>
             <img
               src={selectedTheme.image}
               alt={selectedTheme.title}
               className="w-full h-full object-cover"
+            />
+            
+            {/* Swipe Hint Overlay */}
+            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+              <div className="text-white text-center">
+                <div className="flex items-center justify-center space-x-4 mb-2">
+                  <ChevronLeft size={20} />
+                  <span className="text-sm font-semibold">SWIPE OR TAP ARROWS</span>
+                  <ChevronRight size={20} />
+                </div>
+                <p className="text-xs opacity-75">TO CHANGE THEMES</p>
+              </div>
+            </div>
+            
+            {/* Touch Navigation Areas */}
+            <button
+              onClick={() => navigateTheme('prev')}
+              className="absolute left-0 top-0 w-1/3 h-full bg-transparent"
+              aria-label="Previous theme"
+            />
+            <button
+              onClick={() => navigateTheme('next')}
+              className="absolute right-0 top-0 w-1/3 h-full bg-transparent"
+              aria-label="Next theme"
             />
           </div>
 
@@ -86,6 +140,8 @@ export function ThemeSelector({
                     ? 'border-red-500 bg-red-50' 
                     : 'border-gray-400 focus:border-black bg-white'
                 }`}
+                onFocus={(e) => e.target.style.borderColor = themeColor}
+                onBlur={(e) => e.target.style.borderColor = errors.name ? '#ef4444' : '#9ca3af'}
                 placeholder="ENTER NAME"
               />
               <div className="flex justify-between mt-1">
@@ -110,6 +166,8 @@ export function ThemeSelector({
                     ? 'border-red-500 bg-red-50' 
                     : 'border-gray-400 focus:border-black bg-white'
                 }`}
+                onFocus={(e) => e.target.style.borderColor = themeColor}
+                onBlur={(e) => e.target.style.borderColor = errors.age ? '#ef4444' : '#9ca3af'}
                 placeholder="ENTER AGE"
               />
               {errors.age && (
@@ -314,6 +372,16 @@ export function ThemeSelector({
                   ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
                   : 'bg-gray-400 text-gray-600 cursor-not-allowed'
               }`}
+              onMouseEnter={(e) => {
+                if (isFormValid) {
+                  e.currentTarget.style.color = themeColor;
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (isFormValid) {
+                  e.currentTarget.style.color = 'white';
+                }
+              }}
             >
               GENERATE CARD
             </button>
@@ -329,15 +397,23 @@ export function ThemeSelector({
         </button>
       </div>
 
-      {/* Minimalist Progress Indicator */}
+      {/* Enhanced Progress Indicator */}
       <div className="flex justify-center mt-4 md:mt-6">
+        <div className="text-center">
+          {/* Mobile: Show current theme info above dots */}
+          <div className="md:hidden mb-2">
+            <p className="text-xs text-gray-600 uppercase tracking-wide">
+              TAP DOTS TO JUMP TO THEMES
+            </p>
+          </div>
+          
         <div className="flex items-center space-x-3">
           {themes.map((_, index) => (
             <button
               key={index}
               onClick={() => onThemeChange(themes[index])}
               className={`
-                w-4 h-4 rounded-sm transition-all duration-300 ease-out border
+                w-4 h-4 md:w-4 md:h-4 rounded-sm transition-all duration-300 ease-out border
                 ${index === currentIndex 
                   ? 'border-black shadow-sm' 
                   : 'bg-white border-gray-300 hover:border-gray-500'
@@ -349,6 +425,7 @@ export function ThemeSelector({
               aria-label={`Go to theme ${index + 1}`}
             />
           ))}
+        </div>
         </div>
       </div>
     </div>
