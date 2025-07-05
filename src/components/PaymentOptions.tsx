@@ -53,45 +53,45 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
     <div className="relative w-full max-w-6xl mx-auto mb-12">
       <div className="flex items-center justify-center">
         {/* Main Payment Card */}
-        <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-8 flex-1 max-w-4xl" style={{ aspectRatio: '16/10' }}>
+        <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-6 flex-1 max-w-4xl" style={{ aspectRatio: '16/10' }}>
           <div className="flex h-full">
             {/* Left Side - Payment Info */}
             <div className="w-1/2 relative">
-              <div className="pr-6 h-full flex flex-col">
+              <div className="pr-4 h-full flex flex-col">
                 {/* Header */}
-                <div className="mb-4">
-                  <h2 className="text-4xl font-semibold tracking-wider mb-2">VIBE CARD</h2>
-                  <div className="text-lg tracking-wide">PAYMENT CHECKOUT</div>
+                <div className="mb-3">
+                  <h2 className="text-3xl font-semibold tracking-wider mb-1">VIBE CARD</h2>
+                  <div className="text-base tracking-wide">PAYMENT CHECKOUT</div>
                 </div>
 
                 {/* Form Fields */}
-                <div className="space-y-3 text-base flex-1">
+                <div className="space-y-2 text-sm flex-1">
                   {/* Name Field - Display Only */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">NAME:</span>
+                    <span className="font-semibold w-14">NAME:</span>
                     <span className="ml-4 font-semibold">{userData.name}</span>
                   </div>
 
                   {/* Age Field - Display Only */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">AGE:</span>
+                    <span className="font-semibold w-14">AGE:</span>
                     <span className="ml-4 font-semibold">{userData.age}</span>
                   </div>
 
                   {/* Price Field */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">PRICE:</span>
-                    <span className="ml-4 text-xl font-semibold">$10.00</span>
+                    <span className="font-semibold w-14">PRICE:</span>
+                    <span className="ml-4 text-lg font-semibold">$10.00</span>
                   </div>
 
                   {/* Type Field */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">TYPE:</span>
+                    <span className="font-semibold w-14">TYPE:</span>
                     <span className="ml-4">ONE-TIME PAYMENT</span>
                   </div>
 
                   {/* What's Included - Moved from right side */}
-                  <div className="mt-4">
+                  <div className="mt-3">
                     <h4 className="font-semibold text-xs tracking-wide mb-2 text-gray-700 uppercase">
                       WHAT'S INCLUDED:
                     </h4>
@@ -120,15 +120,15 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
             </div>
 
             {/* Right Side - Credit Card Form */}
-            <div className="w-1/2 relative pl-6">
+            <div className="w-1/2 relative pl-4">
               {/* Credit Card Form */}
-              <div className="w-full bg-white border-2 border-black rounded p-3 mb-3">
-                <div className="flex items-center mb-3">
+              <div className="w-full bg-white border-2 border-black rounded p-2 mb-2">
+                <div className="flex items-center mb-2">
                   <Lock size={14} className="mr-2" />
                   <h4 className="font-semibold text-xs uppercase tracking-wide">SECURE PAYMENT</h4>
                 </div>
                 
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {/* Card Number */}
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5">
@@ -143,14 +143,14 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                         value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
                         setCardNumber(value.slice(0, 19)); // Max 16 digits + 3 spaces
                       }}
-                      className="w-full px-2 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
+                      className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
                       placeholder="1234 5678 9012 3456"
                       maxLength={19}
                     />
                   </div>
                   
                   {/* Expiry and CVV */}
-                  <div className="flex space-x-2">
+                  <div className="flex space-x-1.5">
                     <div className="flex-1">
                       <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5">
                         EXPIRY
@@ -165,7 +165,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                           }
                           setExpiryDate(value);
                         }}
-                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
+                        className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
                         placeholder="MM/YY"
                         maxLength={5}
                       />
@@ -178,7 +178,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                         type="text"
                         value={cvv}
                         onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
-                        className="w-full px-2 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
+                        className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
                         placeholder="123"
                         maxLength={3}
                       />
@@ -194,7 +194,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                       type="text"
                       value={cardName}
                       onChange={(e) => setCardName(e.target.value.toUpperCase())}
-                      className="w-full px-2 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
+                      className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
                       placeholder="JOHN DOE"
                     />
                   </div>
@@ -202,7 +202,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
               </div>
               
               {/* Email Field - Moved from left side */}
-              <div className="mb-3">
+              <div className="mb-2">
                 <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5">
                   EMAIL ADDRESS
                 </label>
@@ -214,6 +214,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
                     setEmailError('');
                   }}
                   className={`w-full px-2 py-1.5 border-2 rounded text-xs tracking-wide transition-all duration-200 focus:outline-none ${
+                  className={`w-full px-2 py-1 border-2 rounded text-xs tracking-wide transition-all duration-200 focus:outline-none ${
                     emailError 
                       ? 'border-red-500 bg-red-50' 
                       : 'border-gray-300 focus:border-black bg-white'
@@ -226,7 +227,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
               </div>
               
               {/* Security Info */}
-              <div className="text-xs text-gray-600 text-center mt-2">
+              <div className="text-xs text-gray-600 text-center mt-1">
                 <div className="flex items-center justify-center mb-1">
                   <CreditCard size={10} className="mr-1" />
                   <span>POWERED BY STRIPE</span>
@@ -237,24 +238,24 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
           </div>
 
           {/* HP Logo and Symbols */}
-          <div className="absolute bottom-6 left-8">
+          <div className="absolute bottom-4 left-6">
             <div className="flex items-center space-x-3">
-              <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
+              <div className="bg-black text-white px-2 py-1 font-semibold text-xs">HP</div>
               <div className="flex space-x-2">
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
+                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">©</div>
+                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
+                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
+                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
               </div>
             </div>
           </div>
 
           {/* Payment Button - Lower Right */}
-          <div className="absolute bottom-6 right-6 pl-6" style={{ width: 'calc(50% - 24px)' }}>
+          <div className="absolute bottom-4 right-6 pl-4" style={{ width: 'calc(50% - 24px)' }}>
             <button 
               onClick={handlePayment}
               disabled={!isFormValid || processing}
-              className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
+              className={`w-full px-4 py-2 font-semibold text-xs tracking-wider transition-all duration-200 ${
                 isFormValid && !processing
                   ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
                   : 'bg-gray-400 text-gray-600 cursor-not-allowed'
@@ -262,7 +263,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
             >
               {processing ? (
                 <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-2"></div>
                   PROCESSING...
                 </div>
               ) : (
