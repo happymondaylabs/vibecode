@@ -166,23 +166,26 @@ function App() {
       {/* Header */}
       {currentStep !== 'loading' && currentStep !== 'complete' && (
         <header className="bg-black text-white shadow-lg border-b-4 border-orange-500">
-          <div className="max-w-6xl mx-auto px-4 py-6">
-            <div className="flex justify-between items-start">
+          <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
               <div>
-                <h1 className="text-4xl font-black tracking-wider">
+                <h1 className="text-2xl md:text-4xl font-black tracking-wider">
                   VIBE CARD
                 </h1>
-                <p className="text-orange-400 mt-1 text-sm tracking-wide">
+                <p className="text-orange-400 mt-1 text-xs md:text-sm tracking-wide">
                   PAPER BIRTHDAY CARDS ARE BORING
                 </p>
               </div>
-              <div className="text-right text-xs max-w-md">
-                <div className="mb-2 text-orange-400 font-semibold tracking-wider">
+              <div className="text-left md:text-right text-xs max-w-md">
+                <div className="mb-1 md:mb-2 text-orange-400 font-semibold tracking-wider">
                   PAPER CARDS → VIBE CARDS
                 </div>
-                <div className="leading-relaxed">
+                <div className="leading-relaxed hidden md:block">
                   Send custom video birthday cards that actually<br />
                   make people laugh, share, and remember you forever.
+                </div>
+                <div className="leading-relaxed md:hidden text-xs">
+                  Send custom video birthday cards that make people laugh and remember you forever.
                 </div>
               </div>
             </div>
@@ -191,30 +194,33 @@ function App() {
       )}
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-4 md:py-8">
         {renderCurrentStep()}
       </main>
 
       {/* Footer */}
       {currentStep !== 'loading' && currentStep !== 'complete' && (
         <footer className="bg-black text-white shadow-lg border-t-4 border-orange-500 mt-16">
-          <div className="max-w-6xl mx-auto px-4 py-6">
-            <div className="flex justify-between items-start">
+          <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
               <div>
-                <h2 className="text-2xl font-black tracking-wider">
+                <h2 className="text-xl md:text-2xl font-black tracking-wider">
                   VIBE CARD
                 </h2>
                 <p className="text-orange-400 mt-1 text-xs tracking-wide">
                   © 2025 YOUGENIUS.CO
                 </p>
               </div>
-              <div className="text-right text-xs max-w-md">
-                <div className="mb-2 text-orange-400 font-semibold tracking-wider">
+              <div className="text-left md:text-right text-xs max-w-md">
+                <div className="mb-1 md:mb-2 text-orange-400 font-semibold tracking-wider">
                   CONTACT & SUPPORT
                 </div>
-                <div className="leading-relaxed">
+                <div className="leading-relaxed hidden md:block">
                   Questions? Issues? We're here to help.<br />
                   Email us at info@yougenius.co
+                </div>
+                <div className="leading-relaxed md:hidden text-xs">
+                  Questions? Email us at info@yougenius.co
                 </div>
               </div>
             </div>

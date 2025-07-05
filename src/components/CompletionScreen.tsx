@@ -56,26 +56,29 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
   };
 
   return (
-    <div className="min-h-screen bg-orange-400">
+    <div className="min-h-screen bg-orange-400 pb-8 md:pb-0">
       {/* Header */}
       <header className="bg-black text-white shadow-lg border-b-4 border-orange-500">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex justify-between items-start">
+        <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
             <div>
-              <h1 className="text-4xl font-semibold tracking-wider">
+              <h1 className="text-2xl md:text-4xl font-semibold tracking-wider">
                 VIBE CARD
               </h1>
-              <p className="text-orange-400 mt-1 text-sm tracking-wide">
+              <p className="text-orange-400 mt-1 text-xs md:text-sm tracking-wide">
                 PAPER BIRTHDAY CARDS ARE BORING
               </p>
             </div>
-            <div className="text-right text-xs max-w-md">
-              <div className="mb-2 text-orange-400 font-semibold tracking-wider">
+            <div className="text-left md:text-right text-xs max-w-md">
+              <div className="mb-1 md:mb-2 text-orange-400 font-semibold tracking-wider">
                 PAPER CARDS → VIBE CARDS
               </div>
-              <div className="leading-relaxed">
+              <div className="leading-relaxed hidden md:block">
                 Send custom video birthday cards that actually<br />
                 make people laugh, share, and remember you forever.
+              </div>
+              <div className="leading-relaxed md:hidden text-xs">
+                Send custom video birthday cards that make people laugh and remember you forever.
               </div>
             </div>
           </div>
@@ -83,8 +86,142 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-4 md:py-8">
         <div className="relative w-full max-w-6xl mx-auto">
+          {/* Mobile Layout */}
+          <div className="md:hidden">
+            <div className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 mb-4">
+              {/* Mobile Header */}
+              <div className="text-center mb-4">
+                <h2 className="text-2xl font-semibold tracking-wider mb-1">VIBE CARD</h2>
+                <div className="text-sm tracking-wide">{selectedTheme.title}</div>
+              </div>
+
+              {/* Mobile User Info */}
+              <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                <div>
+                  <span className="font-semibold block text-xs">NAME:</span>
+                  <span className="font-semibold">{userData.name}</span>
+                </div>
+                <div>
+                  <span className="font-semibold block text-xs">AGE:</span>
+                  <span className="font-semibold">{userData.age}</span>
+                </div>
+                <div>
+                  <span className="font-semibold block text-xs">STYLE:</span>
+                  <span className="text-xs">{selectedTheme.title}</span>
+                </div>
+                <div>
+                  <span className="font-semibold block text-xs">STATUS:</span>
+                  <span className="text-xs font-semibold">
+                    {videoUrl ? 'COMPLETE' : 'READY'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Mobile Video Preview */}
+              <div className="w-full bg-black rounded border-2 border-black overflow-hidden relative mb-4" style={{ aspectRatio: '16/9' }}>
+                {videoUrl ? (
+                  <video
+                    src={videoUrl}
+                    className="w-full h-full object-cover"
+                    poster={selectedTheme.image}
+                    controls={false}
+                    muted
+                    loop
+                    autoPlay
+                  />
+                ) : (
+                  <img
+                    src={selectedTheme.image}
+                    alt={selectedTheme.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+                
+                {/* Video Play Button Overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                  <button
+                    onClick={handlePlayVideo}
+                    className="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all duration-200"
+                  >
+                    <Play size={24} className="text-black ml-1" fill="currentColor" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Mobile Action Buttons */}
+              <div className="space-y-3 mb-4">
+                {/* Download Video Button */}
+                <button
+                  onClick={handleDownload}
+                  className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                >
+                  <Download size={16} className="mr-2" />
+                  DOWNLOAD VIDEO
+                </button>
+
+                {/* Share Now Button */}
+                <div className="relative group">
+                  <button className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200">
+                    <Share2 size={16} className="mr-2" />
+                    SHARE NOW
+                  </button>
+                  
+                  {/* Share Options Dropdown */}
+                  <div className="absolute bottom-full left-0 right-0 mb-1 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto z-10">
+                    <div className="p-2">
+                      <button
+                        onClick={() => handleShare('twitter')}
+                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm transition-colors"
+                      >
+                        <Twitter size={14} className="mr-2" />
+                        <span className="font-semibold uppercase">Twitter</span>
+                      </button>
+                      <button
+                        onClick={() => handleShare('instagram')}
+                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm transition-colors"
+                      >
+                        <Instagram size={14} className="mr-2" />
+                        <span className="font-semibold uppercase">Instagram</span>
+                      </button>
+                      <button
+                        onClick={() => handleShare('copy')}
+                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm transition-colors"
+                      >
+                        <Share2 size={14} className="mr-2" />
+                        <span className="font-semibold uppercase">Copy Link</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Create Another Button */}
+                <button
+                  onClick={onStartOver}
+                  className="w-full px-4 py-3 border border-black text-black rounded font-semibold text-sm uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-200"
+                >
+                  CREATE ANOTHER
+                </button>
+              </div>
+
+              {/* Mobile HP Logo */}
+              <div className="flex justify-center">
+                <div className="flex items-center space-x-3">
+                  <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
+                  <div className="flex space-x-2">
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden md:block">
           {/* Main Card - Same layout as home screen but no navigation arrows */}
           <div className="flex items-center justify-center">
             <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-8 flex-1 max-w-4xl" style={{ aspectRatio: '16/10' }}>
@@ -245,6 +382,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
               </div>
             </div>
           </div>
+        </div>
         </div>
       </main>
     </div>

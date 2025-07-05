@@ -50,10 +50,213 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
   const isFormValid = isEmailValid && isCardValid;
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto mb-12">
-      <div className="flex items-center justify-center">
+    <div className="relative w-full max-w-5xl mx-auto mb-8 md:mb-12">
+      {/* Mobile Layout */}
+      <div className="md:hidden">
+        <div className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 mb-4">
+          {/* Mobile Header */}
+          <div className="text-center mb-4">
+            <h2 className="text-2xl font-semibold tracking-wider mb-1">VIBE CARD</h2>
+            <div className="text-sm tracking-wide">PAYMENT CHECKOUT</div>
+          </div>
+
+          {/* Mobile User Info */}
+          <div className="bg-white p-4 rounded border mb-4">
+            <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+              <div>
+                <span className="font-semibold block text-xs">NAME:</span>
+                <span className="font-semibold">{userData.name}</span>
+              </div>
+              <div>
+                <span className="font-semibold block text-xs">AGE:</span>
+                <span className="font-semibold">{userData.age}</span>
+              </div>
+              <div>
+                <span className="font-semibold block text-xs">PRICE:</span>
+                <span className="text-lg font-semibold">$10.00</span>
+              </div>
+              <div>
+                <span className="font-semibold block text-xs">TYPE:</span>
+                <span className="text-xs">ONE-TIME</span>
+              </div>
+            </div>
+
+            {/* What's Included */}
+            <div>
+              <h4 className="font-semibold text-xs tracking-wide mb-2 text-gray-700 uppercase">
+                WHAT'S INCLUDED:
+              </h4>
+              <ul className="space-y-1 text-xs text-gray-700">
+                <li className="flex items-center">
+                  <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                  CUSTOM VIDEO GENERATED
+                </li>
+                <li className="flex items-center">
+                  <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                  MP4 DOWNLOAD READY
+                </li>
+                <li className="flex items-center">
+                  <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                  EMAIL DELIVERY INCLUDED
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Mobile Payment Form */}
+          <div className="space-y-4 mb-4">
+            {/* Credit Card Form */}
+            <div className="bg-white border-2 border-black rounded p-3">
+              <div className="flex items-center mb-3">
+                <Lock size={14} className="mr-2" />
+                <h4 className="font-semibold text-sm uppercase tracking-wide">SECURE PAYMENT</h4>
+              </div>
+              
+              <div className="space-y-3">
+                {/* Card Number */}
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                    CARD NUMBER
+                  </label>
+                  <input
+                    type="text"
+                    value={cardNumber}
+                    onChange={(e) => {
+                      let value = e.target.value.replace(/\D/g, '');
+                      value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+                      setCardNumber(value.slice(0, 19));
+                    }}
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                    placeholder="1234 5678 9012 3456"
+                    maxLength={19}
+                  />
+                </div>
+                
+                {/* Expiry and CVV */}
+                <div className="flex space-x-3">
+                  <div className="flex-1">
+                    <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                      EXPIRY
+                    </label>
+                    <input
+                      type="text"
+                      value={expiryDate}
+                      onChange={(e) => {
+                        let value = e.target.value.replace(/\D/g, '');
+                        if (value.length >= 2) {
+                          value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                        }
+                        setExpiryDate(value);
+                      }}
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                      placeholder="MM/YY"
+                      maxLength={5}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                      CVV
+                    </label>
+                    <input
+                      type="text"
+                      value={cvv}
+                      onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                      placeholder="123"
+                      maxLength={3}
+                    />
+                  </div>
+                </div>
+                
+                {/* Cardholder Name */}
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
+                    CARDHOLDER NAME
+                  </label>
+                  <input
+                    type="text"
+                    value={cardName}
+                    onChange={(e) => setCardName(e.target.value.toUpperCase())}
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
+                    placeholder="JOHN DOE"
+                  />
+                </div>
+              </div>
+            </div>
+            
+            {/* Email Field */}
+            <div>
+              <label className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-2">
+                EMAIL ADDRESS
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailError('');
+                }}
+                className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
+                  emailError 
+                    ? 'border-red-500 bg-red-50' 
+                    : 'border-gray-300 focus:border-black bg-white'
+                }`}
+                placeholder="ENTER YOUR EMAIL"
+              />
+              {emailError && (
+                <span className="text-xs text-red-600 font-semibold mt-1 block">{emailError}</span>
+              )}
+            </div>
+          </div>
+
+          {/* Mobile Security Info */}
+          <div className="text-xs text-gray-600 text-center mb-4">
+            <div className="flex items-center justify-center mb-1">
+              <CreditCard size={12} className="mr-1" />
+              <span>POWERED BY STRIPE</span>
+            </div>
+            <p className="text-xs">Your payment information is encrypted and secure</p>
+          </div>
+
+          {/* Mobile Payment Button */}
+          <button 
+            onClick={handlePayment}
+            disabled={!isFormValid || processing}
+            className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
+              isFormValid && !processing
+                ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
+                : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+            }`}
+          >
+            {processing ? (
+              <div className="flex items-center justify-center">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                PROCESSING...
+              </div>
+            ) : (
+              'PAY & GENERATE VIDEO'
+            )}
+          </button>
+
+          {/* Mobile HP Logo */}
+          <div className="flex justify-center mt-4">
+            <div className="flex items-center space-x-3">
+              <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
+              <div className="flex space-x-2">
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden md:flex items-center justify-center">
         {/* Main Payment Card */}
-        <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-6 w-full max-w-3xl" style={{ aspectRatio: '16/10' }}>
+        <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-6 w-full max-w-4xl" style={{ aspectRatio: '16/10' }}>
           <div className="flex h-full">
             {/* Left Side - Payment Info */}
             <div className="w-1/2 relative">
@@ -274,7 +477,7 @@ export function PaymentOptions({ userData, onPaymentComplete }: PaymentOptionsPr
       </div>
 
       {/* Progress Indicator - Single dot to show we're on payment step */}
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center mt-4 md:mt-6">
         <div className="flex items-center space-x-3">
           <div className="w-4 h-4 rounded-sm bg-white border border-gray-300" />
           <div className="w-4 h-4 rounded-sm bg-black border-black shadow-sm" />

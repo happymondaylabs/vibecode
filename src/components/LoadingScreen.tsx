@@ -200,23 +200,23 @@ export function LoadingScreen({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
-      <div className="text-center">
+      <div className="text-center px-4">
         <div className="relative mb-8">
-          <div className="w-24 h-24 border-4 border-white border-dashed rounded-full animate-spin mx-auto opacity-80" 
+          <div className="w-16 h-16 md:w-24 md:h-24 border-4 border-white border-dashed rounded-full animate-spin mx-auto opacity-80" 
                style={{ 
                  borderStyle: 'dashed',
                  animationDuration: '2s',
                  filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.3))'
                }} 
           />
-          <Loader2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-yellow-400" size={32} />
+          <Loader2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-yellow-400" size={24} />
         </div>
 
-        <h2 className="text-3xl font-black uppercase tracking-wider text-white mb-4">
+        <h2 className="text-xl md:text-3xl font-black uppercase tracking-wider text-white mb-4">
           {loadingText}
         </h2>
 
-        <div className="w-80 mx-auto mb-6">
+        <div className="w-64 md:w-80 mx-auto mb-6">
           <div className="bg-gray-800 rounded-full h-2 overflow-hidden">
             <div 
               className="bg-gradient-to-r from-red-600 to-yellow-400 h-full transition-all duration-300 ease-out rounded-full"
@@ -228,12 +228,12 @@ export function LoadingScreen({
           </p>
         </div>
 
-        <p className="text-gray-400 text-sm uppercase tracking-wide">
+        <p className="text-gray-400 text-xs md:text-sm uppercase tracking-wide">
           {isGenerating ? 'EST. 3–8 MIN TO GENERATE' : 'EST. 3–5 MIN TO CREATE'}
         </p>
 
         {isGenerating && (
-          <div className="mt-6 p-4 bg-gray-900 bg-opacity-50 rounded-lg max-w-sm mx-auto">
+          <div className="mt-4 md:mt-6 p-3 md:p-4 bg-gray-900 bg-opacity-50 rounded-lg max-w-sm mx-auto">
             <p className="text-gray-300 text-xs uppercase tracking-wide">
               {progress < 30 ? 'SUBMITTING TO QUEUE...' :
                progress < 60 ? 'PROCESSING IN QUEUE...' :
@@ -243,11 +243,11 @@ export function LoadingScreen({
           </div>
         )}
 
-        <div className="absolute top-20 left-20 text-white opacity-30 transform rotate-12">
-          <div className="text-6xl font-light">↗</div>
+        <div className="absolute top-10 md:top-20 left-4 md:left-20 text-white opacity-30 transform rotate-12">
+          <div className="text-3xl md:text-6xl font-light">↗</div>
         </div>
-        <div className="absolute bottom-20 right-20 text-white opacity-30 transform -rotate-12">
-          <div className="text-6xl font-light">↙</div>
+        <div className="absolute bottom-10 md:bottom-20 right-4 md:right-20 text-white opacity-30 transform -rotate-12">
+          <div className="text-3xl md:text-6xl font-light">↙</div>
         </div>
       </div>
     </div>

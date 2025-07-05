@@ -41,8 +41,123 @@ export function ThemeSelector({
                      !errors.name && !errors.age;
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto mb-12">
-      <div className="flex items-center justify-center">
+    <div className="relative w-full max-w-6xl mx-auto mb-8 md:mb-12">
+      {/* Mobile Layout */}
+      <div className="md:hidden">
+        <div className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 mb-4">
+          {/* Mobile Header */}
+          <div className="text-center mb-4">
+            <h2 className="text-2xl font-semibold tracking-wider mb-1">VIBE CARD</h2>
+            <div className="text-sm tracking-wide">{selectedTheme.title}</div>
+          </div>
+
+          {/* Mobile Image */}
+          <div className="w-full bg-black rounded border-2 border-black overflow-hidden mb-4" style={{ aspectRatio: '16/9' }}>
+            <img
+              src={selectedTheme.image}
+              alt={selectedTheme.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Mobile Description */}
+          <div className="mb-4">
+            <p className="text-sm text-gray-700 leading-relaxed text-center">
+              {selectedTheme.description}
+            </p>
+          </div>
+
+          {/* Mobile Form Fields */}
+          <div className="space-y-4 mb-4">
+            {/* Name Field */}
+            <div>
+              <label className="block text-sm font-semibold uppercase tracking-wide text-black mb-2">
+                NAME:
+              </label>
+              <input
+                type="text"
+                value={userData.name}
+                onChange={(e) => onUserDataChange({ ...userData, name: e.target.value })}
+                maxLength={20}
+                className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
+                  errors.name 
+                    ? 'border-red-500 bg-red-50' 
+                    : 'border-gray-400 focus:border-black bg-white'
+                }`}
+                placeholder="ENTER NAME"
+              />
+              <div className="flex justify-between mt-1">
+                <span className="text-xs text-gray-600">{userData.name.length}/20</span>
+                {errors.name && <span className="text-xs text-red-600 font-semibold">{errors.name}</span>}
+              </div>
+            </div>
+
+            {/* Age Field */}
+            <div>
+              <label className="block text-sm font-semibold uppercase tracking-wide text-black mb-2">
+                AGE:
+              </label>
+              <input
+                type="number"
+                value={userData.age}
+                onChange={(e) => onUserDataChange({ ...userData, age: e.target.value })}
+                min="1"
+                max="120"
+                className={`w-full px-3 py-2 border-2 rounded text-sm transition-all duration-200 focus:outline-none ${
+                  errors.age 
+                    ? 'border-red-500 bg-red-50' 
+                    : 'border-gray-400 focus:border-black bg-white'
+                }`}
+                placeholder="ENTER AGE"
+              />
+              {errors.age && (
+                <span className="text-xs text-red-600 font-semibold mt-1 block">{errors.age}</span>
+              )}
+            </div>
+
+            {/* Style and Type - Display Only */}
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="font-semibold block">STYLE:</span>
+                <span className="text-xs">{selectedTheme.title}</span>
+              </div>
+              <div>
+                <span className="font-semibold block">TYPE:</span>
+                <span className="text-xs">BIRTHDAY</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Generate Button */}
+          <button 
+            onClick={handleGenerateCard}
+            disabled={!isFormValid}
+            className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
+              isFormValid
+                ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
+                : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+            }`}
+          >
+            GENERATE CARD
+          </button>
+
+          {/* Mobile HP Logo */}
+          <div className="flex justify-center mt-4">
+            <div className="flex items-center space-x-3">
+              <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
+              <div className="flex space-x-2">
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden md:flex items-center justify-center">
         {/* Left Navigation Arrow */}
         <button
           onClick={() => navigateTheme('prev')}
@@ -191,7 +306,7 @@ export function ThemeSelector({
       </div>
 
       {/* Minimalist Progress Indicator */}
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center mt-4 md:mt-6">
         <div className="flex items-center space-x-3">
           {themes.map((_, index) => (
             <button
