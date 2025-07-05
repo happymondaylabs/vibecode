@@ -149,19 +149,6 @@ export function ThemeSelector({
                 e.currentTarget.style.color = 'white';
               }
             }}
-            style={isFormValid ? { 
-              '--hover-color': themeColor 
-            } as React.CSSProperties & { '--hover-color': string } : {}}
-            onMouseEnter={(e) => {
-              if (isFormValid) {
-                e.currentTarget.style.color = themeColor;
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (isFormValid) {
-                e.currentTarget.style.color = 'white';
-              }
-            }}
           >
             GENERATE CARD
           </button>
