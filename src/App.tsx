@@ -176,7 +176,7 @@ function App() {
           className="bg-black text-white shadow-lg border-b-4 transition-all duration-500"
           style={{ borderBottomColor: currentThemeColor }}
         >
-          <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
+          <div className="max-w-6xl mx-auto px-4 py-4 md:py-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
               <div>
                 <div className="flex items-center">
@@ -218,7 +218,7 @@ function App() {
           className="bg-black text-white shadow-lg border-t-4 mt-16 transition-all duration-500"
           style={{ borderTopColor: currentThemeColor }}
         >
-          <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
+          <div className="max-w-6xl mx-auto px-4 py-4 md:py-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
               <div>
                 <div className="flex items-center">
