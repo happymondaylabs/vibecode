@@ -8,7 +8,7 @@ export const themes: Theme[] = [
     image: '/image1.png',
     category: 'Commercial',
     code: '1/8',
-    color: '#3B82F6' // Light blue
+    color: '#47F2A3' // Turquoise
   },
   {
     id: 'female-model-commercial',
@@ -17,7 +17,7 @@ export const themes: Theme[] = [
     image: '/image2.png',
     category: 'Commercial',
     code: '2/8',
-    color: '#EAB308' // Yellow
+    color: '#FF1B1B' // Red
   },
   {
     id: 'bigfoot-vlog',
@@ -26,7 +26,7 @@ export const themes: Theme[] = [
     image: '/image4.png',
     category: 'Adventure',
     code: '3/8',
-    color: '#22C55E' // Green
+    color: '#FF700A' // Orange
   },
   {
     id: 'breaking-news',
@@ -35,7 +35,7 @@ export const themes: Theme[] = [
     image: '/image3.png',
     category: 'News',
     code: '4/8',
-    color: '#EF4444' // Red
+    color: '#034AB3' // Blue
   },
   {
     id: 'fake-infomercial',
@@ -44,7 +44,7 @@ export const themes: Theme[] = [
     image: '/Image8.png',
     category: 'Retro',
     code: '5/8',
-    color: '#F97316' // Orange (default)
+    color: '#6B7280' // Grey
   },
   {
     id: 'jesus-of-nazareth',
