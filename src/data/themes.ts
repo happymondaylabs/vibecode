@@ -7,7 +7,7 @@ export const themes: Theme[] = [
     description: 'A shirtless male hunk delivers your birthday message like it\'s a billion-dollar body wash ad.',
     image: '/image1.png',
     category: 'Commercial',
-    code: '1/5',
+    code: '1/8',
     color: '#3B82F6' // Light blue
   },
   {
@@ -16,7 +16,7 @@ export const themes: Theme[] = [
     description: 'A female goddess says happy birthday like she\'s in love, like the classic burger commercial.',
     image: '/image2.png',
     category: 'Commercial',
-    code: '2/5',
+    code: '2/8',
     color: '#EAB308' // Yellow
   },
   {
@@ -25,7 +25,7 @@ export const themes: Theme[] = [
     description: 'A hairy influencer emerges from the woods to wish you a weirdly wholesome birthday.',
     image: '/image4.png',
     category: 'Adventure',
-    code: '3/5',
+    code: '3/8',
     color: '#22C55E' // Green
   },
   {
@@ -34,7 +34,7 @@ export const themes: Theme[] = [
     description: 'A dramatic anchor interrupts regular programming to report: somebody is old.',
     image: '/image3.png',
     category: 'News',
-    code: '4/5',
+    code: '4/8',
     color: '#EF4444' // Red
   },
   {
@@ -43,7 +43,7 @@ export const themes: Theme[] = [
     description: 'A narrated ad selling random products for people turning this age, like pills for old people',
     image: '/Image8.png',
     category: 'Retro',
-    code: '5/5',
+    code: '5/8',
     color: '#F97316' // Orange (default)
   },
   {
