@@ -73,7 +73,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                 <img 
                   src="/imagelogo transparent.png" 
                   alt="VIBE CARD" 
-                  className="h-12 md:h-16 w-auto"
+                  className="h-24 md:h-32 w-auto"
                 />
               </div>
             </div>
