@@ -62,7 +62,7 @@ export const themes: Theme[] = [
     image: '/imageangry-manager.png',
     category: 'Reality TV',
     code: '7/8',
-    color: '#EF4444' // Red
+    color: '#EAB308' // Yellow
   },
   {
     id: 'swamp-man',
