@@ -68,7 +68,7 @@ export const themes: Theme[] = [
     id: 'swamp-man',
     title: 'SWAMP MAN',
     description: 'A mullet-rocking swamp dweller reels in your birthday with croc-wrangling bravado and a big "senior living" grin.',
-    image: '/image3.png', // Using placeholder image for now
+    image: '/imageswamp.png',
     category: 'Reality TV',
     code: '8/8',
     color: '#556B2F' // Deep olive-green swamp vibe
