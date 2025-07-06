@@ -59,10 +59,10 @@ export const themes: Theme[] = [
     id: 'fast-food-manager',
     title: 'FAST FOOD MANAGER',
     description: 'An off-the-rails restaurant manager snaps into reality-TV mode and serves up some hard truths instead of fries.',
-    image: '/image2.png', // Using placeholder image for now
+    image: '/imageangry-manager.png',
     category: 'Reality TV',
     code: '7/8',
-    color: '#FFCC00' // Classic fast-food yellow
+    color: '#EF4444' // Red
   },
   {
     id: 'swamp-man',
