@@ -45,5 +45,32 @@ export const themes: Theme[] = [
     category: 'Retro',
     code: '5/5',
     color: '#F97316' // Orange (default)
+  },
+  {
+    id: 'jesus-of-nazareth',
+    title: 'JESUS OF NAZARETH',
+    description: 'Jesus of Nazareth steps out of a bustling 30 AD market to deliver a divine birthday blessing—with just the right amount of holy confusion.',
+    image: '/image1.png', // Using placeholder image for now
+    category: 'Religious',
+    code: '6/8',
+    color: '#F0EAD6' // Parchment tone
+  },
+  {
+    id: 'fast-food-manager',
+    title: 'FAST FOOD MANAGER',
+    description: 'An off-the-rails restaurant manager snaps into reality-TV mode and serves up some hard truths instead of fries.',
+    image: '/image2.png', // Using placeholder image for now
+    category: 'Reality TV',
+    code: '7/8',
+    color: '#FFCC00' // Classic fast-food yellow
+  },
+  {
+    id: 'swamp-man',
+    title: 'SWAMP MAN',
+    description: 'A mullet-rocking swamp dweller reels in your birthday with croc-wrangling bravado and a big "senior living" grin.',
+    image: '/image3.png', // Using placeholder image for now
+    category: 'Reality TV',
+    code: '8/8',
+    color: '#556B2F' // Deep olive-green swamp vibe
   }
 ];
