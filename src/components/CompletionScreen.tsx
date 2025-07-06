@@ -85,11 +85,11 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                 PAPER BIRTHDAY CARDS ARE BORING
               </div>
               <div className="leading-relaxed hidden md:block">
-                Send custom video birthday cards that actually<br />
-                make people laugh, share, and remember you forever.
+                Send custom birthday videos that make<br />
+                people laugh, remember, and save paper.
               </div>
               <div className="leading-relaxed md:hidden text-xs">
-                Send custom video birthday cards that make people laugh and remember you forever.
+                Send custom birthday videos that make people laugh, remember, and save paper.
               </div>
             </div>
           </div>
