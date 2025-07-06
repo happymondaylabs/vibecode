@@ -50,7 +50,7 @@ export const themes: Theme[] = [
     id: 'jesus-of-nazareth',
     title: 'JESUS OF NAZARETH',
     description: 'Jesus of Nazareth steps out of a bustling 30 AD market to deliver a divine birthday blessing—with just the right amount of holy confusion.',
-    image: '/image1.png', // Using placeholder image for now
+    image: '/imagejesus.png',
     category: 'Religious',
     code: '6/8',
     color: '#F0EAD6' // Parchment tone
