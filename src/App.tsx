@@ -177,19 +177,19 @@ function App() {
           style={{ borderBottomColor: currentThemeColor }}
         >
           <div className="max-w-6xl mx-auto px-4 py-3 md:py-3">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
-              <div>
+            <div className="flex justify-between items-center md:items-center">
+              <div className="flex-shrink-0">
                 <div className="flex items-center">
                   <img 
                     src="/imagelogo transparent.png" 
                     alt="VIBE CARD" 
-                    className="h-12 md:h-24 w-auto"
+                    className="h-8 md:h-24 w-auto"
                   />
                 </div>
               </div>
-              <div className="text-left md:text-right text-xs max-w-md">
+              <div className="text-right text-xs max-w-xs md:max-w-md ml-4">
                 <div 
-                  className="mb-1 md:mb-2 font-semibold tracking-wider transition-all duration-500"
+                  className="mb-0.5 md:mb-2 font-semibold tracking-wider transition-all duration-500 text-xs md:text-sm"
                   style={{ color: currentThemeColor }}
                 >
                   PAPER BIRTHDAY CARDS ARE BORING
@@ -198,7 +198,7 @@ function App() {
                   Send custom birthday videos that make<br />
                   people laugh, remember, and save paper.
                 </div>
-                <div className="leading-relaxed md:hidden text-xs">
+                <div className="leading-tight md:hidden text-xs">
                   Send custom birthday videos that make people laugh, remember, and save paper.
                 </div>
               </div>
