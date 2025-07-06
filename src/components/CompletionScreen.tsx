@@ -73,22 +73,16 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                 <img 
                   src="/imagelogo transparent.png" 
                   alt="VIBE CARD" 
-                  className="h-8 md:h-12 w-auto"
+                  className="h-12 md:h-16 w-auto"
                 />
               </div>
-              <p 
-                className="mt-1 text-xs md:text-sm tracking-wide transition-all duration-500"
-                style={{ color: themeColor }}
-              >
-                PAPER BIRTHDAY CARDS ARE BORING
-              </p>
             </div>
             <div className="text-left md:text-right text-xs max-w-md">
               <div 
                 className="mb-1 md:mb-2 font-semibold tracking-wider transition-all duration-500"
                 style={{ color: themeColor }}
               >
-                PAPER CARDS → VIBE CARDS
+                PAPER BIRTHDAY CARDS ARE BORING
               </div>
               <div className="leading-relaxed hidden md:block">
                 Send custom video birthday cards that actually<br />
