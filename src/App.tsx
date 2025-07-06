@@ -179,9 +179,13 @@ function App() {
           <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
               <div>
-                <h1 className="text-2xl md:text-4xl font-black tracking-wider">
-                  VIBE CARD
-                </h1>
+                <div className="flex items-center">
+                  <img 
+                    src="/imagelogo transparent.png" 
+                    alt="VIBE CARD" 
+                    className="h-8 md:h-12 w-auto"
+                  />
+                </div>
                 <p 
                   className="mt-1 text-xs md:text-sm tracking-wide transition-all duration-500"
                   style={{ color: currentThemeColor }}
@@ -223,9 +227,13 @@ function App() {
           <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
               <div>
-                <h2 className="text-xl md:text-2xl font-black tracking-wider">
-                  VIBE CARD
-                </h2>
+                <div className="flex items-center">
+                  <img 
+                    src="/imagelogo transparent.png" 
+                    alt="VIBE CARD" 
+                    className="h-6 md:h-8 w-auto"
+                  />
+                </div>
                 <p 
                   className="mt-1 text-xs tracking-wide transition-all duration-500"
                   style={{ color: currentThemeColor }}
