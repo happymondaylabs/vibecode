@@ -183,7 +183,7 @@ function App() {
                   <img 
                     src="/imagelogo transparent.png" 
                     alt="VIBE CARD" 
-                    className="h-8 md:h-24 w-auto"
+                    className="h-12 md:h-24 w-auto"
                   />
                 </div>
               </div>
@@ -225,7 +225,7 @@ function App() {
                   <img 
                     src="/imagelogo transparent.png" 
                     alt="VIBE CARD" 
-                    className="h-8 md:h-18 w-auto"
+                    className="h-12 md:h-18 w-auto"
                   />
                 </div>
               </div>
