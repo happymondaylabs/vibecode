@@ -66,14 +66,14 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
         className="bg-black text-white shadow-lg border-b-4 transition-all duration-500"
         style={{ borderBottomColor: themeColor }}
       >
-        <div className="max-w-6xl mx-auto px-4 py-4 md:py-4">
+        <div className="max-w-6xl mx-auto px-4 py-3 md:py-3">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
             <div>
               <div className="flex items-center">
                 <img 
                   src="/imagelogo transparent.png" 
                   alt="VIBE CARD" 
-                  className="h-24 md:h-32 w-auto"
+                  className="h-18 md:h-24 w-auto"
                 />
               </div>
             </div>
