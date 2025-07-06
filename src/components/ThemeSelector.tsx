@@ -60,7 +60,7 @@ export function ThemeSelector({
             <h3 className="text-lg font-semibold tracking-wider text-black">
               {selectedTheme.title}
             </h3>
-            <p className="text-xs text-gray-600 uppercase tracking-wide">
+            <p className="text-xs text-black uppercase tracking-wide font-semibold">
               {currentIndex + 1} OF {themes.length} THEMES
             </p>
           </div>
