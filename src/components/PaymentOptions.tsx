@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreditCard, Lock } from 'lucide-react';
+import { StripePaymentForm } from './StripePaymentForm';
 import { UserData } from '../types';
 
 interface PaymentOptionsProps {
@@ -9,22 +9,17 @@ interface PaymentOptionsProps {
 }
 
 export function PaymentOptions({ userData, onPaymentComplete, themeColor }: PaymentOptionsProps) {
-  const [processing, setProcessing] = useState(false);
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
-  
-  // Mock card form state
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
-  const [cvv, setCvv] = useState('');
-  const [cardName, setCardName] = useState('');
+  const [paymentError, setPaymentError] = useState('');
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  const handlePayment = async () => {
+  const handleEmailSubmit = () => {
     // Validate email first
     if (!email.trim()) {
       setEmailError('EMAIL IS REQUIRED');
@@ -37,18 +32,20 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
     }
 
     setEmailError('');
-    setProcessing(true);
-    
-    // Simulate payment processing
-    setTimeout(() => {
-      setProcessing(false);
-      onPaymentComplete();
-    }, 2000);
+    setPaymentError('');
+    setShowPaymentForm(true);
+  };
+
+  const handlePaymentSuccess = () => {
+    onPaymentComplete();
+  };
+
+  const handlePaymentError = (error: string) => {
+    setPaymentError(error);
+    setShowPaymentForm(false);
   };
 
   const isEmailValid = email.trim().length > 0 && !emailError && validateEmail(email);
-  const isCardValid = cardNumber.length >= 16 && expiryDate.length >= 5 && cvv.length >= 3 && cardName.length > 0;
-  const isFormValid = isEmailValid && isCardValid;
 
   return (
     <div className="relative w-full max-w-5xl mx-auto mb-8 md:mb-12">
@@ -116,86 +113,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
           </div>
 
           {/* Mobile Payment Form */}
-          <div className="space-y-4 mb-4">
-            {/* Credit Card Form */}
-            <div className="bg-white border-2 border-black rounded p-3">
-              <div className="flex items-center mb-3">
-                <Lock size={14} className="mr-2" />
-                <h4 className="font-semibold text-sm uppercase tracking-wide">SECURE PAYMENT</h4>
-              </div>
-              
-              <div className="space-y-3">
-                {/* Card Number */}
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
-                    CARD NUMBER
-                  </label>
-                  <input
-                    type="text"
-                    value={cardNumber}
-                    onChange={(e) => {
-                      let value = e.target.value.replace(/\D/g, '');
-                      value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
-                      setCardNumber(value.slice(0, 19));
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
-                    placeholder="1234 5678 9012 3456"
-                    maxLength={19}
-                  />
-                </div>
-                
-                {/* Expiry and CVV */}
-                <div className="flex space-x-3">
-                  <div className="flex-1">
-                    <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
-                      EXPIRY
-                    </label>
-                    <input
-                      type="text"
-                      value={expiryDate}
-                      onChange={(e) => {
-                        let value = e.target.value.replace(/\D/g, '');
-                        if (value.length >= 2) {
-                          value = value.slice(0, 2) + '/' + value.slice(2, 4);
-                        }
-                        setExpiryDate(value);
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
-                      placeholder="MM/YY"
-                      maxLength={5}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
-                      CVV
-                    </label>
-                    <input
-                      type="text"
-                      value={cvv}
-                      onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
-                      placeholder="123"
-                      maxLength={3}
-                    />
-                  </div>
-                </div>
-                
-                {/* Cardholder Name */}
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1">
-                    CARDHOLDER NAME
-                  </label>
-                  <input
-                    type="text"
-                    value={cardName}
-                    onChange={(e) => setCardName(e.target.value.toUpperCase())}
-                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-black"
-                    placeholder="JOHN DOE"
-                  />
-                </div>
-              </div>
-            </div>
-            
+          <div className="space-y-4 mb-4">            
             {/* Email Field */}
             <div>
               <label className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-2">
@@ -221,46 +139,50 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 <span className="text-xs text-red-600 font-semibold mt-1 block">{emailError}</span>
               )}
             </div>
-          </div>
-
-          {/* Mobile Security Info */}
-          <div className="text-xs text-gray-600 text-center mb-4">
-            <div className="flex items-center justify-center mb-1">
-              <CreditCard size={12} className="mr-1" />
-              <span>POWERED BY STRIPE</span>
-            </div>
-            <p className="text-xs">Your payment information is encrypted and secure</p>
-          </div>
-
-          {/* Mobile Payment Button */}
-          <button 
-            onClick={handlePayment}
-            disabled={!isFormValid || processing}
-            className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
-              isFormValid && !processing
-                ? 'bg-black text-white cursor-pointer'
-                : 'bg-gray-400 text-gray-600 cursor-not-allowed'
-            }`}
-            onMouseEnter={(e) => {
-              if (isFormValid && !processing) {
-                e.currentTarget.style.color = themeColor;
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (isFormValid && !processing) {
-                e.currentTarget.style.color = 'white';
-              }
-            }}
-          >
-            {processing ? (
-              <div className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                PROCESSING...
+            
+            {/* Payment Form or Email Submit */}
+            {showPaymentForm ? (
+              <div className="bg-white border-2 border-black rounded p-3">
+                <StripePaymentForm
+                  userData={userData}
+                  theme={{ id: 'custom', title: 'Custom Video' } as any}
+                  email={email}
+                  onPaymentSuccess={handlePaymentSuccess}
+                  onPaymentError={handlePaymentError}
+                  themeColor={themeColor}
+                />
               </div>
             ) : (
-              'PAY & GENERATE VIDEO'
+              <button 
+                onClick={handleEmailSubmit}
+                disabled={!isEmailValid}
+                className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
+                  isEmailValid
+                    ? 'bg-black text-white cursor-pointer'
+                    : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                }`}
+                onMouseEnter={(e) => {
+                  if (isEmailValid) {
+                    e.currentTarget.style.color = themeColor;
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (isEmailValid) {
+                    e.currentTarget.style.color = 'white';
+                  }
+                }}
+              >
+                CONTINUE TO PAYMENT
+              </button>
             )}
-          </button>
+            
+            {/* Payment Error */}
+            {paymentError && (
+              <div className="text-red-600 text-xs font-semibold bg-red-50 p-3 rounded">
+                {paymentError}
+              </div>
+            )}
+          </div>
 
           {/* Mobile HP Logo */}
           <div className="flex justify-center mt-4">
@@ -359,94 +281,6 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
 
             {/* Right Side - Credit Card Form */}
             <div className="w-1/2 relative pl-4">
-              {/* Credit Card Form */}
-              <div className="w-full bg-white border-2 border-black rounded p-2 mb-2">
-                <div className="flex items-center mb-2">
-                  <Lock size={12} className="mr-1" />
-                  <h4 className="font-semibold text-xs uppercase tracking-wide">SECURE PAYMENT</h4>
-                </div>
-                
-                <div className="space-y-1.5">
-                  {/* Card Number */}
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5" style={{ fontSize: '10px' }}>
-                      CARD NUMBER
-                    </label>
-                    <input
-                      type="text"
-                      value={cardNumber}
-                      onChange={(e) => {
-                        let value = e.target.value.replace(/\D/g, '');
-                        // Add spaces every 4 digits for display
-                        value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
-                        setCardNumber(value.slice(0, 19)); // Max 16 digits + 3 spaces
-                      }}
-                      className="w-full px-1.5 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
-                      onFocus={(e) => e.target.style.borderColor = themeColor}
-                      onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
-                      placeholder="1234 5678 9012 3456"
-                      maxLength={19}
-                    />
-                  </div>
-                  
-                  {/* Expiry and CVV */}
-                  <div className="flex space-x-2">
-                    <div className="flex-1">
-                      <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5" style={{ fontSize: '10px' }}>
-                        EXPIRY
-                      </label>
-                      <input
-                        type="text"
-                        value={expiryDate}
-                        onChange={(e) => {
-                          let value = e.target.value.replace(/\D/g, '');
-                          if (value.length >= 2) {
-                            value = value.slice(0, 2) + '/' + value.slice(2, 4);
-                          }
-                          setExpiryDate(value);
-                        }}
-                        className="w-full px-1.5 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
-                        onFocus={(e) => e.target.style.borderColor = themeColor}
-                        onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
-                        placeholder="MM/YY"
-                        maxLength={5}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5" style={{ fontSize: '10px' }}>
-                        CVV
-                      </label>
-                      <input
-                        type="text"
-                        value={cvv}
-                        onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
-                        className="w-full px-1.5 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
-                        onFocus={(e) => e.target.style.borderColor = themeColor}
-                        onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
-                        placeholder="123"
-                        maxLength={3}
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Cardholder Name */}
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5" style={{ fontSize: '10px' }}>
-                      CARDHOLDER NAME
-                    </label>
-                    <input
-                      type="text"
-                      value={cardName}
-                      onChange={(e) => setCardName(e.target.value.toUpperCase())}
-                      className="w-full px-1.5 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-black"
-                      onFocus={(e) => e.target.style.borderColor = themeColor}
-                      onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
-                      placeholder="JOHN DOE"
-                    />
-                  </div>
-                </div>
-              </div>
-              
               {/* Email Field - Moved from left side */}
               <div className="mb-2">
                 <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5" style={{ fontSize: '10px' }}>
@@ -473,14 +307,48 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 )}
               </div>
               
-              {/* Security Info */}
-              <div className="text-xs text-gray-600 text-center mt-1">
-                <div className="flex items-center justify-center mb-1">
-                  <CreditCard size={10} className="mr-1" />
-                  <span>POWERED BY STRIPE</span>
+              {/* Payment Form or Email Submit */}
+              {showPaymentForm ? (
+                <div className="w-full bg-white border-2 border-black rounded p-2 mb-2">
+                  <StripePaymentForm
+                    userData={userData}
+                    theme={{ id: 'custom', title: 'Custom Video' } as any}
+                    email={email}
+                    onPaymentSuccess={handlePaymentSuccess}
+                    onPaymentError={handlePaymentError}
+                    themeColor={themeColor}
+                  />
                 </div>
-                <p style={{ fontSize: '10px' }}>Your payment information is encrypted and secure</p>
-              </div>
+              ) : (
+                <button 
+                  onClick={handleEmailSubmit}
+                  disabled={!isEmailValid}
+                  className={`w-full px-4 py-2 font-semibold text-xs tracking-wider transition-all duration-200 ${
+                    isEmailValid
+                      ? 'bg-black text-white cursor-pointer'
+                      : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                  }`}
+                  onMouseEnter={(e) => {
+                    if (isEmailValid) {
+                      e.currentTarget.style.color = themeColor;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (isEmailValid) {
+                      e.currentTarget.style.color = 'white';
+                    }
+                  }}
+                >
+                  CONTINUE TO PAYMENT
+                </button>
+              )}
+              
+              {/* Payment Error */}
+              {paymentError && (
+                <div className="text-red-600 text-xs font-semibold bg-red-50 p-2 rounded mt-2">
+                  {paymentError}
+                </div>
+              )}
             </div>
           </div>
 
@@ -497,37 +365,6 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
             </div>
           </div>
 
-          {/* Payment Button - Lower Right */}
-          <div className="absolute bottom-4 right-6 pl-4" style={{ width: 'calc(50% - 24px)' }}>
-            <button 
-              onClick={handlePayment}
-              disabled={!isFormValid || processing}
-              className={`w-full px-4 py-2 font-semibold text-xs tracking-wider transition-all duration-200 ${
-                isFormValid && !processing
-                  ? 'bg-black text-white cursor-pointer'
-                  : 'bg-gray-400 text-gray-600 cursor-not-allowed'
-              }`}
-              onMouseEnter={(e) => {
-                if (isFormValid && !processing) {
-                  e.currentTarget.style.color = themeColor;
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (isFormValid && !processing) {
-                  e.currentTarget.style.color = 'white';
-                }
-              }}
-            >
-              {processing ? (
-                <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
-                  PROCESSING...
-                </div>
-              ) : (
-                'PAY $12 & GENERATE VIDEO'
-              )}
-            </button>
-          </div>
         </div>
       </div>
 
