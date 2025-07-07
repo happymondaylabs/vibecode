@@ -176,7 +176,7 @@ export function ThemeSelector({
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <span className="font-semibold block">STYLE:</span>
-                <span className="text-xs">{selectedTheme.title}</span>
+                <span className="text-xs">8 SECOND CUSTOM VIDEO</span>
               </div>
               <div>
                 <span className="font-semibold block">TYPE:</span>
@@ -308,7 +308,7 @@ export function ThemeSelector({
                   {/* Style Field - Dynamic based on selected theme */}
                   <div className="flex items-center">
                     <span className="font-semibold w-16">STYLE:</span>
-                    <span className="ml-4">{selectedTheme.title}</span>
+                    <span className="ml-4">8 SECOND CUSTOM VIDEO</span>
                   </div>
 
                   {/* Type Field - Static */}
