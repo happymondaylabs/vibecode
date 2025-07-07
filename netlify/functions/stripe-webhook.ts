@@ -2,6 +2,7 @@ import type { Handler } from "@netlify/functions";
 import Stripe from "stripe";
 import { fal } from "@fal-ai/client";
 import { generatePrompt } from "../../src/services/falApi";
+import { sendOrderNotification } from "./send-email";
 
 export const handler: Handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -40,6 +41,23 @@ export const handler: Handler = async (event) => {
       
       console.log('✅ Payment succeeded:', paymentIntent.id);
       console.log('Metadata:', paymentIntent.metadata);
+
+      // Send payment success notification
+      try {
+        await sendOrderNotification({
+          customerEmail: paymentIntent.metadata.email,
+          customerName: paymentIntent.metadata.userName,
+          customerAge: paymentIntent.metadata.userAge,
+          themeSelected: paymentIntent.metadata.themeTitle,
+          themeId: paymentIntent.metadata.themeId,
+          paymentStatus: 'success',
+          paymentIntentId: paymentIntent.id,
+          generationStatus: 'pending',
+          orderTimestamp: new Date().toISOString()
+        });
+      } catch (emailError) {
+        console.error('❌ Failed to send payment success email:', emailError);
+      }
 
       // Extract user data from metadata
       const { userName, userAge, themeId, themeTitle, userMessage, email } = paymentIntent.metadata;
@@ -105,6 +123,9 @@ export const handler: Handler = async (event) => {
         
         console.log('✅ Video generation submitted:', request_id);
         
+        // Send generation success notification (if video completes immediately)
+        // Note: For queue-based generation, we'll send this from a separate status check
+        
         // Here you could store the request_id with the payment_intent_id in a database
         // for later retrieval when the video is complete
         
@@ -113,6 +134,24 @@ export const handler: Handler = async (event) => {
         
       } catch (videoError) {
         console.error('❌ Video generation failed for payment:', paymentIntent.id, videoError);
+        
+        // Send generation failure notification
+        try {
+          await sendOrderNotification({
+            customerEmail: email,
+            customerName: userName,
+            customerAge: userAge,
+            themeSelected: themeTitle,
+            themeId: themeId,
+            paymentStatus: 'success',
+            paymentIntentId: paymentIntent.id,
+            generationStatus: 'failed',
+            errorMessage: videoError instanceof Error ? videoError.message : String(videoError),
+            orderTimestamp: new Date().toISOString()
+          });
+        } catch (emailError) {
+          console.error('❌ Failed to send generation failure email:', emailError);
+        }
         // Don't fail the webhook - payment was successful
         // You might want to send an email notification about the video generation failure
       }
@@ -123,7 +162,25 @@ export const handler: Handler = async (event) => {
       const paymentIntent = stripeEvent.data.object as Stripe.PaymentIntent;
       console.log('❌ Payment failed:', paymentIntent.id);
       
-      // You could send a notification email here
+      // Send payment failure notification
+      try {
+        const { userName, userAge, themeId, themeTitle, email } = paymentIntent.metadata;
+        if (userName && userAge && themeId && email) {
+          await sendOrderNotification({
+            customerEmail: email,
+            customerName: userName,
+            customerAge: userAge,
+            themeSelected: themeTitle || 'Unknown Theme',
+            themeId: themeId,
+            paymentStatus: 'failed',
+            generationStatus: 'failed',
+            errorMessage: 'Payment was declined or failed',
+            orderTimestamp: new Date().toISOString()
+          });
+        }
+      } catch (emailError) {
+        console.error('❌ Failed to send payment failure email:', emailError);
+      }
     }
 
     return {

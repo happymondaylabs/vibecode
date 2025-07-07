@@ -51,6 +51,8 @@ If you're still getting "Server misconfiguration":
 ## Environment Variables Needed
 
 - `FAL_KEY` - Your FAL.ai API key for video generation ✅ CONFIGURED
+- `SENDGRID_API_KEY` - Your SendGrid API key for email notifications
+- `ADMIN_EMAIL` - Email address to receive order notifications (default: darin@yougenius.co)
 
 ## Development
 
@@ -58,6 +60,50 @@ For local development, create a `.env` file in the root directory:
 
 ```
 FAL_KEY=your_fal_api_key_here
+SENDGRID_API_KEY=your_sendgrid_api_key_here
+ADMIN_EMAIL=darin@yougenius.co
 ```
 
 Note: The `.env` file is already in `.gitignore` so your API key won't be committed to the repository.
+
+## Email Notifications
+
+The system automatically sends email notifications for:
+
+### ✅ Payment Success + Generation Pending
+- Customer email, name, age
+- Theme selected
+- Payment confirmation
+- Generation status: PENDING
+
+### ❌ Payment Success + Generation Failed
+- **URGENT**: Manual processing required
+- All order details
+- Error message
+- Action required notification
+
+### 💳 Payment Failed
+- Failed payment attempt details
+- No generation attempted
+- Customer contact info for follow-up
+
+### 🎬 Generation Success (Future)
+- Video URL included
+- Complete order summary
+- Ready for customer delivery
+
+### Setup Email Service
+
+1. **Get SendGrid API Key**:
+   - Sign up at [SendGrid](https://sendgrid.com)
+   - Create an API key with "Mail Send" permissions
+   - Add to Netlify environment variables as `SENDGRID_API_KEY`
+
+2. **Set Admin Email**:
+   - Add `ADMIN_EMAIL=darin@yougenius.co` to environment variables
+   - This email will receive all order notifications
+
+3. **Alternative Email Services**:
+   - The system can be easily modified to use other services
+   - EmailJS, Mailgun, or AWS SES are good alternatives
+   - Update the `send-email.ts` function accordingly
