@@ -78,8 +78,8 @@ export function ThemeSelector({
           {/* Mobile Header */}
           <div className="text-center mb-4">
             <h2 className="text-2xl font-semibold tracking-wider mb-1">VIBE CARD</h2>
-            <div className="text-sm tracking-wide" style={{ color: themeColor }}>
-              CREATE YOUR CUSTOM VIDEO
+            <div className="text-sm tracking-wide font-semibold text-black">
+              {selectedTheme.title}
             </div>
           </div>
 
