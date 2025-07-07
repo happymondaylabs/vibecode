@@ -102,7 +102,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 </li>
               </ul>
               
-              <div className="mt-3">
+              <div className="mt-4">
                 <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
                   NOTE:
                 </h4>
@@ -337,7 +337,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                       </li>
                     </ul>
                     
-                    <div className="mt-2">
+                    <div className="mt-3">
                       <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
                         NOTE:
                       </h4>
