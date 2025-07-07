@@ -90,7 +90,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               <ul className="space-y-1 text-xs text-gray-700">
                 <li className="flex items-center">
                   <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                  CUSTOM VIDEO GENERATED
+                  CUSTOM VIDEO VIBE CARD
                 </li>
                 <li className="flex items-center">
                   <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
@@ -98,9 +98,20 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 </li>
                 <li className="flex items-center">
                   <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                  EMAIL DELIVERY INCLUDED
+                  SHARABLE LINK
                 </li>
               </ul>
+              
+              <div className="mt-3">
+                <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
+                  NOTE:
+                </h4>
+                <ul className="space-y-0.5 text-xs text-gray-700">
+                  <li>NO REFUNDS</li>
+                  <li>QUESTIONS OR ISSUES?</li>
+                  <li>INFO@YOUGENIUS.CO</li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -314,7 +325,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                     <ul className="space-y-0.5 text-xs text-gray-700">
                       <li className="flex items-center">
                         <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                        CUSTOM VIDEO GENERATED
+                        CUSTOM VIDEO VIBE CARD
                       </li>
                       <li className="flex items-center">
                         <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
@@ -322,9 +333,20 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                       </li>
                       <li className="flex items-center">
                         <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                        EMAIL DELIVERY INCLUDED
+                        SHARABLE LINK
                       </li>
                     </ul>
+                    
+                    <div className="mt-2">
+                      <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
+                        NOTE:
+                      </h4>
+                      <ul className="space-y-0.5 text-xs text-gray-700">
+                        <li>NO REFUNDS</li>
+                        <li>QUESTIONS OR ISSUES?</li>
+                        <li>INFO@YOUGENIUS.CO</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -512,12 +534,12 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
       {/* Progress Indicator - Single dot to show we're on payment step */}
       <div className="flex justify-center mt-4 md:mt-6">
         <div className="flex items-center space-x-3">
-          <div className="w-4 h-4 rounded-sm bg-white border border-gray-300" />
+          <div className="w-4 h-4 rounded-sm bg-white border border-black" />
           <div 
-            className="w-4 h-4 rounded-sm border-black shadow-sm" 
+            className="w-4 h-4 rounded-sm border border-black shadow-sm" 
             style={{ backgroundColor: themeColor }}
           />
-          <div className="w-4 h-4 rounded-sm bg-white border border-gray-300" />
+          <div className="w-4 h-4 rounded-sm bg-white border border-black" />
         </div>
       </div>
     </div>
