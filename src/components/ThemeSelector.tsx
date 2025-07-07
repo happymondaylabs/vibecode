@@ -57,9 +57,6 @@ export function ThemeSelector({
           </button>
           
           <div className="text-center flex-1 mx-4">
-            <h3 className="text-lg font-semibold tracking-wider text-black">
-              {selectedTheme.title}
-            </h3>
             <p className="text-xs text-black uppercase tracking-wide font-semibold">
               {currentIndex + 1} OF {themes.length} THEMES
             </p>
@@ -78,9 +75,6 @@ export function ThemeSelector({
           {/* Mobile Header */}
           <div className="text-center mb-4">
             <h2 className="text-2xl font-semibold tracking-wider mb-1">VIBE CARD</h2>
-            <div className="text-sm tracking-wide font-semibold text-black">
-              {selectedTheme.title}
-            </div>
           </div>
 
           {/* Mobile Image with Navigation Overlay */}
