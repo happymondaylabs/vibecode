@@ -120,7 +120,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                 </div>
                 <div>
                   <span className="font-semibold block text-xs">STYLE:</span>
-                  <span className="text-xs">{selectedTheme.title}</span>
+                  <span className="text-xs">8 SECOND CUSTOM VIDEO</span>
                 </div>
                 <div>
                   <span className="font-semibold block text-xs">STATUS:</span>
@@ -269,7 +269,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                       {/* Style Field */}
                       <div className="flex items-center">
                         <span className="font-semibold w-16">STYLE:</span>
-                        <span className="ml-4">{selectedTheme.title}</span>
+                        <span className="ml-4">8 SECOND CUSTOM VIDEO</span>
                       </div>
 
                       {/* Type Field */}
