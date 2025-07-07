@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { SEOHead } from './components/SEOHead';
 import { ThemeSelector } from './components/ThemeSelector';
 import { LoadingScreen } from './components/LoadingScreen';
 import { TransitionLoading } from './components/TransitionLoading';
@@ -188,6 +189,18 @@ function App() {
       className="min-h-screen transition-all duration-500"
       style={{ backgroundColor: currentThemeColor }}
     >
+      {/* SEO Head Component */}
+      <SEOHead 
+        title={currentStep === 'form' ? 
+          `VIBE CARD - ${selectedTheme.title} Birthday Videos` : 
+          'VIBE CARD - Paper Birthday Cards Are Boring'
+        }
+        description={currentStep === 'form' ? 
+          `Create a ${selectedTheme.title.toLowerCase()} birthday video card. ${selectedTheme.description}` :
+          'Create custom AI-generated birthday video cards that make people laugh, remember, and save paper.'
+        }
+      />
+      
       {/* Header */}
       {currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
         <header 
