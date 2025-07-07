@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ThemeSelector } from './components/ThemeSelector';
 import { LoadingScreen } from './components/LoadingScreen';
+import { TransitionLoading } from './components/TransitionLoading';
 import { EmailCapture } from './components/EmailCapture';
 import { PaymentOptions } from './components/PaymentOptions';
 import { CompletionScreen } from './components/CompletionScreen';
@@ -13,6 +14,7 @@ import { AppStep, UserData, Theme } from './types';
 
 function App() {
   const [currentStep, setCurrentStep] = useState<AppStep>('form');
+  const [showTransition, setShowTransition] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<Theme>(themes[0]);
   const [userData, setUserData] = useState<UserData>({
     name: '',
@@ -44,10 +46,15 @@ function App() {
     if (validateUserData(formData)) {
       clearToasts();
       setUserData(formData);
-      setCurrentStep('payment');
+      setShowTransition(true);
     } else {
       addToast('PLEASE FIX THE ERRORS ABOVE', 'error');
     }
+  };
+
+  const handleTransitionComplete = () => {
+    setShowTransition(false);
+    setCurrentStep('payment');
   };
 
   const handlePaymentComplete = async () => {
@@ -101,6 +108,7 @@ function App() {
 
   const handleStartOver = () => {
     setCurrentStep('form');
+    setShowTransition(false);
     setSelectedTheme(themes[0]);
     setUserData({ name: '', age: '', message: '' });
     setUserEmail('');
@@ -112,6 +120,16 @@ function App() {
   };
 
   const renderCurrentStep = () => {
+    if (showTransition) {
+      return (
+        <TransitionLoading 
+          onComplete={handleTransitionComplete}
+          themeColor={currentThemeColor}
+          userName={userData.name}
+        />
+      );
+    }
+
     switch (currentStep) {
       case 'form':
         return (
@@ -171,7 +189,7 @@ function App() {
       style={{ backgroundColor: currentThemeColor }}
     >
       {/* Header */}
-      {currentStep !== 'loading' && currentStep !== 'complete' && (
+      {currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
         <header 
           className="bg-black text-white shadow-lg border-b-4 transition-all duration-500"
           style={{ borderBottomColor: currentThemeColor }}
@@ -213,7 +231,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      {currentStep !== 'loading' && currentStep !== 'complete' && (
+      {currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
         <footer 
           className="bg-black text-white shadow-lg border-t-4 mt-16 transition-all duration-500"
           style={{ borderTopColor: currentThemeColor }}
