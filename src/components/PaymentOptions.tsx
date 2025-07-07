@@ -74,7 +74,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               </div>
               <div>
                 <span className="font-semibold block text-xs">PRICE:</span>
-                <span className="text-lg font-semibold">$10.00</span>
+                <span className="text-lg font-semibold">$12.00</span>
               </div>
               <div>
                 <span className="font-semibold block text-xs">TYPE:</span>
@@ -308,7 +308,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   {/* Price Field */}
                   <div className="flex items-center">
                     <span className="font-semibold w-14 text-xs">PRICE:</span>
-                    <span className="ml-4 text-lg font-semibold">$10.00</span>
+                    <span className="ml-4 text-lg font-semibold">$12.00</span>
                   </div>
 
                   {/* Type Field */}
@@ -524,7 +524,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   PROCESSING...
                 </div>
               ) : (
-                'PAY & GENERATE VIDEO'
+                'PAY $12 & GENERATE VIDEO'
               )}
             </button>
           </div>
