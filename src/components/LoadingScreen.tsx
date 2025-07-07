@@ -8,6 +8,8 @@ interface LoadingScreenProps {
   error?: string | null;
   onRetry?: () => void;
   isPending?: boolean;
+  themeColor?: string;
+  onGoHome?: () => void;
 }
 
 export function LoadingScreen({ 
@@ -16,7 +18,9 @@ export function LoadingScreen({
   progress = 0, 
   error = null,
   onRetry,
-  isPending = false
+  isPending = false,
+  themeColor = '#FF700A',
+  onGoHome
 }: LoadingScreenProps) {
   const [localProgress, setLocalProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('INITIALIZING...');
@@ -37,7 +41,10 @@ export function LoadingScreen({
     return (
       <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
         <div className="text-center max-w-2xl mx-auto px-4">
-          <div className="w-24 h-24 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-8">
+          <div 
+            className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8"
+            style={{ backgroundColor: themeColor }}
+          >
             <Clock className="text-white" size={48} />
           </div>
 
@@ -58,7 +65,20 @@ export function LoadingScreen({
           <div className="space-y-4">
             <button
               onClick={onComplete}
-              className="w-full px-8 py-3 bg-white text-black font-semibold text-sm uppercase tracking-wider hover:bg-gray-200 transition-all duration-200"
+              className="w-full px-8 py-3 font-semibold text-sm uppercase tracking-wider transition-all duration-200"
+              style={{ 
+                backgroundColor: themeColor, 
+                color: 'white',
+                border: `2px solid ${themeColor}`
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'white';
+                e.currentTarget.style.color = themeColor;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = themeColor;
+                e.currentTarget.style.color = 'white';
+              }}
             >
               CONTINUE TO CHECKOUT
             </button>
@@ -127,7 +147,10 @@ export function LoadingScreen({
     return (
       <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
         <div className="text-center max-w-2xl mx-auto px-4">
-          <div className="w-24 h-24 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-8">
+          <div 
+            className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8"
+            style={{ backgroundColor: themeColor }}
+          >
             <Clock className="text-white" size={48} />
           </div>
 
@@ -135,29 +158,48 @@ export function LoadingScreen({
             DUE TO HIGH TRAFFIC
           </h2>
 
-          <div className="bg-yellow-900 bg-opacity-50 p-6 rounded-lg mb-8">
-            <p className="text-yellow-200 text-lg leading-relaxed mb-4">
+          <div 
+            className="p-6 rounded-lg mb-8"
+            style={{ backgroundColor: `${themeColor}20` }}
+          >
+            <p className="text-white text-lg leading-relaxed mb-4">
               VIBE CARDS ARE TAKING LONGER THAN EXPECTED.
             </p>
-            <p className="text-yellow-300 text-base leading-relaxed">
+            <p className="text-white text-base leading-relaxed opacity-90">
               WE WILL EMAIL YOU YOUR CUSTOM VIBE CARD WHEN IT'S READY
             </p>
-            <p className="text-yellow-400 text-sm mt-2 font-semibold">
+            <p 
+              className="text-sm mt-2 font-semibold"
+              style={{ color: themeColor }}
+            >
               [ESTIMATED WAIT TIME 2-3 HOURS]
             </p>
           </div>
 
           <div className="space-y-4">
             <button
-              onClick={onComplete}
-              className="w-full px-8 py-3 bg-white text-black font-semibold text-sm uppercase tracking-wider hover:bg-gray-200 transition-all duration-200"
+              onClick={onGoHome || onComplete}
+              className="w-full px-8 py-3 font-semibold text-sm uppercase tracking-wider transition-all duration-200"
+              style={{ 
+                backgroundColor: themeColor, 
+                color: 'white',
+                border: `2px solid ${themeColor}`
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'white';
+                e.currentTarget.style.color = themeColor;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = themeColor;
+                e.currentTarget.style.color = 'white';
+              }}
             >
-              CONTINUE TO CHECKOUT
+              BACK TO HOME
             </button>
           </div>
 
           <p className="text-gray-400 text-xs mt-4 uppercase tracking-wide">
-            You can complete your order and we'll deliver the video when ready
+            Try again later or contact support for assistance
           </p>
         </div>
       </div>
@@ -178,18 +220,27 @@ export function LoadingScreen({
           <Loader2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-yellow-400" size={24} />
         </div>
 
-        <h2 className="text-xl md:text-3xl font-black uppercase tracking-wider text-white mb-4">
+        <h2 
+          className="text-xl md:text-3xl font-black uppercase tracking-wider mb-4"
+          style={{ color: themeColor }}
+        >
           {loadingText}
         </h2>
 
         <div className="w-64 md:w-80 mx-auto mb-6">
           <div className="bg-gray-800 rounded-full h-2 overflow-hidden">
             <div 
-              className="bg-gradient-to-r from-red-600 to-yellow-400 h-full transition-all duration-300 ease-out rounded-full"
-              style={{ width: `${isGenerating ? progress : localProgress}%` }}
+              className="h-full transition-all duration-300 ease-out rounded-full"
+              style={{ 
+                width: `${isGenerating ? progress : localProgress}%`,
+                backgroundColor: themeColor
+              }}
             />
           </div>
-          <p className="text-white text-sm mt-2 opacity-75">
+          <p 
+            className="text-sm mt-2 opacity-75"
+            style={{ color: themeColor }}
+          >
             {Math.round(isGenerating ? progress : localProgress)}% COMPLETE
           </p>
         </div>

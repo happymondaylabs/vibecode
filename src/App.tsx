@@ -107,6 +107,19 @@ function App() {
     }
   };
 
+  const handleGoHome = () => {
+    setCurrentStep('form');
+    setShowTransition(false);
+    setSelectedTheme(themes[0]);
+    setUserData({ name: '', age: '', message: '' });
+    setUserEmail('');
+    setGeneratedVideoUrl(null);
+    setIsPending(false);
+    clearErrors();
+    clearToasts();
+    resetVideoGeneration();
+  };
+
   const handleStartOver = () => {
     setCurrentStep('form');
     setShowTransition(false);
@@ -156,6 +169,8 @@ function App() {
             error={videoError}
             onRetry={handleRetryGeneration}
             isPending={isPending}
+            themeColor={currentThemeColor}
+            onGoHome={handleGoHome}
           />
         );
 
