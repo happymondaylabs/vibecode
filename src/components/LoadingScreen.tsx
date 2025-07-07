@@ -127,72 +127,38 @@ export function LoadingScreen({
     return (
       <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
         <div className="text-center max-w-2xl mx-auto px-4">
-          <div className="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-8">
-            <AlertCircle className="text-white" size={48} />
+          <div className="w-24 h-24 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-8">
+            <Clock className="text-white" size={48} />
           </div>
 
-          <h2 className="text-3xl font-semibold uppercase tracking-wider text-white mb-4">
-            GENERATION FAILED
+          <h2 className="text-2xl md:text-3xl font-semibold uppercase tracking-wider text-white mb-6">
+            DUE TO HIGH TRAFFIC
           </h2>
 
-          <div className="bg-red-900 bg-opacity-50 p-6 rounded-lg mb-8">
-            <p className="text-red-300 text-sm leading-relaxed mb-4">
-              Video generation failed:
+          <div className="bg-yellow-900 bg-opacity-50 p-6 rounded-lg mb-8">
+            <p className="text-yellow-200 text-lg leading-relaxed mb-4">
+              VIBE CARDS ARE TAKING LONGER THAN EXPECTED.
             </p>
-            <div className="text-red-200 text-xs leading-relaxed bg-red-800 bg-opacity-50 p-4 rounded max-h-40 overflow-y-auto text-left">
-              <div className="mb-2">
-                <strong>Error:</strong> {error}
-              </div>
-              <div className="mb-2">
-                <strong>Timestamp:</strong> {new Date().toISOString()}
-              </div>
-              <div className="mb-2">
-                <strong>User Agent:</strong> {navigator.userAgent}
-              </div>
-              <div className="mb-2">
-                <strong>API Key Present:</strong> {import.meta.env.VITE_FAL_API_KEY ? 'Yes' : 'No'}
-              </div>
-              <div className="mb-2">
-                <strong>Environment:</strong> {import.meta.env.MODE}
-              </div>
-            </div>
+            <p className="text-yellow-300 text-base leading-relaxed">
+              WE WILL EMAIL YOU YOUR CUSTOM VIBE CARD WHEN IT'S READY
+            </p>
+            <p className="text-yellow-400 text-sm mt-2 font-semibold">
+              [ESTIMATED WAIT TIME 2-3 HOURS]
+            </p>
           </div>
 
           <div className="space-y-4">
-            {onRetry && (
-              <button
-                onClick={onRetry}
-                className="w-full px-8 py-3 bg-white text-black font-semibold text-sm uppercase tracking-wider hover:bg-gray-200 transition-all duration-200 flex items-center justify-center"
-              >
-                <RefreshCw size={16} className="mr-2" />
-                TRY AGAIN
-              </button>
-            )}
-
             <button
               onClick={onComplete}
-              className="w-full px-8 py-3 border border-white text-white font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-black transition-all duration-200"
+              className="w-full px-8 py-3 bg-white text-black font-semibold text-sm uppercase tracking-wider hover:bg-gray-200 transition-all duration-200"
             >
-              CONTINUE WITHOUT VIDEO
+              CONTINUE TO CHECKOUT
             </button>
           </div>
 
           <p className="text-gray-400 text-xs mt-4 uppercase tracking-wide">
-            You can still complete your order with a preview image
+            You can complete your order and we'll deliver the video when ready
           </p>
-
-          {/* Troubleshooting Tips */}
-          <div className="mt-8 p-4 bg-gray-900 bg-opacity-50 rounded-lg text-left">
-            <h4 className="text-white font-semibold text-sm mb-3 uppercase tracking-wide">
-              Troubleshooting Tips:
-            </h4>
-            <ul className="text-gray-300 text-xs space-y-2">
-              <li>• Check your internet connection</li>
-              <li>• Verify the FAL AI API key is correctly set</li>
-              <li>• Try refreshing the page and starting over</li>
-              <li>• Contact support if the issue persists</li>
-            </ul>
-          </div>
         </div>
       </div>
     );
