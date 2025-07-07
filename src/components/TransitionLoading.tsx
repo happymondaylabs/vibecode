@@ -50,46 +50,38 @@ export function TransitionLoading({ onComplete, themeColor, userName }: Transiti
         {/* Animated Icon */}
         <div className="relative mb-6">
           <div 
-            className="w-16 h-16 md:w-20 md:h-20 border-4 border-white border-dashed rounded-full animate-spin mx-auto opacity-90" 
+            className="w-16 h-16 md:w-20 md:h-20 border-4 border-black border-dashed rounded-full animate-spin mx-auto opacity-90" 
             style={{ 
               borderStyle: 'dashed',
               animationDuration: '1.5s',
-              filter: 'drop-shadow(0 0 15px rgba(255, 255, 255, 0.4))'
+              filter: 'drop-shadow(0 0 15px rgba(0, 0, 0, 0.4))'
             }} 
           />
-          <Zap className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white" size={24} />
+          <Zap className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-black" size={24} />
         </div>
 
         {/* Loading Message */}
-        <h2 className="text-lg md:text-2xl font-black uppercase tracking-wider text-white mb-4 transition-all duration-300">
+        <h2 className="text-lg md:text-2xl font-black uppercase tracking-wider text-black mb-4 transition-all duration-300">
           {messages[currentMessage]}
         </h2>
 
         {/* Progress Bar */}
         <div className="w-64 md:w-80 mx-auto mb-4">
-          <div className="bg-white bg-opacity-30 rounded-full h-2 overflow-hidden">
+          <div className="bg-black bg-opacity-30 rounded-full h-2 overflow-hidden">
             <div 
-              className="bg-white h-full transition-all duration-100 ease-out rounded-full shadow-lg"
+              className="bg-black h-full transition-all duration-100 ease-out rounded-full shadow-lg"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="text-white text-sm mt-2 opacity-90 font-semibold">
+          <p className="text-black text-sm mt-2 opacity-90 font-semibold">
             {Math.round(progress)}% READY
           </p>
         </div>
 
         {/* User Context */}
-        <p className="text-white text-xs md:text-sm uppercase tracking-wide opacity-75">
+        <p className="text-black text-xs md:text-sm uppercase tracking-wide opacity-75">
           PREPARING {userName}'S VIBE CARD
         </p>
-
-        {/* Decorative Elements */}
-        <div className="absolute top-10 md:top-20 left-4 md:left-20 text-white opacity-20 transform rotate-12">
-          <div className="text-2xl md:text-4xl font-light">⚡</div>
-        </div>
-        <div className="absolute bottom-10 md:bottom-20 right-4 md:right-20 text-white opacity-20 transform -rotate-12">
-          <div className="text-2xl md:text-4xl font-light">🎬</div>
-        </div>
       </div>
     </div>
   );
