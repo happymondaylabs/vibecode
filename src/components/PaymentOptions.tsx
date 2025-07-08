@@ -347,7 +347,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               {paymentError && (
                 <div className="text-red-600 text-xs font-semibold bg-red-50 p-2 rounded mt-2">
                   {paymentError}
-            <div className="flex justify-center">
+                </div>
               )}
             </div>
           </div>
