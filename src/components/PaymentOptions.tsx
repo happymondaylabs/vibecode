@@ -208,7 +208,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
           <div className="flex h-full">
             {/* Left Side - Payment Info */}
             <div className="w-1/2 relative">
-              <div className="pr-6 h-full flex flex-col">
+              <div className="pr-6 h-full flex flex-col pb-16">
                 {/* Header */}
                 <div className="mb-8">
                   <h2 className="text-4xl font-semibold tracking-wider mb-2">VIBE CARD</h2>
@@ -216,7 +216,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 </div>
 
                 {/* Form Fields */}
-                <div className="space-y-6 text-base flex-1">
+                <div className="space-y-4 text-base flex-1">
                   {/* Name Field - Display Only */}
                   <div className="flex items-center">
                     <span className="font-semibold w-16">NAME:</span>
@@ -242,11 +242,11 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   </div>
 
                   {/* What's Included - Moved from right side */}
-                  <div className="mt-6">
+                  <div className="mt-4">
                     <h4 className="font-semibold text-sm tracking-wide mb-3 text-gray-700 uppercase">
                       WHAT'S INCLUDED:
                     </h4>
-                    <ul className="space-y-2 text-sm text-gray-700">
+                    <ul className="space-y-1 text-sm text-gray-700">
                       <li className="flex items-center">
                         <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
                         CUSTOM VIDEO VIBE CARD
@@ -261,11 +261,11 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                       </li>
                     </ul>
                     
-                    <div className="mt-4">
+                    <div className="mt-3">
                       <h4 className="font-semibold text-sm tracking-wide mb-2 text-gray-700 uppercase">
                         NOTE:
                       </h4>
-                      <ul className="space-y-1 text-sm text-gray-700">
+                      <ul className="space-y-0 text-sm text-gray-700">
                         <li>NO REFUNDS</li>
                         <li>QUESTIONS OR ISSUES?</li>
                         <li>INFO@YOUGENIUS.CO</li>
@@ -284,7 +284,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
             {/* Right Side - Credit Card Form */}
             <div className="w-1/2 relative pl-6">
               {/* Email Field - Moved from left side */}
-              <div className="mb-6">
+              <div className="mb-4">
                 <label className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-2">
                   EMAIL ADDRESS
                 </label>
@@ -311,7 +311,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               
               {/* Payment Form or Email Submit */}
               {showPaymentForm ? (
-                <div className="w-full bg-white border-2 border-black rounded p-3 mb-4">
+                <div className="w-full bg-white border-2 border-black rounded p-3 mb-3">
                   <StripePaymentForm
                     userData={userData}
                     theme={{ id: 'custom', title: 'Custom Video' } as any}
