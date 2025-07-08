@@ -76,6 +76,14 @@ export function useVideoGeneration() {
     } catch (err) {
       console.error('Video generation hook error:', err);
       
+      // More detailed error logging
+      console.error('Error details:', {
+        message: err instanceof Error ? err.message : String(err),
+        stack: err instanceof Error ? err.stack : undefined,
+        userData: request.userData,
+        theme: request.theme.id
+      });
+      
       setError(err instanceof Error ? err.message : String(err));
       setIsGenerating(false);
       setProgress(0);

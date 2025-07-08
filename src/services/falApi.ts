@@ -80,28 +80,44 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
     // Poll for completion
     const requestId = submitResult.requestId;
     let attempts = 0;
-    const maxAttempts = 240; // 20 minutes max (5 second intervals)
+    const maxAttempts = 60; // 5 minutes max (5 second intervals) - reduced for testing
     
     while (attempts < maxAttempts) {
       await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
       
-      const statusResponse = await fetch(`/.netlify/functions/checkVideo?requestId=${requestId}`);
+      console.log(`⏳ Checking video status (attempt ${attempts + 1}/${maxAttempts})...`);
       
-      if (statusResponse.status === 200) {
-        const result = await statusResponse.json();
-        console.log('✅ Video completed:', result.videoUrl);
-        return {
-          video_url: result.videoUrl,
-          status: 'completed',
-          request_id: requestId
-        };
-      } else if (statusResponse.status === 202) {
-        const statusResult = await statusResponse.json();
-        console.log('⏳ Video still processing:', statusResult.status);
+      try {
+        const statusResponse = await fetch(`/.netlify/functions/checkVideo?requestId=${requestId}`);
+        
+        if (statusResponse.status === 200) {
+          const result = await statusResponse.json();
+          console.log('✅ Video completed:', result.videoUrl);
+          return {
+            video_url: result.videoUrl,
+            status: 'completed',
+            request_id: requestId
+          };
+        } else if (statusResponse.status === 202) {
+          const statusResult = await statusResponse.json();
+          console.log('⏳ Video still processing:', statusResult.status);
+          attempts++;
+          continue;
+        } else {
+          const errorText = await statusResponse.text();
+          console.error(`❌ Status check failed: ${statusResponse.status} - ${errorText}`);
+          throw new Error(`Status check failed: ${statusResponse.status}`);
+        }
+      } catch (statusError) {
+        console.error(`❌ Error checking status (attempt ${attempts + 1}):`, statusError);
         attempts++;
+        
+        // If we're near the end, throw the error
+        if (attempts >= maxAttempts - 5) {
+          throw statusError;
+        }
+        // Otherwise continue trying
         continue;
-      } else {
-        throw new Error('Failed to check video status');
       }
     }
     
@@ -121,6 +137,14 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
   } catch (err: any) {
     console.error("❌ Video generation error:", err);
     
+    // Log more details about the error
+    console.error('Full error details:', {
+      message: err.message,
+      stack: err.stack,
+      userData: request.userData,
+      theme: request.theme
+    });
+    
     // Check for developer bypass in error handling
     const isDevBypass = 
       import.meta.env.VITE_DEV_BYPASS_NAME === request.userData.name &&
@@ -132,11 +156,13 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
     
     // Provide helpful error messages
     if (err.message.includes('fetch')) {
-      throw new Error('Failed to connect to video generation service. Please check your internet connection.');
+      throw new Error('Network error: Failed to connect to video generation service. Please check your internet connection and try again.');
     } else if (err.message.includes('HTTP 500')) {
-      throw new Error('Video generation service is temporarily unavailable. Please try again in a few minutes.');
+      throw new Error('Server error: Video generation service is temporarily unavailable. Please try again in a few minutes.');
     } else if (err.message.includes('HTTP 404')) {
-      throw new Error('Video generation service not found. Please contact support.');
+      throw new Error('Service error: Video generation endpoint not found. Please contact support.');
+    } else if (err.message.includes('Status check failed')) {
+      throw new Error('Status check error: Unable to verify video generation progress. The video may still be processing.');
     }
     
     throw err instanceof Error ? err : new Error(String(err));

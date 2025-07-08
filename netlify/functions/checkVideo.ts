@@ -28,6 +28,7 @@ export const handler: Handler = async (event) => {
 
   try {
     console.log('=== CHECK VIDEO STATUS ===');
+    console.log('Check request at:', new Date().toISOString());
     
     const requestId = event.queryStringParameters?.requestId;
     if (!requestId) {
@@ -36,21 +37,47 @@ export const handler: Handler = async (event) => {
 
     console.log('Checking status for request ID:', requestId);
 
+    // Validate FAL_KEY
+    if (!process.env.FAL_KEY) {
+      throw new Error("FAL_KEY environment variable is not configured");
+    }
+
     // Configure FAL AI
     fal.config({ credentials: process.env.FAL_KEY! });
 
-    // Check the status
-    const status = await fal.queue.status("fal-ai/veo3", {
-      requestId,
-      logs: false,
+    // Check the status with error handling
+    let status;
+    try {
+      status = await fal.queue.status("fal-ai/veo3", {
+        requestId,
+        logs: false,
+      });
+    } catch (statusError: any) {
+      console.error('FAL status check error:', statusError);
+      throw new Error(`Failed to check status with FAL AI: ${statusError.message}`);
+    }
+
+    console.log('Status response:', {
+      status: status.status,
+      requestId: requestId,
+      timestamp: new Date().toISOString()
     });
 
-    console.log('Status response:', status);
-
     if (status.status === "COMPLETED") {
-      // Get the result
-      const result = await fal.queue.result("fal-ai/veo3", { requestId });
-      console.log('✅ Video completed:', result.data.video.url);
+      // Get the result with error handling
+      let result;
+      try {
+        result = await fal.queue.result("fal-ai/veo3", { requestId });
+      } catch (resultError: any) {
+        console.error('FAL result fetch error:', resultError);
+        throw new Error(`Failed to fetch result from FAL AI: ${resultError.message}`);
+      }
+      
+      if (!result.data?.video?.url) {
+        throw new Error("Video URL not found in completed result");
+      }
+      
+      console.log('✅ Video completed successfully:', result.data.video.url);
       
       return {
         statusCode: 200,
@@ -63,7 +90,7 @@ export const handler: Handler = async (event) => {
     }
 
     // Still processing
-    console.log('⏳ Video still processing:', status.status);
+    console.log('⏳ Video still processing. Status:', status.status);
     return {
       statusCode: 202,
       headers: {
@@ -73,7 +100,13 @@ export const handler: Handler = async (event) => {
       body: JSON.stringify({ status: status.status }),
     };
   } catch (error: any) {
-    console.error("🔥 Check video status error:", error);
+    console.error("🔥 Check video status error at:", new Date().toISOString());
+    console.error("Error details:", {
+      message: error.message,
+      stack: error.stack,
+      requestId: event.queryStringParameters?.requestId
+    });
+    
     return {
       statusCode: 500,
       headers: {
