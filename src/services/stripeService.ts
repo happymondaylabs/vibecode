@@ -62,7 +62,7 @@ export async function processPayment(
 
     console.log('🔄 Processing payment...');
 
-    const { error, paymentIntent } = await stripe.confirmPayment({
+    const result = await stripe.confirmPayment({
       clientSecret,
       confirmParams: {
         payment_method_data: {
@@ -74,14 +74,20 @@ export async function processPayment(
       redirect: 'if_required',
     });
 
-    if (error) {
-      console.error('❌ Payment failed:', error);
-      throw new Error(error.message || 'Payment failed');
+    if (result.error) {
+      console.error('❌ Payment failed:', result.error.message);
+      throw new Error(result.error.message || 'Payment failed');
     }
 
-    if (paymentIntent?.status === 'succeeded') {
-      console.log('✅ Payment succeeded:', paymentIntent.id);
-      return paymentIntent;
+    if (result.paymentIntent?.status === 'succeeded') {
+      console.log('✅ Payment succeeded:', result.paymentIntent.id);
+      // Return only the essential data to avoid circular references
+      return {
+        id: result.paymentIntent.id,
+        status: result.paymentIntent.status,
+        amount: result.paymentIntent.amount,
+        currency: result.paymentIntent.currency
+      };
     } else {
       throw new Error('Payment was not completed successfully');
     }

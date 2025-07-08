@@ -37,10 +37,12 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
   };
 
   const handlePaymentSuccess = () => {
+    console.log('Payment completed successfully');
     onPaymentComplete();
   };
 
   const handlePaymentError = (error: string) => {
+    console.error('Payment error received:', error);
     setPaymentError(error);
     setShowPaymentForm(false);
   };

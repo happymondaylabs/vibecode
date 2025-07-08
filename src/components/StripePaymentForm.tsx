@@ -40,6 +40,7 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    event.stopPropagation();
 
     if (!stripe || !elements) {
       onPaymentError('Stripe has not loaded yet. Please try again.');
@@ -68,7 +69,7 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
       });
 
       // Process payment
-      const paymentIntent = await processPayment(
+      const result = await processPayment(
         clientSecret,
         cardElement,
         {
@@ -77,7 +78,7 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
         }
       );
 
-      console.log('✅ Payment completed:', paymentIntent.id);
+      console.log('✅ Payment completed:', result.id);
       onPaymentSuccess();
     } catch (error: any) {
       console.error('❌ Payment error:', error);
@@ -93,7 +94,7 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
       {/* Secure Payment Header */}
       <div className="flex items-center mb-3">
         <Lock size={14} className="mr-2" />
