@@ -8,35 +8,22 @@ export function useVideoGeneration() {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
   const startGeneration = useCallback(async (request: VideoGenerationRequest) => {
+    setIsGenerating(true);
+    setProgress(10);
+    setError(null);
+    setVideoUrl(null);
+
     // Check for developer bypass
     const isDevBypass = 
       import.meta.env.VITE_DEV_BYPASS_NAME === request.userData.name &&
       import.meta.env.VITE_DEV_BYPASS_AGE === request.userData.age;
 
     if (isDevBypass) {
-      console.log('🛠 Developer bypass active - simulating video generation');
+      console.log('🛠 DEVELOPER BYPASS: Generating REAL video for testing');
       console.log(`Magic combo detected: ${request.userData.name} + ${request.userData.age}`);
       console.log(`Testing theme: ${request.theme.title} (${request.theme.id})`);
-      
-      // Simulate realistic generation time for testing
-      setProgress(30);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setProgress(60);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setProgress(90);
-      await new Promise(resolve => setTimeout(resolve, 500));
-      setProgress(100);
-      
-      console.log('🛠 Developer bypass - using theme image as mock video');
-      setVideoUrl(request.theme.image);
-      setIsGenerating(false);
-      return request.theme.image;
+      console.log('📝 This will use the actual FAL AI service with real prompts');
     }
-
-    setIsGenerating(true);
-    setProgress(10);
-    setError(null);
-    setVideoUrl(null);
 
     try {
       console.log('🚀 Starting queue-based video generation...');
@@ -65,22 +52,20 @@ export function useVideoGeneration() {
       
       clearInterval(progressInterval);
       
-      if (isDevBypass) {
-        console.log('🛠 Developer bypass - using theme image as video URL');
-        setVideoUrl(request.theme.image);
-        setProgress(100);
-        setIsGenerating(false);
-        return request.theme.image;
-      }
-      
       if (result.status === 'completed' && result.video_url) {
         console.log('✅ Video completed:', result.video_url);
+        if (isDevBypass) {
+          console.log('🛠 DEV BYPASS: Real video generation completed successfully!');
+        }
         setVideoUrl(result.video_url);
         setProgress(100);
         setIsGenerating(false);
         return result.video_url;
       } else if (result.status === 'pending') {
         console.log('⏰ Video generation pending, will continue in background');
+        if (isDevBypass) {
+          console.log('🛠 DEV BYPASS: Real video is pending - this is normal for complex themes');
+        }
         setProgress(100);
         setIsGenerating(false);
         // Don't set videoUrl, but don't throw error either
@@ -90,15 +75,6 @@ export function useVideoGeneration() {
       }
     } catch (err) {
       console.error('Video generation hook error:', err);
-      
-      // In dev bypass mode, still return success with theme image
-      if (isDevBypass) {
-        console.log('🛠 Developer bypass - ignoring error and using theme image');
-        setVideoUrl(request.theme.image);
-        setProgress(100);
-        setIsGenerating(false);
-        return request.theme.image;
-      }
       
       setError(err instanceof Error ? err.message : String(err));
       setIsGenerating(false);

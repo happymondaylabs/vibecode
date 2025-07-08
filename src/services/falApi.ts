@@ -39,30 +39,22 @@ export interface VideoGenerationResponse {
 
 // Submit video generation request
 export async function generateVideo(request: VideoGenerationRequest): Promise<VideoGenerationResponse> {
-  // Check for developer bypass
-  const isDevBypass = 
-    import.meta.env.VITE_DEV_BYPASS_NAME === request.userData.name &&
-    import.meta.env.VITE_DEV_BYPASS_AGE === request.userData.age;
-
-  if (isDevBypass) {
-    console.log('🛠 Developer bypass - returning mock video response');
-    console.log(`🎬 Mock generating video for theme: ${request.theme.title}`);
-    console.log(`📝 Using prompt preview: ${generatePrompt(request.userData, request.theme).substring(0, 100)}...`);
-    
-    // Simulate realistic API delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    return {
-      video_url: request.theme.image, // Use theme image as mock video
-      status: 'completed',
-      request_id: `dev-bypass-${request.theme.id}-${Date.now()}`
-    };
-  }
-
   try {
     console.log('=== SUBMITTING VIDEO GENERATION ===');
     console.log('User:', request.userData.name, 'Age:', request.userData.age);
     console.log('Theme:', request.theme.title);
+    
+    // Check for developer bypass - but still generate real video
+    const isDevBypass = 
+      import.meta.env.VITE_DEV_BYPASS_NAME === request.userData.name &&
+      import.meta.env.VITE_DEV_BYPASS_AGE === request.userData.age;
+    
+    if (isDevBypass) {
+      console.log('🛠 DEVELOPER BYPASS: Generating REAL video without payment');
+      console.log(`🎬 Testing theme: ${request.theme.title}`);
+      console.log(`📝 Using actual prompt: ${generatePrompt(request.userData, request.theme).substring(0, 150)}...`);
+    }
+    
     console.log('================================');
     
     // Submit the request
@@ -115,6 +107,11 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
     
     // Instead of throwing an error, return a pending status
     console.log('⏰ Video generation taking longer than expected, returning pending status');
+    
+    if (isDevBypass) {
+      console.log('🛠 DEV BYPASS: Video pending - this is normal for real generation');
+    }
+    
     return {
       video_url: '',
       status: 'pending',
@@ -124,7 +121,16 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
   } catch (err: any) {
     console.error("❌ Video generation error:", err);
     
-    // Provide more helpful error messages
+    // Check for developer bypass in error handling
+    const isDevBypass = 
+      import.meta.env.VITE_DEV_BYPASS_NAME === request.userData.name &&
+      import.meta.env.VITE_DEV_BYPASS_AGE === request.userData.age;
+    
+    if (isDevBypass) {
+      console.log('🛠 DEV BYPASS: Error occurred during real video generation:', err.message);
+    }
+    
+    // Provide helpful error messages
     if (err.message.includes('fetch')) {
       throw new Error('Failed to connect to video generation service. Please check your internet connection.');
     } else if (err.message.includes('HTTP 500')) {

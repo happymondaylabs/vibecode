@@ -72,7 +72,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
           <div className="max-w-6xl mx-auto px-4">
             <div className="flex items-center justify-center">
               <span className="text-yellow-800 font-semibold text-xs uppercase tracking-wide">
-                🛠 DEV MODE: Theme "{selectedTheme.title}" tested successfully
+                🛠 DEV MODE: Real video generated for "{selectedTheme.title}" theme
               </span>
             </div>
           </div>

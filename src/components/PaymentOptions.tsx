@@ -42,9 +42,9 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
     
     // If developer bypass is active, skip payment
     if (isDevBypass) {
-      console.log('🛠 Developer bypass detected - skipping payment flow');
+      console.log('🛠 DEVELOPER BYPASS: Skipping payment, proceeding to REAL video generation');
       console.log(`Magic combo: ${userData.name} + ${userData.age}`);
-      console.log(`Theme: ${userData.theme || 'current theme'}`);
+      console.log('📝 This will generate an actual video using FAL AI');
       handlePaymentSuccess();
       return;
     }
@@ -74,7 +74,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
         <div className="mb-4 p-3 bg-yellow-100 border-2 border-yellow-400 rounded-lg">
           <div className="flex items-center justify-center">
             <span className="text-yellow-800 font-semibold text-sm uppercase tracking-wide">
-              🛠 DEVELOPER BYPASS ACTIVE - PAYMENT WILL BE SKIPPED
+              🛠 DEVELOPER BYPASS: REAL VIDEO GENERATION WITHOUT PAYMENT
             </span>
           </div>
         </div>
@@ -370,7 +370,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                     }
                   }}
                 >
-                  {isDevBypass ? 'BYPASS & GENERATE' : 'CONTINUE TO PAYMENT'}
+                  {isDevBypass ? 'BYPASS PAYMENT & GENERATE REAL VIDEO' : 'CONTINUE TO PAYMENT'}
                 </button>
               )}
               

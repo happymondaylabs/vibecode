@@ -83,7 +83,7 @@ VITE_DEV_BYPASS_AGE=32
 1. Enter the magic name: `monday`
 2. Enter the magic age: `32`
 3. Select any theme you want to test
-4. The system will automatically skip payment and generate a mock video using the theme image
+4. The system will automatically skip payment and generate a REAL video using FAL AI
 5. You can test all 8 themes this way without any payment processing
 
 ### Security Notes
@@ -95,11 +95,19 @@ VITE_DEV_BYPASS_AGE=32
 ### How It Works
 - Detects the magic combo in `PaymentOptions.tsx`
 - Skips Stripe payment flow entirely
-- Simulates realistic video generation timing
-- Uses theme image as mock video URL for testing
+- Proceeds directly to REAL video generation using FAL AI
+- Uses actual prompts and themes for authentic testing
+- Generates real videos that users would receive
 - Shows visual indicators when bypass is active
 - Logs bypass activity for debugging
-- Allows testing of all themes without payment processing
+- Allows testing of all themes with real video generation
+
+### Important Notes
+- ⚠️ **REAL API COSTS**: This uses actual FAL AI credits for video generation
+- 🎬 **AUTHENTIC TESTING**: You get the exact same videos users would receive
+- ⏱️ **REAL TIMING**: Videos take 3-8 minutes to generate (same as production)
+- 📝 **ACTUAL PROMPTS**: Uses the real prompts for each theme
+- 🔄 **FULL PIPELINE**: Tests the complete video generation workflow
 
 ## Email Notifications
 
