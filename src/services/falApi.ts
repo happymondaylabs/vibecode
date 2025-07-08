@@ -5,6 +5,8 @@ export function generatePrompt(userData: UserData, theme: Theme): string {
   const { name, age } = userData;
   
   const prompts = {
+    'hot-fireman': `Ultra-realistic video of a muscular firefighter at a fire scene, in the style of a calendar photoshoot. Fire truck and flames in the background. The firefighter is holding a fire hose confidently with a heroic look on his face. Wearing firefighter pants, suspenders, red helmet, and no shirt showing muscular chest. The firefighter says to the camera, "Did someone call about a fire? Because things are about to get hot!" Then sprays water from the hose and says "Happy Birthday ${name}, hope your ${age}th is smokin'!" Include dramatic lighting from the fire, and a heroic, action-movie tone.`,
+    
     'bigfoot-vlog': `Ultra-realistic video of Bigfoot walking fast in the woods, holding a camera in selfie mode. Natural outdoor lighting, tree's, and a mountains in the background. Bigfoot is running through the woods with a concerned expression. He says to the camera, "The worst part about getting older, is number two really creeps up on you fast!" Bigfoot chuckles, then glances to the camera and says "Happy Birthday ${name}" Include shaky handheld motion, and a humorous, lighthearted tone.`,
     
     'fake-infomercial': `A fake infomercial in the style of a Life Alert commercial. It opens with a wide shot of an elderly man lying at the bottom of a flight of stairs, looking distressed. A somber, authoritative male narrator's voice says, "Now that you're officially a senior citizen, time to look into Life Alert." The scene then transitions to the same elderly man, neatly dressed, sitting comfortably in an armchair, smiling warmly at the camera. He says directly to the camera, "Happy Birthday ${name}."`,

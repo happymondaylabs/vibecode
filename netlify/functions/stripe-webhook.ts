@@ -79,6 +79,7 @@ export const handler: Handler = async (event) => {
 
       // Find theme by ID (you might want to store this in metadata or database)
       const themes = [
+        { id: 'hot-fireman', title: 'HOT FIREMAN' },
         { id: 'male-model-commercial', title: 'MALE MODEL COMMERCIAL' },
         { id: 'female-model-commercial', title: 'FEMALE MODEL COMMERCIAL' },
         { id: 'bigfoot-vlog', title: 'BIGFOOT VLOG' },

@@ -58,7 +58,7 @@ export function ThemeSelector({
           
           <div className="text-center flex-1 mx-4">
             <p className="text-xs text-black uppercase tracking-wide font-semibold">
-              {currentIndex + 1} OF {themes.length} THEMES
+              {currentIndex + 1} OF 9 THEMES
             </p>
           </div>
           
