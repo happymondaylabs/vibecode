@@ -105,6 +105,21 @@ export const handler: Handler = async (event) => {
                 <div class="value">${orderData.themeSelected} (ID: ${orderData.themeId})</div>
             </div>
             
+            ${(orderData.paymentStatus === 'success' && orderData.generationStatus === 'failed') ? `
+            <div class="urgent">
+                <h3>🚨 MANUAL PROCESSING REQUIRED</h3>
+                <p><strong>Payment was successful but video generation failed.</strong></p>
+                <p><strong>Customer Details for Manual Video Creation:</strong></p>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li><strong>Name:</strong> ${orderData.customerName}</li>
+                    <li><strong>Age:</strong> ${orderData.customerAge}</li>
+                    <li><strong>Theme:</strong> ${orderData.themeSelected}</li>
+                    <li><strong>Email:</strong> ${orderData.customerEmail}</li>
+                </ul>
+                <p><strong>Action Required:</strong> Create video manually using the above details and deliver to customer.</p>
+            </div>
+            ` : ''}
+            
             <div class="field">
                 <div class="label">Payment Status:</div>
                 <div class="value ${orderData.paymentStatus === 'success' ? 'status-success' : 'status-failed'}">
@@ -140,8 +155,15 @@ export const handler: Handler = async (event) => {
             ${(orderData.paymentStatus === 'success' && orderData.generationStatus === 'failed') ? `
             <div class="urgent">
                 <h3>🚨 MANUAL PROCESSING REQUIRED</h3>
-                <p>Payment was successful but video generation failed. Customer needs manual assistance.</p>
-                <p><strong>Action Required:</strong> Contact customer at ${orderData.customerEmail} or manually generate video.</p>
+                <p><strong>Payment was successful but video generation failed.</strong></p>
+                <p><strong>Customer Details for Manual Video Creation:</strong></p>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li><strong>Name:</strong> ${orderData.customerName}</li>
+                    <li><strong>Age:</strong> ${orderData.customerAge}</li>
+                    <li><strong>Theme:</strong> ${orderData.themeSelected}</li>
+                    <li><strong>Email:</strong> ${orderData.customerEmail}</li>
+                </ul>
+                <p><strong>Action Required:</strong> Create video manually using the above details and deliver to customer.</p>
             </div>
             ` : ''}
             
