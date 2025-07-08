@@ -96,13 +96,13 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
   return (
     <form onSubmit={handleSubmit} className="space-y-4" noValidate>
       {/* Secure Payment Header */}
-      <div className="flex items-center mb-3">
-        <Lock size={14} className="mr-2" />
-        <h4 className="font-technical font-semibold text-sm uppercase tracking-wide">SECURE PAYMENT</h4>
+      <div className="flex items-center mb-2">
+        <Lock size={12} className="mr-1" />
+        <h4 className="font-technical font-semibold uppercase tracking-wide" style={{ fontSize: '10px' }}>SECURE PAYMENT</h4>
       </div>
 
       {/* Card Element */}
-      <div className="bg-white border-2 border-gray-300 rounded p-3 focus-within:border-black transition-colors">
+      <div className="bg-white border-2 border-gray-300 rounded p-2 focus-within:border-black transition-colors">
         <CardElement
           options={cardElementOptions}
           onChange={handleCardChange}
@@ -111,25 +111,25 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
 
       {/* Card Error */}
       {cardError && (
-        <div className="text-red-600 text-xs font-technical font-semibold">
+        <div className="text-red-600 font-technical font-semibold" style={{ fontSize: '10px' }}>
           {cardError}
         </div>
       )}
 
       {/* Security Info */}
-      <div className="text-xs font-technical text-gray-600 text-center">
-        <div className="flex items-center justify-center mb-1">
-          <CreditCard size={12} className="mr-1" />
+      <div className="font-technical text-gray-600 text-center" style={{ fontSize: '10px' }}>
+        <div className="flex items-center justify-center mb-0.5">
+          <CreditCard size={10} className="mr-1" />
           <span>POWERED BY STRIPE</span>
         </div>
-        <p style={{ fontSize: '10px' }}>Your payment information is encrypted and secure</p>
+        <p style={{ fontSize: '9px' }}>Your payment information is encrypted and secure</p>
       </div>
 
       {/* Submit Button */}
       <button
         type="submit"
         disabled={!stripe || !cardComplete || processing}
-        className={`w-full px-4 py-2 font-technical font-semibold text-xs tracking-wider transition-all duration-200 ${
+        className={`w-full px-3 py-1.5 font-technical font-semibold tracking-wider transition-all duration-200 ${
           stripe && cardComplete && !processing
             ? 'bg-black text-white cursor-pointer'
             : 'bg-gray-400 text-gray-600 cursor-not-allowed'
@@ -147,11 +147,11 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
       >
         {processing ? (
           <div className="flex items-center justify-center">
-            <Loader2 size={14} className="animate-spin mr-2" />
+            <Loader2 size={12} className="animate-spin mr-1" />
             PROCESSING...
           </div>
         ) : (
-          'PAY AND DOWNLOAD VIBE CARD'
+          'PAY $12 & GENERATE'
         )}
       </button>
     </form>

@@ -233,49 +233,49 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
       {/* Desktop Layout */}
       <div className="hidden md:flex items-center justify-center">
         {/* Main Payment Card */}
-        <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-6 flex-1 max-w-4xl" style={{ aspectRatio: '16/10' }}>
+        <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 flex-1 max-w-4xl" style={{ aspectRatio: '16/8' }}>
           <div className="flex h-full">
             {/* Left Side - Payment Info */}
             <div className="w-1/2 relative">
-              <div className="pr-4 h-full flex flex-col">
+              <div className="pr-3 h-full flex flex-col">
                 {/* Header */}
-                <div className="mb-3">
-                  <h2 className="text-4xl font-technical font-semibold tracking-technical mb-2">VIBE CARD</h2>
-                  <div className="text-lg font-technical tracking-wide">PAYMENT CHECKOUT</div>
+                <div className="mb-2">
+                  <h2 className="text-3xl font-technical font-semibold tracking-technical mb-1">VIBE CARD</h2>
+                  <div className="text-base font-technical tracking-wide">PAYMENT CHECKOUT</div>
                 </div>
 
                 {/* Form Fields */}
-                <div className="space-y-6 text-base font-technical flex-1">
+                <div className="space-y-3 text-sm font-technical flex-1">
                   {/* Name Field - Display Only */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">NAME:</span>
+                    <span className="font-semibold w-14 text-xs">NAME:</span>
                     <span className="ml-4 font-semibold">{userData.name}</span>
                   </div>
 
                   {/* Age Field - Display Only */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">AGE:</span>
+                    <span className="font-semibold w-14 text-xs">AGE:</span>
                     <span className="ml-4 font-semibold">{userData.age}</span>
                   </div>
 
                   {/* Price Field */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">PRICE:</span>
-                    <span className="ml-4">$12.00</span>
+                    <span className="font-semibold w-14 text-xs">PRICE:</span>
+                    <span className="ml-4 text-base font-semibold">$12.00</span>
                   </div>
 
                   {/* Type Field */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">TYPE:</span>
-                    <span className="ml-4">ONE-TIME PAYMENT</span>
+                    <span className="font-semibold w-14 text-xs">TYPE:</span>
+                    <span className="ml-4 text-xs">ONE-TIME</span>
                   </div>
 
                   {/* What's Included - Moved from right side */}
-                  <div className="mt-6">
-                    <h4 className="font-semibold text-xs font-technical tracking-wide mb-1 text-gray-700 uppercase">
+                  <div className="mt-3">
+                    <h4 className="font-semibold text-xs font-technical tracking-wide mb-1 text-gray-700 uppercase" style={{ fontSize: '10px' }}>
                       WHAT'S INCLUDED:
                     </h4>
-                    <ul className="space-y-0.5 text-xs font-technical text-gray-700">
+                    <ul className="space-y-0 text-xs font-technical text-gray-700" style={{ fontSize: '10px' }}>
                       <li className="flex items-center">
                         <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                         CUSTOM VIDEO VIBE CARD
@@ -290,11 +290,11 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                       </li>
                     </ul>
                     
-                    <div className="mt-3">
-                      <h4 className="font-semibold text-xs font-technical tracking-wide mb-1 text-gray-700 uppercase">
+                    <div className="mt-2">
+                      <h4 className="font-semibold text-xs font-technical tracking-wide mb-1 text-gray-700 uppercase" style={{ fontSize: '10px' }}>
                         NOTE:
                       </h4>
-                      <ul className="space-y-0 text-xs font-technical text-gray-700">
+                      <ul className="space-y-0 text-xs font-technical text-gray-700" style={{ fontSize: '10px' }}>
                         <li>NO REFUNDS</li>
                         <li>QUESTIONS OR ISSUES?</li>
                         <li>INFO@YOUGENIUS.CO</li>
@@ -311,10 +311,10 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
             </div>
 
             {/* Right Side - Credit Card Form */}
-            <div className="w-1/2 relative pl-4">
+            <div className="w-1/2 relative pl-3">
               {/* Email Field - Moved from left side */}
-              <div className="mb-4">
-                <label className="block text-xs font-technical font-semibold uppercase tracking-wide text-gray-700 mb-2">
+              <div className="mb-2">
+                <label className="block font-technical font-semibold uppercase tracking-wide text-gray-700 mb-1" style={{ fontSize: '10px' }}>
                   EMAIL ADDRESS
                 </label>
                 <input
@@ -324,7 +324,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                     setEmail(e.target.value);
                     setEmailError('');
                   }}
-                  className={`w-full px-3 py-2 border-2 rounded text-sm font-technical tracking-wide transition-all duration-200 focus:outline-none ${
+                  className={`w-full px-2 py-1.5 border-2 rounded text-xs font-technical tracking-wide transition-all duration-200 focus:outline-none ${
                     emailError 
                       ? 'border-red-500 bg-red-50' 
                       : 'border-gray-300 bg-white'
@@ -340,7 +340,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               
               {/* Payment Form or Email Submit */}
               {showPaymentForm ? (
-                <div className="w-full bg-white border-2 border-black rounded p-3 mb-4">
+                <div className="w-full bg-white border-2 border-black rounded p-2 mb-2">
                   <StripePaymentForm
                     userData={userData}
                     theme={{ id: 'custom', title: 'Custom Video' } as any}
@@ -354,7 +354,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 <button 
                   onClick={handleEmailSubmit}
                   disabled={!isEmailValid}
-                  className={`w-full px-4 py-3 font-technical font-semibold text-sm tracking-wider transition-all duration-200 ${
+                  className={`w-full px-3 py-2 font-technical font-semibold text-xs tracking-wider transition-all duration-200 ${
                     isEmailValid
                       ? `${isDevBypass ? 'bg-yellow-600' : 'bg-black'} text-white cursor-pointer`
                       : 'bg-gray-400 text-gray-600 cursor-not-allowed'
@@ -376,7 +376,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               
               {/* Payment Error */}
               {paymentError && (
-                <div className="text-red-600 text-xs font-technical font-semibold bg-red-50 p-3 rounded mt-4">
+                <div className="text-red-600 text-xs font-technical font-semibold bg-red-50 p-2 rounded mt-2">
                   {paymentError}
                 </div>
               )}
@@ -384,14 +384,14 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
           </div>
 
           {/* HP Logo and Symbols */}
-          <div className="absolute bottom-6 left-8">
+          <div className="absolute bottom-3 left-4">
             <div className="flex items-center space-x-3">
-              <div className="bg-black text-white px-3 py-2 font-technical font-semibold text-sm">HP</div>
+              <div className="bg-black text-white px-2 py-1 font-technical font-semibold text-xs">HP</div>
               <div className="flex space-x-2">
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
+                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center" style={{ fontSize: '8px' }}>©</div>
+                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center" style={{ fontSize: '8px' }}>CE</div>
+                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center" style={{ fontSize: '8px' }}>⚡</div>
+                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center" style={{ fontSize: '8px' }}>♻</div>
               </div>
             </div>
           </div>
