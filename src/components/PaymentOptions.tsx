@@ -174,7 +174,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   }
                 }}
               >
-                CONTINUE TO PAYMENT
+                CONTINUE
               </button>
             )}
             

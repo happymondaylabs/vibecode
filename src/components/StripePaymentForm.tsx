@@ -151,7 +151,7 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
             PROCESSING...
           </div>
         ) : (
-          'PAY $12 & GENERATE VIDEO'
+          'PAY AND DOWNLOAD VIBE CARD'
         )}
       </button>
     </form>
