@@ -14,10 +14,10 @@ export const themes: Theme[] = [
     id: 'female-model-commercial',
     title: 'FEMALE MODEL COMMERCIAL',
     description: 'A female goddess says happy birthday like she\'s in love, like the classic burger commercial.',
-    image: '/image2.png',
+    image: '/imagePINKMODEL.png',
     category: 'Commercial',
     code: '2/9',
-    color: '#FF1B1B' // Red
+    color: '#FFB6C1' // Light pink
   },
   {
     id: 'bigfoot-vlog',
