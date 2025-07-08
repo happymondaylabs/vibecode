@@ -263,7 +263,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                       <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
                         NOTE:
                       </h4>
-                      <ul className="space-y-0.5 text-xs text-gray-700">
+                      <ul className="space-y-0.5 text-xs text-gray-700 mb-1">
                         <li>NO REFUNDS</li>
                         <li>QUESTIONS OR ISSUES?</li>
                         <li>INFO@YOUGENIUS.CO</li>
@@ -347,20 +347,20 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               {paymentError && (
                 <div className="text-red-600 text-xs font-semibold bg-red-50 p-2 rounded mt-2">
                   {paymentError}
-                </div>
+            <div className="flex justify-center">
               )}
             </div>
           </div>
 
           {/* HP Logo and Symbols */}
-          <div className="absolute bottom-4 left-6">
+          <div className="absolute bottom-6 left-6">
             <div className="flex items-center space-x-3">
-              <div className="bg-black text-white px-2 py-1 font-semibold text-xs">HP</div>
+              <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
               <div className="flex space-x-2">
-                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">©</div>
-                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
-                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
-                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
+                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
               </div>
             </div>
           </div>
