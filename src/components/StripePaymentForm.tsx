@@ -78,7 +78,7 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
         }
       );
 
-      console.log('✅ Payment completed:', result.id);
+      console.log('✅ Payment completed:', result?.id || 'success');
       onPaymentSuccess();
     } catch (error: any) {
       console.error('❌ Payment error:', error);

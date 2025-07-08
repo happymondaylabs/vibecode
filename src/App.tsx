@@ -64,20 +64,23 @@ function App() {
 
     // Now start video generation after payment
     try {
+      console.log('Starting video generation after payment...');
       const videoUrl = await startGeneration({
         userData,
         theme: selectedTheme
       });
       
       if (videoUrl) {
+        console.log('Video generation completed with URL');
         setGeneratedVideoUrl(videoUrl);
         setIsPending(false);
       } else {
         // Video is pending
+        console.log('Video generation is pending');
         setIsPending(true);
       }
     } catch (error) {
-      console.error('Video generation failed:', error);
+      console.error('Video generation failed:', error instanceof Error ? error.message : String(error));
       setIsPending(false);
     }
   };

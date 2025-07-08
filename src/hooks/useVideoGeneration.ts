@@ -15,12 +15,12 @@ export function useVideoGeneration() {
 
     try {
       console.log('🚀 Starting queue-based video generation...');
-      console.log('Request details:', {
+      console.log('Request details:', JSON.stringify({
         name: request.userData.name,
         age: request.userData.age,
         theme: request.theme.title,
         themeId: request.theme.id
-      });
+      }));
       
       setProgress(20);
       

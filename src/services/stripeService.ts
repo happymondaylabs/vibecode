@@ -81,13 +81,17 @@ export async function processPayment(
 
     if (result.paymentIntent?.status === 'succeeded') {
       console.log('✅ Payment succeeded:', result.paymentIntent.id);
-      // Return only the essential data to avoid circular references
-      return {
+      // Return only essential data to avoid circular references
+      const paymentData = {
         id: result.paymentIntent.id,
         status: result.paymentIntent.status,
         amount: result.paymentIntent.amount,
         currency: result.paymentIntent.currency
       };
+      
+      // Log without circular references
+      console.log('Payment data:', JSON.stringify(paymentData));
+      return paymentData;
     } else {
       throw new Error('Payment was not completed successfully');
     }
