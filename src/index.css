@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'JetBrains Mono', 'Space Mono', 'Roboto Mono', 'Courier New', monospace;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'JetBrains Mono', 'Space Mono', 'Roboto Mono', 'Courier New', monospace;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  
+  .font-technical {
+    font-family: 'JetBrains Mono', 'Space Mono', 'Roboto Mono', 'Courier New', monospace;
+    letter-spacing: 0.05em;
+  }
+  
+  .tracking-technical {
+    letter-spacing: 0.1em;
+  }
+}

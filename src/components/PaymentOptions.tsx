@@ -83,13 +83,13 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
         <div className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 mb-4">
           {/* Mobile Header */}
           <div className="text-center mb-4">
-            <h2 className="text-2xl font-semibold tracking-wider mb-1">VIBE CARD</h2>
-            <div className="text-sm tracking-wide">PAYMENT CHECKOUT</div>
+            <h2 className="text-2xl font-technical font-semibold tracking-technical mb-1">VIBE CARD</h2>
+            <div className="text-sm font-technical tracking-wide">PAYMENT CHECKOUT</div>
           </div>
 
           {/* Mobile User Info */}
           <div className="bg-white p-4 rounded border mb-4">
-            <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+            <div className="grid grid-cols-2 gap-4 text-sm font-technical mb-4">
               <div>
                 <span className="font-semibold block text-xs">NAME:</span>
                 <span className="font-semibold">{userData.name}</span>
@@ -110,10 +110,10 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
 
             {/* What's Included */}
             <div>
-              <h4 className="font-semibold text-xs tracking-wide mb-2 text-gray-700 uppercase">
+              <h4 className="font-semibold text-xs font-technical tracking-wide mb-2 text-gray-700 uppercase">
                 WHAT'S INCLUDED:
               </h4>
-              <ul className="space-y-1 text-xs text-gray-700">
+              <ul className="space-y-1 text-xs font-technical text-gray-700">
                 <li className="flex items-center">
                   <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                   CUSTOM VIDEO VIBE CARD
@@ -129,10 +129,10 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               </ul>
               
               <div className="mt-4">
-                <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
+                <h4 className="font-semibold text-xs font-technical tracking-wide mb-1 text-gray-700 uppercase">
                   NOTE:
                 </h4>
-                <ul className="space-y-0.5 text-xs text-gray-700">
+                <ul className="space-y-0.5 text-xs font-technical text-gray-700">
                   <li>NO REFUNDS</li>
                   <li>QUESTIONS OR ISSUES?</li>
                   <li>INFO@YOUGENIUS.CO</li>
@@ -145,7 +145,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
           <div className="space-y-4 mb-4">            
             {/* Email Field */}
             <div>
-              <label className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-2">
+              <label className="block text-sm font-technical font-semibold uppercase tracking-technical text-gray-700 mb-2">
                 EMAIL ADDRESS
               </label>
               <input
@@ -155,7 +155,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   setEmail(e.target.value);
                   setEmailError('');
                 }}
-                className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
+                className={`w-full px-3 py-2 border-2 rounded text-sm font-technical tracking-wide transition-all duration-200 focus:outline-none ${
                   emailError 
                     ? 'border-red-500 bg-red-50' 
                     : 'border-gray-300 bg-white'
@@ -165,7 +165,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 placeholder="ENTER YOUR EMAIL"
               />
               {emailError && (
-                <span className="text-xs text-red-600 font-semibold mt-1 block">{emailError}</span>
+                <span className="text-xs font-technical text-red-600 font-semibold mt-1 block">{emailError}</span>
               )}
             </div>
             
@@ -187,7 +187,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 disabled={!isEmailValid}
                 className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
                   isEmailValid
-                    ? 'bg-black text-white cursor-pointer'
+                    ? 'bg-black text-white cursor-pointer font-technical'
                     : 'bg-gray-400 text-gray-600 cursor-not-allowed'
                 }`}
                 onMouseEnter={(e) => {
