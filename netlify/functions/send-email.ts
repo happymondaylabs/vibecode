@@ -163,52 +163,56 @@ export const handler: Handler = async (event) => {
 </html>
     `;
 
-    // Send email using Netlify's built-in email service or external service
-    // For now, we'll use a simple HTTP request to a service like EmailJS or SendGrid
-    // You'll need to configure this with your preferred email service
-    
-    const emailPayload = {
-      to: process.env.ADMIN_EMAIL || 'darin@yougenius.co',
-      from: 'orders@vibecard.com',
-      subject: emailSubject,
-      html: emailBody,
-      // Include order data for potential integrations
-      metadata: orderData
-    };
+    // Send email using Mailgun
+    if (process.env.MAILGUN_API_KEY && process.env.MAILGUN_DOMAIN) {
+      console.log('📧 Sending email via Mailgun...');
+      
+      // Create form data for Mailgun API
+      const formData = new FormData();
+      formData.append('from', `VIBE CARD Orders <orders@${process.env.MAILGUN_DOMAIN}>`);
+      formData.append('to', process.env.ADMIN_EMAIL || 'darin@yougenius.co');
+      formData.append('subject', emailSubject);
+      formData.append('html', emailBody);
+      
+      // Add tags for better organization in Mailgun
+      formData.append('o:tag', 'vibe-card-order');
+      formData.append('o:tag', `payment-${orderData.paymentStatus}`);
+      formData.append('o:tag', `generation-${orderData.generationStatus}`);
+      
+      // Add custom variables for tracking
+      formData.append('v:customer_email', orderData.customerEmail);
+      formData.append('v:theme_id', orderData.themeId);
+      formData.append('v:payment_intent_id', orderData.paymentIntentId || '');
 
-    // Example using SendGrid (you'll need to add SENDGRID_API_KEY to environment variables)
-    if (process.env.SENDGRID_API_KEY) {
-      const sendGridResponse = await fetch('https://api.sendgrid.com/v3/mail/send', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          personalizations: [{
-            to: [{ email: process.env.ADMIN_EMAIL || 'darin@yougenius.co' }],
-            subject: emailSubject
-          }],
-          from: { email: 'orders@vibecard.com', name: 'VIBE CARD Orders' },
-          content: [{
-            type: 'text/html',
-            value: emailBody
-          }]
-        })
-      });
+      const mailgunResponse = await fetch(
+        `https://api.mailgun.net/v3/${process.env.MAILGUN_DOMAIN}/messages`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Basic ${Buffer.from(`api:${process.env.MAILGUN_API_KEY}`).toString('base64')}`,
+          },
+          body: formData
+        }
+      );
 
-      if (!sendGridResponse.ok) {
-        throw new Error(`SendGrid API error: ${sendGridResponse.status}`);
+      if (!mailgunResponse.ok) {
+        const errorText = await mailgunResponse.text();
+        throw new Error(`Mailgun API error: ${mailgunResponse.status} - ${errorText}`);
       }
+
+      const mailgunResult = await mailgunResponse.json();
+      console.log('✅ Email sent via Mailgun:', mailgunResult.id);
+      
     } else {
       // Fallback: Log the email content (for development)
-      console.log('📧 EMAIL NOTIFICATION (SendGrid not configured):');
-      console.log('To:', emailPayload.to);
-      console.log('Subject:', emailPayload.subject);
+      console.log('📧 EMAIL NOTIFICATION (Mailgun not configured):');
+      console.log('To:', process.env.ADMIN_EMAIL || 'darin@yougenius.co');
+      console.log('Subject:', emailSubject);
       console.log('Order Data:', orderData);
+      console.log('⚠️ Configure MAILGUN_API_KEY and MAILGUN_DOMAIN to send emails');
     }
 
-    console.log('✅ Email notification sent successfully');
+    console.log('✅ Email notification processed successfully');
 
     return {
       statusCode: 200,
@@ -230,3 +234,24 @@ export const handler: Handler = async (event) => {
     };
   }
 };
+
+// Export the sendOrderNotification function for use in other functions
+export async function sendOrderNotification(orderData: Omit<OrderEmailData, 'orderTimestamp'>): Promise<void> {
+  const emailData = {
+    ...orderData,
+    orderTimestamp: new Date().toISOString()
+  };
+
+  const response = await fetch('/.netlify/functions/send-email', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(emailData)
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+  }
+}

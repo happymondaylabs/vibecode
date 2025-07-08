@@ -51,7 +51,8 @@ If you're still getting "Server misconfiguration":
 ## Environment Variables Needed
 
 - `FAL_KEY` - Your FAL.ai API key for video generation ✅ CONFIGURED
-- `SENDGRID_API_KEY` - Your SendGrid API key for email notifications
+- `MAILGUN_API_KEY` - Your Mailgun API key for email notifications
+- `MAILGUN_DOMAIN` - Your Mailgun domain for sending emails
 - `ADMIN_EMAIL` - Email address to receive order notifications (default: darin@yougenius.co)
 
 ## Development
@@ -60,7 +61,8 @@ For local development, create a `.env` file in the root directory:
 
 ```
 FAL_KEY=your_fal_api_key_here
-SENDGRID_API_KEY=your_sendgrid_api_key_here
+MAILGUN_API_KEY=your_mailgun_api_key_here
+MAILGUN_DOMAIN=your_mailgun_domain_here
 ADMIN_EMAIL=darin@yougenius.co
 ```
 
@@ -92,14 +94,39 @@ The system automatically sends email notifications for:
 - Complete order summary
 - Ready for customer delivery
 
-### Setup Email Service
+### Setup Mailgun Email Service
 
-1. **Get SendGrid API Key**:
-   - Sign up at [SendGrid](https://sendgrid.com)
-   - Create an API key with "Mail Send" permissions
-   - Add to Netlify environment variables as `SENDGRID_API_KEY`
+#### Step 1: Create Mailgun Account
+1. Go to [mailgun.com](https://mailgun.com) and sign up
+2. Verify your email address
+3. Complete the account setup
 
-2. **Set Admin Email**:
+#### Step 2: Get Your API Key
+1. Go to **Settings** → **API Keys**
+2. Copy your **Private API Key** (starts with `key-...`)
+3. Save this for the environment variables
+
+#### Step 3: Set Up Domain
+1. Go to **Sending** → **Domains**
+2. Use the sandbox domain for testing: `sandboxXXXXX.mailgun.org`
+3. Or add your own domain for production
+4. Copy the domain name for environment variables
+
+#### Step 4: Add Environment Variables to Netlify
+1. Go to your Netlify dashboard
+2. Navigate to **Site settings** → **Environment variables**
+3. Add these variables:
+   - `MAILGUN_API_KEY` = your private API key
+   - `MAILGUN_DOMAIN` = your domain (e.g., `sandboxXXXXX.mailgun.org`)
+   - `ADMIN_EMAIL` = `darin@yougenius.co`
+4. **Important**: Redeploy your site after adding variables
+
+#### Step 5: Verify Setup
+- Test by making a purchase on your site
+- Check your email for order notifications
+- Monitor Mailgun dashboard for delivery stats
+
+3. **Set Admin Email**:
    - Add `ADMIN_EMAIL=darin@yougenius.co` to environment variables
    - This email will receive all order notifications
 
