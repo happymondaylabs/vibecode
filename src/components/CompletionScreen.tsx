@@ -121,12 +121,12 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
             <div className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 mb-4">
               {/* Mobile Header */}
               <div className="text-center mb-4">
-                <h2 className="text-2xl font-semibold tracking-wider mb-1">VIBE CARD</h2>
-                <div className="text-sm tracking-wide">{selectedTheme.title}</div>
+                <h2 className="text-2xl font-technical font-semibold tracking-technical mb-1">VIBE CARD</h2>
+                <div className="text-sm font-technical tracking-wide">{selectedTheme.title}</div>
               </div>
 
               {/* Mobile User Info */}
-              <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+              <div className="grid grid-cols-2 gap-4 text-sm font-technical mb-4">
                 <div>
                   <span className="font-semibold block text-xs">NAME:</span>
                   <span className="font-semibold">{userData.name}</span>
@@ -186,6 +186,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                   className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
                   onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
                   onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
+                  style={{ fontFamily: 'JetBrains Mono, Space Mono, Roboto Mono, Courier New, monospace' }}
                 >
                   <Download size={16} className="mr-2" />
                   DOWNLOAD VIDEO
@@ -197,6 +198,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                     className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
                     onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
                     onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
+                    style={{ fontFamily: 'JetBrains Mono, Space Mono, Roboto Mono, Courier New, monospace' }}
                   >
                     <Share2 size={16} className="mr-2" />
                     SHARE NOW
@@ -233,7 +235,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                 {/* Create Another Button */}
                 <button
                   onClick={onStartOver}
-                  className="w-full px-4 py-3 border border-black text-black rounded font-semibold text-sm uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-200"
+                  className="w-full px-4 py-3 border border-black text-black rounded font-semibold text-sm uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-200 font-technical"
                 >
                   CREATE ANOTHER
                 </button>
@@ -265,12 +267,12 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                   <div className="pr-6 h-full">
                     {/* Header */}
                     <div className="mb-8">
-                      <h2 className="text-4xl font-semibold tracking-wider mb-2">VIBE CARD</h2>
-                      <div className="text-lg tracking-wide">{selectedTheme.title}</div>
+                      <h2 className="text-4xl font-technical font-semibold tracking-technical mb-2">VIBE CARD</h2>
+                      <div className="text-lg font-technical tracking-wide">{selectedTheme.title}</div>
                     </div>
 
                     {/* User Info Display */}
-                    <div className="space-y-6 text-base">
+                    <div className="space-y-6 text-base font-technical">
                       {/* Name Field */}
                       <div className="flex items-center">
                         <span className="font-semibold w-16">NAME:</span>

@@ -56,12 +56,17 @@ export function LoadingScreen({
           <h2 className="text-3xl font-semibold uppercase tracking-wider text-white mb-4">
             GENERATION IN PROGRESS
           </h2>
+          <style jsx>{`
+            h2 {
+              font-family: 'JetBrains Mono', 'Space Mono', 'Roboto Mono', 'Courier New', monospace;
+            }
+          `}</style>
 
           <div className="bg-yellow-900 bg-opacity-50 p-6 rounded-lg mb-8">
-            <p className="text-yellow-200 text-lg leading-relaxed mb-4">
+            <p className="text-yellow-200 text-lg leading-relaxed mb-4 font-technical">
               Your video is taking longer than usual to generate.
             </p>
-            <p className="text-yellow-300 text-sm leading-relaxed">
+            <p className="text-yellow-300 text-sm leading-relaxed font-technical">
               This is normal for complex videos. We'll email you when it's ready, 
               or you can continue and check back later.
             </p>
@@ -70,7 +75,7 @@ export function LoadingScreen({
           <div className="space-y-4">
             <button
               onClick={onComplete}
-              className="w-full px-8 py-3 font-semibold text-sm uppercase tracking-wider transition-all duration-200"
+              className="w-full px-8 py-3 font-technical font-semibold text-sm uppercase tracking-wider transition-all duration-200"
               style={{ 
                 backgroundColor: themeColor, 
                 color: 'white',
@@ -91,23 +96,23 @@ export function LoadingScreen({
             {onRetry && (
               <button
                 onClick={onRetry}
-                className="w-full px-8 py-3 border border-white text-white font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-black transition-all duration-200"
+                className="w-full px-8 py-3 border border-white text-white font-technical font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-black transition-all duration-200"
               >
                 CHECK STATUS AGAIN
               </button>
             )}
           </div>
 
-          <p className="text-gray-400 text-xs mt-4 uppercase tracking-wide">
+          <p className="text-gray-400 text-xs mt-4 uppercase tracking-wide font-technical">
             You can complete your order and we'll deliver the video when ready
           </p>
 
           {/* Processing Tips */}
           <div className="mt-8 p-4 bg-gray-900 bg-opacity-50 rounded-lg text-left">
-            <h4 className="text-white font-semibold text-sm mb-3 uppercase tracking-wide">
+            <h4 className="text-white font-technical font-semibold text-sm mb-3 uppercase tracking-wide">
               Why This Happens:
             </h4>
-            <ul className="text-gray-300 text-xs space-y-2">
+            <ul className="text-gray-300 text-xs space-y-2 font-technical">
               <li>• High-quality video generation takes time</li>
               <li>• Complex themes require more processing</li>
               <li>• Server queue may be busy during peak hours</li>
@@ -228,6 +233,10 @@ export function LoadingScreen({
         <h2 
           className="text-xl md:text-3xl font-black uppercase tracking-wider mb-4"
           style={{ color: themeColor }}
+          style={{ 
+            color: themeColor,
+            fontFamily: 'JetBrains Mono, Space Mono, Roboto Mono, Courier New, monospace'
+          }}
         >
           {loadingText}
         </h2>
@@ -245,18 +254,27 @@ export function LoadingScreen({
           <p 
             className="text-sm mt-2 opacity-75"
             style={{ color: themeColor }}
+            style={{ 
+              color: themeColor,
+              fontFamily: 'JetBrains Mono, Space Mono, Roboto Mono, Courier New, monospace'
+            }}
           >
             {Math.round(isGenerating ? progress : localProgress)}% COMPLETE
           </p>
         </div>
 
-        <p className="text-gray-400 text-xs md:text-sm uppercase tracking-wide">
+        <p className="text-gray-400 text-xs md:text-sm uppercase tracking-wide font-technical">
           {isGenerating ? 'EST. 3–8 MIN TO GENERATE' : 'EST. 3–5 MIN TO CREATE'}
         </p>
+        <style jsx>{`
+          p {
+            font-family: 'JetBrains Mono', 'Space Mono', 'Roboto Mono', 'Courier New', monospace;
+          }
+        `}</style>
 
         {isGenerating && (
           <div className="mt-4 md:mt-6 p-3 md:p-4 bg-gray-900 bg-opacity-50 rounded-lg max-w-sm mx-auto">
-            <p className="text-gray-300 text-xs uppercase tracking-wide">
+            <p className="text-gray-300 text-xs uppercase tracking-wide font-technical">
               {progress < 30 ? 'SUBMITTING TO QUEUE...' :
                progress < 60 ? 'PROCESSING IN QUEUE...' :
                progress < 90 ? 'FINALIZING VIDEO...' :

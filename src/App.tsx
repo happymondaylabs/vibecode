@@ -238,16 +238,16 @@ function App() {
               </div>
               <div className="text-right text-xs max-w-xs md:max-w-md ml-4">
                 <div 
-                  className="mb-0.5 md:mb-2 font-semibold tracking-wider transition-all duration-500 text-xs md:text-sm"
+                  className="mb-0.5 md:mb-2 font-technical font-semibold tracking-technical transition-all duration-500 text-xs md:text-sm"
                   style={{ color: currentThemeColor }}
                 >
                   PAPER BIRTHDAY CARDS ARE BORING
                 </div>
-                <div className="leading-relaxed hidden md:block">
+                <div className="leading-relaxed hidden md:block font-technical">
                   Send custom birthday videos that make<br />
                   people laugh, remember, and save paper.
                 </div>
-                <div className="leading-tight md:hidden text-xs">
+                <div className="leading-tight md:hidden text-xs font-technical">
                   Send custom birthday videos that make people laugh, remember, and save paper.
                 </div>
               </div>
@@ -280,16 +280,16 @@ function App() {
               </div>
               <div className="text-left md:text-right text-xs max-w-md">
                 <div 
-                  className="mb-1 md:mb-2 font-semibold tracking-wider transition-all duration-500"
+                  className="mb-1 md:mb-2 font-technical font-semibold tracking-technical transition-all duration-500"
                   style={{ color: currentThemeColor }}
                 >
                   © 2025 YOUGENIUS.CO
                 </div>
-                <div className="leading-relaxed hidden md:block">
+                <div className="leading-relaxed hidden md:block font-technical">
                   Questions? Issues? We're here to help.<br />
                   Email us at info@yougenius.co
                 </div>
-                <div className="leading-relaxed md:hidden text-xs">
+                <div className="leading-relaxed md:hidden text-xs font-technical">
                   Questions? Email us at info@yougenius.co
                 </div>
               </div>
