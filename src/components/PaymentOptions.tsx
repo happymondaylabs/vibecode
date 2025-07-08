@@ -13,9 +13,6 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
   const [emailError, setEmailError] = useState('');
   const [paymentError, setPaymentError] = useState('');
   const [showPaymentForm, setShowPaymentForm] = useState(false);
-  
-  // Test mode - set to true for development
-  const isTestMode = import.meta.env.DEV || window.location.hostname === 'localhost';
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,10 +41,6 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
     onPaymentComplete();
   };
 
-  const handleTestModeSkip = () => {
-    console.log('Test mode: Skipping payment');
-    onPaymentComplete();
-  };
 
   const handlePaymentError = (error: string) => {
     console.error('Payment error received:', error);
@@ -101,7 +94,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 </li>
                 <li className="flex items-center">
                   <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                  DOWNLOADABLE MP4
+                  MP4 DOWNLOAD READY
                 </li>
                 <li className="flex items-center">
                   <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
@@ -186,16 +179,6 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               </button>
             )}
             
-            {/* Test Mode Skip Button */}
-            {isTestMode && (
-              <button 
-                onClick={handleTestModeSkip}
-                className="w-full px-6 py-3 bg-yellow-500 text-black font-semibold text-sm tracking-wider transition-all duration-200 hover:bg-yellow-400"
-              >
-                🧪 TEST MODE: SKIP PAYMENT
-              </button>
-            )}
-            
             {/* Payment Error */}
             {paymentError && (
               <div className="text-red-600 text-xs font-semibold bg-red-50 p-3 rounded">
@@ -222,58 +205,73 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
       {/* Desktop Layout */}
       <div className="hidden md:flex items-center justify-center">
         {/* Main Payment Card */}
-        <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-8 w-full max-w-4xl" style={{ aspectRatio: '16/9' }}>
+        <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-6 flex-1 max-w-4xl" style={{ aspectRatio: '16/10' }}>
           <div className="flex h-full">
             {/* Left Side - Payment Info */}
             <div className="w-1/2 relative">
-              <div className="pr-6 h-full flex flex-col pb-16">
+              <div className="pr-4 h-full flex flex-col">
                 {/* Header */}
-                <div className="mb-8">
-                  <h2 className="text-4xl font-semibold tracking-wider mb-2">VIBE CARD</h2>
+                <div className="mb-3">
+                  <h2 className="text-3xl font-semibold tracking-wider mb-1">VIBE CARD</h2>
                   <div className="text-base tracking-wide">PAYMENT CHECKOUT</div>
                 </div>
 
                 {/* Form Fields */}
-                <div className="space-y-4 text-base flex-1">
+                <div className="space-y-2 text-sm flex-1">
                   {/* Name Field - Display Only */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">NAME:</span>
+                    <span className="font-semibold w-14 text-xs">NAME:</span>
                     <span className="ml-4 font-semibold">{userData.name}</span>
                   </div>
 
                   {/* Age Field - Display Only */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">AGE:</span>
+                    <span className="font-semibold w-14 text-xs">AGE:</span>
                     <span className="ml-4 font-semibold">{userData.age}</span>
                   </div>
 
                   {/* Price Field */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">PRICE:</span>
+                    <span className="font-semibold w-14 text-xs">PRICE:</span>
                     <span className="ml-4 text-lg font-semibold">$12.00</span>
                   </div>
 
                   {/* Type Field */}
                   <div className="flex items-center">
-                    <span className="font-semibold w-16">TYPE:</span>
-                    <span className="ml-4">ONE-TIME PAYMENT</span>
+                    <span className="font-semibold w-14 text-xs">TYPE:</span>
+                    <span className="ml-4 text-xs">ONE-TIME PAYMENT</span>
                   </div>
 
                   {/* What's Included - Moved from right side */}
-                  <div className="mt-8">
-                    <h4 className="font-semibold text-sm tracking-wide mb-3 text-gray-700 uppercase">
+                  <div className="mt-3">
+                    <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
                       WHAT'S INCLUDED:
                     </h4>
-                    <ul className="space-y-1 text-sm text-gray-700">
+                    <ul className="space-y-0.5 text-xs text-gray-700">
                       <li className="flex items-center">
-                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                        <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                         CUSTOM VIDEO VIBE CARD
                       </li>
                       <li className="flex items-center">
-                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
-                        DOWNLOADABLE MP4
+                        <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                        MP4 DOWNLOAD READY
+                      </li>
+                      <li className="flex items-center">
+                        <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                        SHARABLE LINK
                       </li>
                     </ul>
+                    
+                    <div className="mt-3">
+                      <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
+                        NOTE:
+                      </h4>
+                      <ul className="space-y-0 text-xs text-gray-700">
+                        <li>NO REFUNDS</li>
+                        <li>QUESTIONS OR ISSUES?</li>
+                        <li>INFO@YOUGENIUS.CO</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -285,10 +283,10 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
             </div>
 
             {/* Right Side - Credit Card Form */}
-            <div className="w-1/2 relative pl-6">
+            <div className="w-1/2 relative pl-4">
               {/* Email Field - Moved from left side */}
-              <div className="mb-4">
-                <label className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-2">
+              <div className="mb-2">
+                <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5" style={{ fontSize: '10px' }}>
                   EMAIL ADDRESS
                 </label>
                 <input
@@ -298,7 +296,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                     setEmail(e.target.value);
                     setEmailError('');
                   }}
-                  className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
+                  className={`w-full px-2 py-1.5 border-2 rounded text-xs tracking-wide transition-all duration-200 focus:outline-none ${
                     emailError 
                       ? 'border-red-500 bg-red-50' 
                       : 'border-gray-300 bg-white'
@@ -314,7 +312,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               
               {/* Payment Form or Email Submit */}
               {showPaymentForm ? (
-                <div className="w-full bg-white border-2 border-black rounded p-3 mb-3">
+                <div className="w-full bg-white border-2 border-black rounded p-2 mb-2">
                   <StripePaymentForm
                     userData={userData}
                     theme={{ id: 'custom', title: 'Custom Video' } as any}
@@ -328,7 +326,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 <button 
                   onClick={handleEmailSubmit}
                   disabled={!isEmailValid}
-                  className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
+                  className={`w-full px-4 py-2 font-semibold text-xs tracking-wider transition-all duration-200 ${
                     isEmailValid
                       ? 'bg-black text-white cursor-pointer'
                       : 'bg-gray-400 text-gray-600 cursor-not-allowed'
@@ -348,19 +346,9 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 </button>
               )}
               
-              {/* Test Mode Skip Button */}
-              {isTestMode && (
-                <button 
-                  onClick={handleTestModeSkip}
-                  className="w-full px-6 py-3 bg-yellow-500 text-black font-semibold text-sm tracking-wider transition-all duration-200 hover:bg-yellow-400 mt-3"
-                >
-                  🧪 TEST MODE: SKIP PAYMENT
-                </button>
-              )}
-              
               {/* Payment Error */}
               {paymentError && (
-                <div className="text-red-600 text-sm font-semibold bg-red-50 p-3 rounded">
+                <div className="text-red-600 text-xs font-semibold bg-red-50 p-2 rounded mt-2">
                   {paymentError}
                 </div>
               )}
@@ -368,7 +356,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
           </div>
 
           {/* HP Logo and Symbols */}
-          <div className="absolute bottom-6 left-8">
+          <div className="absolute bottom-3 left-6">
             <div className="flex items-center space-x-3">
               <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
               <div className="flex space-x-2">
@@ -384,7 +372,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
       </div>
 
       {/* Progress Indicator - Single dot to show we're on payment step */}
-      <div className="flex justify-center mt-6 md:mt-8">
+      <div className="flex justify-center mt-4 md:mt-6">
         <div className="flex items-center space-x-3">
           <div className="w-4 h-4 rounded-sm bg-white border border-black" />
           <div 
