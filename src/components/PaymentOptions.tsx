@@ -185,7 +185,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
           </div>
 
           {/* Mobile HP Logo */}
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center">
             <div className="flex items-center space-x-3">
               <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
               <div className="flex space-x-2">
@@ -263,7 +263,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                       <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
                         NOTE:
                       </h4>
-                      <ul className="space-y-0.5 text-xs text-gray-700 mb-1">
+                      <ul className="space-y-0 text-xs text-gray-700">
                         <li>NO REFUNDS</li>
                         <li>QUESTIONS OR ISSUES?</li>
                         <li>INFO@YOUGENIUS.CO</li>
@@ -353,7 +353,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
           </div>
 
           {/* HP Logo and Symbols */}
-          <div className="absolute bottom-6 left-6">
+          <div className="absolute bottom-3 left-6">
             <div className="flex items-center space-x-3">
               <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
               <div className="flex space-x-2">
