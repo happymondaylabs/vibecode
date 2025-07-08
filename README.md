@@ -82,7 +82,9 @@ VITE_DEV_BYPASS_AGE=32
 ### Usage
 1. Enter the magic name: `monday`
 2. Enter the magic age: `32`
-3. The system will automatically skip payment and use the theme image as a mock video
+3. Select any theme you want to test
+4. The system will automatically skip payment and generate a mock video using the theme image
+5. You can test all 8 themes this way without any payment processing
 
 ### Security Notes
 - ⚠️ **NEVER** set these variables in production
@@ -93,8 +95,11 @@ VITE_DEV_BYPASS_AGE=32
 ### How It Works
 - Detects the magic combo in `PaymentOptions.tsx`
 - Skips Stripe payment flow entirely
-- Uses theme image as mock video URL
+- Simulates realistic video generation timing
+- Uses theme image as mock video URL for testing
+- Shows visual indicators when bypass is active
 - Logs bypass activity for debugging
+- Allows testing of all themes without payment processing
 
 ## Email Notifications
 

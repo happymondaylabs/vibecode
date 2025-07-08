@@ -16,6 +16,21 @@ export function useVideoGeneration() {
     if (isDevBypass) {
       console.log('🛠 Developer bypass active - simulating video generation');
       console.log(`Magic combo detected: ${request.userData.name} + ${request.userData.age}`);
+      console.log(`Testing theme: ${request.theme.title} (${request.theme.id})`);
+      
+      // Simulate realistic generation time for testing
+      setProgress(30);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setProgress(60);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setProgress(90);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setProgress(100);
+      
+      console.log('🛠 Developer bypass - using theme image as mock video');
+      setVideoUrl(request.theme.image);
+      setIsGenerating(false);
+      return request.theme.image;
     }
 
     setIsGenerating(true);

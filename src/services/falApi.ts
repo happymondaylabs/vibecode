@@ -46,12 +46,16 @@ export async function generateVideo(request: VideoGenerationRequest): Promise<Vi
 
   if (isDevBypass) {
     console.log('🛠 Developer bypass - returning mock video response');
-    // Simulate a short delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log(`🎬 Mock generating video for theme: ${request.theme.title}`);
+    console.log(`📝 Using prompt preview: ${generatePrompt(request.userData, request.theme).substring(0, 100)}...`);
+    
+    // Simulate realistic API delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
     return {
       video_url: request.theme.image, // Use theme image as mock video
       status: 'completed',
-      request_id: 'dev-bypass-' + Date.now()
+      request_id: `dev-bypass-${request.theme.id}-${Date.now()}`
     };
   }
 

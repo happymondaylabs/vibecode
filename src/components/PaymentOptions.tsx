@@ -44,6 +44,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
     if (isDevBypass) {
       console.log('🛠 Developer bypass detected - skipping payment flow');
       console.log(`Magic combo: ${userData.name} + ${userData.age}`);
+      console.log(`Theme: ${userData.theme || 'current theme'}`);
       handlePaymentSuccess();
       return;
     }

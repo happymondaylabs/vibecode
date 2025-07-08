@@ -22,18 +22,23 @@ export function LoadingScreen({
   themeColor = '#FF700A',
   onGoHome
 }: LoadingScreenProps) {
+  // Check if this is a dev bypass session
+  const isDevBypass = 
+    typeof window !== 'undefined' && 
+    window.location.search.includes('dev-bypass');
+
   const [localProgress, setLocalProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('INITIALIZING...');
 
   const loadingMessages = [
-    'INITIALIZING...',
-    'SUBMITTING TO QUEUE...',
-    'ANALYZING VIBE...',
-    'QUEUED FOR PROCESSING...',
-    'CREATING VIDEO...',
-    'APPLYING EFFECTS...',
-    'FINAL TOUCHES...',
-    'COMPLETE!'
+    isDevBypass ? 'DEV MODE: INITIALIZING...' : 'INITIALIZING...',
+    isDevBypass ? 'DEV MODE: MOCKING API CALL...' : 'SUBMITTING TO QUEUE...',
+    isDevBypass ? 'DEV MODE: SIMULATING PROCESSING...' : 'ANALYZING VIBE...',
+    isDevBypass ? 'DEV MODE: TESTING THEME...' : 'QUEUED FOR PROCESSING...',
+    isDevBypass ? 'DEV MODE: USING THEME IMAGE...' : 'CREATING VIDEO...',
+    isDevBypass ? 'DEV MODE: APPLYING MOCK EFFECTS...' : 'APPLYING EFFECTS...',
+    isDevBypass ? 'DEV MODE: FINALIZING TEST...' : 'FINAL TOUCHES...',
+    isDevBypass ? 'DEV MODE: TEST COMPLETE!' : 'COMPLETE!'
   ];
 
   // Handle pending state
