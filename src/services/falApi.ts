@@ -39,6 +39,22 @@ export interface VideoGenerationResponse {
 
 // Submit video generation request
 export async function generateVideo(request: VideoGenerationRequest): Promise<VideoGenerationResponse> {
+  // Check for developer bypass
+  const isDevBypass = 
+    import.meta.env.VITE_DEV_BYPASS_NAME === request.userData.name &&
+    import.meta.env.VITE_DEV_BYPASS_AGE === request.userData.age;
+
+  if (isDevBypass) {
+    console.log('🛠 Developer bypass - returning mock video response');
+    // Simulate a short delay
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    return {
+      video_url: request.theme.image, // Use theme image as mock video
+      status: 'completed',
+      request_id: 'dev-bypass-' + Date.now()
+    };
+  }
+
   try {
     console.log('=== SUBMITTING VIDEO GENERATION ===');
     console.log('User:', request.userData.name, 'Age:', request.userData.age);

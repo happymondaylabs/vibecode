@@ -14,6 +14,11 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
   const [paymentError, setPaymentError] = useState('');
   const [showPaymentForm, setShowPaymentForm] = useState(false);
 
+  // Check for developer bypass
+  const isDevBypass = 
+    import.meta.env.VITE_DEV_BYPASS_NAME === userData.name &&
+    import.meta.env.VITE_DEV_BYPASS_AGE === userData.age;
+
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -34,6 +39,14 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
     setEmailError('');
     setPaymentError('');
     setShowPaymentForm(true);
+    
+    // If developer bypass is active, skip payment
+    if (isDevBypass) {
+      console.log('🛠 Developer bypass detected - skipping payment flow');
+      console.log(`Magic combo: ${userData.name} + ${userData.age}`);
+      handlePaymentSuccess();
+      return;
+    }
   };
 
   const handlePaymentSuccess = () => {
@@ -50,8 +63,22 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
 
   const isEmailValid = email.trim().length > 0 && !emailError && validateEmail(email);
 
+  // Show bypass indicator in development
+  const showBypassIndicator = isDevBypass && import.meta.env.DEV;
+
   return (
     <div className="relative w-full max-w-5xl mx-auto mb-8 md:mb-12">
+      {/* Developer Bypass Indicator */}
+      {showBypassIndicator && (
+        <div className="mb-4 p-3 bg-yellow-100 border-2 border-yellow-400 rounded-lg">
+          <div className="flex items-center justify-center">
+            <span className="text-yellow-800 font-semibold text-sm uppercase tracking-wide">
+              🛠 DEVELOPER BYPASS ACTIVE - PAYMENT WILL BE SKIPPED
+            </span>
+          </div>
+        </div>
+      )}
+      
       {/* Mobile Layout */}
       <div className="md:hidden">
         <div className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 mb-4">
@@ -328,7 +355,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   disabled={!isEmailValid}
                   className={`w-full px-4 py-2 font-semibold text-xs tracking-wider transition-all duration-200 ${
                     isEmailValid
-                      ? 'bg-black text-white cursor-pointer'
+                      ? `${isDevBypass ? 'bg-yellow-600' : 'bg-black'} text-white cursor-pointer`
                       : 'bg-gray-400 text-gray-600 cursor-not-allowed'
                   }`}
                   onMouseEnter={(e) => {
@@ -342,7 +369,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                     }
                   }}
                 >
-                  CONTINUE TO PAYMENT
+                  {isDevBypass ? 'BYPASS & GENERATE' : 'CONTINUE TO PAYMENT'}
                 </button>
               )}
               

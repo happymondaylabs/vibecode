@@ -68,6 +68,34 @@ ADMIN_EMAIL=darin@yougenius.co
 
 Note: The `.env` file is already in `.gitignore` so your API key won't be committed to the repository.
 
+## Developer Bypass (Testing Only)
+
+For testing purposes, you can bypass Stripe payments using a magic name/age combination:
+
+### Setup
+Add these environment variables to your Netlify dashboard or local `.env` file:
+```
+VITE_DEV_BYPASS_NAME=monday
+VITE_DEV_BYPASS_AGE=32
+```
+
+### Usage
+1. Enter the magic name: `monday`
+2. Enter the magic age: `32`
+3. The system will automatically skip payment and use the theme image as a mock video
+
+### Security Notes
+- ⚠️ **NEVER** set these variables in production
+- The bypass only works when both name AND age match exactly
+- A visual indicator shows when bypass is active (development mode only)
+- The bypass is completely disabled in production builds
+
+### How It Works
+- Detects the magic combo in `PaymentOptions.tsx`
+- Skips Stripe payment flow entirely
+- Uses theme image as mock video URL
+- Logs bypass activity for debugging
+
 ## Email Notifications
 
 The system automatically sends email notifications for:

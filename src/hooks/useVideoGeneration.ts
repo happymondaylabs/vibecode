@@ -8,6 +8,16 @@ export function useVideoGeneration() {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
   const startGeneration = useCallback(async (request: VideoGenerationRequest) => {
+    // Check for developer bypass
+    const isDevBypass = 
+      import.meta.env.VITE_DEV_BYPASS_NAME === request.userData.name &&
+      import.meta.env.VITE_DEV_BYPASS_AGE === request.userData.age;
+
+    if (isDevBypass) {
+      console.log('🛠 Developer bypass active - simulating video generation');
+      console.log(`Magic combo detected: ${request.userData.name} + ${request.userData.age}`);
+    }
+
     setIsGenerating(true);
     setProgress(10);
     setError(null);
@@ -19,7 +29,8 @@ export function useVideoGeneration() {
         name: request.userData.name,
         age: request.userData.age,
         theme: request.theme.title,
-        themeId: request.theme.id
+        themeId: request.theme.id,
+        devBypass: isDevBypass
       }));
       
       setProgress(20);
@@ -39,6 +50,14 @@ export function useVideoGeneration() {
       
       clearInterval(progressInterval);
       
+      if (isDevBypass) {
+        console.log('🛠 Developer bypass - using theme image as video URL');
+        setVideoUrl(request.theme.image);
+        setProgress(100);
+        setIsGenerating(false);
+        return request.theme.image;
+      }
+      
       if (result.status === 'completed' && result.video_url) {
         console.log('✅ Video completed:', result.video_url);
         setVideoUrl(result.video_url);
@@ -56,6 +75,16 @@ export function useVideoGeneration() {
       }
     } catch (err) {
       console.error('Video generation hook error:', err);
+      
+      // In dev bypass mode, still return success with theme image
+      if (isDevBypass) {
+        console.log('🛠 Developer bypass - ignoring error and using theme image');
+        setVideoUrl(request.theme.image);
+        setProgress(100);
+        setIsGenerating(false);
+        return request.theme.image;
+      }
+      
       setError(err instanceof Error ? err.message : String(err));
       setIsGenerating(false);
       setProgress(0);
