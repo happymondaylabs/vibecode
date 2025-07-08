@@ -32,7 +32,7 @@ export const themes: Theme[] = [
     id: 'breaking-news',
     title: 'BREAKING NEWS',
     description: 'A dramatic anchor interrupts regular programming to report... somebody is old.',
-    image: '/image3.png',
+    image: '/imagenewsanchoir.png',
     category: 'News',
     code: '4/9',
     color: '#034AB3' // Blue
