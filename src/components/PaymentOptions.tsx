@@ -13,6 +13,9 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
   const [emailError, setEmailError] = useState('');
   const [paymentError, setPaymentError] = useState('');
   const [showPaymentForm, setShowPaymentForm] = useState(false);
+  
+  // Test mode - set to true for development
+  const isTestMode = import.meta.env.DEV || window.location.hostname === 'localhost';
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -38,6 +41,11 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
 
   const handlePaymentSuccess = () => {
     console.log('Payment completed successfully');
+    onPaymentComplete();
+  };
+
+  const handleTestModeSkip = () => {
+    console.log('Test mode: Skipping payment');
     onPaymentComplete();
   };
 
@@ -175,6 +183,16 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 }}
               >
                 CONTINUE
+              </button>
+            )}
+            
+            {/* Test Mode Skip Button */}
+            {isTestMode && (
+              <button 
+                onClick={handleTestModeSkip}
+                className="w-full px-6 py-3 bg-yellow-500 text-black font-semibold text-sm tracking-wider transition-all duration-200 hover:bg-yellow-400"
+              >
+                🧪 TEST MODE: SKIP PAYMENT
               </button>
             )}
             
@@ -327,6 +345,16 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   }}
                 >
                   CONTINUE TO PAYMENT
+                </button>
+              )}
+              
+              {/* Test Mode Skip Button */}
+              {isTestMode && (
+                <button 
+                  onClick={handleTestModeSkip}
+                  className="w-full px-6 py-3 bg-yellow-500 text-black font-semibold text-sm tracking-wider transition-all duration-200 hover:bg-yellow-400 mt-3"
+                >
+                  🧪 TEST MODE: SKIP PAYMENT
                 </button>
               )}
               
