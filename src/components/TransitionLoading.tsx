@@ -130,7 +130,6 @@ export function TransitionLoading({ onComplete, themeColor, userName }: Transiti
           <p className="text-black text-xs opacity-75">
             Your custom video is being designed with the perfect theme, timing, and personal touches for {userName}.
           </p>
-        </p>
       </div>
     </div>
   );
