@@ -263,6 +263,12 @@ export function ThemeSelector({
                         }`}
                        onFocus={(e) => e.target.style.borderColor = themeColor}
                        onBlur={(e) => e.target.style.borderColor = errors.name ? '#ef4444' : '#9ca3af'}
+                       style={{ 
+                         focusBorderColor: themeColor,
+                         '--focus-border-color': themeColor
+                       } as React.CSSProperties & { '--focus-border-color': string }}
+                       onFocus={(e) => e.target.style.borderColor = themeColor}
+                       onBlur={(e) => e.target.style.borderColor = errors.name ? '#ef4444' : '#9ca3af'}
                         placeholder="ENTER NAME"
                       />
                       <div className="flex justify-between mt-1">
@@ -287,6 +293,8 @@ export function ThemeSelector({
                             ? 'border-red-500 bg-red-50' 
                            : 'border-gray-400 bg-white'
                         }`}
+                       onFocus={(e) => e.target.style.borderColor = themeColor}
+                       onBlur={(e) => e.target.style.borderColor = errors.age ? '#ef4444' : '#9ca3af'}
                        onFocus={(e) => e.target.style.borderColor = themeColor}
                        onBlur={(e) => e.target.style.borderColor = errors.age ? '#ef4444' : '#9ca3af'}
                         placeholder="ENTER AGE"
