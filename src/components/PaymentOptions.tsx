@@ -245,12 +245,17 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   <div className="mt-8">
                     <h4 className="font-semibold text-sm tracking-wide mb-3 text-gray-700 uppercase">
                       WHAT'S INCLUDED:
-              <div className="grid grid-cols-2 gap-6 text-sm mb-4">
-                    <ul className="space-y-1 text-sm text-gray-700">
-                      <li className="flex items-center">
-                        <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
-                        CUSTOM VIDEO VIBE CARD
-                      </li>
+                    </h4>
+                    <div className="grid grid-cols-2 gap-6 text-sm mb-4">
+                      <ul className="space-y-1 text-sm text-gray-700">
+                        <li className="flex items-center">
+                          <span className="w-2 h-2 bg-black rounded-full mr-3"></span>
+                          CUSTOM VIDEO VIBE CARD
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
