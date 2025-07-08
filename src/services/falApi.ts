@@ -26,6 +26,7 @@ export function generatePrompt(userData: UserData, theme: Theme): string {
   return prompts[theme.id as keyof typeof prompts] || prompts['male-model-commercial'];
 }
 
+// Legacy exports for backward compatibility
 export interface VideoGenerationRequest {
   userData: UserData;
   theme: Theme;
@@ -33,166 +34,18 @@ export interface VideoGenerationRequest {
 
 export interface VideoGenerationResponse {
   video_url: string;
-  status: 'completed' | 'processing' | 'failed';
+  status: 'completed' | 'processing' | 'failed' | 'pending';
   request_id?: string;
 }
 
-// Submit video generation request
+// Note: These functions are now deprecated in favor of direct Netlify Function calls
+// They remain here for backward compatibility but should not be used in new code
 export async function generateVideo(request: VideoGenerationRequest): Promise<VideoGenerationResponse> {
-  try {
-    console.log('=== SUBMITTING VIDEO GENERATION ===');
-    console.log('User:', request.userData.name, 'Age:', request.userData.age);
-    console.log('Theme:', request.theme.title);
-    
-    // Check for developer bypass - but still generate real video
-    const isDevBypass = 
-      import.meta.env.VITE_DEV_BYPASS_NAME === request.userData.name &&
-      import.meta.env.VITE_DEV_BYPASS_AGE === request.userData.age;
-    
-    if (isDevBypass) {
-      console.log('🛠 DEVELOPER BYPASS: Generating REAL video without payment');
-      console.log(`🎬 Testing theme: ${request.theme.title}`);
-      console.log(`📝 Using actual prompt: ${generatePrompt(request.userData, request.theme).substring(0, 150)}...`);
-    }
-    
-    console.log('================================');
-    
-    // Submit the request
-    const submitResponse = await fetch('/.netlify/functions/submitVideo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userData: request.userData,
-        theme: request.theme
-      })
-    });
-
-    if (!submitResponse.ok) {
-      const errorData = await submitResponse.json().catch(() => ({}));
-      throw new Error(errorData.error || `HTTP ${submitResponse.status}: ${submitResponse.statusText}`);
-    }
-
-    const submitResult = await submitResponse.json();
-    console.log('✅ Video submitted with request ID:', submitResult.requestId);
-
-    // Poll for completion
-    const requestId = submitResult.requestId;
-    let attempts = 0;
-    const maxAttempts = 60; // 5 minutes max (5 second intervals) - reduced for testing
-    
-    while (attempts < maxAttempts) {
-      await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
-      
-      console.log(`⏳ Checking video status (attempt ${attempts + 1}/${maxAttempts})...`);
-      
-      try {
-        const statusResponse = await fetch(`/.netlify/functions/checkVideo?requestId=${requestId}`);
-        
-        if (statusResponse.status === 200) {
-          const result = await statusResponse.json();
-          console.log('✅ Video completed:', result.videoUrl);
-          return {
-            video_url: result.videoUrl,
-            status: 'completed',
-            request_id: requestId
-          };
-        } else if (statusResponse.status === 202) {
-          const statusResult = await statusResponse.json();
-          console.log('⏳ Video still processing:', statusResult.status);
-          attempts++;
-          continue;
-        } else {
-          const errorText = await statusResponse.text();
-          console.error(`❌ Status check failed: ${statusResponse.status} - ${errorText}`);
-          throw new Error(`Status check failed: ${statusResponse.status}`);
-        }
-      } catch (statusError) {
-        console.error(`❌ Error checking status (attempt ${attempts + 1}):`, statusError);
-        attempts++;
-        
-        // If we're near the end, throw the error
-        if (attempts >= maxAttempts - 5) {
-          throw statusError;
-        }
-        // Otherwise continue trying
-        continue;
-      }
-    }
-    
-    // Instead of throwing an error, return a pending status
-    console.log('⏰ Video generation taking longer than expected, returning pending status');
-    
-    if (isDevBypass) {
-      console.log('🛠 DEV BYPASS: Video pending - this is normal for real generation');
-    }
-    
-    return {
-      video_url: '',
-      status: 'pending',
-      request_id: requestId
-    };
-
-  } catch (err: any) {
-    console.error("❌ Video generation error:", err);
-    
-    // Log more details about the error
-    console.error('Full error details:', {
-      message: err.message,
-      stack: err.stack,
-      userData: request.userData,
-      theme: request.theme
-    });
-    
-    // Check for developer bypass in error handling
-    const isDevBypass = 
-      import.meta.env.VITE_DEV_BYPASS_NAME === request.userData.name &&
-      import.meta.env.VITE_DEV_BYPASS_AGE === request.userData.age;
-    
-    if (isDevBypass) {
-      console.log('🛠 DEV BYPASS: Error occurred during real video generation:', err.message);
-    }
-    
-    // Provide helpful error messages
-    if (err.message.includes('fetch')) {
-      throw new Error('Network error: Failed to connect to video generation service. Please check your internet connection and try again.');
-    } else if (err.message.includes('HTTP 500')) {
-      throw new Error('Server error: Video generation service is temporarily unavailable. Please try again in a few minutes.');
-    } else if (err.message.includes('HTTP 404')) {
-      throw new Error('Service error: Video generation endpoint not found. Please contact support.');
-    } else if (err.message.includes('Status check failed')) {
-      throw new Error('Status check error: Unable to verify video generation progress. The video may still be processing.');
-    }
-    
-    throw err instanceof Error ? err : new Error(String(err));
-  }
+  console.warn('⚠️ generateVideo() is deprecated. Use Netlify Functions directly.');
+  throw new Error('This function has been moved to Netlify Functions for better security');
 }
 
-// Check video generation status
 export async function checkVideoStatus(requestId: string): Promise<VideoGenerationResponse> {
-  try {
-    const response = await fetch(`/.netlify/functions/checkVideo?requestId=${requestId}`);
-    
-    if (response.status === 200) {
-      const result = await response.json();
-      return {
-        video_url: result.videoUrl,
-        status: 'completed',
-        request_id: requestId
-      };
-    } else if (response.status === 202) {
-      const statusResult = await response.json();
-      return {
-        video_url: '',
-        status: 'processing',
-        request_id: requestId
-      };
-    } else {
-      throw new Error('Failed to check video status');
-    }
-  } catch (err: any) {
-    console.error("❌ Status check error:", err);
-    throw err instanceof Error ? err : new Error(String(err));
-  }
+  console.warn('⚠️ checkVideoStatus() is deprecated. Use Netlify Functions directly.');
+  throw new Error('This function has been moved to Netlify Functions for better security');
 }

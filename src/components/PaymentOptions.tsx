@@ -16,8 +16,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
 
   // Check for developer bypass
   const isDevBypass = 
-    import.meta.env.VITE_DEV_BYPASS_NAME === userData.name &&
-    import.meta.env.VITE_DEV_BYPASS_AGE === userData.age;
+    userData.name.toLowerCase() === "monday" && userData.age === "32";
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,9 +41,8 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
     
     // If developer bypass is active, skip payment
     if (isDevBypass) {
-      console.log('🛠 DEVELOPER BYPASS: Skipping payment, proceeding to REAL video generation');
-      console.log(`Magic combo: ${userData.name} + ${userData.age}`);
-      console.log('📝 This will generate an actual video using FAL AI');
+      console.log('🛠 DEVELOPER BYPASS: Skipping payment, proceeding to test video generation');
+      console.log(`Magic combo detected: ${userData.name} + ${userData.age}`);
       handlePaymentSuccess();
       return;
     }
@@ -370,7 +368,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                     }
                   }}
                 >
-                  {isDevBypass ? 'BYPASS PAYMENT & GENERATE REAL VIDEO' : 'CONTINUE TO PAYMENT'}
+                  {isDevBypass ? 'BYPASS PAYMENT & GENERATE TEST VIDEO' : 'CONTINUE TO PAYMENT'}
                 </button>
               )}
               

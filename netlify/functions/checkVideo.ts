@@ -8,15 +8,15 @@ export const handler: Handler = async (event) => {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",
       },
       body: "",
     };
   }
 
-  // Only allow GET requests
-  if (event.httpMethod !== "GET") {
+  // Only allow POST requests
+  if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
       headers: {
@@ -28,56 +28,71 @@ export const handler: Handler = async (event) => {
 
   try {
     console.log('=== CHECK VIDEO STATUS ===');
-    console.log('Check request at:', new Date().toISOString());
     
-    const requestId = event.queryStringParameters?.requestId;
+    if (!event.body) {
+      return {
+        statusCode: 400,
+        headers: { "Access-Control-Allow-Origin": "*" },
+        body: JSON.stringify({ error: "Request body is required" })
+      };
+    }
+
+    const { requestId } = JSON.parse(event.body);
     if (!requestId) {
-      throw new Error("Request ID is required");
+      return {
+        statusCode: 400,
+        headers: { "Access-Control-Allow-Origin": "*" },
+        body: JSON.stringify({ error: "Missing requestId" })
+      };
     }
 
     console.log('Checking status for request ID:', requestId);
 
+    // Handle developer bypass
+    if (requestId === "DEV_BYPASS") {
+      console.log('🛠 DEVELOPER BYPASS: Returning test video URL');
+      return {
+        statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ videoUrl: "/test-video.mp4" }),
+      };
+    }
+
     // Validate FAL_KEY
     if (!process.env.FAL_KEY) {
-      throw new Error("FAL_KEY environment variable is not configured");
+      return {
+        statusCode: 500,
+        headers: { "Access-Control-Allow-Origin": "*" },
+        body: JSON.stringify({ error: "FAL_KEY not configured" })
+      };
     }
 
     // Configure FAL AI
     fal.config({ credentials: process.env.FAL_KEY! });
 
-    // Check the status with error handling
-    let status;
-    try {
-      status = await fal.queue.status("fal-ai/veo3", {
-        requestId,
-        logs: false,
-      });
-    } catch (statusError: any) {
-      console.error('FAL status check error:', statusError);
-      throw new Error(`Failed to check status with FAL AI: ${statusError.message}`);
-    }
-
-    console.log('Status response:', {
-      status: status.status,
-      requestId: requestId,
-      timestamp: new Date().toISOString()
+    // Check the status
+    const status = await fal.queue.status("fal-ai/veo3", {
+      requestId,
+      logs: true
     });
 
+    console.log('Status response:', status.status);
+
     if (status.status === "COMPLETED") {
-      // Get the result with error handling
-      let result;
-      try {
-        result = await fal.queue.result("fal-ai/veo3", { requestId });
-      } catch (resultError: any) {
-        console.error('FAL result fetch error:', resultError);
-        throw new Error(`Failed to fetch result from FAL AI: ${resultError.message}`);
-      }
+      const result = await fal.queue.result("fal-ai/veo3", { requestId });
       
       if (!result.data?.video?.url) {
-        throw new Error("Video URL not found in completed result");
+        return {
+          statusCode: 500,
+          headers: { "Access-Control-Allow-Origin": "*" },
+          body: JSON.stringify({ error: "Video URL not found in result" })
+        };
       }
       
-      console.log('✅ Video completed successfully:', result.data.video.url);
+      console.log('✅ Video completed:', result.data.video.url);
       
       return {
         statusCode: 200,
@@ -89,31 +104,26 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    // Still processing
-    console.log('⏳ Video still processing. Status:', status.status);
+    // Still processing - return current status
     return {
-      statusCode: 202,
+      statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ status: status.status }),
     };
+
   } catch (error: any) {
-    console.error("🔥 Check video status error at:", new Date().toISOString());
-    console.error("Error details:", {
-      message: error.message,
-      stack: error.stack,
-      requestId: event.queryStringParameters?.requestId
-    });
+    console.error("🔥 Check video status error:", error);
     
     return {
-      statusCode: 500,
+      statusCode: 502,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: error.message || "FAL.ai service error" }),
     };
   }
 };

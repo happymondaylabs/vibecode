@@ -13,8 +13,7 @@ interface CompletionScreenProps {
 export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOver, themeColor }: CompletionScreenProps) {
   // Check if this is a dev bypass session
   const isDevBypass = 
-    import.meta.env.VITE_DEV_BYPASS_NAME === userData.name &&
-    import.meta.env.VITE_DEV_BYPASS_AGE === userData.age;
+    userData.name.toLowerCase() === "monday" && userData.age === "32";
 
   const handleDownload = () => {
     if (videoUrl) {
@@ -68,11 +67,11 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
     >
       {/* Developer Bypass Indicator */}
       {isDevBypass && import.meta.env.DEV && (
-        <div className="bg-yellow-100 border-b-2 border-yellow-400 p-2">
+        <div className="bg-blue-100 border-b-2 border-blue-400 p-2">
           <div className="max-w-6xl mx-auto px-4">
             <div className="flex items-center justify-center">
-              <span className="text-yellow-800 font-semibold text-xs uppercase tracking-wide">
-                🛠 DEV MODE: Real video generated for "{selectedTheme.title}" theme
+              <span className="text-blue-800 font-semibold text-xs uppercase tracking-wide">
+                🛠 DEV MODE: Test video generated for "{selectedTheme.title}" theme
               </span>
             </div>
           </div>

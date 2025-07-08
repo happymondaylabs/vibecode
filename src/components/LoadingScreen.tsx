@@ -24,21 +24,21 @@ export function LoadingScreen({
 }: LoadingScreenProps) {
   // Check if this is a dev bypass session
   const isDevBypass = 
-    import.meta.env.VITE_DEV_BYPASS_NAME && 
-    import.meta.env.VITE_DEV_BYPASS_AGE;
+    typeof window !== 'undefined' && 
+    window.location.search.includes('dev=true');
 
   const [localProgress, setLocalProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('INITIALIZING...');
 
   const loadingMessages = [
-    isDevBypass ? 'DEV MODE: REAL VIDEO GENERATION...' : 'INITIALIZING...',
-    isDevBypass ? 'DEV MODE: SUBMITTING TO FAL AI...' : 'SUBMITTING TO QUEUE...',
-    isDevBypass ? 'DEV MODE: PROCESSING REAL PROMPT...' : 'ANALYZING VIBE...',
-    isDevBypass ? 'DEV MODE: GENERATING ACTUAL VIDEO...' : 'QUEUED FOR PROCESSING...',
-    isDevBypass ? 'DEV MODE: CREATING REAL VIDEO...' : 'CREATING VIDEO...',
-    isDevBypass ? 'DEV MODE: APPLYING REAL EFFECTS...' : 'APPLYING EFFECTS...',
-    isDevBypass ? 'DEV MODE: FINALIZING REAL VIDEO...' : 'FINAL TOUCHES...',
-    isDevBypass ? 'DEV MODE: REAL VIDEO COMPLETE!' : 'COMPLETE!'
+    isDevBypass ? 'DEV MODE: TEST VIDEO GENERATION...' : 'INITIALIZING...',
+    isDevBypass ? 'DEV MODE: SUBMITTING TO QUEUE...' : 'SUBMITTING TO QUEUE...',
+    isDevBypass ? 'DEV MODE: PROCESSING REQUEST...' : 'ANALYZING VIBE...',
+    isDevBypass ? 'DEV MODE: GENERATING VIDEO...' : 'QUEUED FOR PROCESSING...',
+    isDevBypass ? 'DEV MODE: CREATING VIDEO...' : 'CREATING VIDEO...',
+    isDevBypass ? 'DEV MODE: APPLYING EFFECTS...' : 'APPLYING EFFECTS...',
+    isDevBypass ? 'DEV MODE: FINALIZING VIDEO...' : 'FINAL TOUCHES...',
+    isDevBypass ? 'DEV MODE: VIDEO COMPLETE!' : 'COMPLETE!'
   ];
 
   // Handle pending state

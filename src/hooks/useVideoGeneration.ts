@@ -1,5 +1,10 @@
 import { useState, useCallback } from 'react';
-import { generateVideo, VideoGenerationRequest } from '../services/falApi';
+import { UserData, Theme } from '../types';
+
+export interface VideoGenerationRequest {
+  userData: UserData;
+  theme: Theme;
+}
 
 export function useVideoGeneration() {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -19,75 +24,130 @@ export function useVideoGeneration() {
       import.meta.env.VITE_DEV_BYPASS_AGE === request.userData.age;
 
     if (isDevBypass) {
-      console.log('🛠 DEVELOPER BYPASS: Generating REAL video for testing');
-      console.log(`Magic combo detected: ${request.userData.name} + ${request.userData.age}`);
-      console.log(`Testing theme: ${request.theme.title} (${request.theme.id})`);
-      console.log('📝 This will use the actual FAL AI service with real prompts');
+      console.log('🛠 DEVELOPER BYPASS: Testing video generation');
+      console.log(`Magic combo: ${request.userData.name} + ${request.userData.age}`);
+      console.log(`Testing theme: ${request.theme.title}`);
     }
 
     try {
-      console.log('🚀 Starting queue-based video generation...');
-      console.log('Request details:', JSON.stringify({
-        name: request.userData.name,
-        age: request.userData.age,
-        theme: request.theme.title,
-        themeId: request.theme.id,
-        devBypass: isDevBypass
-      }));
+      console.log('🚀 Starting video generation via Netlify Functions...');
       
       setProgress(20);
       
+      // 1. Submit video generation request
+      const submitResponse = await fetch('/.netlify/functions/submitVideo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userData: request.userData,
+          theme: request.theme
+        })
+      });
+
+      if (!submitResponse.ok) {
+        const errorData = await submitResponse.json().catch(() => ({}));
+        throw new Error(errorData.error || `Submit failed: ${submitResponse.status}`);
+      }
+
+      const { requestId } = await submitResponse.json();
+      console.log('✅ Video submitted with request ID:', requestId);
+
+      setProgress(30);
+
       // Start progress simulation
       const progressInterval = setInterval(() => {
         setProgress(prev => {
-          if (prev < 90) {
-            return prev + Math.random() * 10;
+          if (prev < 85) {
+            return prev + Math.random() * 8;
           }
           return prev;
         });
-      }, 2000);
+      }, 3000);
 
-      // Call the new queue-based generation
-      const result = await generateVideo(request);
+      // 2. Poll for completion (5 minutes max)
+      let attempts = 0;
+      const maxAttempts = 60; // 5 minutes at 5-second intervals
       
-      clearInterval(progressInterval);
-      
-      if (result.status === 'completed' && result.video_url) {
-        console.log('✅ Video completed:', result.video_url);
-        if (isDevBypass) {
-          console.log('🛠 DEV BYPASS: Real video generation completed successfully!');
+      while (attempts < maxAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
+        
+        console.log(`⏳ Checking video status (attempt ${attempts + 1}/${maxAttempts})...`);
+        
+        try {
+          const statusResponse = await fetch('/.netlify/functions/checkVideo', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ requestId })
+          });
+
+          if (statusResponse.ok) {
+            const result = await statusResponse.json();
+            
+            if (result.videoUrl) {
+              clearInterval(progressInterval);
+              console.log('✅ Video completed:', result.videoUrl);
+              
+              if (isDevBypass) {
+                console.log('🛠 DEV BYPASS: Video generation completed successfully!');
+              }
+              
+              setVideoUrl(result.videoUrl);
+              setProgress(100);
+              setIsGenerating(false);
+              return result.videoUrl;
+            } else if (result.status) {
+              console.log('⏳ Video still processing:', result.status);
+              attempts++;
+              continue;
+            }
+          } else {
+            const errorData = await statusResponse.json().catch(() => ({}));
+            console.error(`❌ Status check failed: ${statusResponse.status} - ${errorData.error}`);
+            attempts++;
+            continue;
+          }
+        } catch (statusError) {
+          console.error(`❌ Error checking status (attempt ${attempts + 1}):`, statusError);
+          attempts++;
+          continue;
         }
-        setVideoUrl(result.video_url);
-        setProgress(100);
-        setIsGenerating(false);
-        return result.video_url;
-      } else if (result.status === 'pending') {
-        console.log('⏰ Video generation pending, will continue in background');
-        if (isDevBypass) {
-          console.log('🛠 DEV BYPASS: Real video is pending - this is normal for complex themes');
-        }
-        setProgress(100);
-        setIsGenerating(false);
-        // Don't set videoUrl, but don't throw error either
-        return null;
-      } else {
-        throw new Error('Video generation failed - no video URL received');
       }
+      
+      // Timeout reached - return pending status
+      clearInterval(progressInterval);
+      console.log('⏰ Video generation taking longer than 5 minutes');
+      
+      if (isDevBypass) {
+        console.log('🛠 DEV BYPASS: Video pending - this is normal for real generation');
+      }
+      
+      setProgress(100);
+      setIsGenerating(false);
+      return null; // Indicates pending status
+
     } catch (err) {
-      console.error('Video generation hook error:', err);
+      console.error('Video generation error:', err);
       
-      // More detailed error logging
-      console.error('Error details:', {
-        message: err instanceof Error ? err.message : String(err),
-        stack: err instanceof Error ? err.stack : undefined,
-        userData: request.userData,
-        theme: request.theme.id
-      });
+      const errorMessage = err instanceof Error ? err.message : String(err);
       
-      setError(err instanceof Error ? err.message : String(err));
+      // Provide user-friendly error messages
+      let userMessage = errorMessage;
+      if (errorMessage.includes('fetch')) {
+        userMessage = 'Network error: Unable to connect to video service. Please check your connection.';
+      } else if (errorMessage.includes('Submit failed: 422')) {
+        userMessage = 'Invalid video parameters. Please try a different theme or contact support.';
+      } else if (errorMessage.includes('Submit failed: 502')) {
+        userMessage = 'Video service temporarily unavailable. Please try again in a few minutes.';
+      }
+      
+      setError(userMessage);
       setIsGenerating(false);
       setProgress(0);
-      throw err;
+      throw new Error(userMessage);
     }
   }, []);
 
