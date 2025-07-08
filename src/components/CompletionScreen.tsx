@@ -126,22 +126,22 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
               </div>
 
               {/* Mobile User Info */}
-              <div className="grid grid-cols-2 gap-4 text-sm font-technical mb-4">
+              <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                 <div>
-                  <span className="font-semibold block text-xs">NAME:</span>
-                  <span className="font-semibold">{userData.name}</span>
+                  <span className="font-semibold block text-xs font-technical">NAME:</span>
+                  <span className="font-semibold font-technical">{userData.name}</span>
                 </div>
                 <div>
-                  <span className="font-semibold block text-xs">AGE:</span>
-                  <span className="font-semibold">{userData.age}</span>
+                  <span className="font-semibold block text-xs font-technical">AGE:</span>
+                  <span className="font-semibold font-technical">{userData.age}</span>
                 </div>
                 <div>
-                  <span className="font-semibold block text-xs">STYLE:</span>
-                  <span className="text-xs">8 SECOND CUSTOM VIDEO</span>
+                  <span className="font-semibold block text-xs font-technical">STYLE:</span>
+                  <span className="text-xs font-technical">8 SECOND CUSTOM VIDEO</span>
                 </div>
                 <div>
-                  <span className="font-semibold block text-xs">STATUS:</span>
-                  <span className="text-xs font-semibold">
+                  <span className="font-semibold block text-xs font-technical">STATUS:</span>
+                  <span className="text-xs font-technical font-semibold">
                     {videoUrl ? 'COMPLETE' : 'READY'}
                   </span>
                 </div>
@@ -183,10 +183,9 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                 {/* Download Video Button */}
                 <button
                   onClick={handleDownload}
-                  className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                  className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-technical font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
                   onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
                   onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
-                  style={{ fontFamily: 'JetBrains Mono, Space Mono, Roboto Mono, Courier New, monospace' }}
                 >
                   <Download size={16} className="mr-2" />
                   DOWNLOAD VIDEO
@@ -195,10 +194,9 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                 {/* Share Now Button */}
                 <div className="relative group">
                   <button 
-                    className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                    className="w-full flex items-center justify-center px-4 py-3 bg-black text-white rounded font-technical font-semibold text-sm uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
                     onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
                     onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
-                    style={{ fontFamily: 'JetBrains Mono, Space Mono, Roboto Mono, Courier New, monospace' }}
                   >
                     <Share2 size={16} className="mr-2" />
                     SHARE NOW
@@ -209,21 +207,21 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                     <div className="p-2">
                       <button
                         onClick={() => handleShare('twitter')}
-                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm transition-colors"
+                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm font-technical transition-colors"
                       >
                         <Twitter size={14} className="mr-2" />
                         <span className="font-semibold uppercase">Twitter</span>
                       </button>
                       <button
                         onClick={() => handleShare('instagram')}
-                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm transition-colors"
+                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm font-technical transition-colors"
                       >
                         <Instagram size={14} className="mr-2" />
                         <span className="font-semibold uppercase">Instagram</span>
                       </button>
                       <button
                         onClick={() => handleShare('copy')}
-                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm transition-colors"
+                        className="w-full flex items-center px-3 py-2 text-black hover:bg-gray-100 rounded text-sm font-technical transition-colors"
                       >
                         <Share2 size={14} className="mr-2" />
                         <span className="font-semibold uppercase">Copy Link</span>
@@ -352,7 +350,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                     {/* Download Video Button */}
                     <button
                       onClick={handleDownload}
-                      className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                      className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-technical font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
                       onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
                       onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
                     >
@@ -363,7 +361,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                     {/* Share Now Button */}
                     <div className="relative group">
                       <button 
-                        className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
+                        className="w-full flex items-center justify-center px-3 py-2 bg-black text-white rounded font-technical font-semibold text-xs uppercase tracking-wider hover:text-orange-400 transition-all duration-200"
                         onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
                         onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
                       >
@@ -376,21 +374,21 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                         <div className="p-1">
                           <button
                             onClick={() => handleShare('twitter')}
-                            className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs transition-colors"
+                            className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs font-technical transition-colors"
                           >
                             <Twitter size={12} className="mr-2" />
                             <span className="font-semibold uppercase">Twitter</span>
                           </button>
                           <button
                             onClick={() => handleShare('instagram')}
-                            className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs transition-colors"
+                            className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs font-technical transition-colors"
                           >
                             <Instagram size={12} className="mr-2" />
                             <span className="font-semibold uppercase">Instagram</span>
                           </button>
                           <button
                             onClick={() => handleShare('copy')}
-                            className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs transition-colors"
+                            className="w-full flex items-center px-2 py-1 text-black hover:bg-gray-100 rounded text-xs font-technical transition-colors"
                           >
                             <Share2 size={12} className="mr-2" />
                             <span className="font-semibold uppercase">Copy Link</span>
@@ -402,7 +400,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                     {/* Create Another Button */}
                     <button
                       onClick={onStartOver}
-                      className="w-full px-3 py-2 border border-black text-black rounded font-semibold text-xs uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-200"
+                      className="w-full px-3 py-2 border border-black text-black rounded font-technical font-semibold text-xs uppercase tracking-wider hover:bg-black hover:text-white transition-all duration-200"
                     >
                       CREATE ANOTHER
                     </button>
@@ -413,7 +411,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
               {/* HP Logo and Symbols */}
               <div className="absolute bottom-6 left-8">
                 <div className="flex items-center space-x-3">
-                  <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
+                  <div className="bg-black text-white px-3 py-2 font-technical font-semibold text-sm">HP</div>
                   <div className="flex space-x-2">
                     <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
                     <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>

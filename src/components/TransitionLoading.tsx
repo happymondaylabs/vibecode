@@ -62,7 +62,7 @@ export function TransitionLoading({ onComplete, themeColor, userName }: Transiti
 
         {/* Loading Message */}
         <h2 className="text-lg md:text-2xl font-black uppercase tracking-wider text-black mb-4 transition-all duration-300">
-          {messages[currentMessage]}
+          className="text-lg md:text-2xl font-technical font-black uppercase tracking-technical text-black mb-4 transition-all duration-300"
         </h2>
 
         {/* Progress Bar */}
@@ -73,13 +73,14 @@ export function TransitionLoading({ onComplete, themeColor, userName }: Transiti
               style={{ width: `${progress}%` }}
             />
           </div>
+           style={{ fontFamily: 'JetBrains Mono, Space Mono, Roboto Mono, Courier New, monospace' }}
           <p className="text-black text-sm mt-2 opacity-90 font-semibold">
             {Math.round(progress)}% READY
           </p>
         </div>
 
         {/* User Context */}
-        <p className="text-black text-xs md:text-sm uppercase tracking-wide opacity-75">
+        <p className="text-black text-xs md:text-sm font-technical uppercase tracking-wide opacity-75">
           PREPARING {userName}'S VIBE CARD
         </p>
       </div>
