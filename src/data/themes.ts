@@ -4,7 +4,7 @@ export const themes: Theme[] = [
   {
     id: 'male-model-commercial',
     title: 'MALE MODEL COMMERCIAL',
-    description: 'A shirtless male hunk delivers your birthday message like it\'s a billion-dollar body wash ad.',
+    description: 'A shirtless exotic model delivers your birthday message like it\'s an infamous body wash ad.',
     image: '/image1.png',
     category: 'Commercial',
     code: '1/8',
@@ -31,7 +31,7 @@ export const themes: Theme[] = [
   {
     id: 'breaking-news',
     title: 'BREAKING NEWS',
-    description: 'A dramatic anchor interrupts regular programming to report: somebody is old.',
+    description: 'A dramatic anchor interrupts regular programming to report... somebody is old.',
     image: '/image3.png',
     category: 'News',
     code: '4/8',
@@ -40,7 +40,7 @@ export const themes: Theme[] = [
   {
     id: 'fake-infomercial',
     title: 'FAKE INFOMERCIAL',
-    description: 'A narrated ad selling random products for people turning this age, like pills for old people',
+    description: 'A narrated ad selling random products for people turning this age, like pills for old people.',
     image: '/Image8.png',
     category: 'Retro',
     code: '5/8',
@@ -49,7 +49,7 @@ export const themes: Theme[] = [
   {
     id: 'jesus-of-nazareth',
     title: 'JESUS OF NAZARETH',
-    description: 'Jesus of Nazareth steps out of a bustling 30 AD market to deliver a divine birthday blessing—with just the right amount of holy confusion.',
+    description: 'Jesus delivers a divine birthday blessing... with just the right amount of holy confusion.',
     image: '/imagejesus.png',
     category: 'Religious',
     code: '6/8',
@@ -58,7 +58,7 @@ export const themes: Theme[] = [
   {
     id: 'fast-food-manager',
     title: 'FAST FOOD MANAGER',
-    description: 'An off-the-rails restaurant manager snaps into reality-TV mode and serves up some hard truths instead of fries.',
+    description: 'A pissed off fast food manager goes off and serves up some hard truths instead of fries.',
     image: '/imageangry-manager.png',
     category: 'Reality TV',
     code: '7/8',
@@ -67,7 +67,7 @@ export const themes: Theme[] = [
   {
     id: 'swamp-man',
     title: 'SWAMP MAN',
-    description: 'A mullet-rocking swamp dweller reels in your birthday with croc-wrangling bravado and a big "senior living" grin.',
+    description: 'A swamp man with a mullet reels in your birthday with a surprise and a great attitude.',
     image: '/imageswamp.png',
     category: 'Reality TV',
     code: '8/8',
