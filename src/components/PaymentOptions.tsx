@@ -12,10 +12,28 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [paymentError, setPaymentError] = useState('');
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  const handleEmailSubmit = () => {
+    // Validate email first
+    if (!email.trim()) {
+      setEmailError('EMAIL IS REQUIRED');
+      return;
+    }
+    
+    if (!validateEmail(email)) {
+      setEmailError('INVALID EMAIL FORMAT');
+      return;
+    }
+
+    setEmailError('');
+    setPaymentError('');
+    setShowPaymentForm(true);
   };
 
   const handlePaymentSuccess = () => {
@@ -24,9 +42,10 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
 
   const handlePaymentError = (error: string) => {
     setPaymentError(error);
+    setShowPaymentForm(false);
   };
 
-  const isEmailValid = email.trim().length > 0 && validateEmail(email);
+  const isEmailValid = email.trim().length > 0 && !emailError && validateEmail(email);
 
   return (
     <div className="relative w-full max-w-5xl mx-auto mb-8 md:mb-12">
@@ -39,11 +58,8 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
             <div className="text-sm tracking-wide">PAYMENT CHECKOUT</div>
           </div>
 
-          {/* Mobile Order Summary */}
+          {/* Mobile User Info */}
           <div className="bg-white p-4 rounded border mb-4">
-            <h4 className="font-semibold text-sm tracking-wide mb-3 text-gray-700 uppercase">
-              ORDER SUMMARY:
-            </h4>
             <div className="grid grid-cols-2 gap-4 text-sm mb-4">
               <div>
                 <span className="font-semibold block text-xs">NAME:</span>
@@ -64,7 +80,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
             </div>
 
             {/* What's Included */}
-            <div className="mb-4">
+            <div>
               <h4 className="font-semibold text-xs tracking-wide mb-2 text-gray-700 uppercase">
                 WHAT'S INCLUDED:
               </h4>
@@ -82,18 +98,17 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   SHARABLE LINK
                 </li>
               </ul>
-            </div>
-
-            {/* Important Notes */}
-            <div className="border-t pt-3">
-              <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
-                IMPORTANT:
-              </h4>
-              <ul className="space-y-0.5 text-xs text-gray-700">
-                <li>• NO REFUNDS</li>
-                <li>• QUESTIONS? EMAIL INFO@YOUGENIUS.CO</li>
-                <li>• VIDEO DELIVERED TO EMAIL WITHIN 24 HOURS</li>
-              </ul>
+              
+              <div className="mt-4">
+                <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
+                  NOTE:
+                </h4>
+                <ul className="space-y-0.5 text-xs text-gray-700">
+                  <li>NO REFUNDS</li>
+                  <li>QUESTIONS OR ISSUES?</li>
+                  <li>INFO@YOUGENIUS.CO</li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -102,7 +117,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
             {/* Email Field */}
             <div>
               <label className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-2">
-                EMAIL ADDRESS *
+                EMAIL ADDRESS
               </label>
               <input
                 type="email"
@@ -110,7 +125,6 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setEmailError('');
-                  setPaymentError('');
                 }}
                 className={`w-full px-3 py-2 border-2 rounded text-sm tracking-wide transition-all duration-200 focus:outline-none ${
                   emailError 
@@ -124,11 +138,10 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               {emailError && (
                 <span className="text-xs text-red-600 font-semibold mt-1 block">{emailError}</span>
               )}
-              <p className="text-xs text-gray-600 mt-1">Your video will be delivered to this email</p>
             </div>
             
-            {/* Payment Form */}
-            {isEmailValid ? (
+            {/* Payment Form or Email Submit */}
+            {showPaymentForm ? (
               <div className="bg-white border-2 border-black rounded p-3">
                 <StripePaymentForm
                   userData={userData}
@@ -140,16 +153,32 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 />
               </div>
             ) : (
-              <div className="bg-gray-100 border-2 border-gray-300 rounded p-4 text-center">
-                <p className="text-sm text-gray-600 font-semibold">
-                  ENTER VALID EMAIL TO CONTINUE
-                </p>
-              </div>
+              <button 
+                onClick={handleEmailSubmit}
+                disabled={!isEmailValid}
+                className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
+                  isEmailValid
+                    ? 'bg-black text-white cursor-pointer'
+                    : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                }`}
+                onMouseEnter={(e) => {
+                  if (isEmailValid) {
+                    e.currentTarget.style.color = themeColor;
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (isEmailValid) {
+                    e.currentTarget.style.color = 'white';
+                  }
+                }}
+              >
+                CONTINUE TO PAYMENT
+              </button>
             )}
             
             {/* Payment Error */}
             {paymentError && (
-              <div className="text-red-600 text-xs font-semibold bg-red-50 p-3 rounded border border-red-200">
+              <div className="text-red-600 text-xs font-semibold bg-red-50 p-3 rounded">
                 {paymentError}
               </div>
             )}
@@ -175,7 +204,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
         {/* Main Payment Card */}
         <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-6 w-full max-w-4xl" style={{ aspectRatio: '16/10' }}>
           <div className="flex h-full">
-            {/* Left Side - Order Summary */}
+            {/* Left Side - Payment Info */}
             <div className="w-1/2 relative">
               <div className="pr-4 h-full flex flex-col">
                 {/* Header */}
@@ -184,57 +213,63 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   <div className="text-base tracking-wide">PAYMENT CHECKOUT</div>
                 </div>
 
-                {/* Order Details */}
-                <div className="space-y-2 text-sm mb-4">
+                {/* Form Fields */}
+                <div className="space-y-2 text-sm flex-1">
+                  {/* Name Field - Display Only */}
                   <div className="flex items-center">
                     <span className="font-semibold w-14 text-xs">NAME:</span>
                     <span className="ml-4 font-semibold">{userData.name}</span>
                   </div>
+
+                  {/* Age Field - Display Only */}
                   <div className="flex items-center">
                     <span className="font-semibold w-14 text-xs">AGE:</span>
                     <span className="ml-4 font-semibold">{userData.age}</span>
                   </div>
+
+                  {/* Price Field */}
                   <div className="flex items-center">
                     <span className="font-semibold w-14 text-xs">PRICE:</span>
                     <span className="ml-4 text-lg font-semibold">$12.00</span>
                   </div>
+
+                  {/* Type Field */}
                   <div className="flex items-center">
                     <span className="font-semibold w-14 text-xs">TYPE:</span>
                     <span className="ml-4 text-xs">ONE-TIME PAYMENT</span>
                   </div>
-                </div>
 
-                {/* What's Included */}
-                <div className="mb-4">
-                  <h4 className="font-semibold text-xs tracking-wide mb-2 text-gray-700 uppercase">
-                    WHAT'S INCLUDED:
-                  </h4>
-                  <ul className="space-y-1 text-xs text-gray-700">
-                    <li className="flex items-center">
-                      <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                      CUSTOM VIDEO VIBE CARD
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                      MP4 DOWNLOAD READY
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
-                      SHARABLE LINK
-                    </li>
-                  </ul>
-                </div>
-                
-                {/* Important Notes */}
-                <div className="mt-auto">
-                  <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
-                    IMPORTANT:
-                  </h4>
-                  <ul className="space-y-0.5 text-xs text-gray-700">
-                    <li>• NO REFUNDS</li>
-                    <li>• QUESTIONS? EMAIL INFO@YOUGENIUS.CO</li>
-                    <li>• VIDEO DELIVERED WITHIN 24 HOURS</li>
-                  </ul>
+                  {/* What's Included - Moved from right side */}
+                  <div className="mt-3">
+                    <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
+                      WHAT'S INCLUDED:
+                    </h4>
+                    <ul className="space-y-0.5 text-xs text-gray-700">
+                      <li className="flex items-center">
+                        <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                        CUSTOM VIDEO VIBE CARD
+                      </li>
+                      <li className="flex items-center">
+                        <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                        MP4 DOWNLOAD READY
+                      </li>
+                      <li className="flex items-center">
+                        <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                        SHARABLE LINK
+                      </li>
+                    </ul>
+                    
+                    <div className="mt-3">
+                      <h4 className="font-semibold text-xs tracking-wide mb-1 text-gray-700 uppercase">
+                        NOTE:
+                      </h4>
+                      <ul className="space-y-0.5 text-xs text-gray-700">
+                        <li>NO REFUNDS</li>
+                        <li>QUESTIONS OR ISSUES?</li>
+                        <li>INFO@YOUGENIUS.CO</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -244,12 +279,12 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               <div className="w-px h-full border-l-2 border-dashed border-black"></div>
             </div>
 
-            {/* Right Side - Email & Payment Form */}
-            <div className="w-1/2 relative pl-4 flex flex-col">
-              {/* Email Field */}
-              <div className="mb-3">
-                <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-1" style={{ fontSize: '10px' }}>
-                  EMAIL ADDRESS *
+            {/* Right Side - Credit Card Form */}
+            <div className="w-1/2 relative pl-4">
+              {/* Email Field - Moved from left side */}
+              <div className="mb-2">
+                <label className="block text-xs font-semibold uppercase tracking-wide text-gray-700 mb-0.5" style={{ fontSize: '10px' }}>
+                  EMAIL ADDRESS
                 </label>
                 <input
                   type="email"
@@ -257,7 +292,6 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                   onChange={(e) => {
                     setEmail(e.target.value);
                     setEmailError('');
-                    setPaymentError('');
                   }}
                   className={`w-full px-2 py-1.5 border-2 rounded text-xs tracking-wide transition-all duration-200 focus:outline-none ${
                     emailError 
@@ -271,34 +305,47 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
                 {emailError && (
                   <span className="text-xs text-red-600 font-semibold mt-1 block">{emailError}</span>
                 )}
-                <p className="text-xs text-gray-600 mt-1">Video will be delivered to this email</p>
               </div>
               
-              {/* Payment Form */}
-              <div className="flex-1">
-                {isEmailValid ? (
-                  <div className="w-full bg-white border-2 border-black rounded p-2">
-                    <StripePaymentForm
-                      userData={userData}
-                      theme={{ id: 'custom', title: 'Custom Video' } as any}
-                      email={email}
-                      onPaymentSuccess={handlePaymentSuccess}
-                      onPaymentError={handlePaymentError}
-                      themeColor={themeColor}
-                    />
-                  </div>
-                ) : (
-                  <div className="w-full bg-gray-100 border-2 border-gray-300 rounded p-4 flex items-center justify-center">
-                    <p className="text-xs text-gray-600 font-semibold text-center">
-                      ENTER VALID EMAIL<br />TO CONTINUE
-                    </p>
-                  </div>
-                )}
-              </div>
+              {/* Payment Form or Email Submit */}
+              {showPaymentForm ? (
+                <div className="w-full bg-white border-2 border-black rounded p-2 mb-2">
+                  <StripePaymentForm
+                    userData={userData}
+                    theme={{ id: 'custom', title: 'Custom Video' } as any}
+                    email={email}
+                    onPaymentSuccess={handlePaymentSuccess}
+                    onPaymentError={handlePaymentError}
+                    themeColor={themeColor}
+                  />
+                </div>
+              ) : (
+                <button 
+                  onClick={handleEmailSubmit}
+                  disabled={!isEmailValid}
+                  className={`w-full px-4 py-2 font-semibold text-xs tracking-wider transition-all duration-200 ${
+                    isEmailValid
+                      ? 'bg-black text-white cursor-pointer'
+                      : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                  }`}
+                  onMouseEnter={(e) => {
+                    if (isEmailValid) {
+                      e.currentTarget.style.color = themeColor;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (isEmailValid) {
+                      e.currentTarget.style.color = 'white';
+                    }
+                  }}
+                >
+                  CONTINUE TO PAYMENT
+                </button>
+              )}
               
               {/* Payment Error */}
               {paymentError && (
-                <div className="text-red-600 text-xs font-semibold bg-red-50 p-2 rounded mt-2 border border-red-200">
+                <div className="text-red-600 text-xs font-semibold bg-red-50 p-2 rounded mt-2">
                   {paymentError}
                 </div>
               )}
@@ -317,6 +364,7 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
               </div>
             </div>
           </div>
+
         </div>
       </div>
 
