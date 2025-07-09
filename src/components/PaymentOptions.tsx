@@ -311,16 +311,6 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
                       </li>
                     </ul>
                     
-                    <div className="mt-2 mb-16">
-                      <h4 className="font-semibold text-xs font-technical tracking-wide mb-1 text-gray-700 uppercase" style={{ fontSize: '10px' }}>
-                        NOTE:
-                      </h4>
-                      <div className="text-xs font-technical text-gray-700" style={{ fontSize: '10px' }}>
-                        <div>NO REFUNDS</div>
-                        <div>QUESTIONS OR ISSUES?</div>
-                        <div>INFO@YOUGENIUS.CO</div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
