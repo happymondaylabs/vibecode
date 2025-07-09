@@ -311,7 +311,7 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
                       </li>
                     </ul>
                     
-                    <div className="mt-2">
+                    <div className="mt-2 mb-8">
                       <h4 className="font-semibold text-xs font-technical tracking-wide mb-1 text-gray-700 uppercase" style={{ fontSize: '10px' }}>
                         NOTE:
                       </h4>
@@ -405,7 +405,7 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
           </div>
 
           {/* HP Logo and Symbols */}
-          <div className="absolute bottom-3 left-4">
+          <div className="absolute bottom-1 left-4">
             <div className="flex items-center space-x-3">
               <div className="bg-black text-white px-2 py-1 font-technical font-semibold text-xs">HP</div>
               <div className="flex space-x-2">
