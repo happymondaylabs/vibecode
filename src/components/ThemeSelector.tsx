@@ -343,13 +343,13 @@ export function ThemeSelector({
           {/* HP Logo and Symbols */}
           <div className="absolute bottom-6 left-8">
             <div className="flex items-center space-x-3">
-            <div className="bg-black text-white px-3 py-2 font-technical font-semibold text-sm">HP</div>
+              <div className="bg-black text-white px-3 py-2 font-technical font-semibold text-sm">HP</div>
               <div className="flex space-x-2">
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
-              <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">©</div>
-              <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">CE</div>
-              <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">⚡</div>
-              <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">♻</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">©</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">CE</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">⚡</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">♻</div>
+              </div>
             </div>
           </div>
 
@@ -398,25 +398,25 @@ export function ThemeSelector({
             </p>
           </div>
           
-        <div className="flex items-center space-x-3">
-          {themes.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => onThemeChange(themes[index])}
-              className={`
-                w-4 h-4 md:w-4 md:h-4 rounded-sm transition-all duration-300 ease-out border
-                ${index === currentIndex 
-                  ? 'border-black shadow-sm' 
-                  : 'bg-white border-gray-300 hover:border-gray-500'
-                }
-                focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50
-                transform hover:scale-110 active:scale-95
-              `}
-              style={index === currentIndex ? { backgroundColor: themeColor } : {}}
-              aria-label={`Go to theme ${index + 1}`}
-            />
-          ))}
-        </div>
+          <div className="flex items-center space-x-3">
+            {themes.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => onThemeChange(themes[index])}
+                className={`
+                  w-4 h-4 md:w-4 md:h-4 rounded-sm transition-all duration-300 ease-out border
+                  ${index === currentIndex 
+                    ? 'border-black shadow-sm' 
+                    : 'bg-white border-gray-300 hover:border-gray-500'
+                  }
+                  focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50
+                  transform hover:scale-110 active:scale-95
+                `}
+                style={index === currentIndex ? { backgroundColor: themeColor } : {}}
+                aria-label={`Go to theme ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
