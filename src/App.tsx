@@ -182,6 +182,7 @@ function App() {
           <PaymentOptions 
             userData={userData}
             onPaymentComplete={handlePaymentComplete}
+            onGoBack={() => setCurrentStep('form')}
             themeColor={currentThemeColor}
           />
         );

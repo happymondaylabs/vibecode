@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { StripePaymentForm } from './StripePaymentForm';
 import { UserData } from '../types';
 
 interface PaymentOptionsProps {
   userData: UserData;
   onPaymentComplete: () => void;
+  onGoBack: () => void;
   themeColor: string;
 }
 
-export function PaymentOptions({ userData, onPaymentComplete, themeColor }: PaymentOptionsProps) {
+export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeColor }: PaymentOptionsProps) {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [paymentError, setPaymentError] = useState('');
@@ -60,13 +62,24 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
     setShowPaymentForm(false);
   };
 
+  const handleRightArrowClick = () => {
+    if (showPaymentForm) {
+      // If payment form is showing, trigger payment
+      // This will be handled by the form's submit button
+      return;
+    } else if (isEmailValid) {
+      // If email is valid, proceed to payment form
+      handleEmailSubmit();
+    }
+  };
+
   const isEmailValid = email.trim().length > 0 && !emailError && validateEmail(email);
 
   // Show bypass indicator in development
   const showBypassIndicator = isDevBypass && import.meta.env.DEV;
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto mb-8 md:mb-12">
+    <div className="relative w-full max-w-6xl mx-auto mb-8 md:mb-12">
       {/* Developer Bypass Indicator */}
       {showBypassIndicator && (
         <div className="mb-4 p-3 bg-yellow-100 border-2 border-yellow-400 rounded-lg">
@@ -232,6 +245,14 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
 
       {/* Desktop Layout */}
       <div className="hidden md:flex items-center justify-center">
+        {/* Left Navigation Arrow - Back */}
+        <button
+          onClick={onGoBack}
+          className="mr-8 p-3 rounded-full bg-black bg-opacity-20 text-black hover:bg-opacity-30 hover:text-white transition-all duration-200 transform hover:scale-110"
+        >
+          <ChevronLeft size={32} strokeWidth={3} />
+        </button>
+
         {/* Main Payment Card */}
         <div className="relative bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 flex-1 max-w-4xl" style={{ aspectRatio: '16/8' }}>
           <div className="flex h-full">
@@ -397,6 +418,19 @@ export function PaymentOptions({ userData, onPaymentComplete, themeColor }: Paym
           </div>
 
         </div>
+
+        {/* Right Navigation Arrow - Continue/Pay */}
+        <button
+          onClick={handleRightArrowClick}
+          disabled={!isEmailValid}
+          className={`ml-8 p-3 rounded-full transition-all duration-200 transform hover:scale-110 ${
+            isEmailValid
+              ? 'bg-black bg-opacity-20 text-black hover:bg-opacity-30 hover:text-white'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          }`}
+        >
+          <ChevronRight size={32} strokeWidth={3} />
+        </button>
       </div>
 
       {/* Progress Indicator - Single dot to show we're on payment step */}
