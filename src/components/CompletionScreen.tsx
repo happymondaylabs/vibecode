@@ -242,12 +242,12 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
               {/* Mobile HP Logo */}
               <div className="flex justify-center">
                 <div className="flex items-center space-x-3">
-                  <div className="bg-black text-white px-3 py-2 font-technical font-semibold text-sm">HP</div>
+                  <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
                   <div className="flex space-x-2">
-                    <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">©</div>
-                    <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">CE</div>
-                    <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">⚡</div>
-                    <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">♻</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
                   </div>
                 </div>
               </div>
@@ -413,10 +413,10 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
                 <div className="flex items-center space-x-3">
                   <div className="bg-black text-white px-3 py-2 font-technical font-semibold text-sm">HP</div>
                   <div className="flex space-x-2">
-                    <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">©</div>
-                    <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">CE</div>
-                    <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">⚡</div>
-                    <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">♻</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
+                    <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
                   </div>
                 </div>
               </div>
