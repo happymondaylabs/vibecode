@@ -231,12 +231,12 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
           {/* Mobile HP Logo */}
           <div className="flex justify-center">
             <div className="flex items-center space-x-3">
-              <div className="bg-black text-white px-3 py-2 font-semibold text-sm">HP</div>
+              <div className="bg-black text-white px-3 py-2 font-technical font-semibold text-sm">HP</div>
               <div className="flex space-x-2">
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">©</div>
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
-                <div className="w-5 h-5 border border-black rounded-full flex items-center justify-center text-xs">♻</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">©</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">CE</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">⚡</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">♻</div>
               </div>
             </div>
           </div>
@@ -397,12 +397,12 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
           {/* HP Logo and Symbols */}
           <div className="absolute bottom-1 left-4">
             <div className="flex items-center space-x-3">
-              <div className="bg-black text-white px-2 py-1 font-technical font-semibold text-xs">HP</div>
+              <div className="bg-black text-white px-3 py-2 font-technical font-semibold text-sm">HP</div>
               <div className="flex space-x-2">
-                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center" style={{ fontSize: '8px' }}>©</div>
-                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center" style={{ fontSize: '8px' }}>CE</div>
-                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center" style={{ fontSize: '8px' }}>⚡</div>
-                <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center" style={{ fontSize: '8px' }}>♻</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">©</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">CE</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">⚡</div>
+                <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center text-xs font-technical">♻</div>
               </div>
             </div>
           </div>
