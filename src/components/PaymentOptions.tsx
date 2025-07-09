@@ -395,7 +395,7 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
           </div>
 
           {/* HP Logo and Symbols */}
-          <div className="absolute bottom-1 left-4">
+          <div className="absolute bottom-6 left-8">
             <div className="flex items-center space-x-3">
               <div className="bg-black text-white px-3 py-2 font-technical font-semibold text-sm">HP</div>
               <div className="flex space-x-2">
