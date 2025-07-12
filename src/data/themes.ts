@@ -23,10 +23,10 @@ export const themes: Theme[] = [
     id: 'bigfoot-vlog',
     title: 'BIGFOOT VLOG',
     description: 'A hairy influencer emerges from the woods to wish you a weirdly wholesome birthday.',
-    image: '/image4.png',
+    image: '/bigfoot-new.png',
     category: 'Adventure',
     code: '3/9',
-    color: '#FF700A' // Orange
+    color: '#228B22' // Forest green
   },
   {
     id: 'breaking-news',
