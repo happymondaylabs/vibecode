@@ -265,25 +265,60 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
               right: '-20px',
               focusRingColor: '#1B1B1B'
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#F8B8B7';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#A7C342';
-              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-            }}
-            className="md:-right-15"
-            aria-label="Next template"
-          >
-            <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
-          </button>
-
           {/* Main Content Card */}
-          <div 
+          <div className="relative">
+            {/* Left Navigation Arrow */}
+            <button
+              onClick={navigatePrevious}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg"
+              style={{ 
+                backgroundColor: '#A7C342',
+                borderColor: '#1B1B1B',
+                left: '-20px',
+                focusRingColor: '#1B1B1B'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#F8B8B7';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#A7C342';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+              }}
+              className="md:-left-15"
+              aria-label="Previous template"
+            >
+              <ChevronLeft size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
+            </button>
+
+            {/* Right Navigation Arrow */}
+            <button
+              onClick={navigateNext}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg"
+              style={{ 
+                backgroundColor: '#A7C342',
+                borderColor: '#1B1B1B',
+                right: '-20px',
+                focusRingColor: '#1B1B1B'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#F8B8B7';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#A7C342';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+              }}
+              className="md:-right-15"
+              aria-label="Next template"
+            >
+              <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
+            </button>
+
+            <div 
             className="rounded-xl shadow-2xl overflow-hidden mx-5 md:mx-15"
             style={{ backgroundColor: '#E5E5E5' }}
-          >
+            >
             {/* Video Container with Black Frame */}
             <div 
               className="relative p-2 md:p-2"
