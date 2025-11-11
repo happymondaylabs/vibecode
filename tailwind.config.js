@@ -26,6 +26,9 @@ export default {
       },
       spacing: {
         '15': '3.75rem',
+      },
+      inset: {
+        '15': '3.75rem',
       }
     },
   },

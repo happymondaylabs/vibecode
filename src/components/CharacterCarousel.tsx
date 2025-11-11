@@ -179,126 +179,263 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
   };
 
   return (
-    <div className="min-h-screen bg-green-400 flex items-center justify-center p-4" style={{ backgroundColor: '#00FF9D' }}>
-      <div className="relative w-full max-w-4xl">
-        {/* Navigation Arrows */}
-        <button
-          onClick={navigatePrevious}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-12 md:-translate-x-16 z-10 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 border-black transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-          style={{ backgroundColor: 'rgba(0, 255, 157, 0.9)' }}
-          aria-label="Previous template"
-        >
-          <ChevronLeft size={24} className="text-black mx-auto" strokeWidth={3} />
-        </button>
-
-        <button
-          onClick={navigateNext}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-12 md:translate-x-16 z-10 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 border-black transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-          style={{ backgroundColor: 'rgba(0, 255, 157, 0.9)' }}
-          aria-label="Next template"
-        >
-          <ChevronRight size={24} className="text-black mx-auto" strokeWidth={3} />
-        </button>
-
-        {/* Main Content Card */}
-        <div className="bg-gray-200 rounded-xl shadow-2xl overflow-hidden" style={{ backgroundColor: '#E5E5E5' }}>
-          {/* Video Container with Black Frame */}
-          <div 
-            className="relative bg-black p-2 md:p-2"
-            style={{ aspectRatio: '16/9' }}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-          >
-            {/* Video/Image Area */}
-            <div className="relative w-full h-full bg-black rounded-sm overflow-hidden">
-              {/* Loading State */}
-              {!imageLoaded && (
-                <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
-                  <div className="text-white font-secondary text-sm">Loading character...</div>
-                </div>
-              )}
-              
-              {/* Character Image */}
-              <img
-                src={currentTemplate.imageUrl}
-                alt={`${currentTemplate.name} - ${currentTemplate.description}`}
-                className={`w-full h-full object-cover transition-opacity duration-200 ${
-                  isTransitioning ? 'opacity-0' : 'opacity-100'
-                } ${imageLoaded ? 'block' : 'hidden'}`}
-                onLoad={handleImageLoad}
-                onError={() => setImageLoaded(true)} // Show even if image fails to load
+    <div className="min-h-screen" style={{ backgroundColor: '#EEEDD8' }}>
+      {/* Header */}
+      <header 
+        className="sticky top-0 z-50 shadow-lg"
+        style={{ backgroundColor: '#1B1B1B' }}
+      >
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <img 
+                src="/ygpng.png" 
+                alt="yougenius" 
+                className="h-9 md:h-12 w-auto"
               />
+            </div>
+            
+            {/* Center - Headlines */}
+            <div className="flex-1 text-center mx-4 md:mx-8">
+              <h1 
+                className="font-primary text-lg md:text-2xl tracking-wider mb-1"
+                style={{ 
+                  color: '#EEEDD8',
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontWeight: 700,
+                  fontStyle: 'italic',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}
+              >
+                CREATE CUSTOM AI VIDEOS
+              </h1>
+              <p 
+                className="font-secondary text-xs md:text-sm opacity-90"
+                style={{ 
+                  color: '#A7C342',
+                  fontFamily: 'Roboto Mono, monospace',
+                  fontWeight: 400
+                }}
+              >
+                Choose a character. Pick your vibe. Get your video in 60 seconds.
+              </p>
+            </div>
+            
+            {/* Right side - Reserved for future */}
+            <div className="flex-shrink-0 w-9 md:w-12"></div>
+          </div>
+        </div>
+      </header>
 
-              {/* Play Button Overlay */}
-              <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-white bg-opacity-90 rounded-full flex items-center justify-center">
-                  <Play size={24} className="text-black ml-1" fill="currentColor" />
-                </div>
-              </div>
+      {/* Main Content */}
+      <div className="flex items-center justify-center px-4 py-10 md:py-16">
+        <div className="relative w-full max-w-4xl">
+          {/* Navigation Arrows */}
+          <button
+            onClick={navigatePrevious}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg"
+            style={{ 
+              backgroundColor: '#A7C342',
+              borderColor: '#1B1B1B',
+              left: '-20px',
+              focusRingColor: '#1B1B1B'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#F8B8B7';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#A7C342';
+              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            }}
+            className="md:-left-15"
+            aria-label="Previous template"
+          >
+            <ChevronLeft size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
+          </button>
 
-              {/* Character Info Bar (Bottom of Frame) */}
-              <div className="absolute bottom-0 left-0 right-0 bg-black px-4 py-3 md:px-6 md:py-4">
-                <div className="flex items-center justify-between">
-                  {/* Character Info */}
-                  <div className="flex-1 min-w-0">
-                    <h2 className="font-primary text-white text-lg md:text-2xl leading-tight mb-1">
-                      {currentTemplate.name}
-                    </h2>
-                    <p className="font-secondary text-white text-xs md:text-sm opacity-60 leading-tight">
-                      {currentTemplate.description}
-                    </p>
+          <button
+            onClick={navigateNext}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg"
+            style={{ 
+              backgroundColor: '#A7C342',
+              borderColor: '#1B1B1B',
+              right: '-20px',
+              focusRingColor: '#1B1B1B'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#F8B8B7';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#A7C342';
+              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            }}
+            className="md:-right-15"
+            aria-label="Next template"
+          >
+            <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
+          </button>
+
+          {/* Main Content Card */}
+          <div 
+            className="rounded-xl shadow-2xl overflow-hidden mx-5 md:mx-15"
+            style={{ backgroundColor: '#E5E5E5' }}
+          >
+            {/* Video Container with Black Frame */}
+            <div 
+              className="relative p-2 md:p-2"
+              style={{ 
+                backgroundColor: '#1B1B1B',
+                aspectRatio: '16/9'
+              }}
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+            >
+              {/* Video/Image Area */}
+              <div className="relative w-full h-full overflow-hidden rounded-sm">
+                {/* Loading State */}
+                {!imageLoaded && (
+                  <div 
+                    className="absolute inset-0 flex items-center justify-center"
+                    style={{ backgroundColor: '#1B1B1B' }}
+                  >
+                    <div 
+                      className="font-secondary text-sm"
+                      style={{ color: '#EEEDD8' }}
+                    >
+                      Loading character...
+                    </div>
                   </div>
-                  
-                  {/* Navigation Counter */}
-                  <div className="ml-4 flex-shrink-0">
-                    <span className="font-secondary text-white text-sm md:text-base">
-                      {currentIndex + 1}/9
-                    </span>
+                )}
+                
+                {/* Character Image */}
+                <img
+                  src={currentTemplate.imageUrl}
+                  alt={`${currentTemplate.name} - ${currentTemplate.description}`}
+                  className={`w-full h-full object-cover transition-opacity duration-200 ${
+                    isTransitioning ? 'opacity-0' : 'opacity-100'
+                  } ${imageLoaded ? 'block' : 'hidden'}`}
+                  onLoad={handleImageLoad}
+                  onError={() => setImageLoaded(true)}
+                />
+
+                {/* Play Button Overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+                  <div 
+                    className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(238, 237, 216, 0.9)' }}
+                  >
+                    <Play size={24} style={{ color: '#1B1B1B' }} className="ml-1" fill="currentColor" />
+                  </div>
+                </div>
+
+                {/* Character Info Bar (Bottom of Frame) */}
+                <div 
+                  className="absolute bottom-0 left-0 right-0 px-4 py-3 md:px-6 md:py-4"
+                  style={{ backgroundColor: '#1B1B1B' }}
+                >
+                  <div className="flex items-center justify-between">
+                    {/* Character Info */}
+                    <div className="flex-1 min-w-0">
+                      <h2 
+                        className="font-primary text-lg md:text-2xl leading-tight mb-1"
+                        style={{ 
+                          color: '#EEEDD8',
+                          fontFamily: 'Montserrat, sans-serif',
+                          fontWeight: 700,
+                          fontStyle: 'italic'
+                        }}
+                      >
+                        {currentTemplate.name}
+                      </h2>
+                      <p 
+                        className="font-secondary text-xs md:text-sm opacity-60 leading-tight"
+                        style={{ 
+                          color: '#EEEDD8',
+                          fontFamily: 'Roboto Mono, monospace',
+                          fontWeight: 400
+                        }}
+                      >
+                        {currentTemplate.description}
+                      </p>
+                    </div>
+                    
+                    {/* Navigation Counter */}
+                    <div className="ml-4 flex-shrink-0">
+                      <span 
+                        className="font-secondary text-sm md:text-base"
+                        style={{ 
+                          color: '#EEEDD8',
+                          fontFamily: 'Roboto Mono, monospace',
+                          fontWeight: 400
+                        }}
+                      >
+                        {currentIndex + 1}/9
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Carousel Dots */}
-        <div className="flex justify-center mt-6 space-x-2 md:space-x-3">
-          {templates.map((_, index) => (
+          {/* Carousel Dots */}
+          <div className="flex justify-center mt-6 space-x-2 md:space-x-3">
+            {templates.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => navigateToIndex(index)}
+                className={`w-2.5 h-2.5 md:w-4 md:h-4 border-2 md:border-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                  index === currentIndex
+                    ? 'scale-120 border-3 opacity-100'
+                    : 'opacity-60 hover:opacity-80'
+                }`}
+                style={{
+                  backgroundColor: index === currentIndex ? '#A7C342' : '#EEEDD8',
+                  borderColor: '#1B1B1B',
+                  focusRingColor: '#1B1B1B'
+                }}
+                aria-label={`Go to template ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* CTA Button */}
+          <div className="flex justify-center mt-8">
             <button
-              key={index}
-              onClick={() => navigateToIndex(index)}
-              className={`w-2.5 h-2.5 md:w-4 md:h-4 border-2 md:border-3 border-black transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 ${
-                index === currentIndex
-                  ? 'bg-transparent scale-120 border-3'
-                  : 'bg-white opacity-60 hover:opacity-80'
-              }`}
-              aria-label={`Go to template ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* CTA Button */}
-        <div className="flex justify-center mt-8">
-          <button
-            onClick={handleSelectCharacter}
-            data-cta="true"
-            className="font-primary text-lg md:text-xl px-12 md:px-16 py-4 md:py-5 bg-black border-3 border-black rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4 active:scale-95"
-            style={{ 
-              color: '#00FF9D',
-              backgroundColor: 'black'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#00FF9D';
-              e.currentTarget.style.color = 'black';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'black';
-              e.currentTarget.style.color = '#00FF9D';
-            }}
-          >
-            SELECT THIS CHARACTER
-          </button>
+              onClick={handleSelectCharacter}
+              data-cta="true"
+              className="font-primary text-lg md:text-xl px-12 md:px-16 py-4 md:py-5 border-3 rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-4 active:scale-95"
+              style={{ 
+                backgroundColor: '#1B1B1B',
+                color: '#A7C342',
+                borderColor: '#1B1B1B',
+                fontFamily: 'Montserrat, sans-serif',
+                fontWeight: 700,
+                fontStyle: 'italic',
+                textTransform: 'uppercase',
+                focusRingColor: '#1B1B1B'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#A7C342';
+                e.currentTarget.style.color = '#1B1B1B';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#1B1B1B';
+                e.currentTarget.style.color = '#A7C342';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              SELECT THIS CHARACTER
+            </button>
+          </div>
         </div>
       </div>
     </div>
