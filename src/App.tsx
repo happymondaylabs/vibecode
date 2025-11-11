@@ -238,7 +238,7 @@ function App() {
   return (
     <div 
       className="min-h-screen transition-all duration-500"
-      style={{ backgroundColor: currentThemeColor }}
+      style={{ backgroundColor: '#EEEDD8' }}
     >
       {/* SEO Head Component */}
       <SEOHead 
