@@ -918,7 +918,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
               <button
                 onClick={handleSubmit}
                 disabled={!isFormValid}
-                className={`w-full px-6 py-2 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
+                className={\`w-full px-6 py-2 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
                   isFormValid
                     ? 'cursor-pointer'
                     : 'cursor-not-allowed opacity-50'
@@ -1013,7 +1013,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                 borderColor: '#1B1B1B',
                 focusRingColor: '#1B1B1B'
               }}
-              aria-label={`Go to template ${index + 1}`}
+              aria-label={\`Go to template ${index + 1}`}
             />
           ))}
         </div>
