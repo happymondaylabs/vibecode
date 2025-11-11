@@ -437,7 +437,6 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
             </button>
           </div>
         </div>
-      </div>
     </div>
   );
 }
