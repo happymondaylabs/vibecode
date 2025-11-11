@@ -17,7 +17,7 @@ export default {
         green: {
           400: '#00FF9D',
         }
-      }
+      },
       borderWidth: {
         '3': '3px',
       },
