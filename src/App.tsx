@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SEOHead } from './components/SEOHead';
+import { CharacterCarousel } from './components/CharacterCarousel';
 import { ThemeSelector } from './components/ThemeSelector';
 import { LoadingScreen } from './components/LoadingScreen';
 import { TransitionLoading } from './components/TransitionLoading';
@@ -13,10 +14,19 @@ import { useVideoGeneration } from './hooks/useVideoGeneration';
 import { themes } from './data/themes';
 import { AppStep, UserData, Theme } from './types';
 
+interface Template {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  type: 'video';
+}
+
 function App() {
-  const [currentStep, setCurrentStep] = useState<AppStep>('form');
+  const [currentStep, setCurrentStep] = useState<'carousel' | AppStep>('carousel');
   const [showTransition, setShowTransition] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<Theme>(themes[0]);
+  const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
   const [userData, setUserData] = useState<UserData>({
     name: '',
     age: '',
@@ -39,6 +49,22 @@ function App() {
 
   // Get current theme color
   const currentThemeColor = selectedTheme.color;
+
+  const handleSelectCharacter = (template: Template) => {
+    setSelectedTemplate(template);
+    // Convert template to theme format for compatibility
+    const themeFromTemplate: Theme = {
+      id: template.id,
+      title: template.name,
+      description: template.description,
+      image: template.imageUrl,
+      category: 'Custom',
+      code: '1/9',
+      color: '#00FF9D'
+    };
+    setSelectedTheme(themeFromTemplate);
+    setCurrentStep('form');
+  };
 
   const handleFormSubmit = async () => {
     // For the form submission, we only need name and age (message is optional for now)
@@ -111,9 +137,10 @@ function App() {
   };
 
   const handleGoHome = () => {
-    setCurrentStep('form');
+    setCurrentStep('carousel');
     setShowTransition(false);
     setSelectedTheme(themes[0]);
+    setSelectedTemplate(null);
     setUserData({ name: '', age: '', message: '' });
     setUserEmail('');
     setGeneratedVideoUrl(null);
@@ -124,9 +151,10 @@ function App() {
   };
 
   const handleStartOver = () => {
-    setCurrentStep('form');
+    setCurrentStep('carousel');
     setShowTransition(false);
     setSelectedTheme(themes[0]);
+    setSelectedTemplate(null);
     setUserData({ name: '', age: '', message: '' });
     setUserEmail('');
     setGeneratedVideoUrl(null);
@@ -137,6 +165,10 @@ function App() {
   };
 
   const renderCurrentStep = () => {
+    if (currentStep === 'carousel') {
+      return <CharacterCarousel onSelectCharacter={handleSelectCharacter} />;
+    }
+
     if (showTransition) {
       return (
         <TransitionLoading 
@@ -221,7 +253,7 @@ function App() {
       />
       
       {/* Header */}
-      {currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
+      {currentStep !== 'carousel' && currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
         <header 
           className="bg-black text-white shadow-lg border-b-4 transition-all duration-500"
           style={{ borderBottomColor: currentThemeColor }}
@@ -263,7 +295,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      {currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
+      {currentStep !== 'carousel' && currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
         <footer 
           className="bg-black text-white shadow-lg border-t-4 mt-16 transition-all duration-500"
           style={{ borderTopColor: currentThemeColor }}
