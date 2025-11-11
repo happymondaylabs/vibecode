@@ -182,10 +182,10 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
     <div className="min-h-screen" style={{ backgroundColor: '#EEEDD8' }}>
       {/* Header */}
       <header 
-        className="sticky top-0 z-50 shadow-lg"
+        className="sticky top-0 z-50 shadow-lg w-full"
         style={{ backgroundColor: '#1B1B1B' }}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="w-full px-4 md:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <div className="flex-shrink-0">
@@ -232,53 +232,6 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
       {/* Main Content */}
       <div className="flex items-center justify-center px-4 py-10 md:py-16">
         <div className="relative w-full max-w-4xl">
-          {/* Navigation Arrows */}
-          <button
-            onClick={navigatePrevious}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg"
-            style={{ 
-              backgroundColor: '#A7C342',
-              borderColor: '#1B1B1B',
-              left: '-20px',
-              focusRingColor: '#1B1B1B'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#F8B8B7';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#A7C342';
-              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-            }}
-            className="md:-left-15"
-            aria-label="Previous template"
-          >
-            <ChevronLeft size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
-          </button>
-
-          <button
-            onClick={navigateNext}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg"
-            style={{ 
-              backgroundColor: '#A7C342',
-              borderColor: '#1B1B1B',
-              right: '-20px',
-              focusRingColor: '#1B1B1B'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#F8B8B7';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#A7C342';
-              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-            }}
-            className="md:-right-15"
-            aria-label="Next template"
-          >
-            <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
-          </button>
-
           {/* Main Content Card */}
           <div className="relative">
             {/* Left Navigation Arrow */}
@@ -288,7 +241,7 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
               style={{ 
                 backgroundColor: '#A7C342',
                 borderColor: '#1B1B1B',
-                left: '-20px',
+                left: '-60px',
                 focusRingColor: '#1B1B1B'
               }}
               onMouseEnter={(e) => {
@@ -299,7 +252,7 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
                 e.currentTarget.style.backgroundColor = '#A7C342';
                 e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
               }}
-              className="md:-left-15"
+              className="md:-left-20"
               aria-label="Previous template"
             >
               <ChevronLeft size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
@@ -312,7 +265,7 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
               style={{ 
                 backgroundColor: '#A7C342',
                 borderColor: '#1B1B1B',
-                right: '-20px',
+                right: '-60px',
                 focusRingColor: '#1B1B1B'
               }}
               onMouseEnter={(e) => {
@@ -323,7 +276,7 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
                 e.currentTarget.style.backgroundColor = '#A7C342';
                 e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
               }}
-              className="md:-right-15"
+              className="md:-right-20"
               aria-label="Next template"
             >
               <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />

@@ -29,6 +29,7 @@ export default {
       },
       inset: {
         '15': '3.75rem',
+        '20': '5rem',
       }
     },
   },
