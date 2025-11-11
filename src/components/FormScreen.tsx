@@ -478,39 +478,84 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       style={{ backgroundColor: '#D8D7C3' }}
                     >
 
-                  {/* Template Name - Moved here */}
-                  <div 
-                    className="text-lg font-semibold uppercase tracking-wide mb-4 text-center"
-                    style={{ 
-                      fontFamily: 'Roboto Mono, monospace',
-                      color: '#1B1B1B'
-                    }}
-                  >
-                    {currentTemplate.name}
+                  {/* Style Section */}
+                  <div className="w-full max-w-sm">
+                    <h3 
+                      className="text-lg font-semibold uppercase tracking-wide mb-4 text-center"
+                      style={{ 
+                        fontFamily: 'Roboto Mono, monospace',
+                        color: '#1B1B1B'
+                      }}
+                    >
+                      STYLE
+                    </h3>
+                    
+                    {/* Style Field */}
+                    <div className="mb-4">
+                      <label 
+                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
+                        style={{ 
+                          fontFamily: 'Roboto Mono, monospace',
+                          color: '#1B1B1B'
+                        }}
+                      >
+                        VIDEO TYPE:
+                      </label>
+                      <div 
+                        className="text-sm"
+                        style={{ 
+                          fontFamily: 'Roboto Mono, monospace',
+                          color: '#1B1B1B'
+                        }}
+                      >
+                        8 SECOND CUSTOM VIDEO
+                      </div>
+                    </div>
+
+                    {/* Duration Field */}
+                    <div className="mb-4">
+                      <label 
+                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
+                        style={{ 
+                          fontFamily: 'Roboto Mono, monospace',
+                          color: '#1B1B1B'
+                        }}
+                      >
+                        DURATION:
+                      </label>
+                      <div 
+                        className="text-sm"
+                        style={{ 
+                          fontFamily: 'Roboto Mono, monospace',
+                          color: '#1B1B1B'
+                        }}
+                      >
+                        8 SECONDS
+                      </div>
+                    </div>
+
+                    {/* Format Field */}
+                    <div className="mb-6">
+                      <label 
+                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
+                        style={{ 
+                          fontFamily: 'Roboto Mono, monospace',
+                          color: '#1B1B1B'
+                        }}
+                      >
+                        FORMAT:
+                      </label>
+                      <div 
+                        className="text-sm"
+                        style={{ 
+                          fontFamily: 'Roboto Mono, monospace',
+                          color: '#1B1B1B'
+                        }}
+                      >
+                        MP4 VIDEO
+                      </div>
+                    </div>
                   </div>
-
-                  {/* Description */}
-                  <p 
-                    className="text-sm text-center mb-6 opacity-85 leading-relaxed"
-                    style={{ 
-                      fontFamily: 'Roboto Mono, monospace',
-                      color: '#1B1B1B'
-                    }}
-                  >
-                    {currentTemplate.description}
-                  </p>
-
-                  {/* Template Counter */}
-                  <div 
-                    className="text-center text-base mb-6"
-                    style={{ 
-                      fontFamily: 'Roboto Mono, monospace',
-                      color: '#1B1B1B'
-                    }}
-                  >
-                    {currentIndex + 1}/9
-                  </div>
-
                   {/* Generate Button - Moved from left side */}
                   <button
                     onClick={handleSubmit}
