@@ -182,7 +182,7 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
     <div className="min-h-screen" style={{ backgroundColor: '#EEEDD8' }}>
       {/* Header */}
       <header 
-        className="sticky top-0 z-50 shadow-lg w-full"
+        className="sticky top-0 z-50 shadow-lg w-full rounded-lg"
         style={{ backgroundColor: '#1B1B1B' }}
       >
         <div className="w-full px-4 md:px-8">
