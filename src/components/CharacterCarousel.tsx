@@ -182,22 +182,13 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
     <div className="min-h-screen" style={{ backgroundColor: '#EEEDD8' }}>
       {/* Header */}
       <header 
-        className="sticky top-0 z-50 shadow-lg w-full rounded-lg"
+        className="sticky top-0 z-50 shadow-lg w-full"
         style={{ backgroundColor: '#1B1B1B' }}
       >
         <div className="w-full px-4 md:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <img 
-                src="/ygpng.png" 
-                alt="yougenius" 
-                className="h-9 md:h-12 w-auto"
-              />
-            </div>
-            
-            {/* Center - Headlines */}
-            <div className="flex-1 text-center mx-4 md:mx-8">
+            {/* Left side - Headlines */}
+            <div className="flex-1">
               <h1 
                 className="font-primary text-lg md:text-2xl tracking-wider mb-1"
                 style={{ 
@@ -223,8 +214,14 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
               </p>
             </div>
             
-            {/* Right side - Reserved for future */}
-            <div className="flex-shrink-0 w-9 md:w-12"></div>
+            {/* Right side - Logo */}
+            <div className="flex-shrink-0">
+              <img 
+                src="/ygpng.png" 
+                alt="yougenius" 
+                className="h-18 md:h-24 w-auto"
+              />
+            </div>
           </div>
         </div>
       </header>
