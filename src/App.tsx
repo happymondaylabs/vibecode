@@ -308,59 +308,67 @@ function App() {
       
       {/* Header */}
       {currentStep !== 'carousel' && currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
-        <header 
-          className="sticky top-0 z-50 shadow-lg w-full rounded-lg"
-          style={{ backgroundColor: '#1B1B1B' }}
-        >
-          <div className="w-full px-4 md:px-8">
-            <div className="flex items-center justify-between h-16 md:h-20">
-              {/* Logo */}
-              <div className="flex-shrink-0">
-                <img 
-                  src="/ygpng.png" 
-                  alt="yougenius" 
-                  className="h-9 md:h-12 w-auto"
-                />
+        <div className="min-h-screen" style={{ backgroundColor: '#EEEDD8' }}>
+          {/* Header - Exact same as CharacterCarousel */}
+          <header 
+            className="sticky top-0 z-50 shadow-lg w-full rounded-lg"
+            style={{ backgroundColor: '#1B1B1B' }}
+          >
+            <div className="w-full px-4 md:px-8">
+              <div className="flex items-center justify-between h-16 md:h-20">
+                {/* Logo */}
+                <div className="flex-shrink-0">
+                  <img 
+                    src="/ygpng.png" 
+                    alt="yougenius" 
+                    className="h-9 md:h-12 w-auto"
+                  />
+                </div>
+                
+                {/* Center - Headlines */}
+                <div className="flex-1 text-center mx-4 md:mx-8">
+                  <h1 
+                    className="font-primary text-lg md:text-2xl tracking-wider mb-1"
+                    style={{ 
+                      color: '#EEEDD8',
+                      fontFamily: 'Montserrat, sans-serif',
+                      fontWeight: 700,
+                      fontStyle: 'italic',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em'
+                    }}
+                  >
+                    CREATE CUSTOM AI VIDEOS
+                  </h1>
+                  <p 
+                    className="font-secondary text-xs md:text-sm opacity-90"
+                    style={{ 
+                      color: '#A7C342',
+                      fontFamily: 'Roboto Mono, monospace',
+                      fontWeight: 400
+                    }}
+                  >
+                    Choose a character. Pick your vibe. Get your video in 60 seconds.
+                  </p>
+                </div>
+                
+                {/* Right side - Reserved for future */}
+                <div className="flex-shrink-0 w-9 md:w-12"></div>
               </div>
-              
-              {/* Center - Headlines */}
-              <div className="flex-1 text-center mx-4 md:mx-8">
-                <h1 
-                  className="font-primary text-lg md:text-2xl tracking-wider mb-1"
-                  style={{ 
-                    color: '#EEEDD8',
-                    fontFamily: 'Montserrat, sans-serif',
-                    fontWeight: 700,
-                    fontStyle: 'italic',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}
-                >
-                  CREATE CUSTOM AI VIDEOS
-                </h1>
-                <p 
-                  className="font-secondary text-xs md:text-sm opacity-90"
-                  style={{ 
-                    color: '#A7C342',
-                    fontFamily: 'Roboto Mono, monospace',
-                    fontWeight: 400
-                  }}
-                >
-                  Choose a character. Pick your vibe. Get your video in 60 seconds.
-                </p>
-              </div>
-              
-              {/* Right side - Reserved for future */}
-              <div className="flex-shrink-0 w-9 md:w-12"></div>
             </div>
+          </header>
+
+          {/* Main Content */}
+          <div className="px-4 py-10 md:py-16">
+            {renderCurrentStep()}
           </div>
-        </header>
+        </div>
       )}
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-4 md:py-8">
+      {(currentStep === 'carousel' || currentStep === 'loading' || currentStep === 'complete' || showTransition) && (
         {renderCurrentStep()}
-      </main>
+      )}
 
       {/* Footer */}
       {currentStep !== 'carousel' && currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (

@@ -176,8 +176,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
   const isFormValid = name.trim().length > 0 && age.trim().length > 0 && !errors.name && !errors.age;
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#EEEDD8' }}>
-      <div className="px-4 py-10 md:py-16">
+    <>
         {/* Desktop Layout */}
         <div className="hidden md:flex items-center justify-center gap-4 md:gap-16 max-w-7xl mx-auto">
           {/* Left Navigation Arrow */}
@@ -1062,7 +1061,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
             />
           ))}
         </div>
-      </div>
-    </div>
+    </>
   );
 }
