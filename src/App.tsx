@@ -232,7 +232,7 @@ function App() {
                 <div className="flex items-center">
                   <img 
                     src="/imagelogo transparent.png" 
-                    alt="VIBE CARD" 
+                    alt="yougenius" 
                     className="h-12 md:h-24 w-auto"
                   />
                 </div>
@@ -274,7 +274,7 @@ function App() {
                 <div className="flex items-center">
                   <img 
                     src="/imagelogo transparent.png" 
-                    alt="VIBE CARD" 
+                    alt="yougenius" 
                     className="h-12 md:h-18 w-auto"
                   />
                 </div>

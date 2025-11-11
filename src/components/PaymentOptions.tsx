@@ -96,7 +96,7 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
         <div className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 mb-4">
           {/* Mobile Header */}
           <div className="text-center mb-4">
-            <h2 className="text-2xl font-technical font-semibold tracking-technical mb-1">VIBE CARD</h2>
+            <h2 className="text-2xl font-technical font-semibold tracking-technical mb-1">yougenius</h2>
             <div className="text-sm font-technical tracking-wide font-semibold text-black mb-2">
               PAYMENT CHECKOUT
             </div>
@@ -261,7 +261,7 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
               <div className="pr-3 h-full flex flex-col">
                 {/* Header */}
                 <div className="mb-2">
-                  <h2 className="text-3xl font-technical font-semibold tracking-technical mb-1">VIBE CARD</h2>
+                  <h2 className="text-3xl font-technical font-semibold tracking-technical mb-1">yougenius</h2>
                   <div className="text-base font-technical tracking-wide">PAYMENT CHECKOUT</div>
                 </div>
 

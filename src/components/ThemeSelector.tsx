@@ -74,7 +74,7 @@ export function ThemeSelector({
         <div className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 mb-4">
           {/* Mobile Header */}
           <div className="text-center mb-4">
-            <h2 className="text-2xl font-technical font-semibold tracking-technical mb-1">VIBE CARD</h2>
+            <h2 className="text-2xl font-technical font-semibold tracking-technical mb-1">yougenius</h2>
             <div className="text-sm font-technical tracking-wide font-semibold text-black mb-2">
               {selectedTheme.title}
             </div>
@@ -241,7 +241,7 @@ export function ThemeSelector({
               <div className="pr-6 h-full">
                 {/* Header */}
                 <div className="mb-8">
-                  <h2 className="text-4xl font-technical font-semibold tracking-technical mb-2">VIBE CARD</h2>
+                  <h2 className="text-4xl font-technical font-semibold tracking-technical mb-2">yougenius</h2>
                   <div className="text-lg font-technical tracking-wide">{selectedTheme.title}</div>
                 </div>
 
