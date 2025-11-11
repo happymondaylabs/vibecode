@@ -426,46 +426,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       </div>
                     </div>
 
-                    {/* Age Field */}
-                    <div>
-                      <label 
-                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                        style={{ 
-                          fontFamily: 'Roboto Mono, monospace',
-                          color: '#1B1B1B'
-                        }}
-                      >
-                        AGE:
-                      </label>
-                      <input
-                        type="number"
-                        value={age}
-                        onChange={(e) => {
-                          setAge(e.target.value);
-                          setErrors(prev => ({ ...prev, age: undefined }));
-                        }}
-                        min="1"
-                        max="120"
-                        className={`w-full px-3 py-3 border rounded text-sm transition-all duration-200 focus:outline-none ${
-                          errors.age 
-                            ? 'border-red-500 bg-red-50' 
-                            : 'border-black bg-white focus:border-2'
-                        }`}
-                        style={{ 
-                          fontFamily: 'Roboto Mono, monospace',
-                          borderColor: errors.age ? '#ef4444' : '#1B1B1B'
-                        }}
-                        placeholder="Enter age"
-                      />
-                      {errors.age && (
-                        <span 
-                          className="text-xs font-semibold mt-1 block"
-                          style={{ color: '#ef4444' }}
-                        >
-                          {errors.age}
-                        </span>
-                      )}
-                    </div>
 
                     {/* Style Field (Display Only) */}
                     <div>
@@ -511,44 +471,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       </div>
                     </div>
                   </div>
-
-                  {/* Generate Button */}
-                  <button
-                    onClick={handleSubmit}
-                    disabled={!isFormValid}
-                    className={`w-full mt-4 px-6 py-2 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
-                      isFormValid
-                        ? 'cursor-pointer'
-                        : 'cursor-not-allowed opacity-50'
-                    }`}
-                    style={{ 
-                      backgroundColor: isFormValid ? '#1B1B1B' : '#9ca3af',
-                      color: isFormValid ? '#A7C342' : '#6b7280',
-                      borderColor: isFormValid ? '#1B1B1B' : '#9ca3af',
-                      fontFamily: 'Montserrat, sans-serif',
-                      fontWeight: 700,
-                      fontStyle: 'italic',
-                      letterSpacing: '0.05em'
-                    }}
-                    onMouseEnter={(e) => {
-                      if (isFormValid) {
-                        e.currentTarget.style.backgroundColor = '#A7C342';
-                        e.currentTarget.style.color = '#1B1B1B';
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (isFormValid) {
-                        e.currentTarget.style.backgroundColor = '#1B1B1B';
-                        e.currentTarget.style.color = '#A7C342';
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = 'none';
-                      }
-                    }}
-                  >
-                    CREATE VIDEO — ${getPricing(selectedUseCase)}
-                  </button>
                 </div>
 
                     {/* Right Panel - Preview */}
@@ -604,6 +526,44 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   >
                     {currentIndex + 1}/9
                   </div>
+
+                  {/* Generate Button - Moved from left side */}
+                  <button
+                    onClick={handleSubmit}
+                    disabled={!isFormValid}
+                    className={`w-full mt-4 px-6 py-2 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
+                      isFormValid
+                        ? 'cursor-pointer'
+                        : 'cursor-not-allowed opacity-50'
+                    }`}
+                    style={{ 
+                      backgroundColor: isFormValid ? '#1B1B1B' : '#9ca3af',
+                      color: isFormValid ? '#A7C342' : '#6b7280',
+                      borderColor: isFormValid ? '#1B1B1B' : '#9ca3af',
+                      fontFamily: 'Montserrat, sans-serif',
+                      fontWeight: 700,
+                      fontStyle: 'italic',
+                      letterSpacing: '0.05em'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (isFormValid) {
+                        e.currentTarget.style.backgroundColor = '#A7C342';
+                        e.currentTarget.style.color = '#1B1B1B';
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (isFormValid) {
+                        e.currentTarget.style.backgroundColor = '#1B1B1B';
+                        e.currentTarget.style.color = '#A7C342';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }
+                    }}
+                  >
+                    CREATE VIDEO — ${getPricing(selectedUseCase)}
+                  </button>
                 </div>
                   </div>
                 </div>
