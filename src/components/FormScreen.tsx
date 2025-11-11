@@ -178,63 +178,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#EEEDD8' }}>
       {/* Header */}
-      <header 
-        className="shadow-lg w-full rounded-lg"
-        style={{ 
-          backgroundColor: '#1B1B1B',
-          width: '100vw',
-          margin: '0',
-          position: 'relative',
-          left: '50%',
-          right: '50%',
-          marginLeft: '-50vw',
-          marginRight: '-50vw'
-        }}
-      >
-        <div className="w-full px-4 md:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <img 
-                src="/ygpng.png" 
-                alt="yougenius" 
-                className="h-9 md:h-12 w-auto"
-              />
-            </div>
-            
-            {/* Center - Headlines */}
-            <div className="flex-1 text-center mx-4 md:mx-8">
-              <h1 
-                className="font-primary text-lg md:text-2xl tracking-wider mb-1"
-                style={{ 
-                  color: '#EEEDD8',
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontWeight: 700,
-                  fontStyle: 'italic',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em'
-                }}
-              >
-                CREATE CUSTOM AI VIDEOS
-              </h1>
-              <p 
-                className="font-secondary text-xs md:text-sm opacity-90"
-                style={{ 
-                  color: '#A7C342',
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontWeight: 400
-                }}
-              >
-                Choose a character. Pick your vibe. Get your video in 60 seconds.
-              </p>
-            </div>
-            
-            {/* Right side - Reserved for future */}
-            <div className="flex-shrink-0 w-9 md:w-12"></div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
       <div className="px-4 py-10 md:py-16">
         {/* Desktop Layout */}
@@ -262,26 +205,29 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
           </button>
 
           {/* Content Card */}
-          <div className="flex-shrink-1 w-full max-w-6xl">
+          <div className="flex-shrink-1 w-full max-w-4xl">
             <div 
-              className="rounded-xl shadow-2xl overflow-hidden"
+              className="rounded-xl shadow-2xl overflow-hidden mx-5 md:mx-15"
               style={{ backgroundColor: '#E5E5E5' }}
             >
               <div 
-                className="flex h-full"
+                className="relative p-2 md:p-2"
                 style={{ 
-                  backgroundColor: '#EEEDD8',
-                  minHeight: '600px'
+                  backgroundColor: '#1B1B1B',
+                  aspectRatio: '16/9'
                 }}
               >
-                {/* Left Panel - Form */}
-                <div 
-                  className="flex-1 p-12"
-                  style={{ 
-                    backgroundColor: '#EEEDD8',
-                    borderRight: '2px dashed #1B1B1B'
-                  }}
-                >
+                {/* Form/Preview Area */}
+                <div className="relative w-full h-full overflow-hidden rounded-sm">
+                  <div className="flex h-full">
+                    {/* Left Panel - Form */}
+                    <div 
+                      className="flex-1 p-6 md:p-12"
+                      style={{ 
+                        backgroundColor: '#EEEDD8',
+                        borderRight: '2px dashed #1B1B1B'
+                      }}
+                    >
                   {/* Form Header */}
                   <div className="mb-8">
                     <h2 
@@ -630,12 +576,13 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                     CREATE VIDEO — ${getPricing(selectedUseCase)}
                   </button>
                 </div>
+                    </div>
 
-                {/* Right Panel - Preview */}
-                <div 
-                  className="flex-1 p-12 flex flex-col items-center justify-center"
-                  style={{ backgroundColor: '#D8D7C3' }}
-                >
+                    {/* Right Panel - Preview */}
+                    <div 
+                      className="flex-1 p-6 md:p-12 flex flex-col items-center justify-center"
+                      style={{ backgroundColor: '#D8D7C3' }}
+                    >
                   {/* Character Image */}
                   <div 
                     className="w-full max-w-md rounded-lg overflow-hidden mb-4"
@@ -672,6 +619,9 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                     }}
                   >
                     {currentIndex + 1}/9
+                  </div>
+                </div>
+                    </div>
                   </div>
                 </div>
               </div>
