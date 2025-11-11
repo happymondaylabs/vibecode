@@ -230,58 +230,33 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
       </header>
 
       {/* Main Content */}
-      <div className="flex items-center justify-center px-4 py-10 md:py-16">
-        <div className="relative w-full max-w-4xl">
-          {/* Main Content Card */}
-          <div className="relative">
-            {/* Left Navigation Arrow */}
-            <button
-              onClick={navigatePrevious}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg"
-              style={{ 
-                backgroundColor: '#A7C342',
-                borderColor: '#1B1B1B',
-                left: '-60px',
-                focusRingColor: '#1B1B1B'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#F8B8B7';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#A7C342';
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-              }}
-              className="md:-left-20"
-              aria-label="Previous template"
-            >
-              <ChevronLeft size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
-            </button>
+      <div className="px-4 py-10 md:py-16">
+        {/* Carousel Wrapper with Flexbox Layout */}
+        <div className="flex items-center justify-center gap-4 md:gap-16 max-w-7xl mx-auto">
+          {/* Left Navigation Arrow */}
+          <button
+            onClick={navigatePrevious}
+            className="flex-shrink-0 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
+            style={{ 
+              backgroundColor: '#A7C342',
+              borderColor: '#1B1B1B',
+              focusRingColor: '#1B1B1B'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#F8B8B7';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#A7C342';
+              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            }}
+            aria-label="Previous template"
+          >
+            <ChevronLeft size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} />
+          </button>
 
-            {/* Right Navigation Arrow */}
-            <button
-              onClick={navigateNext}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg"
-              style={{ 
-                backgroundColor: '#A7C342',
-                borderColor: '#1B1B1B',
-                right: '-60px',
-                focusRingColor: '#1B1B1B'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#F8B8B7';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#A7C342';
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-              }}
-              className="md:-right-20"
-              aria-label="Next template"
-            >
-              <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
-            </button>
-
+          {/* Video Card Container */}
+          <div className="flex-shrink-1 w-full max-w-4xl">
             <div 
               className="rounded-xl shadow-2xl overflow-hidden mx-5 md:mx-15"
               style={{ backgroundColor: '#E5E5E5' }}
@@ -386,6 +361,28 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
             </div>
           </div>
 
+          {/* Right Navigation Arrow */}
+          <button
+            onClick={navigateNext}
+            className="flex-shrink-0 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
+            style={{ 
+              backgroundColor: '#A7C342',
+              borderColor: '#1B1B1B',
+              focusRingColor: '#1B1B1B'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#F8B8B7';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#A7C342';
+              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            }}
+            aria-label="Next template"
+          >
+            <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} />
+          </button>
+        </div>
           {/* Carousel Dots */}
           <div className="flex justify-center mt-6 space-x-2 md:space-x-3">
             {templates.map((_, index) => (
