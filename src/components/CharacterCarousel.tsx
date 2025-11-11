@@ -265,6 +265,20 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
               right: '-20px',
               focusRingColor: '#1B1B1B'
             }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#F8B8B7';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#A7C342';
+              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            }}
+            className="md:-right-15"
+            aria-label="Next template"
+          >
+            <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} className="mx-auto" />
+          </button>
+
           {/* Main Content Card */}
           <div className="relative">
             {/* Left Navigation Arrow */}
@@ -316,101 +330,102 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
             </button>
 
             <div 
-            className="rounded-xl shadow-2xl overflow-hidden mx-5 md:mx-15"
-            style={{ backgroundColor: '#E5E5E5' }}
+              className="rounded-xl shadow-2xl overflow-hidden mx-5 md:mx-15"
+              style={{ backgroundColor: '#E5E5E5' }}
             >
-            {/* Video Container with Black Frame */}
-            <div 
-              className="relative p-2 md:p-2"
-              style={{ 
-                backgroundColor: '#1B1B1B',
-                aspectRatio: '16/9'
-              }}
-              onTouchStart={onTouchStart}
-              onTouchMove={onTouchMove}
-              onTouchEnd={onTouchEnd}
-            >
-              {/* Video/Image Area */}
-              <div className="relative w-full h-full overflow-hidden rounded-sm">
-                {/* Loading State */}
-                {!imageLoaded && (
+              {/* Video Container with Black Frame */}
+              <div 
+                className="relative p-2 md:p-2"
+                style={{ 
+                  backgroundColor: '#1B1B1B',
+                  aspectRatio: '16/9'
+                }}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+              >
+                {/* Video/Image Area */}
+                <div className="relative w-full h-full overflow-hidden rounded-sm">
+                  {/* Loading State */}
+                  {!imageLoaded && (
+                    <div 
+                      className="absolute inset-0 flex items-center justify-center"
+                      style={{ backgroundColor: '#1B1B1B' }}
+                    >
+                      <div 
+                        className="font-secondary text-sm"
+                        style={{ color: '#EEEDD8' }}
+                      >
+                        Loading character...
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Character Image */}
+                  <img
+                    src={currentTemplate.imageUrl}
+                    alt={`${currentTemplate.name} - ${currentTemplate.description}`}
+                    className={`w-full h-full object-cover transition-opacity duration-200 ${
+                      isTransitioning ? 'opacity-0' : 'opacity-100'
+                    } ${imageLoaded ? 'block' : 'hidden'}`}
+                    onLoad={handleImageLoad}
+                    onError={() => setImageLoaded(true)}
+                  />
+
+                  {/* Play Button Overlay */}
+                  <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+                    <div 
+                      className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: 'rgba(238, 237, 216, 0.9)' }}
+                    >
+                      <Play size={24} style={{ color: '#1B1B1B' }} className="ml-1" fill="currentColor" />
+                    </div>
+                  </div>
+
+                  {/* Character Info Bar (Bottom of Frame) */}
                   <div 
-                    className="absolute inset-0 flex items-center justify-center"
+                    className="absolute bottom-0 left-0 right-0 px-4 py-3 md:px-6 md:py-4"
                     style={{ backgroundColor: '#1B1B1B' }}
                   >
-                    <div 
-                      className="font-secondary text-sm"
-                      style={{ color: '#EEEDD8' }}
-                    >
-                      Loading character...
-                    </div>
-                  </div>
-                )}
-                
-                {/* Character Image */}
-                <img
-                  src={currentTemplate.imageUrl}
-                  alt={`${currentTemplate.name} - ${currentTemplate.description}`}
-                  className={`w-full h-full object-cover transition-opacity duration-200 ${
-                    isTransitioning ? 'opacity-0' : 'opacity-100'
-                  } ${imageLoaded ? 'block' : 'hidden'}`}
-                  onLoad={handleImageLoad}
-                  onError={() => setImageLoaded(true)}
-                />
-
-                {/* Play Button Overlay */}
-                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-                  <div 
-                    className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(238, 237, 216, 0.9)' }}
-                  >
-                    <Play size={24} style={{ color: '#1B1B1B' }} className="ml-1" fill="currentColor" />
-                  </div>
-                </div>
-
-                {/* Character Info Bar (Bottom of Frame) */}
-                <div 
-                  className="absolute bottom-0 left-0 right-0 px-4 py-3 md:px-6 md:py-4"
-                  style={{ backgroundColor: '#1B1B1B' }}
-                >
-                  <div className="flex items-center justify-between">
-                    {/* Character Info */}
-                    <div className="flex-1 min-w-0">
-                      <h2 
-                        className="font-primary text-lg md:text-2xl leading-tight mb-1"
-                        style={{ 
-                          color: '#EEEDD8',
-                          fontFamily: 'Montserrat, sans-serif',
-                          fontWeight: 700,
-                          fontStyle: 'italic'
-                        }}
-                      >
-                        {currentTemplate.name}
-                      </h2>
-                      <p 
-                        className="font-secondary text-xs md:text-sm opacity-60 leading-tight"
-                        style={{ 
-                          color: '#EEEDD8',
-                          fontFamily: 'Roboto Mono, monospace',
-                          fontWeight: 400
-                        }}
-                      >
-                        {currentTemplate.description}
-                      </p>
-                    </div>
-                    
-                    {/* Navigation Counter */}
-                    <div className="ml-4 flex-shrink-0">
-                      <span 
-                        className="font-secondary text-sm md:text-base"
-                        style={{ 
-                          color: '#EEEDD8',
-                          fontFamily: 'Roboto Mono, monospace',
-                          fontWeight: 400
-                        }}
-                      >
-                        {currentIndex + 1}/9
-                      </span>
+                    <div className="flex items-center justify-between">
+                      {/* Character Info */}
+                      <div className="flex-1 min-w-0">
+                        <h2 
+                          className="font-primary text-lg md:text-2xl leading-tight mb-1"
+                          style={{ 
+                            color: '#EEEDD8',
+                            fontFamily: 'Montserrat, sans-serif',
+                            fontWeight: 700,
+                            fontStyle: 'italic'
+                          }}
+                        >
+                          {currentTemplate.name}
+                        </h2>
+                        <p 
+                          className="font-secondary text-xs md:text-sm opacity-60 leading-tight"
+                          style={{ 
+                            color: '#EEEDD8',
+                            fontFamily: 'Roboto Mono, monospace',
+                            fontWeight: 400
+                          }}
+                        >
+                          {currentTemplate.description}
+                        </p>
+                      </div>
+                      
+                      {/* Navigation Counter */}
+                      <div className="ml-4 flex-shrink-0">
+                        <span 
+                          className="font-secondary text-sm md:text-base"
+                          style={{ 
+                            color: '#EEEDD8',
+                            fontFamily: 'Roboto Mono, monospace',
+                            fontWeight: 400
+                          }}
+                        >
+                          {currentIndex + 1}/9
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
