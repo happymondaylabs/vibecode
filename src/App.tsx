@@ -242,14 +242,14 @@ function App() {
                   className="mb-0.5 md:mb-2 font-technical font-semibold tracking-technical transition-all duration-500 text-xs md:text-sm"
                   style={{ color: currentThemeColor }}
                 >
-                  PAPER BIRTHDAY CARDS ARE BORING
+                  YOUR MESSAGE. YOUR GENIUS. ZERO BORING.
                 </div>
                 <div className="leading-relaxed hidden md:block font-technical">
-                  Send custom birthday videos that make<br />
-                  people laugh, remember, and save paper.
+                  Custom AI videos. Different characters.<br />
+                  Different themes. Instant comedy.
                 </div>
                 <div className="leading-tight md:hidden text-xs font-technical">
-                  Send custom birthday videos that make people laugh, remember, and save paper.
+                  Custom AI videos. Different characters. Different themes. Instant comedy.
                 </div>
               </div>
             </div>
