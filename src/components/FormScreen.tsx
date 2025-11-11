@@ -592,64 +592,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
                     }}
                   >
-                    <img
-                      src={currentTemplate.imageUrl}
-                      alt={currentTemplate.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Description */}
-                  <p 
-                    className="text-sm text-center max-w-md mb-3 opacity-85 leading-relaxed"
-                    style={{ 
-                      fontFamily: 'Roboto Mono, monospace',
-                      color: '#1B1B1B'
-                    }}
-                  >
-                    {currentTemplate.description}
-                  </p>
-
-                  {/* Template Counter */}
-                  <div 
-                    className="text-base"
-                    style={{ 
-                      fontFamily: 'Roboto Mono, monospace',
-                      color: '#1B1B1B'
-                    }}
-                  >
-                    {currentIndex + 1}/9
-                  </div>
-                </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Navigation Arrow */}
-          <button
-            onClick={() => navigateTemplate('next')}
-            className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
-            style={{ 
-              backgroundColor: '#A7C342',
-              borderColor: '#1B1B1B',
-              focusRingColor: '#1B1B1B'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#F8B8B7';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#A7C342';
-              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-            }}
-            aria-label="Next template"
-          >
-            <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} />
-          </button>
-        </div>
 
         {/* Mobile Layout */}
         <div className="md:hidden">
