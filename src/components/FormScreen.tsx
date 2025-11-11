@@ -177,8 +177,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#EEEDD8' }}>
-      {/* Header */}
-      {/* Main Content */}
       <div className="px-4 py-10 md:py-16">
         {/* Desktop Layout */}
         <div className="hidden md:flex items-center justify-center gap-4 md:gap-16 max-w-7xl mx-auto">
