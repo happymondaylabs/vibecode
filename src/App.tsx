@@ -239,16 +239,16 @@ function App() {
               </div>
               <div className="text-right text-xs max-w-xs md:max-w-md ml-4">
                 <div 
-                  className="mb-0.5 md:mb-2 font-technical font-semibold tracking-technical transition-all duration-500 text-xs md:text-sm"
+                  className="mb-0.5 md:mb-2 font-primary text-uppercase transition-all duration-500 text-hero-sub"
                   style={{ color: currentThemeColor }}
                 >
                   YOUR MESSAGE. YOUR GENIUS. ZERO BORING.
                 </div>
-                <div className="leading-relaxed hidden md:block font-technical">
+                <div className="leading-relaxed hidden md:block font-secondary text-sentence">
                   Custom AI videos. Different characters.<br />
                   Different themes. Instant comedy.
                 </div>
-                <div className="leading-tight md:hidden text-xs font-technical">
+                <div className="leading-tight md:hidden text-xs font-secondary text-sentence">
                   Custom AI videos. Different characters. Different themes. Instant comedy.
                 </div>
               </div>
@@ -281,16 +281,16 @@ function App() {
               </div>
               <div className="text-left md:text-right text-xs max-w-md">
                 <div 
-                  className="mb-1 md:mb-2 font-technical font-semibold tracking-technical transition-all duration-500"
+                  className="mb-1 md:mb-2 font-secondary-bold text-uppercase transition-all duration-500"
                   style={{ color: currentThemeColor }}
                 >
                   © 2025 YOUGENIUS.CO
                 </div>
-                <div className="leading-relaxed hidden md:block font-technical">
+                <div className="leading-relaxed hidden md:block font-secondary text-sentence">
                   Questions? Issues? We're here to help.<br />
                   Email us at info@yougenius.co
                 </div>
-                <div className="leading-relaxed md:hidden text-xs font-technical">
+                <div className="leading-relaxed md:hidden text-xs font-secondary text-sentence">
                   Questions? Email us at info@yougenius.co
                 </div>
               </div>

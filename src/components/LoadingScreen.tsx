@@ -274,7 +274,7 @@ export function LoadingScreen({
 
         {isGenerating && (
           <div className="mt-4 md:mt-6 p-3 md:p-4 bg-gray-900 bg-opacity-50 rounded-lg max-w-sm mx-auto">
-            <p className="text-gray-300 text-xs uppercase tracking-wide font-technical">
+            <p className="text-gray-300 text-xs font-secondary text-uppercase tracking-wide">
               {progress < 30 ? 'SUBMITTING TO QUEUE...' :
                progress < 60 ? 'PROCESSING IN QUEUE...' :
                progress < 90 ? 'FINALIZING VIDEO...' :

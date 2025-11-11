@@ -82,7 +82,7 @@ export function TransitionLoading({ onComplete, themeColor, userName }: Transiti
         </div>
 
         {/* User Context */}
-        <p className="text-black text-xs md:text-sm font-technical uppercase tracking-wide opacity-75">
+        <p className="text-black text-xs md:text-sm font-secondary text-uppercase tracking-wide opacity-75">
           PREPARING {userName}'S VIBE CARD
         </p>
       </div>

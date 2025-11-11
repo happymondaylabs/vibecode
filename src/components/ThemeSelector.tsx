@@ -74,7 +74,7 @@ export function ThemeSelector({
         <div className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden p-4 mb-4">
           {/* Mobile Header */}
           <div className="text-center mb-4">
-            <h2 className="text-2xl font-technical font-semibold tracking-technical mb-1">yougenius</h2>
+            <h2 className="font-primary text-logo text-uppercase mb-1">yougenius</h2>
             <div className="text-sm font-technical tracking-wide font-semibold text-black mb-2">
               {selectedTheme.title}
             </div>
@@ -124,7 +124,7 @@ export function ThemeSelector({
           <div className="space-y-4 mb-4">
             {/* Name Field */}
             <div>
-              <label className="block text-sm font-technical font-semibold uppercase tracking-technical text-black mb-2">
+              <label className="block font-secondary-bold text-form-label text-uppercase text-black mb-2">
                 NAME:
               </label>
               <input
@@ -132,24 +132,24 @@ export function ThemeSelector({
                 value={userData.name}
                 onChange={(e) => onUserDataChange({ ...userData, name: e.target.value })}
                 maxLength={20}
-                className={`w-full px-3 py-2 border-2 rounded text-sm font-technical tracking-wide transition-all duration-200 focus:outline-none ${
+                className={`w-full px-3 py-2 border-2 rounded font-secondary text-form-input transition-all duration-200 focus:outline-none ${
                   errors.name 
                     ? 'border-red-500 bg-red-50' 
                     : 'border-gray-400 focus:border-black bg-white'
                 }`}
                 onFocus={(e) => e.target.style.borderColor = themeColor}
                 onBlur={(e) => e.target.style.borderColor = errors.name ? '#ef4444' : '#9ca3af'}
-                placeholder="ENTER NAME"
+                placeholder="Enter name"
               />
               <div className="flex justify-between mt-1">
-                <span className="text-xs font-technical text-gray-600">{userData.name.length}/20</span>
-                {errors.name && <span className="text-xs font-technical text-red-600 font-semibold">{errors.name}</span>}
+                <span className="text-xs font-secondary text-gray-600">{userData.name.length}/20</span>
+                {errors.name && <span className="text-xs font-secondary text-red-600 font-semibold">{errors.name}</span>}
               </div>
             </div>
 
             {/* Age Field */}
             <div>
-              <label className="block text-sm font-technical font-semibold uppercase tracking-technical text-black mb-2">
+              <label className="block font-secondary-bold text-form-label text-uppercase text-black mb-2">
                 AGE:
               </label>
               <input
@@ -158,29 +158,29 @@ export function ThemeSelector({
                 onChange={(e) => onUserDataChange({ ...userData, age: e.target.value })}
                 min="1"
                 max="120"
-                className={`w-full px-3 py-2 border-2 rounded text-sm font-technical transition-all duration-200 focus:outline-none ${
+                className={`w-full px-3 py-2 border-2 rounded font-secondary text-form-input transition-all duration-200 focus:outline-none ${
                   errors.age 
                     ? 'border-red-500 bg-red-50' 
                     : 'border-gray-400 focus:border-black bg-white'
                 }`}
                 onFocus={(e) => e.target.style.borderColor = themeColor}
                 onBlur={(e) => e.target.style.borderColor = errors.age ? '#ef4444' : '#9ca3af'}
-                placeholder="ENTER AGE"
+                placeholder="Enter age"
               />
               {errors.age && (
-                <span className="text-xs font-technical text-red-600 font-semibold mt-1 block">{errors.age}</span>
+                <span className="text-xs font-secondary text-red-600 font-semibold mt-1 block">{errors.age}</span>
               )}
             </div>
 
             {/* Style and Type - Display Only */}
-            <div className="grid grid-cols-2 gap-4 text-sm font-technical">
+            <div className="grid grid-cols-2 gap-4 text-sm font-secondary">
               <div>
-                <span className="font-semibold block">STYLE:</span>
-                <span className="text-xs">8 SECOND CUSTOM VIDEO</span>
+                <span className="font-secondary-bold block text-uppercase">STYLE:</span>
+                <span className="text-xs text-sentence">8 second custom video</span>
               </div>
               <div>
-                <span className="font-semibold block">TYPE:</span>
-                <span className="text-xs">BIRTHDAY</span>
+                <span className="font-secondary-bold block text-uppercase">TYPE:</span>
+                <span className="text-xs text-uppercase">BIRTHDAY</span>
               </div>
             </div>
           </div>
@@ -189,9 +189,9 @@ export function ThemeSelector({
           <button 
             onClick={handleGenerateCard}
             disabled={!isFormValid}
-            className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
+            className={`w-full px-6 py-3 font-primary text-cta text-uppercase tracking-wider transition-all duration-200 ${
               isFormValid
-                ? 'bg-black text-white cursor-pointer font-technical'
+                ? 'bg-black text-white cursor-pointer'
                 : 'bg-gray-400 text-gray-600 cursor-not-allowed'
             }`}
             onMouseEnter={(e) => {
@@ -205,7 +205,7 @@ export function ThemeSelector({
               }
             }}
           >
-            GENERATE CARD
+            CREATE VIDEO — $12
           </button>
 
           {/* Mobile HP Logo */}
@@ -358,9 +358,9 @@ export function ThemeSelector({
             <button 
               onClick={handleGenerateCard}
               disabled={!isFormValid}
-              className={`w-full px-6 py-3 font-semibold text-sm tracking-wider transition-all duration-200 ${
+              className={`w-full px-6 py-3 font-primary text-cta text-uppercase tracking-wider transition-all duration-200 ${
                 isFormValid
-                  ? 'bg-black text-white hover:text-orange-400 cursor-pointer font-technical'
+                  ? 'bg-black text-white hover:text-orange-400 cursor-pointer'
                   : 'bg-gray-400 text-gray-600 cursor-not-allowed'
               }`}
               onMouseEnter={(e) => {
@@ -374,7 +374,7 @@ export function ThemeSelector({
                 }
               }}
             >
-              GENERATE CARD
+              CREATE VIDEO — $12
             </button>
           </div>
         </div>

@@ -4,23 +4,108 @@
 
 @layer base {
   body {
-    font-family: 'JetBrains Mono', 'Space Mono', 'Roboto Mono', 'Courier New', monospace;
+    font-family: 'Roboto Mono', monospace;
     font-weight: 400;
-    letter-spacing: 0.025em;
+    line-height: 1.4;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'JetBrains Mono', 'Space Mono', 'Roboto Mono', 'Courier New', monospace;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
   }
   
-  .font-technical {
-    font-family: 'JetBrains Mono', 'Space Mono', 'Roboto Mono', 'Courier New', monospace;
-    letter-spacing: 0.05em;
+  .font-primary {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.02em;
   }
   
-  .tracking-technical {
-    letter-spacing: 0.1em;
+  .font-secondary {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 400;
+  }
+  
+  .font-secondary-bold {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+  }
+  
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+  
+  .text-sentence {
+    text-transform: none;
+  }
+  
+  /* Responsive font sizes */
+  .text-logo {
+    font-size: 24px;
+  }
+  
+  .text-hero-main {
+    font-size: 32px;
+  }
+  
+  .text-hero-sub {
+    font-size: 16px;
+  }
+  
+  .text-character-name {
+    font-size: 24px;
+  }
+  
+  .text-character-desc {
+    font-size: 14px;
+  }
+  
+  .text-form-label {
+    font-size: 12px;
+  }
+  
+  .text-form-input {
+    font-size: 14px;
+  }
+  
+  .text-cta {
+    font-size: 18px;
+  }
+  
+  @media (min-width: 768px) {
+    .text-logo {
+      font-size: 32px;
+    }
+    
+    .text-hero-main {
+      font-size: 48px;
+    }
+    
+    .text-hero-sub {
+      font-size: 18px;
+    }
+    
+    .text-character-name {
+      font-size: 36px;
+    }
+    
+    .text-character-desc {
+      font-size: 16px;
+    }
+    
+    .text-form-label {
+      font-size: 14px;
+    }
+    
+    .text-form-input {
+      font-size: 16px;
+    }
+    
+    .text-cta {
+      font-size: 20px;
+    }
   }
 }

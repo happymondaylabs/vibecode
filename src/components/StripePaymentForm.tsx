@@ -129,7 +129,7 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
       <button
         type="submit"
         disabled={!stripe || !cardComplete || processing}
-        className={`w-full px-3 py-1.5 font-technical font-semibold tracking-wider transition-all duration-200 ${
+        className={`w-full px-3 py-1.5 font-primary text-uppercase tracking-wider transition-all duration-200 ${
           stripe && cardComplete && !processing
             ? 'bg-black text-white cursor-pointer'
             : 'bg-gray-400 text-gray-600 cursor-not-allowed'
@@ -148,10 +148,10 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
         {processing ? (
           <div className="flex items-center justify-center">
             <Loader2 size={12} className="animate-spin mr-1" />
-            PROCESSING...
+            Processing...
           </div>
         ) : (
-          'PAY $12 & GENERATE'
+          'Pay $12 & generate'
         )}
       </button>
     </form>
