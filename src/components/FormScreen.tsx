@@ -373,6 +373,27 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                     </div>
                   </div>
 
+                  {/* Input Fields */}
+                  <div className="space-y-3">
+                    {/* Name Field */}
+                    <div>
+                      <label 
+                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
+                        style={{ 
+                          fontFamily: 'Roboto Mono, monospace',
+                          color: '#1B1B1B'
+                        }}
+                      >
+                        NAME:
+                      </label>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => {
+                          setName(e.target.value);
+                          setErrors(prev => ({ ...prev, name: undefined }));
+                        }}
+                        maxLength={20}
                         className={`w-full px-3 py-3 border rounded text-sm transition-all duration-200 focus:outline-none ${
                           errors.name 
                             ? 'border-red-500 bg-red-50' 
