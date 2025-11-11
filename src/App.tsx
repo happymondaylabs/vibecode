@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SEOHead } from './components/SEOHead';
 import { CharacterCarousel } from './components/CharacterCarousel';
+import { FormScreen } from './components/FormScreen';
 import { ThemeSelector } from './components/ThemeSelector';
 import { LoadingScreen } from './components/LoadingScreen';
 import { TransitionLoading } from './components/TransitionLoading';
@@ -22,11 +23,21 @@ interface Template {
   type: 'video';
 }
 
+interface FormData {
+  template: Template;
+  useCase: 'personal' | 'brand' | 'fun';
+  name: string;
+  age: string;
+  type: string;
+  price: number;
+}
+
 function App() {
-  const [currentStep, setCurrentStep] = useState<'carousel' | AppStep>('carousel');
+  const [currentStep, setCurrentStep] = useState<'carousel' | 'form-screen' | AppStep>('carousel');
   const [showTransition, setShowTransition] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<Theme>(themes[0]);
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
+  const [formData, setFormData] = useState<FormData | null>(null);
   const [userData, setUserData] = useState<UserData>({
     name: '',
     age: '',
@@ -63,7 +74,37 @@ function App() {
       color: '#00FF9D'
     };
     setSelectedTheme(themeFromTemplate);
-    setCurrentStep('form');
+    setCurrentStep('form-screen');
+  };
+
+  const handleFormScreenSubmit = (data: FormData) => {
+    setFormData(data);
+    // Convert form data to userData format for compatibility
+    setUserData({
+      name: data.name,
+      age: data.age,
+      message: `Happy ${data.age}th Birthday!`
+    });
+    setCurrentStep('payment');
+  };
+
+  const handleFormScreenBack = () => {
+    setCurrentStep('carousel');
+  };
+
+  const handleTemplateChange = (template: Template) => {
+    setSelectedTemplate(template);
+    // Update theme as well for compatibility
+    const themeFromTemplate: Theme = {
+      id: template.id,
+      title: template.name,
+      description: template.description,
+      image: template.imageUrl,
+      category: 'Custom',
+      code: '1/9',
+      color: '#00FF9D'
+    };
+    setSelectedTheme(themeFromTemplate);
   };
 
   const handleFormSubmit = async () => {
@@ -141,6 +182,7 @@ function App() {
     setShowTransition(false);
     setSelectedTheme(themes[0]);
     setSelectedTemplate(null);
+    setFormData(null);
     setUserData({ name: '', age: '', message: '' });
     setUserEmail('');
     setGeneratedVideoUrl(null);
@@ -155,6 +197,7 @@ function App() {
     setShowTransition(false);
     setSelectedTheme(themes[0]);
     setSelectedTemplate(null);
+    setFormData(null);
     setUserData({ name: '', age: '', message: '' });
     setUserEmail('');
     setGeneratedVideoUrl(null);
@@ -167,6 +210,17 @@ function App() {
   const renderCurrentStep = () => {
     if (currentStep === 'carousel') {
       return <CharacterCarousel onSelectCharacter={handleSelectCharacter} />;
+    }
+
+    if (currentStep === 'form-screen' && selectedTemplate) {
+      return (
+        <FormScreen 
+          selectedTemplate={selectedTemplate}
+          onTemplateChange={handleTemplateChange}
+          onSubmit={handleFormScreenSubmit}
+          onGoBack={handleFormScreenBack}
+        />
+      );
     }
 
     if (showTransition) {
