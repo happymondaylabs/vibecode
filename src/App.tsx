@@ -309,35 +309,49 @@ function App() {
       {/* Header */}
       {currentStep !== 'carousel' && currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
         <header 
-          className="bg-black text-white shadow-lg border-b-4 transition-all duration-500"
-          style={{ borderBottomColor: currentThemeColor }}
+          className="sticky top-0 z-50 shadow-lg w-full rounded-lg"
+          style={{ backgroundColor: '#1B1B1B' }}
         >
-          <div className="max-w-6xl mx-auto px-4 py-3 md:py-3">
-            <div className="flex justify-between items-center md:items-center">
+          <div className="w-full px-4 md:px-8">
+            <div className="flex items-center justify-between h-16 md:h-20">
+              {/* Logo */}
               <div className="flex-shrink-0">
-                <div className="flex items-center">
-                  <img 
-                    src="/ygpng.png" 
-                    alt="yougenius" 
-                    className="h-12 md:h-24 w-auto"
-                  />
-                </div>
+                <img 
+                  src="/ygpng.png" 
+                  alt="yougenius" 
+                  className="h-9 md:h-12 w-auto"
+                />
               </div>
-              <div className="text-right text-xs max-w-xs md:max-w-md ml-4">
-                <div 
-                  className="mb-0.5 md:mb-2 font-primary text-uppercase transition-all duration-500 text-hero-sub"
-                  style={{ color: currentThemeColor }}
+              
+              {/* Center - Headlines */}
+              <div className="flex-1 text-center mx-4 md:mx-8">
+                <h1 
+                  className="font-primary text-lg md:text-2xl tracking-wider mb-1"
+                  style={{ 
+                    color: '#EEEDD8',
+                    fontFamily: 'Montserrat, sans-serif',
+                    fontWeight: 700,
+                    fontStyle: 'italic',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                  }}
                 >
-                  YOUR MESSAGE. YOUR GENIUS. ZERO BORING.
-                </div>
-                <div className="leading-relaxed hidden md:block font-secondary text-sentence">
-                  Custom AI videos. Different characters.<br />
-                  Different themes. Instant comedy.
-                </div>
-                <div className="leading-tight md:hidden text-xs font-secondary text-sentence">
-                  Custom AI videos. Different characters. Different themes. Instant comedy.
-                </div>
+                  CREATE CUSTOM AI VIDEOS
+                </h1>
+                <p 
+                  className="font-secondary text-xs md:text-sm opacity-90"
+                  style={{ 
+                    color: '#A7C342',
+                    fontFamily: 'Roboto Mono, monospace',
+                    fontWeight: 400
+                  }}
+                >
+                  Choose a character. Pick your vibe. Get your video in 60 seconds.
+                </p>
               </div>
+              
+              {/* Right side - Reserved for future */}
+              <div className="flex-shrink-0 w-9 md:w-12"></div>
             </div>
           </div>
         </header>
