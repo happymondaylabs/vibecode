@@ -88,7 +88,7 @@ export function CompletionScreen({ userData, selectedTheme, videoUrl, onStartOve
             <div className="flex-shrink-0">
               <div className="flex items-center">
                 <img 
-                  src="/imagelogo transparent.png" 
+                  src="/ygpng.png" 
                   alt="yougenius" 
                   className="h-12 md:h-24 w-auto"
                 />

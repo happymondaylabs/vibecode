@@ -231,7 +231,7 @@ function App() {
               <div className="flex-shrink-0">
                 <div className="flex items-center">
                   <img 
-                    src="/imagelogo transparent.png" 
+                    src="/ygpng.png" 
                     alt="yougenius" 
                     className="h-12 md:h-24 w-auto"
                   />
@@ -273,7 +273,7 @@ function App() {
               <div>
                 <div className="flex items-center">
                   <img 
-                    src="/imagelogo transparent.png" 
+                    src="/ygpng.png" 
                     alt="yougenius" 
                     className="h-12 md:h-18 w-auto"
                   />
