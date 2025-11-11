@@ -9,7 +9,7 @@ interface SEOHeadProps {
 }
 
 export function SEOHead({ 
-  title = "VIBE CARD - Paper Birthday Cards Are Boring",
+  title = "yougenius - Paper Birthday Cards Are Boring",
   description = "Create custom AI-generated birthday video cards that make people laugh, remember, and save paper. Choose from 8 hilarious themes and get your personalized VIBE CARD in minutes.",
   keywords = "birthday cards, video cards, AI video generation, custom birthday videos, digital greeting cards, personalized videos, funny birthday cards",
   ogImage = "/imagelogo transparent.png",

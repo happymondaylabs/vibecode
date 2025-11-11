@@ -1,4 +1,4 @@
-# VIBE CARD - Video Birthday Cards
+# yougenius - Video Birthday Cards
 
 ## Setup Instructions
 

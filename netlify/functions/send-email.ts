@@ -56,7 +56,7 @@ export const handler: Handler = async (event) => {
     });
 
     // Create email content
-    const emailSubject = `VIBE CARD Order ${orderData.paymentStatus === 'success' ? '✅' : '❌'} - ${orderData.customerName}`;
+    const emailSubject = `yougenius Order ${orderData.paymentStatus === 'success' ? '✅' : '❌'} - ${orderData.customerName}`;
     
     const emailBody = `
 <!DOCTYPE html>
@@ -80,7 +80,7 @@ export const handler: Handler = async (event) => {
 <body>
     <div class="container">
         <div class="header">
-            <h1>VIBE CARD ORDER NOTIFICATION</h1>
+            <h1>yougenius ORDER NOTIFICATION</h1>
             <p>Order received at ${new Date(orderData.orderTimestamp).toLocaleString()}</p>
         </div>
         
@@ -177,7 +177,7 @@ export const handler: Handler = async (event) => {
         </div>
         
         <div class="footer">
-            <p>VIBE CARD Order Management System</p>
+            <p>yougenius Order Management System</p>
             <p>© 2025 YOUGENIUS.CO</p>
         </div>
     </div>

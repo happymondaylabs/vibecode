@@ -64,7 +64,7 @@ export function LoadingScreen({
 
           <div className="bg-yellow-900 bg-opacity-50 p-6 rounded-lg mb-8">
             <p className="text-yellow-200 text-lg leading-relaxed mb-4 font-technical">
-              Your video is taking longer than usual to generate.
+              Your yougenius video is taking longer than usual to generate.
             </p>
             <p className="text-yellow-300 text-sm leading-relaxed font-technical">
               This is normal for complex videos. We'll email you when it's ready, 
@@ -165,7 +165,7 @@ export function LoadingScreen({
           </div>
 
           <h2 className="text-2xl md:text-3xl font-semibold uppercase tracking-wider text-white mb-6">
-            DUE TO HIGH TRAFFIC
+            yougenius PROCESSING
           </h2>
 
           <div 
@@ -173,10 +173,10 @@ export function LoadingScreen({
             style={{ backgroundColor: `${themeColor}20` }}
           >
             <p className="text-white text-lg leading-relaxed mb-4">
-              VIBE CARDS ARE TAKING LONGER THAN EXPECTED.
+              yougenius VIDEOS ARE TAKING LONGER THAN EXPECTED.
             </p>
             <p className="text-white text-base leading-relaxed opacity-90">
-              WE WILL EMAIL YOU YOUR CUSTOM VIBE CARD WHEN IT'S READY
+              WE WILL EMAIL YOU YOUR CUSTOM yougenius VIDEO WHEN IT'S READY
             </p>
             <p 
               className="text-sm mt-2 font-semibold"

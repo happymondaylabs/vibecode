@@ -122,10 +122,12 @@ export function UserForm({ userData, onUserDataChange, onSubmit, errors }: UserF
             <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">©</div>
             <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">CE</div>
             <div className="w-4 h-4 border border-black rounded-full flex items-center justify-center text-xs">⚡</div>
-          </div>
+            yougenius Co. Ltd. 2025
           <div className="text-xs font-mono">VIBE CARD Co. Ltd. 2025</div>
         </div>
       </div>
     </div>
   );
+}
+  )
 }

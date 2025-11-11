@@ -37,7 +37,7 @@ export function EmailCapture({ userData, onSubmit }: EmailCaptureProps) {
           ALMOST THERE!
         </h3>
         <p className="text-center text-gray-600 mb-8 uppercase text-sm tracking-wide">
-          Your vibe card for {userData.name} is almost ready
+          Your yougenius card for {userData.name} is almost ready
         </p>
 
         {/* Email Field */}

@@ -67,6 +67,7 @@ export const handler: Handler = async (event) => {
         userMessage: userData.message || `Happy ${userData.age}th Birthday!`,
       },
       description: `VIBE CARD - ${theme.title} for ${userData.name}`,
+      description: `yougenius - ${theme.title} for ${userData.name}`,
       receipt_email: email,
     });
 
