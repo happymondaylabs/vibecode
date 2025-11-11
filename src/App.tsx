@@ -367,7 +367,7 @@ function App() {
 
       {/* Main Content */}
       {(currentStep === 'carousel' || currentStep === 'loading' || currentStep === 'complete' || showTransition) && (
-        {renderCurrentStep()}
+        renderCurrentStep()
       )}
 
       {/* Footer */}
