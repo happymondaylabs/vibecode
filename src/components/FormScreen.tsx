@@ -225,23 +225,9 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                         borderRight: '2px dashed #1B1B1B'
                       }}
                     >
-                  {/* Form Header */}
-                  <div className="mb-6">
-                    <h2 
-                      className="text-2xl font-semibold tracking-wide mb-1"
-                      style={{ 
-                        fontFamily: 'Montserrat, sans-serif',
-                        fontWeight: 700,
-                        fontStyle: 'italic',
-                        color: '#1B1B1B'
-                      }}
-                    >
-                      yougenius
-                    </h2>
-                  </div>
 
                   {/* Use Case Selector */}
-                  <div className="mb-6">
+                  <div className="mb-4">
                     <h3 
                       className="text-xs font-semibold uppercase tracking-wide mb-4"
                       style={{ 
@@ -252,11 +238,11 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       WHAT'S THIS VIDEO FOR?
                     </h3>
                     
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       {/* Personal Button */}
                       <button
                         onClick={() => setSelectedUseCase('personal')}
-                        className={`w-full p-4 border-2 rounded-lg text-left transition-all duration-200 ${
+                        className={`w-full p-3 border-2 rounded-lg text-left transition-all duration-200 ${
                           selectedUseCase === 'personal' 
                             ? 'border-3 font-semibold' 
                             : 'hover:translate-x-1'
@@ -300,7 +286,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       {/* Brand Button */}
                       <button
                         onClick={() => setSelectedUseCase('brand')}
-                        className={`w-full p-4 border-2 rounded-lg text-left transition-all duration-200 ${
+                        className={`w-full p-3 border-2 rounded-lg text-left transition-all duration-200 ${
                           selectedUseCase === 'brand' 
                             ? 'border-3 font-semibold' 
                             : 'hover:translate-x-1'
@@ -344,7 +330,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       {/* Just For Fun Button */}
                       <button
                         onClick={() => setSelectedUseCase('fun')}
-                        className={`w-full p-4 border-2 rounded-lg text-left transition-all duration-200 ${
+                        className={`w-full p-3 border-2 rounded-lg text-left transition-all duration-200 ${
                           selectedUseCase === 'fun' 
                             ? 'border-3 font-semibold' 
                             : 'hover:translate-x-1'
@@ -388,11 +374,11 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   </div>
 
                   {/* Input Fields */}
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {/* Name Field */}
                     <div>
                       <label 
-                        className="block text-xs font-semibold uppercase tracking-wide mb-2"
+                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
                         style={{ 
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
@@ -443,7 +429,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                     {/* Age Field */}
                     <div>
                       <label 
-                        className="block text-xs font-semibold uppercase tracking-wide mb-2"
+                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
                         style={{ 
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
@@ -484,7 +470,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                     {/* Style Field (Display Only) */}
                     <div>
                       <label 
-                        className="block text-xs font-semibold uppercase tracking-wide mb-2"
+                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
                         style={{ 
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
@@ -506,7 +492,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                     {/* Type Field (Auto-populated) */}
                     <div>
                       <label 
-                        className="block text-xs font-semibold uppercase tracking-wide mb-2"
+                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
                         style={{ 
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
@@ -530,7 +516,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   <button
                     onClick={handleSubmit}
                     disabled={!isFormValid}
-                    className={`w-full mt-6 px-6 py-3 border-3 rounded-lg font-semibold text-base uppercase tracking-wider transition-all duration-200 ${
+                    className={`w-full mt-4 px-6 py-2 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
                       isFormValid
                         ? 'cursor-pointer'
                         : 'cursor-not-allowed opacity-50'
@@ -686,24 +672,13 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
 
           {/* Mobile Content Card */}
           <div 
-            className="rounded-xl shadow-2xl overflow-hidden mx-4"
+            className="rounded-xl shadow-2xl overflow-hidden mx-4 pb-2"
             style={{ backgroundColor: '#EEEDD8' }}
           >
             {/* Form Section */}
-            <div className="p-6">
-              {/* Form Header */}
-              <div className="text-center mb-6">
-                <h2 
-                  className="text-2xl font-semibold tracking-wide mb-1"
-                  style={{ 
-                    fontFamily: 'Montserrat, sans-serif',
-                    fontWeight: 700,
-                    fontStyle: 'italic',
-                    color: '#1B1B1B'
-                  }}
-                >
-                  yougenius
-                </h2>
+            <div className="p-4">
+              {/* Template Header */}
+              <div className="text-center mb-4">
                 <div 
                   className="text-sm font-semibold uppercase tracking-wide"
                   style={{ 
@@ -716,9 +691,9 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
               </div>
 
               {/* Use Case Selector */}
-              <div className="mb-6">
+              <div className="mb-4">
                 <h3 
-                  className="text-xs font-semibold uppercase tracking-wide mb-3"
+                  className="text-xs font-semibold uppercase tracking-wide mb-2"
                   style={{ 
                     fontFamily: 'Roboto Mono, monospace',
                     color: '#1B1B1B'
@@ -833,11 +808,11 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
               </div>
 
               {/* Input Fields */}
-              <div className="space-y-4 mb-6">
+              <div className="space-y-3 mb-4">
                 {/* Name Field */}
                 <div>
                   <label 
-                    className="block text-xs font-semibold uppercase tracking-wide mb-2"
+                    className="block text-xs font-semibold uppercase tracking-wide mb-1"
                     style={{ 
                       fontFamily: 'Roboto Mono, monospace',
                       color: '#1B1B1B'
@@ -888,7 +863,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                 {/* Age Field */}
                 <div>
                   <label 
-                    className="block text-xs font-semibold uppercase tracking-wide mb-2"
+                    className="block text-xs font-semibold uppercase tracking-wide mb-1"
                     style={{ 
                       fontFamily: 'Roboto Mono, monospace',
                       color: '#1B1B1B'
@@ -927,10 +902,10 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                 </div>
 
                 {/* Style and Type Fields */}
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-2 gap-3 text-sm">
                   <div>
                     <span 
-                      className="block text-xs font-semibold uppercase tracking-wide mb-1"
+                      className="block text-xs font-semibold uppercase tracking-wide mb-0.5"
                       style={{ 
                         fontFamily: 'Roboto Mono, monospace',
                         color: '#1B1B1B'
@@ -950,7 +925,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   </div>
                   <div>
                     <span 
-                      className="block text-xs font-semibold uppercase tracking-wide mb-1"
+                      className="block text-xs font-semibold uppercase tracking-wide mb-0.5"
                       style={{ 
                         fontFamily: 'Roboto Mono, monospace',
                         color: '#1B1B1B'
@@ -975,7 +950,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
               <button
                 onClick={handleSubmit}
                 disabled={!isFormValid}
-                className={`w-full px-6 py-3 border-3 rounded-lg font-semibold text-base uppercase tracking-wider transition-all duration-200 ${
+                className={`w-full px-6 py-2 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
                   isFormValid
                     ? 'cursor-pointer'
                     : 'cursor-not-allowed opacity-50'
@@ -996,7 +971,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
 
             {/* Preview Section */}
             <div 
-              className="p-6 border-t-2 border-dashed"
+              className="p-4 border-t-2 border-dashed"
               style={{ 
                 backgroundColor: '#D8D7C3',
                 borderColor: '#1B1B1B'
@@ -1004,7 +979,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
             >
               {/* Character Image */}
               <div 
-                className="w-full rounded-lg overflow-hidden mb-4"
+                className="w-full rounded-lg overflow-hidden mb-3"
                 style={{ 
                   aspectRatio: '16/9',
                   border: '4px solid #1B1B1B',
@@ -1018,9 +993,20 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                 />
               </div>
 
+              {/* Template Name */}
+              <div 
+                className="text-sm font-semibold uppercase tracking-wide mb-2 text-center"
+                style={{ 
+                  fontFamily: 'Roboto Mono, monospace',
+                  color: '#1B1B1B'
+                }}
+              >
+                {currentTemplate.name}
+              </div>
+
               {/* Description */}
               <p 
-                className="text-sm text-center mb-3 opacity-85 leading-relaxed"
+                className="text-xs text-center mb-2 opacity-85 leading-relaxed"
                 style={{ 
                   fontFamily: 'Roboto Mono, monospace',
                   color: '#1B1B1B'
@@ -1031,7 +1017,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
 
               {/* Template Counter */}
               <div 
-                className="text-center text-base"
+                className="text-center text-sm"
                 style={{ 
                   fontFamily: 'Roboto Mono, monospace',
                   color: '#1B1B1B'
