@@ -849,27 +849,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   </div>
                 </div>
 
-                {/* Age Field */}
-                <div>
-                  <label 
-                    className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                    style={{ 
-                      fontFamily: 'Roboto Mono, monospace',
-                      color: '#1B1B1B'
-                    }}
-                  >
-                    AGE:
-                  </label>
-                  <input
-                    type="number"
-                    value={age}
-                    onChange={(e) => {
-                      setAge(e.target.value);
-                      setErrors(prev => ({ ...prev, age: undefined }));
-                    }}
-                    min="1"
-                    max="120"
-                    className={`w-full px-3 py-2 border rounded text-sm transition-all duration-200 focus:outline-none ${
                       errors.age 
                         ? 'border-red-500 bg-red-50' 
                         : 'border-black bg-white'
