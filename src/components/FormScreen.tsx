@@ -405,6 +405,27 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       </div>
                     </div>
 
+                    {/* Style Field (Display Only) */}
+                    <div>
+                      <label 
+                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
+                        style={{ 
+                          fontFamily: 'Roboto Mono, monospace',
+                          color: '#1B1B1B'
+                        }}
+                      >
+                        STYLE:
+                      </label>
+                      <div 
+                        className="text-sm"
+                        style={{ 
+                          fontFamily: 'Roboto Mono, monospace',
+                          color: '#1B1B1B'
+                        }}
+                      >
+                        8 SECOND CUSTOM VIDEO
+                      </div>
+                    </div>
 
                     {/* Style Field (Display Only) */}
                     <div>
@@ -457,25 +478,10 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       className="flex-1 p-6 md:p-8 flex flex-col items-center justify-center"
                       style={{ backgroundColor: '#D8D7C3' }}
                     >
-                  {/* Character Image */}
-                  <div 
-                    className="w-full max-w-sm rounded-lg overflow-hidden mb-3"
-                    style={{ 
-                      aspectRatio: '16/9',
-                      border: '6px solid #1B1B1B',
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-                    }}
-                  >
-                    <img
-                      src={currentTemplate.imageUrl}
-                      alt={currentTemplate.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
 
                   {/* Template Name - Moved here */}
                   <div 
-                    className="text-sm font-semibold uppercase tracking-wide mb-3 text-center"
+                    className="text-lg font-semibold uppercase tracking-wide mb-4 text-center"
                     style={{ 
                       fontFamily: 'Roboto Mono, monospace',
                       color: '#1B1B1B'
@@ -486,7 +492,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
 
                   {/* Description */}
                   <p 
-                    className="text-xs text-center mb-3 opacity-85 leading-relaxed"
+                    className="text-sm text-center mb-6 opacity-85 leading-relaxed"
                     style={{ 
                       fontFamily: 'Roboto Mono, monospace',
                       color: '#1B1B1B'
@@ -497,7 +503,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
 
                   {/* Template Counter */}
                   <div 
-                    className="text-center text-base"
+                    className="text-center text-base mb-6"
                     style={{ 
                       fontFamily: 'Roboto Mono, monospace',
                       color: '#1B1B1B'
