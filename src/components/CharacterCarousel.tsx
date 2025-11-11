@@ -236,7 +236,7 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
           {/* Left Navigation Arrow */}
           <button
             onClick={navigatePrevious}
-            className="flex-shrink-0 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
+            className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
             style={{ 
               backgroundColor: '#A7C342',
               borderColor: '#1B1B1B',
@@ -364,7 +364,7 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
           {/* Right Navigation Arrow */}
           <button
             onClick={navigateNext}
-            className="flex-shrink-0 w-12 h-12 md:w-15 md:h-15 rounded-full border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
+            className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
             style={{ 
               backgroundColor: '#A7C342',
               borderColor: '#1B1B1B',
