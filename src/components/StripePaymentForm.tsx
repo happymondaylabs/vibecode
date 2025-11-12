@@ -151,7 +151,7 @@ function PaymentForm({ userData, theme, email, onPaymentSuccess, onPaymentError,
             Processing...
           </div>
         ) : (
-          'Pay $12 & generate'
+          'SUBMIT ORDER'
         )}
       </button>
     </form>
