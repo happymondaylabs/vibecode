@@ -851,15 +851,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
 
                 {/* Age Field */}
                 <div>
-                  <label
-                    className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                    style={{
-                      fontFamily: 'Roboto Mono, monospace',
-                      color: '#1B1B1B'
-                    }}
-                  >
-                    AGE:
-                  </label>
                   <input
                     type="number"
                     value={age}
