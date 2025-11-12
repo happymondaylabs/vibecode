@@ -414,42 +414,20 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       </div>
                     </div>
 
-                    {/* Style Field (Display Only) */}
-                    <div>
-                      <label 
-                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                        style={{ 
-                          fontFamily: 'Roboto Mono, monospace',
-                          color: '#1B1B1B'
-                        }}
-                      >
-                        STYLE:
-                      </label>
-                      <div 
-                        className="text-sm"
-                        style={{ 
-                          fontFamily: 'Roboto Mono, monospace',
-                          color: '#1B1B1B'
-                        }}
-                      >
-                        8 SECOND CUSTOM VIDEO
-                      </div>
-                    </div>
-
                     {/* Type Field (Auto-populated) */}
                     <div>
-                      <label 
+                      <label
                         className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                        style={{ 
+                        style={{
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
                         }}
                       >
                         TYPE:
                       </label>
-                      <div 
+                      <div
                         className="text-sm"
-                        style={{ 
+                        style={{
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
                         }}
