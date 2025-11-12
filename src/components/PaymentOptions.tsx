@@ -14,7 +14,7 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [paymentError, setPaymentError] = useState('');
-  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [showPaymentForm, setShowPaymentForm] = useState(true);
 
   // Check for developer bypass
   const isDevBypass =
@@ -160,28 +160,6 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
                         </div>
                       </div>
 
-                      {/* Age Field */}
-                      <div>
-                        <label
-                          className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                          style={{
-                            fontFamily: 'Roboto Mono, monospace',
-                            color: '#1B1B1B'
-                          }}
-                        >
-                          AGE:
-                        </label>
-                        <div
-                          className="text-sm"
-                          style={{
-                            fontFamily: 'Roboto Mono, monospace',
-                            color: '#1B1B1B'
-                          }}
-                        >
-                          {userData.age}
-                        </div>
-                      </div>
-
                       {/* Price Field */}
                       <div>
                         <label
@@ -232,22 +210,21 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
                           className="text-xs font-semibold uppercase tracking-wide mb-2"
                           style={{
                             fontFamily: 'Roboto Mono, monospace',
-                            color: '#1B1B1B',
-                            opacity: 0.7
+                            color: '#1B1B1B'
                           }}
                         >
                           WHAT'S INCLUDED:
                         </h4>
                         <ul className="space-y-1 text-xs" style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}>
-                          <li className="flex items-center opacity-70">
+                          <li className="flex items-center">
                             <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                             CUSTOM VIDEO VIBE CARD
                           </li>
-                          <li className="flex items-center opacity-70">
+                          <li className="flex items-center">
                             <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                             MP4 DOWNLOAD READY
                           </li>
-                          <li className="flex items-center opacity-70">
+                          <li className="flex items-center">
                             <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                             SHARABLE LINK
                           </li>
@@ -300,41 +277,18 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
                       )}
                     </div>
 
-                    {/* Payment Form or Continue Button */}
+                    {/* Payment Form */}
                     <div className="flex-1 flex flex-col justify-end">
-                      {showPaymentForm ? (
-                        <div className="mb-4">
-                          <StripePaymentForm
-                            userData={userData}
-                            theme={{ id: 'custom', title: 'Custom Video' } as any}
-                            email={email}
-                            onPaymentSuccess={handlePaymentSuccess}
-                            onPaymentError={handlePaymentError}
-                            themeColor={themeColor}
-                          />
-                        </div>
-                      ) : (
-                        <button
-                          onClick={handleEmailSubmit}
-                          disabled={!isEmailValid}
-                          className={`w-full px-6 py-3 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
-                            isEmailValid
-                              ? 'cursor-pointer'
-                              : 'cursor-not-allowed opacity-50'
-                          }`}
-                          style={{
-                            backgroundColor: isEmailValid ? '#1B1B1B' : '#9ca3af',
-                            color: isEmailValid ? '#A7C342' : '#6b7280',
-                            borderColor: isEmailValid ? '#1B1B1B' : '#9ca3af',
-                            fontFamily: 'Montserrat, sans-serif',
-                            fontWeight: 700,
-                            fontStyle: 'italic',
-                            letterSpacing: '0.05em'
-                          }}
-                        >
-                          CONTINUE TO PAYMENT
-                        </button>
-                      )}
+                      <div className="mb-4">
+                        <StripePaymentForm
+                          userData={userData}
+                          theme={{ id: 'custom', title: 'Custom Video' } as any}
+                          email={email}
+                          onPaymentSuccess={handlePaymentSuccess}
+                          onPaymentError={handlePaymentError}
+                          themeColor={themeColor}
+                        />
+                      </div>
 
                       {/* Payment Error */}
                       {paymentError && (
@@ -353,36 +307,8 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
           </div>
         </div>
 
-        {/* Right Navigation Arrow */}
-        <button
-          onClick={() => {
-            if (showPaymentForm) return;
-            if (isEmailValid) handleEmailSubmit();
-          }}
-          disabled={!isEmailValid || showPaymentForm}
-          className={`flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center ${
-            (!isEmailValid || showPaymentForm) ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-          style={{
-            backgroundColor: '#A7C342',
-            borderColor: '#1B1B1B',
-          }}
-          onMouseEnter={(e) => {
-            if (isEmailValid && !showPaymentForm) {
-              e.currentTarget.style.backgroundColor = '#F8B8B7';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (isEmailValid && !showPaymentForm) {
-              e.currentTarget.style.backgroundColor = '#A7C342';
-              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-            }
-          }}
-          aria-label="Continue"
-        >
-          <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} />
-        </button>
+        {/* Right Navigation Arrow - Hidden on payment page */}
+        <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12" />
       </div>
 
       {/* Mobile Layout */}
@@ -437,17 +363,6 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
                     className="block text-xs font-semibold uppercase tracking-wide mb-0.5"
                     style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}
                   >
-                    AGE:
-                  </span>
-                  <span style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}>
-                    {userData.age}
-                  </span>
-                </div>
-                <div>
-                  <span
-                    className="block text-xs font-semibold uppercase tracking-wide mb-0.5"
-                    style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}
-                  >
                     PRICE:
                   </span>
                   <span
@@ -476,21 +391,21 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
               {/* What's Included */}
               <div>
                 <h4
-                  className="text-xs font-semibold uppercase tracking-wide mb-2 opacity-70"
+                  className="text-xs font-semibold uppercase tracking-wide mb-2"
                   style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}
                 >
                   WHAT'S INCLUDED:
                 </h4>
                 <ul className="space-y-1 text-xs" style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}>
-                  <li className="flex items-center opacity-70">
+                  <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                     CUSTOM VIDEO VIBE CARD
                   </li>
-                  <li className="flex items-center opacity-70">
+                  <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                     MP4 DOWNLOAD READY
                   </li>
-                  <li className="flex items-center opacity-70">
+                  <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
                     SHARABLE LINK
                   </li>
@@ -537,40 +452,17 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
               )}
             </div>
 
-            {/* Payment Form or Continue Button */}
-            {showPaymentForm ? (
-              <div className="mb-4">
-                <StripePaymentForm
-                  userData={userData}
-                  theme={{ id: 'custom', title: 'Custom Video' } as any}
-                  email={email}
-                  onPaymentSuccess={handlePaymentSuccess}
-                  onPaymentError={handlePaymentError}
-                  themeColor={themeColor}
-                />
-              </div>
-            ) : (
-              <button
-                onClick={handleEmailSubmit}
-                disabled={!isEmailValid}
-                className={`w-full px-6 py-2 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
-                  isEmailValid
-                    ? 'cursor-pointer'
-                    : 'cursor-not-allowed opacity-50'
-                }`}
-                style={{
-                  backgroundColor: isEmailValid ? '#1B1B1B' : '#9ca3af',
-                  color: isEmailValid ? '#A7C342' : '#6b7280',
-                  borderColor: isEmailValid ? '#1B1B1B' : '#9ca3af',
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontWeight: 700,
-                  fontStyle: 'italic',
-                  letterSpacing: '0.05em'
-                }}
-              >
-                CONTINUE TO PAYMENT
-              </button>
-            )}
+            {/* Payment Form */}
+            <div className="mb-4">
+              <StripePaymentForm
+                userData={userData}
+                theme={{ id: 'custom', title: 'Custom Video' } as any}
+                email={email}
+                onPaymentSuccess={handlePaymentSuccess}
+                onPaymentError={handlePaymentError}
+                themeColor={themeColor}
+              />
+            </div>
 
             {/* Payment Error */}
             {paymentError && (
@@ -586,27 +478,16 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
       </div>
 
       {/* Progress Indicator */}
-      <div className="flex justify-center mt-6 space-x-2 md:space-x-3">
-        <button
-          className="w-3 h-3 md:w-4 md:h-4 rounded-sm transition-all duration-200 border-2"
-          style={{
-            backgroundColor: 'white',
-            borderColor: '#1B1B1B'
-          }}
+      <div className="flex justify-center mt-6 space-x-3">
+        <div
+          className="w-4 h-4 rounded-sm transition-all duration-200 border border-gray-300 bg-white"
         />
-        <button
-          className="w-3 h-3 md:w-4 md:h-4 rounded-sm transition-all duration-200 border-2"
-          style={{
-            backgroundColor: themeColor,
-            borderColor: '#1B1B1B'
-          }}
+        <div
+          className="w-4 h-4 rounded-sm transition-all duration-200 border border-gray-300 bg-white"
         />
-        <button
-          className="w-3 h-3 md:w-4 md:h-4 rounded-sm transition-all duration-200 border-2"
-          style={{
-            backgroundColor: 'white',
-            borderColor: '#1B1B1B'
-          }}
+        <div
+          className="w-4 h-4 rounded-sm transition-all duration-200 border border-black shadow-sm"
+          style={{ backgroundColor: themeColor }}
         />
       </div>
     </div>
