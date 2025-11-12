@@ -849,18 +849,37 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   </div>
                 </div>
 
-                      errors.age 
-                        ? 'border-red-500 bg-red-50' 
+                {/* Age Field */}
+                <div>
+                  <label
+                    className="block text-xs font-semibold uppercase tracking-wide mb-1"
+                    style={{
+                      fontFamily: 'Roboto Mono, monospace',
+                      color: '#1B1B1B'
+                    }}
+                  >
+                    AGE:
+                  </label>
+                  <input
+                    type="number"
+                    value={age}
+                    onChange={(e) => {
+                      setAge(e.target.value);
+                      setErrors(prev => ({ ...prev, age: undefined }));
+                    }}
+                    className={`w-full px-3 py-2 border rounded text-sm transition-all duration-200 focus:outline-none ${
+                      errors.age
+                        ? 'border-red-500 bg-red-50'
                         : 'border-black bg-white'
                     }`}
-                    style={{ 
+                    style={{
                       fontFamily: 'Roboto Mono, monospace',
                       borderColor: errors.age ? '#ef4444' : '#1B1B1B'
                     }}
                     placeholder="Enter age"
                   />
                   {errors.age && (
-                    <span 
+                    <span
                       className="text-xs font-semibold mt-1 block"
                       style={{ color: '#ef4444' }}
                     >
@@ -918,7 +937,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
               <button
                 onClick={handleSubmit}
                 disabled={!isFormValid}
-                className={\`w-full px-6 py-2 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
+                className={`w-full px-6 py-2 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
                   isFormValid
                     ? 'cursor-pointer'
                     : 'cursor-not-allowed opacity-50'
@@ -1013,7 +1032,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                 borderColor: '#1B1B1B',
                 focusRingColor: '#1B1B1B'
               }}
-              aria-label={\`Go to template ${index + 1}`}
+              aria-label={`Go to template ${index + 1}`}
             />
           ))}
         </div>
