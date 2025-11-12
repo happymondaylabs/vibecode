@@ -310,17 +310,56 @@ function App() {
       {currentStep !== 'carousel' && currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
         <div className="min-h-screen" style={{ backgroundColor: '#EEEDD8' }}>
           {/* Header - Exact same as CharacterCarousel */}
-          <header 
+          <header
             className="sticky top-0 z-50 shadow-lg w-full"
             style={{ backgroundColor: '#1B1B1B' }}
           >
-            <div className="w-full px-4 md:px-8">
-              <div className="flex items-center justify-between h-16 md:h-20">
+            <div className="w-full px-4 py-3 md:px-8 md:py-0">
+              {/* Mobile Layout - Stacked */}
+              <div className="md:hidden flex flex-col items-center text-center space-y-2">
+                {/* Logo on top */}
+                <img
+                  src="/ygpng.png"
+                  alt="yougenius"
+                  className="h-12 w-auto"
+                />
+                {/* Text below */}
+                <div>
+                  <h1
+                    className="text-sm tracking-wider mb-0.5"
+                    style={{
+                      color: '#EEEDD8',
+                      fontFamily: 'Montserrat, sans-serif',
+                      fontWeight: 700,
+                      fontStyle: 'italic',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      fontSize: '14px'
+                    }}
+                  >
+                    CREATE CUSTOM AI VIDEOS
+                  </h1>
+                  <p
+                    className="opacity-90"
+                    style={{
+                      color: '#A7C342',
+                      fontFamily: 'Roboto Mono, monospace',
+                      fontWeight: 400,
+                      fontSize: '10px'
+                    }}
+                  >
+                    Choose a character. Pick your vibe. Get your video in 60 seconds.
+                  </p>
+                </div>
+              </div>
+
+              {/* Desktop Layout - Side by side */}
+              <div className="hidden md:flex items-center justify-between h-20">
                 {/* Left side - Headlines */}
                 <div className="flex-1">
-                  <h1 
-                    className="font-primary text-lg md:text-2xl tracking-wider mb-1"
-                    style={{ 
+                  <h1
+                    className="font-primary text-2xl tracking-wider mb-1"
+                    style={{
                       color: '#EEEDD8',
                       fontFamily: 'Montserrat, sans-serif',
                       fontWeight: 700,
@@ -331,9 +370,9 @@ function App() {
                   >
                     CREATE CUSTOM AI VIDEOS
                   </h1>
-                  <p 
-                    className="font-secondary text-xs md:text-sm opacity-90"
-                    style={{ 
+                  <p
+                    className="font-secondary text-sm opacity-90"
+                    style={{
                       color: '#A7C342',
                       fontFamily: 'Roboto Mono, monospace',
                       fontWeight: 400
@@ -342,13 +381,13 @@ function App() {
                     Choose a character. Pick your vibe. Get your video in 60 seconds.
                   </p>
                 </div>
-                
+
                 {/* Right side - Logo */}
                 <div className="flex-shrink-0">
-                  <img 
-                    src="/ygpng.png" 
-                    alt="yougenius" 
-                    className="h-18 md:h-24 w-auto"
+                  <img
+                    src="/ygpng.png"
+                    alt="yougenius"
+                    className="h-24 w-auto"
                   />
                 </div>
               </div>

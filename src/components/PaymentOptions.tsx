@@ -312,17 +312,17 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
       </div>
 
       {/* Mobile Layout */}
-      <div className="md:hidden px-4 py-8">
+      <div className="md:hidden px-2 py-6">
         {/* Back Button */}
         <button
           onClick={onGoBack}
-          className="mb-4 flex items-center text-sm font-semibold uppercase tracking-wide"
+          className="mb-3 flex items-center text-xs font-semibold uppercase tracking-wide"
           style={{
             fontFamily: 'Roboto Mono, monospace',
             color: '#1B1B1B'
           }}
         >
-          <ChevronLeft size={20} style={{ color: '#1B1B1B' }} strokeWidth={3} />
+          <ChevronLeft size={18} style={{ color: '#1B1B1B' }} strokeWidth={3} />
           <span className="ml-1">BACK</span>
         </button>
 
@@ -332,10 +332,10 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
           style={{ backgroundColor: '#EEEDD8' }}
         >
           {/* Form Section */}
-          <div className="p-4">
+          <div className="p-3">
             {/* Header */}
             <h2
-              className="text-lg font-bold uppercase tracking-wide mb-6 text-center"
+              className="text-sm font-bold uppercase tracking-wide mb-4 text-center"
               style={{
                 fontFamily: 'Roboto Mono, monospace',
                 color: '#1B1B1B'
@@ -345,28 +345,28 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
             </h2>
 
             {/* Order Info */}
-            <div className="bg-white p-4 rounded border-2 mb-4" style={{ borderColor: '#1B1B1B' }}>
-              <div className="space-y-3 text-sm mb-4">
+            <div className="bg-white p-3 rounded border-2 mb-3" style={{ borderColor: '#1B1B1B' }}>
+              <div className="space-y-2 text-xs mb-3">
                 <div>
                   <span
-                    className="block text-xs font-semibold uppercase tracking-wide mb-0.5"
+                    className="block text-[10px] font-semibold uppercase tracking-wide mb-0.5"
                     style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}
                   >
                     NAME:
                   </span>
-                  <span style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}>
+                  <span style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B', fontSize: '11px' }}>
                     {userData.name}
                   </span>
                 </div>
                 <div>
                   <span
-                    className="block text-xs font-semibold uppercase tracking-wide mb-0.5"
+                    className="block text-[10px] font-semibold uppercase tracking-wide mb-0.5"
                     style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}
                   >
                     PRICE:
                   </span>
                   <span
-                    className="text-lg font-bold"
+                    className="text-base font-bold"
                     style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}
                   >
                     $12.00
@@ -374,13 +374,13 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
                 </div>
                 <div>
                   <span
-                    className="block text-xs font-semibold uppercase tracking-wide mb-0.5"
+                    className="block text-[10px] font-semibold uppercase tracking-wide mb-0.5"
                     style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}
                   >
                     TYPE:
                   </span>
                   <span
-                    className="text-xs uppercase"
+                    className="text-[10px] uppercase"
                     style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}
                   >
                     ONE-TIME
@@ -391,22 +391,22 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
               {/* What's Included */}
               <div>
                 <h4
-                  className="text-xs font-semibold uppercase tracking-wide mb-2"
+                  className="text-[10px] font-semibold uppercase tracking-wide mb-1.5"
                   style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}
                 >
                   WHAT'S INCLUDED:
                 </h4>
-                <ul className="space-y-1 text-xs" style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}>
+                <ul className="space-y-0.5 text-[10px]" style={{ fontFamily: 'Roboto Mono, monospace', color: '#1B1B1B' }}>
                   <li className="flex items-center">
-                    <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                    <span className="w-1 h-1 bg-black rounded-full mr-1.5"></span>
                     CUSTOM VIDEO VIBE CARD
                   </li>
                   <li className="flex items-center">
-                    <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                    <span className="w-1 h-1 bg-black rounded-full mr-1.5"></span>
                     MP4 DOWNLOAD READY
                   </li>
                   <li className="flex items-center">
-                    <span className="w-1.5 h-1.5 bg-black rounded-full mr-2"></span>
+                    <span className="w-1 h-1 bg-black rounded-full mr-1.5"></span>
                     SHARABLE LINK
                   </li>
                 </ul>
@@ -414,9 +414,9 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
             </div>
 
             {/* Email Field */}
-            <div className="mb-4">
+            <div className="mb-3">
               <label
-                className="block text-xs font-semibold uppercase tracking-wide mb-1"
+                className="block text-[10px] font-semibold uppercase tracking-wide mb-1"
                 style={{
                   fontFamily: 'Roboto Mono, monospace',
                   color: '#1B1B1B'
@@ -431,7 +431,7 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
                   setEmail(e.target.value);
                   setEmailError('');
                 }}
-                className={`w-full px-3 py-2 border rounded text-sm transition-all duration-200 focus:outline-none ${
+                className={`w-full px-2 py-1.5 border rounded text-xs transition-all duration-200 focus:outline-none ${
                   emailError
                     ? 'border-red-500 bg-red-50'
                     : 'border-black bg-white'
@@ -444,7 +444,7 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
               />
               {emailError && (
                 <span
-                  className="text-xs font-semibold mt-1 block"
+                  className="text-[9px] font-semibold mt-0.5 block"
                   style={{ color: '#ef4444', fontFamily: 'Roboto Mono, monospace' }}
                 >
                   {emailError}
@@ -453,7 +453,7 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
             </div>
 
             {/* Payment Form */}
-            <div className="mb-4">
+            <div className="mb-3">
               <StripePaymentForm
                 userData={userData}
                 theme={{ id: 'custom', title: 'Custom Video' } as any}
@@ -467,7 +467,7 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
             {/* Payment Error */}
             {paymentError && (
               <div
-                className="text-xs font-semibold bg-red-50 p-3 rounded mt-2"
+                className="text-[10px] font-semibold bg-red-50 p-2 rounded mt-1.5"
                 style={{ color: '#ef4444', fontFamily: 'Roboto Mono, monospace' }}
               >
                 {paymentError}

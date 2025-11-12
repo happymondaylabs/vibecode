@@ -571,64 +571,109 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
         {/* Mobile Layout */}
         <div className="md:hidden">
           {/* Mobile Navigation Header */}
-          <div className="flex items-center justify-between mb-4 px-4">
+          <div className="flex items-center justify-between mb-4 px-2">
             <button
               onClick={() => navigateTemplate('prev')}
-              className="w-10 h-10 rounded-lg border-3 transition-all duration-150 hover:scale-110 flex items-center justify-center"
-              style={{ 
+              className="w-8 h-8 rounded-lg border-2 transition-all duration-150 hover:scale-110 flex items-center justify-center"
+              style={{
                 backgroundColor: '#A7C342',
                 borderColor: '#1B1B1B'
               }}
             >
-              <ChevronLeft size={20} style={{ color: '#1B1B1B' }} strokeWidth={3} />
+              <ChevronLeft size={18} style={{ color: '#1B1B1B' }} strokeWidth={3} />
             </button>
-            
-            <div className="text-center flex-1 mx-4">
-              <p 
+
+            <div className="text-center flex-1 mx-2">
+              <p
                 className="text-xs uppercase tracking-wide font-semibold"
                 style={{ color: '#1B1B1B' }}
               >
                 {currentIndex + 1} OF 9 TEMPLATES
               </p>
             </div>
-            
+
             <button
               onClick={() => navigateTemplate('next')}
-              className="w-10 h-10 rounded-lg border-3 transition-all duration-150 hover:scale-110 flex items-center justify-center"
-              style={{ 
+              className="w-8 h-8 rounded-lg border-2 transition-all duration-150 hover:scale-110 flex items-center justify-center"
+              style={{
                 backgroundColor: '#A7C342',
                 borderColor: '#1B1B1B'
               }}
             >
-              <ChevronRight size={20} style={{ color: '#1B1B1B' }} strokeWidth={3} />
+              <ChevronRight size={18} style={{ color: '#1B1B1B' }} strokeWidth={3} />
             </button>
           </div>
 
           {/* Mobile Content Card */}
-          <div 
-            className="rounded-xl shadow-2xl overflow-hidden mx-4 pb-2"
+          <div
+            className="rounded-xl shadow-2xl overflow-hidden mx-2 pb-2"
             style={{ backgroundColor: '#EEEDD8' }}
           >
-            {/* Form Section */}
-            <div className="p-4">
-              {/* Template Header */}
-              <div className="text-center mb-4">
-                <div 
-                  className="text-sm font-semibold uppercase tracking-wide"
-                  style={{ 
-                    fontFamily: 'Roboto Mono, monospace',
-                    color: '#1B1B1B'
-                  }}
-                >
-                  {currentTemplate.name}
-                </div>
+            {/* Preview Section - MOVED TO TOP */}
+            <div
+              className="p-3 border-b-2 border-dashed"
+              style={{
+                backgroundColor: '#D8D7C3',
+                borderColor: '#1B1B1B'
+              }}
+            >
+              {/* Character Image */}
+              <div
+                className="w-full rounded-lg overflow-hidden mb-2"
+                style={{
+                  aspectRatio: '16/9',
+                  border: '3px solid #1B1B1B',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+                }}
+              >
+                <img
+                  src={currentTemplate.imageUrl}
+                  alt={currentTemplate.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
+              {/* Template Name */}
+              <div
+                className="text-xs font-semibold uppercase tracking-wide mb-1 text-center"
+                style={{
+                  fontFamily: 'Roboto Mono, monospace',
+                  color: '#1B1B1B'
+                }}
+              >
+                {currentTemplate.name}
+              </div>
+
+              {/* Description */}
+              <p
+                className="text-[10px] text-center mb-1 opacity-85 leading-tight"
+                style={{
+                  fontFamily: 'Roboto Mono, monospace',
+                  color: '#1B1B1B'
+                }}
+              >
+                {currentTemplate.description}
+              </p>
+
+              {/* Template Counter */}
+              <div
+                className="text-center text-xs"
+                style={{
+                  fontFamily: 'Roboto Mono, monospace',
+                  color: '#1B1B1B'
+                }}
+              >
+                {currentIndex + 1}/9
+              </div>
+            </div>
+
+            {/* Form Section - MOVED BELOW PREVIEW */}
+            <div className="p-3">
               {/* Use Case Selector */}
-              <div className="mb-4">
-                <h3 
-                  className="text-xs font-semibold uppercase tracking-wide mb-2"
-                  style={{ 
+              <div className="mb-3">
+                <h3
+                  className="text-[10px] font-semibold uppercase tracking-wide mb-2"
+                  style={{
                     fontFamily: 'Roboto Mono, monospace',
                     color: '#1B1B1B'
                   }}
@@ -636,13 +681,13 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   WHAT'S THIS VIDEO FOR?
                 </h3>
                 
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {/* Personal Button */}
                   <button
                     onClick={() => setSelectedUseCase('personal')}
-                    className={`w-full p-3 border-2 rounded-lg text-left transition-all duration-200 ${
-                      selectedUseCase === 'personal' 
-                        ? 'border-3 font-semibold' 
+                    className={`w-full p-2 border-2 rounded-lg text-left transition-all duration-200 ${
+                      selectedUseCase === 'personal'
+                        ? 'border-3 font-semibold'
                         : ''
                     }`}
                     style={{
@@ -651,18 +696,18 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       borderWidth: selectedUseCase === 'personal' ? '3px' : '2px'
                     }}
                   >
-                    <div 
-                      className="text-sm font-semibold uppercase"
-                      style={{ 
+                    <div
+                      className="text-[11px] font-semibold uppercase"
+                      style={{
                         fontFamily: 'Roboto Mono, monospace',
                         color: '#1B1B1B'
                       }}
                     >
                       PERSONAL
                     </div>
-                    <div 
-                      className="text-xs opacity-70 mt-1"
-                      style={{ 
+                    <div
+                      className="text-[9px] opacity-70 mt-0.5"
+                      style={{
                         fontFamily: 'Roboto Mono, monospace',
                         color: '#1B1B1B'
                       }}
@@ -674,9 +719,9 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   {/* Brand Button */}
                   <button
                     onClick={() => setSelectedUseCase('brand')}
-                    className={`w-full p-3 border-2 rounded-lg text-left transition-all duration-200 ${
-                      selectedUseCase === 'brand' 
-                        ? 'border-3 font-semibold' 
+                    className={`w-full p-2 border-2 rounded-lg text-left transition-all duration-200 ${
+                      selectedUseCase === 'brand'
+                        ? 'border-3 font-semibold'
                         : ''
                     }`}
                     style={{
@@ -685,18 +730,18 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       borderWidth: selectedUseCase === 'brand' ? '3px' : '2px'
                     }}
                   >
-                    <div 
-                      className="text-sm font-semibold uppercase"
-                      style={{ 
+                    <div
+                      className="text-[11px] font-semibold uppercase"
+                      style={{
                         fontFamily: 'Roboto Mono, monospace',
                         color: '#1B1B1B'
                       }}
                     >
                       BRAND
                     </div>
-                    <div 
-                      className="text-xs opacity-70 mt-1"
-                      style={{ 
+                    <div
+                      className="text-[9px] opacity-70 mt-0.5"
+                      style={{
                         fontFamily: 'Roboto Mono, monospace',
                         color: '#1B1B1B'
                       }}
@@ -708,9 +753,9 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   {/* Just For Fun Button */}
                   <button
                     onClick={() => setSelectedUseCase('fun')}
-                    className={`w-full p-3 border-2 rounded-lg text-left transition-all duration-200 ${
-                      selectedUseCase === 'fun' 
-                        ? 'border-3 font-semibold' 
+                    className={`w-full p-2 border-2 rounded-lg text-left transition-all duration-200 ${
+                      selectedUseCase === 'fun'
+                        ? 'border-3 font-semibold'
                         : ''
                     }`}
                     style={{
@@ -719,18 +764,18 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       borderWidth: selectedUseCase === 'fun' ? '3px' : '2px'
                     }}
                   >
-                    <div 
-                      className="text-sm font-semibold uppercase"
-                      style={{ 
+                    <div
+                      className="text-[11px] font-semibold uppercase"
+                      style={{
                         fontFamily: 'Roboto Mono, monospace',
                         color: '#1B1B1B'
                       }}
                     >
                       JUST FOR FUN
                     </div>
-                    <div 
-                      className="text-xs opacity-70 mt-1"
-                      style={{ 
+                    <div
+                      className="text-[9px] opacity-70 mt-0.5"
+                      style={{
                         fontFamily: 'Roboto Mono, monospace',
                         color: '#1B1B1B'
                       }}
@@ -742,12 +787,12 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
               </div>
 
               {/* Input Fields */}
-              <div className="space-y-3 mb-4">
+              <div className="space-y-2 mb-3">
                 {/* Name Field */}
                 <div>
-                  <label 
-                    className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                    style={{ 
+                  <label
+                    className="block text-[10px] font-semibold uppercase tracking-wide mb-1"
+                    style={{
                       fontFamily: 'Roboto Mono, monospace',
                       color: '#1B1B1B'
                     }}
@@ -762,21 +807,21 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       setErrors(prev => ({ ...prev, name: undefined }));
                     }}
                     maxLength={20}
-                    className={`w-full px-3 py-2 border rounded text-sm transition-all duration-200 focus:outline-none ${
-                      errors.name 
-                        ? 'border-red-500 bg-red-50' 
+                    className={`w-full px-2 py-1.5 text-xs border rounded transition-all duration-200 focus:outline-none ${
+                      errors.name
+                        ? 'border-red-500 bg-red-50'
                         : 'border-black bg-white'
                     }`}
-                    style={{ 
+                    style={{
                       fontFamily: 'Roboto Mono, monospace',
                       borderColor: errors.name ? '#ef4444' : '#1B1B1B'
                     }}
                     placeholder="Person or company name"
                   />
-                  <div className="flex justify-between mt-1">
-                    <span 
-                      className="text-xs opacity-60"
-                      style={{ 
+                  <div className="flex justify-between mt-0.5">
+                    <span
+                      className="text-[9px] opacity-60"
+                      style={{
                         fontFamily: 'Roboto Mono, monospace',
                         color: '#1B1B1B'
                       }}
@@ -784,8 +829,8 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       {name.length}/20
                     </span>
                     {errors.name && (
-                      <span 
-                        className="text-xs font-semibold"
+                      <span
+                        className="text-[9px] font-semibold"
                         style={{ color: '#ef4444' }}
                       >
                         {errors.name}
@@ -800,7 +845,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
               <button
                 onClick={handleSubmit}
                 disabled={!isFormValid}
-                className={`w-full px-6 py-2 border-3 rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 ${
+                className={`w-full px-4 py-2 border-2 rounded-lg font-semibold text-xs uppercase tracking-wider transition-all duration-200 ${
                   isFormValid
                     ? 'cursor-pointer'
                     : 'cursor-not-allowed opacity-50'

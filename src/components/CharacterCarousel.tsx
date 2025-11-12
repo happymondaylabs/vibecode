@@ -181,17 +181,56 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#EEEDD8' }}>
       {/* Header */}
-      <header 
+      <header
         className="sticky top-0 z-50 shadow-lg w-full"
         style={{ backgroundColor: '#1B1B1B' }}
       >
-        <div className="w-full px-4 md:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="w-full px-4 py-3 md:px-8 md:py-0">
+          {/* Mobile Layout - Stacked */}
+          <div className="md:hidden flex flex-col items-center text-center space-y-2">
+            {/* Logo on top */}
+            <img
+              src="/ygpng.png"
+              alt="yougenius"
+              className="h-12 w-auto"
+            />
+            {/* Text below */}
+            <div>
+              <h1
+                className="text-sm tracking-wider mb-0.5"
+                style={{
+                  color: '#EEEDD8',
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontWeight: 700,
+                  fontStyle: 'italic',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  fontSize: '14px'
+                }}
+              >
+                CREATE CUSTOM AI VIDEOS
+              </h1>
+              <p
+                className="opacity-90"
+                style={{
+                  color: '#A7C342',
+                  fontFamily: 'Roboto Mono, monospace',
+                  fontWeight: 400,
+                  fontSize: '10px'
+                }}
+              >
+                Choose a character. Pick your vibe. Get your video in 60 seconds.
+              </p>
+            </div>
+          </div>
+
+          {/* Desktop Layout - Side by side */}
+          <div className="hidden md:flex items-center justify-between h-20">
             {/* Left side - Headlines */}
             <div className="flex-1">
-              <h1 
-                className="font-primary text-lg md:text-2xl tracking-wider mb-1"
-                style={{ 
+              <h1
+                className="font-primary text-2xl tracking-wider mb-1"
+                style={{
                   color: '#EEEDD8',
                   fontFamily: 'Montserrat, sans-serif',
                   fontWeight: 700,
@@ -202,9 +241,9 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
               >
                 CREATE CUSTOM AI VIDEOS
               </h1>
-              <p 
-                className="font-secondary text-xs md:text-sm opacity-90"
-                style={{ 
+              <p
+                className="font-secondary text-sm opacity-90"
+                style={{
                   color: '#A7C342',
                   fontFamily: 'Roboto Mono, monospace',
                   fontWeight: 400
@@ -213,13 +252,13 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
                 Choose a character. Pick your vibe. Get your video in 60 seconds.
               </p>
             </div>
-            
+
             {/* Right side - Logo */}
             <div className="flex-shrink-0">
-              <img 
-                src="/ygpng.png" 
-                alt="yougenius" 
-                className="h-18 md:h-24 w-auto"
+              <img
+                src="/ygpng.png"
+                alt="yougenius"
+                className="h-24 w-auto"
               />
             </div>
           </div>
@@ -227,14 +266,14 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
       </header>
 
       {/* Main Content */}
-      <div className="px-4 py-10 md:py-16">
+      <div className="px-2 py-6 md:px-4 md:py-16">
         {/* Carousel Wrapper with Flexbox Layout */}
-        <div className="flex items-center justify-center gap-4 md:gap-16 max-w-7xl mx-auto">
+        <div className="relative flex items-center justify-center gap-2 md:gap-16 max-w-7xl mx-auto">
           {/* Left Navigation Arrow */}
           <button
             onClick={navigatePrevious}
-            className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
-            style={{ 
+            className="flex-shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-lg border-2 md:border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
+            style={{
               backgroundColor: '#A7C342',
               borderColor: '#1B1B1B',
               focusRingColor: '#1B1B1B'
@@ -249,13 +288,13 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
             }}
             aria-label="Previous template"
           >
-            <ChevronLeft size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} />
+            <ChevronLeft size={20} className="md:w-6 md:h-6" style={{ color: '#1B1B1B' }} strokeWidth={3} />
           </button>
 
           {/* Video Card Container */}
           <div className="flex-shrink-1 w-full max-w-4xl">
-            <div 
-              className="rounded-xl shadow-2xl overflow-hidden mx-5 md:mx-15"
+            <div
+              className="rounded-xl shadow-2xl overflow-hidden mx-0 md:mx-15"
               style={{ backgroundColor: '#E5E5E5' }}
             >
               {/* Video Container with Black Frame */}
@@ -308,30 +347,32 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
                   </div>
 
                   {/* Character Info Bar (Bottom of Frame) */}
-                  <div 
-                    className="absolute bottom-0 left-0 right-0 px-4 py-3 md:px-6 md:py-4"
+                  <div
+                    className="absolute bottom-0 left-0 right-0 px-3 py-2 md:px-6 md:py-4"
                     style={{ backgroundColor: '#1B1B1B' }}
                   >
                     <div className="flex items-center justify-between">
                       {/* Character Info */}
                       <div className="flex-1 min-w-0">
-                        <h2 
-                          className="font-primary text-lg md:text-2xl leading-tight mb-1"
-                          style={{ 
+                        <h2
+                          className="font-primary leading-tight mb-0.5 md:mb-1"
+                          style={{
                             color: '#EEEDD8',
                             fontFamily: 'Montserrat, sans-serif',
                             fontWeight: 700,
-                            fontStyle: 'italic'
+                            fontStyle: 'italic',
+                            fontSize: 'clamp(14px, 4vw, 24px)'
                           }}
                         >
                           {currentTemplate.name}
                         </h2>
-                        <p 
-                          className="font-secondary text-xs md:text-sm opacity-60 leading-tight"
-                          style={{ 
+                        <p
+                          className="font-secondary opacity-60 leading-tight"
+                          style={{
                             color: '#EEEDD8',
                             fontFamily: 'Roboto Mono, monospace',
-                            fontWeight: 400
+                            fontWeight: 400,
+                            fontSize: 'clamp(9px, 2.5vw, 14px)'
                           }}
                         >
                           {currentTemplate.description}
@@ -339,13 +380,14 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
                       </div>
                       
                       {/* Navigation Counter */}
-                      <div className="ml-4 flex-shrink-0">
-                        <span 
-                          className="font-secondary text-sm md:text-base"
-                          style={{ 
+                      <div className="ml-2 md:ml-4 flex-shrink-0">
+                        <span
+                          className="font-secondary"
+                          style={{
                             color: '#EEEDD8',
                             fontFamily: 'Roboto Mono, monospace',
-                            fontWeight: 400
+                            fontWeight: 400,
+                            fontSize: 'clamp(10px, 3vw, 16px)'
                           }}
                         >
                           {currentIndex + 1}/9
@@ -361,8 +403,8 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
           {/* Right Navigation Arrow */}
           <button
             onClick={navigateNext}
-            className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
-            style={{ 
+            className="flex-shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-lg border-2 md:border-3 transition-all duration-150 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg flex items-center justify-center"
+            style={{
               backgroundColor: '#A7C342',
               borderColor: '#1B1B1B',
               focusRingColor: '#1B1B1B'
@@ -377,16 +419,16 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
             }}
             aria-label="Next template"
           >
-            <ChevronRight size={24} style={{ color: '#1B1B1B' }} strokeWidth={3} />
+            <ChevronRight size={20} className="md:w-6 md:h-6" style={{ color: '#1B1B1B' }} strokeWidth={3} />
           </button>
         </div>
           {/* Carousel Dots */}
-          <div className="flex justify-center mt-6 space-x-2 md:space-x-3">
+          <div className="flex justify-center mt-4 md:mt-6 space-x-1.5 md:space-x-3">
             {templates.map((_, index) => (
               <button
                 key={index}
                 onClick={() => navigateToIndex(index)}
-                className={`w-2.5 h-2.5 md:w-4 md:h-4 border-2 md:border-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                className={`w-2 h-2 md:w-4 md:h-4 border-2 md:border-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                   index === currentIndex
                     ? 'scale-120 border-3 opacity-100'
                     : 'opacity-60 hover:opacity-80'
@@ -402,14 +444,15 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
           </div>
 
           {/* CTA Button */}
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-6 md:mt-8">
             <button
               onClick={handleSelectCharacter}
               data-cta="true"
-              className="font-primary text-lg md:text-xl px-12 md:px-16 py-4 md:py-5 border-3 rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-4 active:scale-95"
-              style={{ 
+              className="font-primary px-8 md:px-16 py-3 md:py-5 border-2 md:border-3 rounded-lg transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-4 active:scale-95"
+              style={{
                 backgroundColor: '#1B1B1B',
                 color: '#A7C342',
+                fontSize: 'clamp(14px, 4vw, 20px)',
                 borderColor: '#1B1B1B',
                 fontFamily: 'Montserrat, sans-serif',
                 fontWeight: 700,
