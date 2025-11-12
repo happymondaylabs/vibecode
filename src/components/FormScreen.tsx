@@ -466,32 +466,32 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       style={{ backgroundColor: '#D8D7C3' }}
                     >
 
-                  {/* Style Section */}
+                  {/* Summary Section */}
                   <div className="w-full max-w-sm">
-                    <h3 
+                    <h3
                       className="text-lg font-semibold uppercase tracking-wide mb-4 text-center"
-                      style={{ 
+                      style={{
                         fontFamily: 'Roboto Mono, monospace',
                         color: '#1B1B1B'
                       }}
                     >
-                      STYLE
+                      SUMMARY
                     </h3>
-                    
-                    {/* Style Field */}
+
+                    {/* Video Type Field */}
                     <div className="mb-4">
-                      <label 
+                      <label
                         className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                        style={{ 
+                        style={{
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
                         }}
                       >
                         VIDEO TYPE:
                       </label>
-                      <div 
+                      <div
                         className="text-sm"
-                        style={{ 
+                        style={{
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
                         }}
@@ -500,42 +500,42 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       </div>
                     </div>
 
-                    {/* Duration Field */}
+                    {/* Character Field */}
                     <div className="mb-4">
-                      <label 
+                      <label
                         className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                        style={{ 
+                        style={{
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
                         }}
                       >
-                        DURATION:
+                        CHARACTER:
                       </label>
-                      <div 
+                      <div
                         className="text-sm"
-                        style={{ 
+                        style={{
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
                         }}
                       >
-                        8 SECONDS
+                        {currentTemplate.name}
                       </div>
                     </div>
 
                     {/* Format Field */}
                     <div className="mb-6">
-                      <label 
+                      <label
                         className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                        style={{ 
+                        style={{
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
                         }}
                       >
                         FORMAT:
                       </label>
-                      <div 
+                      <div
                         className="text-sm"
-                        style={{ 
+                        style={{
                           fontFamily: 'Roboto Mono, monospace',
                           color: '#1B1B1B'
                         }}
@@ -579,7 +579,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       }
                     }}
                   >
-                    CREATE VIDEO — ${getPricing(selectedUseCase)}
+                    CREATE VIDEO
                   </button>
                 </div>
                   </div>
@@ -901,7 +901,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   letterSpacing: '0.05em'
                 }}
               >
-                CREATE VIDEO — ${getPricing(selectedUseCase)}
+                CREATE VIDEO
               </button>
             </div>
 
