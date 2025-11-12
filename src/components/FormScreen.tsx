@@ -414,27 +414,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       </div>
                     </div>
 
-                    {/* Type Field (Auto-populated) */}
-                    <div>
-                      <label
-                        className="block text-xs font-semibold uppercase tracking-wide mb-1"
-                        style={{
-                          fontFamily: 'Roboto Mono, monospace',
-                          color: '#1B1B1B'
-                        }}
-                      >
-                        TYPE:
-                      </label>
-                      <div
-                        className="text-sm"
-                        style={{
-                          fontFamily: 'Roboto Mono, monospace',
-                          color: '#1B1B1B'
-                        }}
-                      >
-                        {getType(selectedUseCase)}
-                      </div>
-                    </div>
                   </div>
                 </div>
 
@@ -815,49 +794,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                   </div>
                 </div>
 
-                {/* Style and Type Fields */}
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div>
-                    <span 
-                      className="block text-xs font-semibold uppercase tracking-wide mb-0.5"
-                      style={{ 
-                        fontFamily: 'Roboto Mono, monospace',
-                        color: '#1B1B1B'
-                      }}
-                    >
-                      STYLE:
-                    </span>
-                    <span 
-                      className="text-xs"
-                      style={{ 
-                        fontFamily: 'Roboto Mono, monospace',
-                        color: '#1B1B1B'
-                      }}
-                    >
-                      8 second custom video
-                    </span>
-                  </div>
-                  <div>
-                    <span 
-                      className="block text-xs font-semibold uppercase tracking-wide mb-0.5"
-                      style={{ 
-                        fontFamily: 'Roboto Mono, monospace',
-                        color: '#1B1B1B'
-                      }}
-                    >
-                      TYPE:
-                    </span>
-                    <span 
-                      className="text-xs uppercase"
-                      style={{ 
-                        fontFamily: 'Roboto Mono, monospace',
-                        color: '#1B1B1B'
-                      }}
-                    >
-                      {getType(selectedUseCase)}
-                    </span>
-                  </div>
-                </div>
               </div>
 
               {/* Generate Button */}
