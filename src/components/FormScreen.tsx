@@ -20,7 +20,6 @@ interface FormData {
   template: Template;
   useCase: 'personal' | 'brand' | 'fun';
   name: string;
-  age: string;
   type: string;
   price: number;
 }
@@ -95,8 +94,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
   const [currentTemplate, setCurrentTemplate] = useState(selectedTemplate);
   const [selectedUseCase, setSelectedUseCase] = useState<'personal' | 'brand' | 'fun'>('personal');
   const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [errors, setErrors] = useState<{name?: string; age?: string}>({});
+  const [errors, setErrors] = useState<{name?: string}>({});
 
   const currentIndex = templates.findIndex(template => template.id === currentTemplate.id);
 
@@ -138,21 +136,12 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
   };
 
   const validateForm = () => {
-    const newErrors: {name?: string; age?: string} = {};
-    
+    const newErrors: {name?: string} = {};
+
     if (!name.trim()) {
       newErrors.name = 'NAME IS REQUIRED';
     } else if (name.length > 20) {
       newErrors.name = 'NAME TOO LONG (MAX 20)';
-    }
-
-    if (!age.trim()) {
-      newErrors.age = 'AGE IS REQUIRED';
-    } else {
-      const ageNum = parseInt(age);
-      if (isNaN(ageNum) || ageNum < 1 || ageNum > 120) {
-        newErrors.age = 'AGE MUST BE 1-120';
-      }
     }
 
     setErrors(newErrors);
@@ -165,7 +154,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
         template: currentTemplate,
         useCase: selectedUseCase,
         name: name.trim(),
-        age: age.trim(),
         type: getType(selectedUseCase),
         price: getPricing(selectedUseCase)
       };
@@ -173,7 +161,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
     }
   };
 
-  const isFormValid = name.trim().length > 0 && age.trim().length > 0 && !errors.name && !errors.age;
+  const isFormValid = name.trim().length > 0 && !errors.name;
 
   return (
     <>
@@ -847,36 +835,6 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       </span>
                     )}
                   </div>
-                </div>
-
-                {/* Age Field */}
-                <div>
-                  <input
-                    type="number"
-                    value={age}
-                    onChange={(e) => {
-                      setAge(e.target.value);
-                      setErrors(prev => ({ ...prev, age: undefined }));
-                    }}
-                    className={`w-full px-3 py-2 border rounded text-sm transition-all duration-200 focus:outline-none ${
-                      errors.age
-                        ? 'border-red-500 bg-red-50'
-                        : 'border-black bg-white'
-                    }`}
-                    style={{
-                      fontFamily: 'Roboto Mono, monospace',
-                      borderColor: errors.age ? '#ef4444' : '#1B1B1B'
-                    }}
-                    placeholder="Enter age"
-                  />
-                  {errors.age && (
-                    <span
-                      className="text-xs font-semibold mt-1 block"
-                      style={{ color: '#ef4444' }}
-                    >
-                      {errors.age}
-                    </span>
-                  )}
                 </div>
 
                 {/* Style and Type Fields */}
