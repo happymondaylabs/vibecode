@@ -367,42 +367,6 @@ function App() {
         renderCurrentStep()
       )}
 
-      {/* Footer */}
-      {currentStep !== 'carousel' && currentStep !== 'loading' && currentStep !== 'complete' && !showTransition && (
-        <footer 
-          className="bg-black text-white shadow-lg border-t-4 mt-16 transition-all duration-500"
-          style={{ borderTopColor: currentThemeColor }}
-        >
-          <div className="max-w-6xl mx-auto px-4 py-3 md:py-3">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-2 md:space-y-0">
-              <div>
-                <div className="flex items-center">
-                  <img 
-                    src="/ygpng.png" 
-                    alt="yougenius" 
-                    className="h-12 md:h-18 w-auto"
-                  />
-                </div>
-              </div>
-              <div className="text-left md:text-right text-xs max-w-md">
-                <div 
-                  className="mb-1 md:mb-2 font-secondary-bold text-uppercase transition-all duration-500"
-                  style={{ color: currentThemeColor }}
-                >
-                  © 2025 YOUGENIUS.CO
-                </div>
-                <div className="leading-relaxed hidden md:block font-secondary text-sentence">
-                  Questions? Issues? We're here to help.<br />
-                  Email us at info@yougenius.co
-                </div>
-                <div className="leading-relaxed md:hidden text-xs font-secondary text-sentence">
-                  Questions? Email us at info@yougenius.co
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
-      )}
 
       {/* Toast Notifications */}
       {toasts.map((toast) => (
