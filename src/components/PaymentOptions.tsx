@@ -478,16 +478,27 @@ export function PaymentOptions({ userData, onPaymentComplete, onGoBack, themeCol
       </div>
 
       {/* Progress Indicator */}
-      <div className="flex justify-center mt-6 space-x-3">
+      <div className="flex justify-center mt-6 space-x-2 md:space-x-3">
         <div
-          className="w-4 h-4 rounded-sm transition-all duration-200 border border-gray-300 bg-white"
+          className="w-2.5 h-2.5 md:w-4 md:h-4 border-2 md:border-3 transition-all duration-200 opacity-60"
+          style={{
+            backgroundColor: '#EEEDD8',
+            borderColor: '#1B1B1B'
+          }}
         />
         <div
-          className="w-4 h-4 rounded-sm transition-all duration-200 border border-gray-300 bg-white"
+          className="w-2.5 h-2.5 md:w-4 md:h-4 border-2 md:border-3 transition-all duration-200 opacity-60"
+          style={{
+            backgroundColor: '#EEEDD8',
+            borderColor: '#1B1B1B'
+          }}
         />
         <div
-          className="w-4 h-4 rounded-sm transition-all duration-200 border border-black shadow-sm"
-          style={{ backgroundColor: themeColor }}
+          className="w-2.5 h-2.5 md:w-4 md:h-4 border-2 md:border-3 transition-all duration-200 scale-120 opacity-100"
+          style={{
+            backgroundColor: '#A7C342',
+            borderColor: '#1B1B1B'
+          }}
         />
       </div>
     </div>
