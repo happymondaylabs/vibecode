@@ -609,65 +609,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
             className="rounded-xl shadow-2xl overflow-hidden mx-2 pb-2"
             style={{ backgroundColor: '#EEEDD8' }}
           >
-            {/* Preview Section - MOVED TO TOP */}
-            <div
-              className="p-3 border-b-2 border-dashed"
-              style={{
-                backgroundColor: '#D8D7C3',
-                borderColor: '#1B1B1B'
-              }}
-            >
-              {/* Character Image */}
-              <div
-                className="w-full rounded-lg overflow-hidden mb-2"
-                style={{
-                  aspectRatio: '16/9',
-                  border: '3px solid #1B1B1B',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-                }}
-              >
-                <img
-                  src={currentTemplate.imageUrl}
-                  alt={currentTemplate.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Template Name */}
-              <div
-                className="text-xs font-semibold uppercase tracking-wide mb-1 text-center"
-                style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  color: '#1B1B1B'
-                }}
-              >
-                {currentTemplate.name}
-              </div>
-
-              {/* Description */}
-              <p
-                className="text-[10px] text-center mb-1 opacity-85 leading-tight"
-                style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  color: '#1B1B1B'
-                }}
-              >
-                {currentTemplate.description}
-              </p>
-
-              {/* Template Counter */}
-              <div
-                className="text-center text-xs"
-                style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  color: '#1B1B1B'
-                }}
-              >
-                {currentIndex + 1}/9
-              </div>
-            </div>
-
-            {/* Form Section - MOVED BELOW PREVIEW */}
+            {/* Form Section */}
             <div className="p-3">
               {/* Use Case Selector */}
               <div className="mb-3">

@@ -348,26 +348,29 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
 
                   {/* Character Info Bar (Bottom of Frame) */}
                   <div
-                    className="absolute bottom-0 left-0 right-0 px-3 py-2 md:px-6 md:py-4"
-                    style={{ backgroundColor: '#1B1B1B' }}
+                    className="absolute bottom-0 left-0 right-0 px-2 py-1.5 md:px-6 md:py-4"
+                    style={{
+                      backgroundColor: window.innerWidth < 768 ? 'rgba(27, 27, 27, 0.85)' : '#1B1B1B',
+                      height: window.innerWidth < 768 ? '40px' : 'auto'
+                    }}
                   >
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between h-full">
                       {/* Character Info */}
                       <div className="flex-1 min-w-0">
                         <h2
-                          className="font-primary leading-tight mb-0.5 md:mb-1"
+                          className="font-primary leading-tight mb-0 md:mb-1"
                           style={{
                             color: '#EEEDD8',
                             fontFamily: 'Montserrat, sans-serif',
                             fontWeight: 700,
                             fontStyle: 'italic',
-                            fontSize: 'clamp(14px, 4vw, 24px)'
+                            fontSize: 'clamp(12px, 3.5vw, 24px)'
                           }}
                         >
                           {currentTemplate.name}
                         </h2>
                         <p
-                          className="font-secondary opacity-60 leading-tight"
+                          className="hidden md:block font-secondary opacity-60 leading-tight"
                           style={{
                             color: '#EEEDD8',
                             fontFamily: 'Roboto Mono, monospace',
@@ -378,7 +381,7 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
                           {currentTemplate.description}
                         </p>
                       </div>
-                      
+
                       {/* Navigation Counter */}
                       <div className="ml-2 md:ml-4 flex-shrink-0">
                         <span
@@ -387,7 +390,7 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
                             color: '#EEEDD8',
                             fontFamily: 'Roboto Mono, monospace',
                             fontWeight: 400,
-                            fontSize: 'clamp(10px, 3vw, 16px)'
+                            fontSize: 'clamp(10px, 2.5vw, 16px)'
                           }}
                         >
                           {currentIndex + 1}/9
