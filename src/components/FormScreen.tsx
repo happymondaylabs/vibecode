@@ -391,7 +391,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                           fontFamily: 'Roboto Mono, monospace',
                           borderColor: errors.name ? '#ef4444' : '#1B1B1B'
                         }}
-                        placeholder="Enter name"
+                        placeholder="Person or company name"
                       />
                       <div className="flex justify-between mt-1">
                         <span 
@@ -771,7 +771,7 @@ export function FormScreen({ selectedTemplate, onTemplateChange, onSubmit, onGoB
                       fontFamily: 'Roboto Mono, monospace',
                       borderColor: errors.name ? '#ef4444' : '#1B1B1B'
                     }}
-                    placeholder="Enter name"
+                    placeholder="Person or company name"
                   />
                   <div className="flex justify-between mt-1">
                     <span 
