@@ -298,25 +298,27 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
               style={{ backgroundColor: '#E5E5E5' }}
             >
               {/* Video Container with Black Frame */}
-              <div 
-                className="relative p-2 md:p-2"
-                style={{ 
-                  backgroundColor: '#1B1B1B',
-                  aspectRatio: '16/9'
+              <div
+                className="p-2 md:p-2"
+                style={{
+                  backgroundColor: '#1B1B1B'
                 }}
-                onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
-                onTouchEnd={onTouchEnd}
               >
-                {/* Video/Image Area */}
-                <div className="relative w-full h-full overflow-hidden rounded-sm">
+                {/* Video/Image Area - Full 16:9 ratio */}
+                <div
+                  className="relative w-full overflow-hidden rounded-sm"
+                  style={{ aspectRatio: '16/9' }}
+                  onTouchStart={onTouchStart}
+                  onTouchMove={onTouchMove}
+                  onTouchEnd={onTouchEnd}
+                >
                   {/* Loading State */}
                   {!imageLoaded && (
-                    <div 
+                    <div
                       className="absolute inset-0 flex items-center justify-center"
                       style={{ backgroundColor: '#1B1B1B' }}
                     >
-                      <div 
+                      <div
                         className="font-secondary text-sm"
                         style={{ color: '#EEEDD8' }}
                       >
@@ -324,7 +326,7 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
                       </div>
                     </div>
                   )}
-                  
+
                   {/* Character Image */}
                   <img
                     src={currentTemplate.imageUrl}
@@ -338,64 +340,63 @@ export function CharacterCarousel({ onSelectCharacter }: CharacterCarouselProps)
 
                   {/* Play Button Overlay */}
                   <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-                    <div 
+                    <div
                       className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center"
                       style={{ backgroundColor: 'rgba(238, 237, 216, 0.9)' }}
                     >
                       <Play size={24} style={{ color: '#1B1B1B' }} className="ml-1" fill="currentColor" />
                     </div>
                   </div>
+                </div>
 
-                  {/* Character Info Bar (Bottom of Frame) */}
-                  <div
-                    className="absolute bottom-0 left-0 right-0 px-2 py-1.5 md:px-6 md:py-4"
-                    style={{
-                      backgroundColor: window.innerWidth < 768 ? 'rgba(27, 27, 27, 0.85)' : '#1B1B1B',
-                      height: window.innerWidth < 768 ? '40px' : 'auto'
-                    }}
-                  >
-                    <div className="flex items-center justify-between h-full">
-                      {/* Character Info */}
-                      <div className="flex-1 min-w-0">
-                        <h2
-                          className="font-primary leading-tight mb-0 md:mb-1"
-                          style={{
-                            color: '#EEEDD8',
-                            fontFamily: 'Montserrat, sans-serif',
-                            fontWeight: 700,
-                            fontStyle: 'italic',
-                            fontSize: 'clamp(12px, 3.5vw, 24px)'
-                          }}
-                        >
-                          {currentTemplate.name}
-                        </h2>
-                        <p
-                          className="hidden md:block font-secondary opacity-60 leading-tight"
-                          style={{
-                            color: '#EEEDD8',
-                            fontFamily: 'Roboto Mono, monospace',
-                            fontWeight: 400,
-                            fontSize: 'clamp(9px, 2.5vw, 14px)'
-                          }}
-                        >
-                          {currentTemplate.description}
-                        </p>
-                      </div>
+                {/* Character Info Bar (Below Image) */}
+                <div
+                  className="px-3 py-2 md:px-6 md:py-4"
+                  style={{
+                    backgroundColor: '#1B1B1B'
+                  }}
+                >
+                  <div className="flex items-center justify-between">
+                    {/* Character Info */}
+                    <div className="flex-1 min-w-0">
+                      <h2
+                        className="font-primary leading-tight mb-1"
+                        style={{
+                          color: '#EEEDD8',
+                          fontFamily: 'Montserrat, sans-serif',
+                          fontWeight: 700,
+                          fontStyle: 'italic',
+                          fontSize: 'clamp(12px, 3.5vw, 24px)'
+                        }}
+                      >
+                        {currentTemplate.name}
+                      </h2>
+                      <p
+                        className="font-secondary opacity-60 leading-tight"
+                        style={{
+                          color: '#EEEDD8',
+                          fontFamily: 'Roboto Mono, monospace',
+                          fontWeight: 400,
+                          fontSize: 'clamp(9px, 2.5vw, 14px)'
+                        }}
+                      >
+                        {currentTemplate.description}
+                      </p>
+                    </div>
 
-                      {/* Navigation Counter */}
-                      <div className="ml-2 md:ml-4 flex-shrink-0">
-                        <span
-                          className="font-secondary"
-                          style={{
-                            color: '#EEEDD8',
-                            fontFamily: 'Roboto Mono, monospace',
-                            fontWeight: 400,
-                            fontSize: 'clamp(10px, 2.5vw, 16px)'
-                          }}
-                        >
-                          {currentIndex + 1}/9
-                        </span>
-                      </div>
+                    {/* Navigation Counter */}
+                    <div className="ml-3 md:ml-4 flex-shrink-0">
+                      <span
+                        className="font-secondary"
+                        style={{
+                          color: '#EEEDD8',
+                          fontFamily: 'Roboto Mono, monospace',
+                          fontWeight: 400,
+                          fontSize: 'clamp(11px, 2.5vw, 16px)'
+                        }}
+                      >
+                        {currentIndex + 1}/9
+                      </span>
                     </div>
                   </div>
                 </div>
